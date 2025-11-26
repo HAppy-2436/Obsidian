@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "大一/测试/测试同步.md",
+                "file": "大一/测试/平板测试.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "测试同步"
+              "title": "平板测试"
             }
           }
         ]
@@ -170,6 +170,7 @@
   },
   "active": "c33b8885aa76d6cc",
   "lastOpenFiles": [
+    "大一/测试/测试同步.md",
     "大一/测试/平板测试.md",
     "/大一/测试/测试同步.md",
     "/大一/测试/平板测试.md",
