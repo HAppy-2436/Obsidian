@@ -55,7 +55,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "测试同步.md",
+                "file": "测试/测试同步.md",
                 "mode": "source",
                 "source": false
               },
@@ -230,11 +230,12 @@
   },
   "active": "54ea2a418faab1f7",
   "lastOpenFiles": [
-    "2025-11-26.md",
+    "测试",
+    "日记？/2025-11-26.md",
     "数电/未命名.md",
     "数电/逻辑代数.md",
     "未命名.md",
-    "测试同步.md",
+    "测试/测试同步.md",
     "未命名.canvas",
     "博远技术分享/Prompt engineering.md",
     "高数/曲率半径.md",
@@ -263,7 +264,6 @@
     "数论/剩余系.md",
     "数论/同余.md",
     "数论/整除.md",
-    "数论/lcm（最小公倍数）.md",
     "数电/未命名",
     "数电",
     "数论",
