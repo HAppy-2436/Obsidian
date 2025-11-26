@@ -11,14 +11,10 @@
             "id": "c33b8885aa76d6cc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "111111.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "111111"
+              "title": "新标签页"
             }
           }
         ]
@@ -170,8 +166,8 @@
   },
   "active": "c33b8885aa76d6cc",
   "lastOpenFiles": [
-    "测试2.md",
     "111111.md",
+    "测试2.md",
     "大一/博远技术分享/错误的100！.md",
     "大一/测试同步.md",
     "大一/2025-11-26.md",
