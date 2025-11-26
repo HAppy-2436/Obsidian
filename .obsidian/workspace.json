@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "平板测试.md",
+                "file": "大一/测试/平板测试.md",
                 "mode": "source",
                 "source": false
               },
@@ -181,10 +181,10 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "60e6b5b64ffc7b1b",
+  "active": "764af6a6af422154",
   "lastOpenFiles": [
     "conflict-files-obsidian-git.md",
-    "平板测试.md",
+    "大一/测试/平板测试.md",
     "测试2.md",
     "111111.md"
   ]
