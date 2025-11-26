@@ -11,14 +11,10 @@
             "id": "60e6b5b64ffc7b1b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "测试2.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "测试2"
+              "title": "新标签页"
             }
           }
         ]
@@ -181,9 +177,10 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "60e6b5b64ffc7b1b",
+  "active": "764af6a6af422154",
   "lastOpenFiles": [
-    "111111.md",
-    "测试2.md"
+    "测试2.md",
+    "conflict-files-obsidian-git.md",
+    "111111.md"
   ]
 }
