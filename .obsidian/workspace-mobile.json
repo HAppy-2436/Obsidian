@@ -112,6 +112,7 @@
         "state": {
           "type": "backlink",
           "state": {
+            "file": "111111.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -121,7 +122,7 @@
             "unlinkedCollapsed": true
           },
           "icon": "links-coming-in",
-          "title": "Backlinks"
+          "title": "反向链接"
         }
       },
       {
