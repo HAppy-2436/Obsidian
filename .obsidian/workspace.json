@@ -78,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -169,12 +169,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "大一/博远技术分享/例子/例子！.md",
+                "file": "大一/博远技术分享/例子/例子3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "例子！ 的出链列表"
+              "title": "例子3 的出链列表"
             }
           },
           {
@@ -198,13 +198,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "大一/博远技术分享/例子/例子！.md",
+                "file": "大一/博远技术分享/例子/例子3.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "例子！ 的大纲"
+              "title": "例子3 的大纲"
             }
           },
           {
@@ -255,13 +255,13 @@
       "zk-prefixer:创建时间戳笔记": false
     }
   },
-  "active": "4e1906df76ca36c5",
+  "active": "f9effba9f772791e",
   "lastOpenFiles": [
-    "大一/博远技术分享/例子/例子1.md",
     "大一/博远技术分享/例子/例子2.md",
     "大一/博远技术分享/例子/例子3.md",
-    "大一/博远技术分享/例子/例子！.md",
+    "大一/博远技术分享/例子/例子1.md",
     "大一/博远技术分享/大纲.md",
+    "大一/博远技术分享/例子/例子！.md",
     "大一/高数/不熟悉的导数公式.md",
     "未命名.canvas",
     "大一/博远技术分享/例子/未命名.base",
