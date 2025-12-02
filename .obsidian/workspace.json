@@ -36,6 +36,20 @@
             }
           },
           {
+            "id": "028c3457f0ed6ec2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "大一/博远技术分享/例子/例子文档.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "例子文档"
+            }
+          },
+          {
             "id": "3baece7c535ecb6e",
             "type": "leaf",
             "state": {
@@ -78,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -169,12 +183,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "大一/博远技术分享/例子/例子3.md",
+                "file": "大一/博远技术分享/例子/例子文档.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "例子3 的出链列表"
+              "title": "例子文档 的出链列表"
             }
           },
           {
@@ -198,13 +212,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "大一/博远技术分享/例子/例子3.md",
+                "file": "大一/博远技术分享/例子/例子文档.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "例子3 的大纲"
+              "title": "例子文档 的大纲"
             }
           },
           {
@@ -255,11 +269,12 @@
       "zk-prefixer:创建时间戳笔记": false
     }
   },
-  "active": "f9effba9f772791e",
+  "active": "028c3457f0ed6ec2",
   "lastOpenFiles": [
+    "大一/博远技术分享/例子/例子1.md",
+    "大一/博远技术分享/例子/例子文档.md",
     "大一/博远技术分享/例子/例子2.md",
     "大一/博远技术分享/例子/例子3.md",
-    "大一/博远技术分享/例子/例子1.md",
     "大一/博远技术分享/大纲.md",
     "大一/博远技术分享/例子/例子！.md",
     "大一/高数/不熟悉的导数公式.md",
