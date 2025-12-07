@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "92f0020600d6c4f1",
+        "id": "74c2f216ccc33a3a",
         "type": "tabs",
         "children": [
           {
-            "id": "f9effba9f772791e",
+            "id": "ff871b30d4dbfecf",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "大一/博远技术分享/例子/例子.md",
-                "mode": "preview",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "例子"
+              "title": "新标签页"
             }
           }
         ]
@@ -78,8 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "b24b7f2e95c24666",
@@ -194,12 +189,12 @@
       "random-note:开始漫游笔记": false
     }
   },
-  "active": "f9effba9f772791e",
+  "active": "ff871b30d4dbfecf",
   "lastOpenFiles": [
+    "大一/博远技术分享/例子/例子.md",
     "大一/博远技术分享/例子/例子！.md",
     "大一/博远技术分享/例子/例子3.md",
     "大一/博远技术分享/例子/例子2.md",
-    "大一/博远技术分享/例子/例子.md",
     "大一/博远技术分享/例子/例子1.md",
     "大一/博远技术分享/大纲.md",
     "大一/高数/不熟悉的导数公式.md",
