@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "b65625c300bca703",
+        "id": "7fa6e92f9e51feeb",
         "type": "tabs",
         "children": [
           {
-            "id": "ac893a3219861d67",
+            "id": "d9efdc77ce71b028",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "大一上/期末复习/高数/华东师范大学2024-2025学年第一学期华东师范大学高数A期末A卷(菁英班).pdf"
+                "file": "大一下/不唐前端讲解.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "华东师范大学2024-2025学年第一学期华东师范大学高数A期末A卷(菁英班)"
+              "icon": "lucide-file",
+              "title": "不唐前端讲解"
             }
           }
         ]
@@ -191,8 +193,11 @@
       "random-note:开始漫游笔记": false
     }
   },
-  "active": "ac893a3219861d67",
+  "active": "d9efdc77ce71b028",
   "lastOpenFiles": [
+    "大一下/不唐前端讲解.md",
+    "大一下",
+    "大一上/期末复习/高数/华东师范大学2024-2025学年第一学期华东师范大学高数A期末A卷(菁英班).pdf",
     "大一上/期末复习/高数/23-24 A.pdf",
     "知识区/README.md",
     "记录区/2025-12-12.md",
@@ -226,9 +231,6 @@
     "知识区/计算机系统",
     "知识区/ACM",
     "知识区/其他主流语言",
-    "知识区/C语言",
-    "知识区/数电",
-    "知识区/线代",
     "大一上/高数/Pasted image 20251123233450.png",
     "未命名.canvas"
   ]
