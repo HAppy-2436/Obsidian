@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "前端答辩防身指南"
             }
+          },
+          {
+            "id": "0b972c2b48c81ff3",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "版本说明 1.12.4"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -193,7 +206,7 @@
       "random-note:开始漫游笔记": false
     }
   },
-  "active": "d9efdc77ce71b028",
+  "active": "0b972c2b48c81ff3",
   "lastOpenFiles": [
     "大一下/不唐/前端第二部分讲稿.md",
     "大一下/不唐/前端答辩防身指南.md",
