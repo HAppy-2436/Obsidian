@@ -1,0 +1,19 @@
+1. 意外刷到对电脑上chromium内核的检测陈列，搜索了解到了electrobun
+2. 官方的介绍是Build ultra fast, tiny, and cross-platform desktop apps with TypeScript.
+3. 展示star数趋势
+4. 第一部分，介绍前置知识
+5. 提出问题，为什么重复造轮子
+6. 指出2013年的系统困境
+7. 引出chromium的选择
+8. 引入node.js运行时
+9. chromium+node.js引入electron
+10. 展示electron的知名应用
+11. 展示如今系统自带webview
+12. 引入bun
+13. 系统自带webview+bun引入electrobun
+14. 第二部分，正式介绍electrobun的特性
+15. 超小体积+急速启动
+16. 类型化RPC对比传统IPC
+17. bsdiff增量更新
+18. 补丁链
+19. zig原生绑定
