@@ -135,6 +135,50 @@
               "icon": "links-going-out",
               "title": "Roster-Electrobun 的出链列表"
             }
+          },
+          {
+            "id": "6d167891b38adee7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "2734fb351b136a92",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "e1bf88fd93fa2e83",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "大一下/Roster-Electrobun.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Roster-Electrobun 的大纲"
+            }
           }
         ],
         "currentTab": 1
@@ -157,6 +201,8 @@
   },
   "active": "0b972c2b48c81ff3",
   "lastOpenFiles": [
+    "大一下/CSAPP/260319.md",
+    "大一下/CSAPP",
     "大一下/Roster-Electrobun.md",
     "未命名",
     "大一下/不唐/前端第二部分讲稿.md",
@@ -188,11 +234,9 @@
     "知识区/大学英语/比较级与最高级.md",
     "知识区/大学英语/主谓一致.md",
     "知识区/大学英语/非谓语动词.md",
-    "知识区/大学英语/强调句.md",
     "知识区/随便扩展知识",
     "知识区/大学英语",
     "知识区/数据结构与算法实践",
-    "知识区/计算机系统",
     "大一上/高数/Pasted image 20251123233450.png",
     "未命名.canvas"
   ]
