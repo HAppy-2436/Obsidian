@@ -93,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "b24b7f2e95c24666",
@@ -171,13 +170,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "大一下/Roster-Electrobun.md",
+                "file": "大一下/CSAPP/260319.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Roster-Electrobun 的大纲"
+              "title": "260319 的大纲"
             }
           }
         ],
@@ -202,8 +201,8 @@
   "active": "0b972c2b48c81ff3",
   "lastOpenFiles": [
     "大一下/CSAPP/260319.md",
-    "大一下/CSAPP",
     "大一下/Roster-Electrobun.md",
+    "大一下/CSAPP",
     "未命名",
     "大一下/不唐/前端第二部分讲稿.md",
     "大一下/不唐/前端答辩防身指南.md",
