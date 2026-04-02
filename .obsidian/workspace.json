@@ -62,9 +62,21 @@
               "icon": "lucide-file",
               "title": "Electrobun 技术分享 · 演讲提词稿"
             }
+          },
+          {
+            "id": "6b721cea1ed7e0c8",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "版本说明 1.12.7"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -121,8 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "b24b7f2e95c24666",
@@ -227,7 +238,7 @@
       "random-note:开始漫游笔记": false
     }
   },
-  "active": "a9a5b1283345b866",
+  "active": "6b721cea1ed7e0c8",
   "lastOpenFiles": [
     "大一下/Roster/文稿.md",
     "大一下/Roster/Electrobun 技术分享 · 演讲提词稿.md",
