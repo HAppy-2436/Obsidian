@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "大一下/人工智能的数学思维/01-知识点体系.md",
-                "mode": "source",
+                "file": "大一下/人工智能的数学思维/02-考试重点推测.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01-知识点体系"
+              "title": "02-考试重点推测"
             }
           }
         ]
@@ -185,9 +185,9 @@
   },
   "active": "688be167ced71ec3",
   "lastOpenFiles": [
+    "大一下/人工智能的数学思维/01-知识点体系.md",
     "大一下/人工智能的数学思维/02-考试重点推测.md",
     "大一下/CSAPP/Lab2-李奕桐-10255101612.md",
-    "大一下/人工智能的数学思维/01-知识点体系.md",
     "大一下/人工智能的数学思维",
     "大一下/CSAPP/img.png",
     "大一下/CSAPP/260319.md",
