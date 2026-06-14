@@ -112,7 +112,7 @@
   },
   {
    "type": "code",
-   "content": "// 用链表作为底层数据结构实现队列\n#include <iostream>\n#include <list>\n\ntemplate<typename E>\nclass MyLinkedQueue {\nprivate:\n    list<E> list;\n\npublic:\n    // 向队尾插入元素，时间复杂度 O(1)\n    void push(const E &e) {\n        list.push_back(e);\n    }\n\n    // 从队头删除元素，时间复杂度 O(1)\n    E pop() {\n        E front = list.front();\n        list.pop_front();\n        return front;\n    }\n\n    // 查看队头元素，时间复杂度 O(1)\n    E peek() {\n        return list.front();\n    }\n\n    // 返回队列中的元素个数，时间复杂度 O(1)\n    int size() {\n        return list.size();\n    }\n};\n\nint main() {\n    MyLinkedQueue<int> queue;\n    queue.push(1);\n    queue.push(2);\n    queue.push(3);\n\n    cout << queue.peek() << endl; // 1\n    cout << queue.pop() << endl; // 1\n    cout << queue.pop() << endl; // 2\n    cout << queue.peek() << endl; // 3\n\n    return 0;\n}",
+   "content": "// 用链表作为底层数据结构实现队列\n#include <iostream>\n#include <list>\n\n\ntemplate<typename E>\nclass MyLinkedQueue {\nprivate:\n    list<E> list;\n\npublic:\n    // 向队尾插入元素，时间复杂度 O(1)\n    void push(const E &e) {\n        list.push_back(e);\n    }\n\n    // 从队头删除元素，时间复杂度 O(1)\n    E pop() {\n        E front = list.front();\n        list.pop_front();\n        return front;\n    }\n\n    // 查看队头元素，时间复杂度 O(1)\n    E peek() {\n        return list.front();\n    }\n\n    // 返回队列中的元素个数，时间复杂度 O(1)\n    int size() {\n        return list.size();\n    }\n};\n\nint main() {\n    MyLinkedQueue<int> queue;\n    queue.push(1);\n    queue.push(2);\n    queue.push(3);\n\n    cout << queue.peek() << endl; // 1\n    cout << queue.pop() << endl; // 1\n    cout << queue.pop() << endl; // 2\n    cout << queue.peek() << endl; // 3\n\n    return 0;\n}",
    "cpp_source": true
   },
   {
