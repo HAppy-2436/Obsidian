@@ -1,681 +1,681 @@
 {
-  "chapters": [
-    {
-      "tag": "00-intro",
-      "title": "本章导读",
-      "group": "入门",
-      "subgroup": null,
-      "paywall": false,
-      "order": 0,
-      "prerequisites": [],
-      "url": "https://labuladong.online/zh/algo/intro/data-structure-basic/"
-    },
-    {
-      "tag": "01-complexity",
-      "title": "时间空间复杂度入门",
-      "group": "入门",
-      "subgroup": null,
-      "paywall": false,
-      "order": 1,
-      "prerequisites": [
-        "00-intro"
-      ],
-      "url": "https://labuladong.online/zh/algo/intro/complexity-basic/"
-    },
-    {
-      "tag": "02-array-basic",
-      "title": "数组（顺序存储）的原理",
-      "group": "数组",
-      "subgroup": null,
-      "paywall": false,
-      "order": 2,
-      "prerequisites": [
-        "01-complexity"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/array-basic/"
-    },
-    {
-      "tag": "03-array-implement",
-      "title": "动态数组的代码实现",
-      "group": "数组",
-      "subgroup": null,
-      "paywall": false,
-      "order": 3,
-      "prerequisites": [
-        "02-array-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/array-implement/"
-    },
-    {
-      "tag": "04-cycle-array",
-      "title": "循环数组技巧及实现",
-      "group": "数组",
-      "subgroup": "变体",
-      "paywall": false,
-      "order": 4,
-      "prerequisites": [
-        "03-array-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/cycle-array/"
-    },
-    {
-      "tag": "05-linkedlist-basic",
-      "title": "链表（链式存储）的原理",
-      "group": "链表",
-      "subgroup": null,
-      "paywall": false,
-      "order": 5,
-      "prerequisites": [
-        "02-array-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/linkedlist-basic/"
-    },
-    {
-      "tag": "06-linkedlist-implement",
-      "title": "链表的代码实现",
-      "group": "链表",
-      "subgroup": null,
-      "paywall": false,
-      "order": 6,
-      "prerequisites": [
-        "05-linkedlist-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/linkedlist-implement/"
-    },
-    {
-      "tag": "07-deque-implement",
-      "title": "双端队列（Deque）原理和实现",
-      "group": "数组链表技巧",
-      "subgroup": null,
-      "paywall": false,
-      "order": 7,
-      "prerequisites": [
-        "06-linkedlist-implement",
-        "03-array-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/deque-implement/"
-    },
-    {
-      "tag": "08-queue-stack-basic",
-      "title": "队列/栈的基本原理",
-      "group": "队列/栈",
-      "subgroup": null,
-      "paywall": false,
-      "order": 8,
-      "prerequisites": [
-        "02-array-basic",
-        "05-linkedlist-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/queue-stack-basic/"
-    },
-    {
-      "tag": "09-array-queue-stack",
-      "title": "数组实现队列/栈",
-      "group": "队列/栈",
-      "subgroup": "实现",
-      "paywall": false,
-      "order": 9,
-      "prerequisites": [
-        "08-queue-stack-basic",
-        "03-array-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/array-queue-stack/"
-    },
-    {
-      "tag": "10-linked-queue-stack",
-      "title": "链表实现队列/栈",
-      "group": "队列/栈",
-      "subgroup": "实现",
-      "paywall": false,
-      "order": 10,
-      "prerequisites": [
-        "08-queue-stack-basic",
-        "06-linkedlist-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/linked-queue-stack/"
-    },
-    {
-      "tag": "11-hashtable-with-array",
-      "title": "数组实现哈希表（ArrayHashMap）",
-      "group": "哈希表",
-      "subgroup": "实现",
-      "paywall": false,
-      "order": 11,
-      "prerequisites": [
-        "03-array-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/"
-    },
-    {
-      "tag": "12-hashtable-with-linked-list",
-      "title": "链表实现哈希表（LinkedHashMap）",
-      "group": "哈希表",
-      "subgroup": "实现",
-      "paywall": false,
-      "order": 12,
-      "prerequisites": [
-        "06-linkedlist-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/"
-    },
-    {
-      "tag": "13-hashmap-basic",
-      "title": "哈希表核心原理",
-      "group": "哈希表",
-      "subgroup": null,
-      "paywall": false,
-      "order": 13,
-      "prerequisites": [
-        "11-hashtable-with-array",
-        "12-hashtable-with-linked-list"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/hashmap-basic/"
-    },
-    {
-      "tag": "14-linear-probing-key-point",
-      "title": "线性探查法的两个难点",
-      "group": "哈希表",
-      "subgroup": "开放定址",
-      "paywall": false,
-      "order": 14,
-      "prerequisites": [
-        "13-hashmap-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-point/"
-    },
-    {
-      "tag": "15-linear-probing-code",
-      "title": "线性探查法的两种代码实现",
-      "group": "哈希表",
-      "subgroup": "开放定址",
-      "paywall": true,
-      "order": 15,
-      "prerequisites": [
-        "14-linear-probing-key-point"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/linear-probing-code/"
-    },
-    {
-      "tag": "16-hashtable-chaining",
-      "title": "拉链法实现哈希表",
-      "group": "哈希表",
-      "subgroup": "实现",
-      "paywall": true,
-      "order": 16,
-      "prerequisites": [
-        "13-hashmap-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-chaining/"
-    },
-    {
-      "tag": "17-hash-set",
-      "title": "哈希集合的原理及代码实现",
-      "group": "哈希集合",
-      "subgroup": null,
-      "paywall": true,
-      "order": 17,
-      "prerequisites": [
-        "13-hashmap-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/hash-set/"
-    },
-    {
-      "tag": "18-bitmap",
-      "title": "位图原理和实现",
-      "group": "哈希集合",
-      "subgroup": null,
-      "paywall": true,
-      "order": 18,
-      "prerequisites": [
-        "17-hash-set"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/bitmap/"
-    },
-    {
-      "tag": "19-bloom-filter",
-      "title": "布隆过滤器原理和实现",
-      "group": "哈希集合",
-      "subgroup": null,
-      "paywall": true,
-      "order": 19,
-      "prerequisites": [
-        "18-bitmap",
-        "17-hash-set"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/bloom-filter/"
-    },
-    {
-      "tag": "20-skip-list-basic",
-      "title": "跳表原理",
-      "group": "哈希集合",
-      "subgroup": null,
-      "paywall": false,
-      "order": 20,
-      "prerequisites": [
-        "06-linkedlist-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/skip-list-basic/"
-    },
-    {
-      "tag": "21-binary-heap-basic",
-      "title": "二叉堆核心原理及可视化",
-      "group": "二叉堆",
-      "subgroup": null,
-      "paywall": true,
-      "order": 21,
-      "prerequisites": [
-        "02-array-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-basic/"
-    },
-    {
-      "tag": "22-binary-heap-implement",
-      "title": "堆排序/优先级队列的代码实现",
-      "group": "二叉堆",
-      "subgroup": null,
-      "paywall": true,
-      "order": 22,
-      "prerequisites": [
-        "21-binary-heap-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-implement/"
-    },
-    {
-      "tag": "23-binary-tree-basic",
-      "title": "二叉树基本概念及特殊二叉树",
-      "group": "二叉树",
-      "subgroup": null,
-      "paywall": false,
-      "order": 23,
-      "prerequisites": [
-        "02-array-basic",
-        "06-linkedlist-implement"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-tree-basic/"
-    },
-    {
-      "tag": "24-binary-tree-traverse-basic",
-      "title": "二叉树的递归/层序遍历",
-      "group": "二叉树",
-      "subgroup": "遍历",
-      "paywall": false,
-      "order": 24,
-      "prerequisites": [
-        "23-binary-tree-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-tree-traverse-basic/"
-    },
-    {
-      "tag": "25-n-ary-tree-traverse-basic",
-      "title": "N 叉树的递归/层序遍历",
-      "group": "二叉树",
-      "subgroup": "遍历",
-      "paywall": true,
-      "order": 25,
-      "prerequisites": [
-        "24-binary-tree-traverse-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/n-ary-tree-traverse-basic/"
-    },
-    {
-      "tag": "26-segment-tree-basic",
-      "title": "线段树核心原理及可视化",
-      "group": "高级树",
-      "subgroup": null,
-      "paywall": true,
-      "order": 26,
-      "prerequisites": [
-        "23-binary-tree-basic",
-        "02-array-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/segment-tree-basic/"
-    },
-    {
-      "tag": "27-tree-map-basic",
-      "title": "二叉搜索树原理及应用技巧",
-      "group": "高级树",
-      "subgroup": null,
-      "paywall": false,
-      "order": 27,
-      "prerequisites": [
-        "23-binary-tree-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/"
-    },
-    {
-      "tag": "28-tree-map-implement",
-      "title": "TreeMap/TreeSet 的代码实现",
-      "group": "高级树",
-      "subgroup": null,
-      "paywall": true,
-      "order": 28,
-      "prerequisites": [
-        "27-tree-map-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/tree-map-implement/"
-    },
-    {
-      "tag": "29-trie-map-basic",
-      "title": "Trie/字典树/前缀树原理及可视化",
-      "group": "高级树",
-      "subgroup": null,
-      "paywall": false,
-      "order": 29,
-      "prerequisites": [
-        "27-tree-map-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/trie-map-basic/"
-    },
-    {
-      "tag": "30-union-find-basic",
-      "title": "Union Find 并查集原理",
-      "group": "高级树",
-      "subgroup": null,
-      "paywall": false,
-      "order": 30,
-      "prerequisites": [
-        "02-array-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/union-find-basic/"
-    },
-    {
-      "tag": "31-rbtree-basic",
-      "title": "红黑树的自平衡原理及可视化",
-      "group": "高级树",
-      "subgroup": null,
-      "paywall": true,
-      "order": 31,
-      "prerequisites": [
-        "27-tree-map-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/rbtree-basic/"
-    },
-    {
-      "tag": "32-graph-terminology",
-      "title": "图的基本术语",
-      "group": "图",
-      "subgroup": null,
-      "paywall": false,
-      "order": 32,
-      "prerequisites": [
-        "02-array-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-terminology/"
-    },
-    {
-      "tag": "33-graph-basic",
-      "title": "图结构的通用代码实现",
-      "group": "图",
-      "subgroup": "实现",
-      "paywall": true,
-      "order": 33,
-      "prerequisites": [
-        "32-graph-terminology"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-basic/"
-    },
-    {
-      "tag": "34-graph-traverse-basic",
-      "title": "图结构的 DFS/BFS 遍历",
-      "group": "图",
-      "subgroup": "遍历",
-      "paywall": false,
-      "order": 34,
-      "prerequisites": [
-        "33-graph-basic",
-        "24-binary-tree-traverse-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/"
-    },
-    {
-      "tag": "35-use-case-of-dfs-bfs",
-      "title": "DFS 和 BFS 的常用场景",
-      "group": "图",
-      "subgroup": "遍历",
-      "paywall": true,
-      "order": 35,
-      "prerequisites": [
-        "34-graph-traverse-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/use-case-of-dfs-bfs/"
-    },
-    {
-      "tag": "36-graph-minimum-spanning-tree",
-      "title": "最小生成树算法概览",
-      "group": "图",
-      "subgroup": "算法",
-      "paywall": false,
-      "order": 36,
-      "prerequisites": [
-        "34-graph-traverse-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-minimum-spanning-tree/"
-    },
-    {
-      "tag": "37-graph-shortest-path",
-      "title": "图结构最短路径算法概览",
-      "group": "图",
-      "subgroup": "算法",
-      "paywall": false,
-      "order": 37,
-      "prerequisites": [
-        "34-graph-traverse-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-shortest-path/"
-    },
-    {
-      "tag": "38-eulerian-graph",
-      "title": "欧拉图一笔画游戏",
-      "group": "图",
-      "subgroup": "应用",
-      "paywall": true,
-      "order": 38,
-      "prerequisites": [
-        "34-graph-traverse-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/eulerian-graph/"
-    },
-    {
-      "tag": "39-sort-basic",
-      "title": "排序算法的关键指标",
-      "group": "排序",
-      "subgroup": null,
-      "paywall": false,
-      "order": 39,
-      "prerequisites": [
-        "01-complexity"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/sort-basic/"
-    },
-    {
-      "tag": "40-bubble-sort",
-      "title": "拥有稳定性：冒泡排序",
-      "group": "排序",
-      "subgroup": "基础",
-      "paywall": false,
-      "order": 40,
-      "prerequisites": [
-        "39-sort-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/bubble-sort/"
-    },
-    {
-      "tag": "41-insertion-sort",
-      "title": "插入排序的链表思维",
-      "group": "排序",
-      "subgroup": "基础",
-      "paywall": false,
-      "order": 41,
-      "prerequisites": [
-        "39-sort-basic",
-        "05-linkedlist-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/insertion-sort/"
-    },
-    {
-      "tag": "42-select-sort",
-      "title": "选择排序：最慢的排序",
-      "group": "排序",
-      "subgroup": "基础",
-      "paywall": false,
-      "order": 42,
-      "prerequisites": [
-        "39-sort-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/select-sort/"
-    },
-    {
-      "tag": "43-merge-sort",
-      "title": "利用后序位置：归并排序",
-      "group": "排序",
-      "subgroup": "分治",
-      "paywall": true,
-      "order": 43,
-      "prerequisites": [
-        "24-binary-tree-traverse-basic",
-        "40-bubble-sort"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/merge-sort/"
-    },
-    {
-      "tag": "44-quick-sort",
-      "title": "利用前序位置：快速排序",
-      "group": "排序",
-      "subgroup": "分治",
-      "paywall": true,
-      "order": 44,
-      "prerequisites": [
-        "24-binary-tree-traverse-basic",
-        "43-merge-sort"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/quick-sort/"
-    },
-    {
-      "tag": "45-heap-sort",
-      "title": "堆结构妙用：堆排序",
-      "group": "排序",
-      "subgroup": "选择",
-      "paywall": false,
-      "order": 45,
-      "prerequisites": [
-        "21-binary-heap-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/heap-sort/"
-    },
-    {
-      "tag": "46-shell-sort",
-      "title": "突破 O(N^2)：希尔排序",
-      "group": "排序",
-      "subgroup": "插入改进",
-      "paywall": true,
-      "order": 46,
-      "prerequisites": [
-        "41-insertion-sort"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/shell-sort/"
-    },
-    {
-      "tag": "47-counting-sort",
-      "title": "全新的排序原理：计数排序",
-      "group": "排序",
-      "subgroup": "线性",
-      "paywall": false,
-      "order": 47,
-      "prerequisites": [
-        "39-sort-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/counting-sort/"
-    },
-    {
-      "tag": "48-bucket-sort",
-      "title": "善用区间：桶排序",
-      "group": "排序",
-      "subgroup": "线性",
-      "paywall": false,
-      "order": 48,
-      "prerequisites": [
-        "47-counting-sort"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/bucket-sort/"
-    },
-    {
-      "tag": "49-radix-sort",
-      "title": "基数排序（Radix Sort）",
-      "group": "排序",
-      "subgroup": "线性",
-      "paywall": false,
-      "order": 49,
-      "prerequisites": [
-        "47-counting-sort",
-        "48-bucket-sort"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/radix-sort/"
-    },
-    {
-      "tag": "50-huffman-tree",
-      "title": "数据压缩和赫夫曼编码",
-      "group": "应用",
-      "subgroup": null,
-      "paywall": false,
-      "order": 50,
-      "prerequisites": [
-        "23-binary-tree-basic"
-      ],
-      "url": "https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/"
-    }
-  ],
-  "groups": [
-    {
-      "name": "入门",
-      "description": "本章导读与复杂度分析"
-    },
-    {
-      "name": "数组",
-      "description": "顺序存储：动态数组、循环数组"
-    },
-    {
-      "name": "链表",
-      "description": "链式存储：单链表、双链表"
-    },
-    {
-      "name": "数组链表技巧",
-      "description": "双端队列、循环数组"
-    },
-    {
-      "name": "队列/栈",
-      "description": "FIFO/LIFO：数组/链表实现"
-    },
-    {
-      "name": "哈希表",
-      "description": "哈希映射：拉链法、线性探查法"
-    },
-    {
-      "name": "哈希集合",
-      "description": "哈希集合、位图、布隆过滤器、跳表"
-    },
-    {
-      "name": "二叉堆",
-      "description": "堆结构、优先级队列"
-    },
-    {
-      "name": "二叉树",
-      "description": "二叉树概念、遍历"
-    },
-    {
-      "name": "高级树",
-      "description": "线段树、搜索树、Trie、并查集、红黑树"
-    },
-    {
-      "name": "图",
-      "description": "图基础、遍历、最短路、生成树"
-    },
-    {
-      "name": "排序",
-      "description": "十大排序算法"
-    },
-    {
-      "name": "应用",
-      "description": "赫夫曼编码等综合应用"
-    }
-  ]
+ "chapters": [
+  {
+   "tag": "00-intro",
+   "title": "本章导读",
+   "group": "入门",
+   "subgroup": null,
+   "paywall": false,
+   "order": 0,
+   "prerequisites": [],
+   "url": "https://labuladong.online/zh/algo/intro/data-structure-basic/"
+  },
+  {
+   "tag": "01-complexity",
+   "title": "时间空间复杂度入门",
+   "group": "入门",
+   "subgroup": null,
+   "paywall": false,
+   "order": 1,
+   "prerequisites": [
+    "00-intro"
+   ],
+   "url": "https://labuladong.online/zh/algo/intro/complexity-basic/"
+  },
+  {
+   "tag": "02-array-basic",
+   "title": "数组（顺序存储）的原理",
+   "group": "数组",
+   "subgroup": null,
+   "paywall": false,
+   "order": 2,
+   "prerequisites": [
+    "01-complexity"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/array-basic/"
+  },
+  {
+   "tag": "03-array-implement",
+   "title": "动态数组的代码实现",
+   "group": "数组",
+   "subgroup": null,
+   "paywall": false,
+   "order": 3,
+   "prerequisites": [
+    "02-array-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/array-implement/"
+  },
+  {
+   "tag": "04-cycle-array",
+   "title": "循环数组技巧及实现",
+   "group": "数组",
+   "subgroup": "变体",
+   "paywall": false,
+   "order": 4,
+   "prerequisites": [
+    "03-array-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/cycle-array/"
+  },
+  {
+   "tag": "05-linkedlist-basic",
+   "title": "链表（链式存储）的原理",
+   "group": "链表",
+   "subgroup": null,
+   "paywall": false,
+   "order": 5,
+   "prerequisites": [
+    "02-array-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/linkedlist-basic/"
+  },
+  {
+   "tag": "06-linkedlist-implement",
+   "title": "链表的代码实现",
+   "group": "链表",
+   "subgroup": null,
+   "paywall": false,
+   "order": 6,
+   "prerequisites": [
+    "05-linkedlist-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/linkedlist-implement/"
+  },
+  {
+   "tag": "07-deque-implement",
+   "title": "双端队列（Deque）原理和实现",
+   "group": "数组链表技巧",
+   "subgroup": null,
+   "paywall": false,
+   "order": 7,
+   "prerequisites": [
+    "06-linkedlist-implement",
+    "03-array-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/deque-implement/"
+  },
+  {
+   "tag": "08-queue-stack-basic",
+   "title": "队列/栈的基本原理",
+   "group": "队列/栈",
+   "subgroup": null,
+   "paywall": false,
+   "order": 8,
+   "prerequisites": [
+    "02-array-basic",
+    "05-linkedlist-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/queue-stack-basic/"
+  },
+  {
+   "tag": "09-array-queue-stack",
+   "title": "数组实现队列/栈",
+   "group": "队列/栈",
+   "subgroup": "实现",
+   "paywall": false,
+   "order": 9,
+   "prerequisites": [
+    "08-queue-stack-basic",
+    "03-array-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/array-queue-stack/"
+  },
+  {
+   "tag": "10-linked-queue-stack",
+   "title": "链表实现队列/栈",
+   "group": "队列/栈",
+   "subgroup": "实现",
+   "paywall": false,
+   "order": 10,
+   "prerequisites": [
+    "08-queue-stack-basic",
+    "06-linkedlist-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/linked-queue-stack/"
+  },
+  {
+   "tag": "11-hashtable-with-array",
+   "title": "数组实现哈希表（ArrayHashMap）",
+   "group": "哈希表",
+   "subgroup": "实现",
+   "paywall": true,
+   "order": 11,
+   "prerequisites": [
+    "03-array-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/"
+  },
+  {
+   "tag": "12-hashtable-with-linked-list",
+   "title": "链表实现哈希表（LinkedHashMap）",
+   "group": "哈希表",
+   "subgroup": "实现",
+   "paywall": true,
+   "order": 12,
+   "prerequisites": [
+    "06-linkedlist-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/"
+  },
+  {
+   "tag": "13-hashmap-basic",
+   "title": "哈希表核心原理",
+   "group": "哈希表",
+   "subgroup": null,
+   "paywall": false,
+   "order": 13,
+   "prerequisites": [
+    "11-hashtable-with-array",
+    "12-hashtable-with-linked-list"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/hashmap-basic/"
+  },
+  {
+   "tag": "14-linear-probing-key-point",
+   "title": "线性探查法的两个难点",
+   "group": "哈希表",
+   "subgroup": "开放定址",
+   "paywall": true,
+   "order": 14,
+   "prerequisites": [
+    "13-hashmap-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-point/"
+  },
+  {
+   "tag": "15-linear-probing-code",
+   "title": "线性探查法的两种代码实现",
+   "group": "哈希表",
+   "subgroup": "开放定址",
+   "paywall": true,
+   "order": 15,
+   "prerequisites": [
+    "14-linear-probing-key-point"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/linear-probing-code/"
+  },
+  {
+   "tag": "16-hashtable-chaining",
+   "title": "拉链法实现哈希表",
+   "group": "哈希表",
+   "subgroup": "实现",
+   "paywall": true,
+   "order": 16,
+   "prerequisites": [
+    "13-hashmap-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-chaining/"
+  },
+  {
+   "tag": "17-hash-set",
+   "title": "哈希集合的原理及代码实现",
+   "group": "哈希集合",
+   "subgroup": null,
+   "paywall": true,
+   "order": 17,
+   "prerequisites": [
+    "13-hashmap-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/hash-set/"
+  },
+  {
+   "tag": "18-bitmap",
+   "title": "位图原理和实现",
+   "group": "哈希集合",
+   "subgroup": null,
+   "paywall": true,
+   "order": 18,
+   "prerequisites": [
+    "17-hash-set"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/bitmap/"
+  },
+  {
+   "tag": "19-bloom-filter",
+   "title": "布隆过滤器原理和实现",
+   "group": "哈希集合",
+   "subgroup": null,
+   "paywall": true,
+   "order": 19,
+   "prerequisites": [
+    "18-bitmap",
+    "17-hash-set"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/bloom-filter/"
+  },
+  {
+   "tag": "20-skip-list-basic",
+   "title": "跳表原理",
+   "group": "哈希集合",
+   "subgroup": null,
+   "paywall": false,
+   "order": 20,
+   "prerequisites": [
+    "06-linkedlist-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/skip-list-basic/"
+  },
+  {
+   "tag": "21-binary-heap-basic",
+   "title": "二叉堆核心原理及可视化",
+   "group": "二叉堆",
+   "subgroup": null,
+   "paywall": true,
+   "order": 21,
+   "prerequisites": [
+    "02-array-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-basic/"
+  },
+  {
+   "tag": "22-binary-heap-implement",
+   "title": "堆排序/优先级队列的代码实现",
+   "group": "二叉堆",
+   "subgroup": null,
+   "paywall": true,
+   "order": 22,
+   "prerequisites": [
+    "21-binary-heap-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-implement/"
+  },
+  {
+   "tag": "23-binary-tree-basic",
+   "title": "二叉树基本概念及特殊二叉树",
+   "group": "二叉树",
+   "subgroup": null,
+   "paywall": false,
+   "order": 23,
+   "prerequisites": [
+    "02-array-basic",
+    "06-linkedlist-implement"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-tree-basic/"
+  },
+  {
+   "tag": "24-binary-tree-traverse-basic",
+   "title": "二叉树的递归/层序遍历",
+   "group": "二叉树",
+   "subgroup": "遍历",
+   "paywall": false,
+   "order": 24,
+   "prerequisites": [
+    "23-binary-tree-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-tree-traverse-basic/"
+  },
+  {
+   "tag": "25-n-ary-tree-traverse-basic",
+   "title": "N 叉树的递归/层序遍历",
+   "group": "二叉树",
+   "subgroup": "遍历",
+   "paywall": true,
+   "order": 25,
+   "prerequisites": [
+    "24-binary-tree-traverse-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/n-ary-tree-traverse-basic/"
+  },
+  {
+   "tag": "26-segment-tree-basic",
+   "title": "线段树核心原理及可视化",
+   "group": "高级树",
+   "subgroup": null,
+   "paywall": true,
+   "order": 26,
+   "prerequisites": [
+    "23-binary-tree-basic",
+    "02-array-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/segment-tree-basic/"
+  },
+  {
+   "tag": "27-tree-map-basic",
+   "title": "二叉搜索树原理及应用技巧",
+   "group": "高级树",
+   "subgroup": null,
+   "paywall": true,
+   "order": 27,
+   "prerequisites": [
+    "23-binary-tree-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/"
+  },
+  {
+   "tag": "28-tree-map-implement",
+   "title": "TreeMap/TreeSet 的代码实现",
+   "group": "高级树",
+   "subgroup": null,
+   "paywall": true,
+   "order": 28,
+   "prerequisites": [
+    "27-tree-map-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/tree-map-implement/"
+  },
+  {
+   "tag": "29-trie-map-basic",
+   "title": "Trie/字典树/前缀树原理及可视化",
+   "group": "高级树",
+   "subgroup": null,
+   "paywall": true,
+   "order": 29,
+   "prerequisites": [
+    "27-tree-map-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/trie-map-basic/"
+  },
+  {
+   "tag": "30-union-find-basic",
+   "title": "Union Find 并查集原理",
+   "group": "高级树",
+   "subgroup": null,
+   "paywall": true,
+   "order": 30,
+   "prerequisites": [
+    "02-array-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/union-find-basic/"
+  },
+  {
+   "tag": "31-rbtree-basic",
+   "title": "红黑树的自平衡原理及可视化",
+   "group": "高级树",
+   "subgroup": null,
+   "paywall": true,
+   "order": 31,
+   "prerequisites": [
+    "27-tree-map-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/rbtree-basic/"
+  },
+  {
+   "tag": "32-graph-terminology",
+   "title": "图的基本术语",
+   "group": "图",
+   "subgroup": null,
+   "paywall": false,
+   "order": 32,
+   "prerequisites": [
+    "02-array-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-terminology/"
+  },
+  {
+   "tag": "33-graph-basic",
+   "title": "图结构的通用代码实现",
+   "group": "图",
+   "subgroup": "实现",
+   "paywall": true,
+   "order": 33,
+   "prerequisites": [
+    "32-graph-terminology"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-basic/"
+  },
+  {
+   "tag": "34-graph-traverse-basic",
+   "title": "图结构的 DFS/BFS 遍历",
+   "group": "图",
+   "subgroup": "遍历",
+   "paywall": true,
+   "order": 34,
+   "prerequisites": [
+    "33-graph-basic",
+    "24-binary-tree-traverse-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/"
+  },
+  {
+   "tag": "35-use-case-of-dfs-bfs",
+   "title": "DFS 和 BFS 的常用场景",
+   "group": "图",
+   "subgroup": "遍历",
+   "paywall": true,
+   "order": 35,
+   "prerequisites": [
+    "34-graph-traverse-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/use-case-of-dfs-bfs/"
+  },
+  {
+   "tag": "36-graph-minimum-spanning-tree",
+   "title": "最小生成树算法概览",
+   "group": "图",
+   "subgroup": "算法",
+   "paywall": false,
+   "order": 36,
+   "prerequisites": [
+    "34-graph-traverse-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-minimum-spanning-tree/"
+  },
+  {
+   "tag": "37-graph-shortest-path",
+   "title": "图结构最短路径算法概览",
+   "group": "图",
+   "subgroup": "算法",
+   "paywall": true,
+   "order": 37,
+   "prerequisites": [
+    "34-graph-traverse-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-shortest-path/"
+  },
+  {
+   "tag": "38-eulerian-graph",
+   "title": "欧拉图一笔画游戏",
+   "group": "图",
+   "subgroup": "应用",
+   "paywall": true,
+   "order": 38,
+   "prerequisites": [
+    "34-graph-traverse-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/eulerian-graph/"
+  },
+  {
+   "tag": "39-sort-basic",
+   "title": "排序算法的关键指标",
+   "group": "排序",
+   "subgroup": null,
+   "paywall": false,
+   "order": 39,
+   "prerequisites": [
+    "01-complexity"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/sort-basic/"
+  },
+  {
+   "tag": "40-bubble-sort",
+   "title": "拥有稳定性：冒泡排序",
+   "group": "排序",
+   "subgroup": "基础",
+   "paywall": false,
+   "order": 40,
+   "prerequisites": [
+    "39-sort-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/bubble-sort/"
+  },
+  {
+   "tag": "41-insertion-sort",
+   "title": "插入排序的链表思维",
+   "group": "排序",
+   "subgroup": "基础",
+   "paywall": false,
+   "order": 41,
+   "prerequisites": [
+    "39-sort-basic",
+    "05-linkedlist-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/insertion-sort/"
+  },
+  {
+   "tag": "42-select-sort",
+   "title": "选择排序：最慢的排序",
+   "group": "排序",
+   "subgroup": "基础",
+   "paywall": false,
+   "order": 42,
+   "prerequisites": [
+    "39-sort-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/select-sort/"
+  },
+  {
+   "tag": "43-merge-sort",
+   "title": "利用后序位置：归并排序",
+   "group": "排序",
+   "subgroup": "分治",
+   "paywall": true,
+   "order": 43,
+   "prerequisites": [
+    "24-binary-tree-traverse-basic",
+    "40-bubble-sort"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/merge-sort/"
+  },
+  {
+   "tag": "44-quick-sort",
+   "title": "利用前序位置：快速排序",
+   "group": "排序",
+   "subgroup": "分治",
+   "paywall": true,
+   "order": 44,
+   "prerequisites": [
+    "24-binary-tree-traverse-basic",
+    "43-merge-sort"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/quick-sort/"
+  },
+  {
+   "tag": "45-heap-sort",
+   "title": "堆结构妙用：堆排序",
+   "group": "排序",
+   "subgroup": "选择",
+   "paywall": true,
+   "order": 45,
+   "prerequisites": [
+    "21-binary-heap-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/heap-sort/"
+  },
+  {
+   "tag": "46-shell-sort",
+   "title": "突破 O(N^2)：希尔排序",
+   "group": "排序",
+   "subgroup": "插入改进",
+   "paywall": true,
+   "order": 46,
+   "prerequisites": [
+    "41-insertion-sort"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/shell-sort/"
+  },
+  {
+   "tag": "47-counting-sort",
+   "title": "全新的排序原理：计数排序",
+   "group": "排序",
+   "subgroup": "线性",
+   "paywall": true,
+   "order": 47,
+   "prerequisites": [
+    "39-sort-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/counting-sort/"
+  },
+  {
+   "tag": "48-bucket-sort",
+   "title": "善用区间：桶排序",
+   "group": "排序",
+   "subgroup": "线性",
+   "paywall": true,
+   "order": 48,
+   "prerequisites": [
+    "47-counting-sort"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/bucket-sort/"
+  },
+  {
+   "tag": "49-radix-sort",
+   "title": "基数排序（Radix Sort）",
+   "group": "排序",
+   "subgroup": "线性",
+   "paywall": true,
+   "order": 49,
+   "prerequisites": [
+    "47-counting-sort",
+    "48-bucket-sort"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/radix-sort/"
+  },
+  {
+   "tag": "50-huffman-tree",
+   "title": "数据压缩和赫夫曼编码",
+   "group": "应用",
+   "subgroup": null,
+   "paywall": true,
+   "order": 50,
+   "prerequisites": [
+    "23-binary-tree-basic"
+   ],
+   "url": "https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/"
+  }
+ ],
+ "groups": [
+  {
+   "name": "入门",
+   "description": "本章导读与复杂度分析"
+  },
+  {
+   "name": "数组",
+   "description": "顺序存储：动态数组、循环数组"
+  },
+  {
+   "name": "链表",
+   "description": "链式存储：单链表、双链表"
+  },
+  {
+   "name": "数组链表技巧",
+   "description": "双端队列、循环数组"
+  },
+  {
+   "name": "队列/栈",
+   "description": "FIFO/LIFO：数组/链表实现"
+  },
+  {
+   "name": "哈希表",
+   "description": "哈希映射：拉链法、线性探查法"
+  },
+  {
+   "name": "哈希集合",
+   "description": "哈希集合、位图、布隆过滤器、跳表"
+  },
+  {
+   "name": "二叉堆",
+   "description": "堆结构、优先级队列"
+  },
+  {
+   "name": "二叉树",
+   "description": "二叉树概念、遍历"
+  },
+  {
+   "name": "高级树",
+   "description": "线段树、搜索树、Trie、并查集、红黑树"
+  },
+  {
+   "name": "图",
+   "description": "图基础、遍历、最短路、生成树"
+  },
+  {
+   "name": "排序",
+   "description": "十大排序算法"
+  },
+  {
+   "name": "应用",
+   "description": "赫夫曼编码等综合应用"
+  }
+ ]
 }

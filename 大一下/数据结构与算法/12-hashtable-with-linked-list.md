@@ -1,10 +1,10 @@
 ---
 title: 链表实现哈希表（LinkedHashMap）
-tags: [labuladong, 哈希表, 实现, 数据结构与算法]
+tags: [labuladong, 哈希表, 实现, 数据结构与算法, 付费章节]
 order: 12
 prerequisites: [06-linkedlist-implement]
 group: 哈希表 / 实现
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/
 ---
@@ -95,6 +95,10 @@ func main() {
 点击查看答案
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/)。
 
 
 ## 关联章节

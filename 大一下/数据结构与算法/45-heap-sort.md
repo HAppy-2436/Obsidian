@@ -1,10 +1,10 @@
 ---
 title: 堆结构妙用：堆排序
-tags: [labuladong, 排序, 选择, 数据结构与算法]
+tags: [labuladong, 排序, 选择, 数据结构与算法, 付费章节]
 order: 45
 prerequisites: [21-binary-heap-basic]
 group: 排序 / 选择
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/heap-sort/
 ---
@@ -152,6 +152,10 @@ O(NlogN) 的时间内完成排序。
  中的优先级队列实现里抠出来的，把数组作为函数参数传入，其他的逻辑完全一样：
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/heap-sort/)。
 
 
 ## 关联章节

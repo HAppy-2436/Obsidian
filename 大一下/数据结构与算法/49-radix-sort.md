@@ -1,10 +1,10 @@
 ---
 title: 基数排序（Radix Sort）
-tags: [labuladong, 排序, 线性, 数据结构与算法]
+tags: [labuladong, 排序, 线性, 数据结构与算法, 付费章节]
 order: 49
 prerequisites: [47-counting-sort, 48-bucket-sort]
 group: 排序 / 线性
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/radix-sort/
 ---
@@ -136,6 +136,10 @@ LeetCode
 十位数都是 5，稳定排序可以保证这两个 5 的顺序不变，最终的结果就是正确的；而如果使用不稳定排序，这两个 5 的顺序就可能被打乱，最终的结果就不对了。
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/radix-sort/)。
 
 
 ## 关联章节

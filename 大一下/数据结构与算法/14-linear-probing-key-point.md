@@ -1,10 +1,10 @@
 ---
 title: 线性探查法的两个难点
-tags: [labuladong, 哈希表, 开放定址, 数据结构与算法]
+tags: [labuladong, 哈希表, 开放定址, 数据结构与算法, 付费章节]
 order: 14
 prerequisites: [13-hashmap-basic]
 group: 哈希表 / 开放定址
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-point/
 ---
@@ -104,6 +104,10 @@ public:
 基于这个假设场景，我们来看看线性探查法的两个难点。
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-point/)。
 
 
 ## 关联章节

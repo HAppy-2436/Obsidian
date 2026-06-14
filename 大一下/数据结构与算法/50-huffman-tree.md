@@ -1,10 +1,10 @@
 ---
 title: 数据压缩和赫夫曼编码
-tags: [labuladong, 应用, 数据结构与算法]
+tags: [labuladong, 应用, 数据结构与算法, 付费章节]
 order: 50
 prerequisites: [23-binary-tree-basic]
 group: 应用
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/
 ---
@@ -190,6 +190,10 @@ K 较小，解码速度慢几倍也是非常糟糕的，所以我们需要保证
 O(N)，且压缩率尽可能高。
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/)。
 
 
 ## 关联章节

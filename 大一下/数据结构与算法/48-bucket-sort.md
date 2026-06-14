@@ -1,10 +1,10 @@
 ---
 title: 善用区间：桶排序
-tags: [labuladong, 排序, 线性, 数据结构与算法]
+tags: [labuladong, 排序, 线性, 数据结构与算法, 付费章节]
 order: 48
 prerequisites: [47-counting-sort]
 group: 排序 / 线性
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/bucket-sort/
 ---
@@ -391,6 +391,10 @@ O(n
 下面我将来探讨如何把待排序元素分配到桶中，以及如何合并有序桶，最后给出桶排序的几种代码实现。
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/bucket-sort/)。
 
 
 ## 关联章节

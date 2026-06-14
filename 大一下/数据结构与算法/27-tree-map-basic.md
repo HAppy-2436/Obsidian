@@ -1,10 +1,10 @@
 ---
 title: 二叉搜索树原理及应用技巧
-tags: [labuladong, 高级树, 数据结构与算法]
+tags: [labuladong, 高级树, 数据结构与算法, 付费章节]
 order: 27
 prerequisites: [23-binary-tree-basic]
 group: 高级树
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/
 ---
@@ -189,6 +189,10 @@ class MyTreeMap<K, V> {
  中实现的 LinkedHashMap 也只是做到按「插入顺序」排列哈希表中的键，依然做不到按「大小顺序」排列。
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/)。
 
 
 ## 关联章节

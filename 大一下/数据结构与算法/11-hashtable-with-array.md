@@ -1,10 +1,10 @@
 ---
 title: 数组实现哈希表（ArrayHashMap）
-tags: [labuladong, 哈希表, 实现, 数据结构与算法]
+tags: [labuladong, 哈希表, 实现, 数据结构与算法, 付费章节]
 order: 11
 prerequisites: [03-array-implement]
 group: 哈希表 / 实现
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/
 ---
@@ -150,6 +150,10 @@ O(N) 了，还是不符合要求。
 是不是感觉已经走投无路了？所以说，还是要积累一些经典数据结构设计经验，如果面试笔试的时候遇到类似的问题，你现场想恐怕是很难的。下面我就来介绍一下如何用数组加强哈希表，轻松实现 randomKey() API。
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/)。
 
 
 ## 关联章节

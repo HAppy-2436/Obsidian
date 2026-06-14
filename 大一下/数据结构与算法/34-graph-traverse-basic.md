@@ -1,10 +1,10 @@
 ---
 title: 图结构的 DFS/BFS 遍历
-tags: [labuladong, 图, 遍历, 数据结构与算法]
+tags: [labuladong, 图, 遍历, 数据结构与算法, 付费章节]
 order: 34
 prerequisites: [33-graph-basic, 24-binary-tree-traverse-basic]
 group: 图 / 遍历
-paywall: false
+paywall: true
 source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/
 ---
@@ -330,6 +330,10 @@ Hierholzer 算法计算欧拉路径
 因为对于树结构来说，只能由父节点指向子节点，所以从根节点 root 出发，到任意一个节点 targetNode 的路径都是唯一的。换句话说，我遍历一遍树结构的所有节点之后，必然可以找到 root 到 targetNode 的唯一路径：
 
 了解会员权益
+
+
+> [!warning] 付费章节
+> 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/)。
 
 
 ## 关联章节
