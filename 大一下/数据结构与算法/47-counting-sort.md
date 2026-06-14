@@ -38,8 +38,7 @@ LeetCode
 
 计数排序的原理比较简单：统计每种元素出现的次数，进而推算出每个元素在排序后数组中的索引位置，最终完成排序。
 
-计数排序的时间和空间复杂度都是
-O(n+max−min)，其中
+计数排序的时间和空间复杂度都是  O(n+max−min)，其中
 
 n 是待排序数组长度，
 
@@ -74,32 +73,15 @@ LeetCode
 示例 1：
 
 ```cpp
-class Solution {
-public:
-    void sortColors(vector<int>& nums) {
-        // 统计 0, 1, 2 出现的次数
-        vector<int> count(3, 0);
-        for (int element : nums) {
-            count[element]++;
-        }
+class Solution { public:  void sortColors(vector<int>& nums) {  // 统计 0, 1, 2 出现的次数  vector<int> count(3, 0);  for (int element : nums) {  count[element]++;  }
 
-        // 按照 count 数组的统计结果，依次填充原数组
-        int index = 0;
-        for (int element = 0; element < 3; element++) {
-            for (int i = 0; i < count[element]; i++) {
-                nums[index] = element;
-                index++;
-            }
-        }
-    }
-};
+  // 按照 count 数组的统计结果，依次填充原数组  int index = 0;  for (int element = 0; element < 3; element++) {  for (int i = 0; i < count[element]; i++) {  nums[index] = element;  index++;  }  }  } };
 ```
 
 示例 2：
 
 ```
-输入：nums = [2,0,1]
-输出：[0,1,2]
+输入：nums = [2,0,1] 输出：[0,1,2]
 ```
 
 提示：
@@ -120,32 +102,14 @@ nums[i] 为 0、1 或 2
 
 。
 
-这道题有多种思路，最优解法是用双指针技巧仅遍历一次数组完成排序，我会在
-数组双指针技巧习题
- 中介绍。这里我们用计数排序的思路来解决这个问题，说白了就是让你对数组排序，且这个数组里只有 0、1、2 三种元素。
+这道题有多种思路，最优解法是用双指针技巧仅遍历一次数组完成排序，我会在  数组双指针技巧习题  中介绍。这里我们用计数排序的思路来解决这个问题，说白了就是让你对数组排序，且这个数组里只有 0、1、2 三种元素。
 
 我们可以创建一个大小为 3 的 count 数组，count[0], count[1], count[2] 分别表示数组中 0、1、2 出现的次数。然后我们按照 count 数组的统计结果，依次填充原数组即可。
 
 ```
-class Solution {
-public:
-    void sortColors(vector<int>& nums) {
-        // 统计 0, 1, 2 出现的次数
-        vector<int> count(3, 0);
-        for (int element : nums) {
-            count[element]++;
-        }
+class Solution { public:  void sortColors(vector<int>& nums) {  // 统计 0, 1, 2 出现的次数  vector<int> count(3, 0);  for (int element : nums) {  count[element]++;  }
 
-        // 按照 count 数组的统计结果，依次填充原数组
-        int index = 0;
-        for (int element = 0; element < 3; element++) {
-            for (int i = 0; i < count[element]; i++) {
-                nums[index] = element;
-                index++;
-            }
-        }
-    }
-};
+  // 按照 count 数组的统计结果，依次填充原数组  int index = 0;  for (int element = 0; element < 3; element++) {  for (int i = 0; i < count[element]; i++) {  nums[index] = element;  index++;  }  }  } };
 ```
 
 这就是一个简单的计数排序算法，不过这个题目给的场景比较简单，只有 0, 1, 2 三种元素，下面我们给出一个更通用的计数排序算法。

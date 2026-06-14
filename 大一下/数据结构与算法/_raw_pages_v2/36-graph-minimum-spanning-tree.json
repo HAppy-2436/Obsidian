@@ -38,7 +38,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n什么是生成树"
+   "content": "¶ 什么是生成树"
   },
   {
    "type": "text",
@@ -75,7 +75,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n什么是最小生成树"
+   "content": "¶ 什么是最小生成树"
   },
   {
    "type": "text",
@@ -96,7 +96,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n最小生成树算法"
+   "content": "¶ 最小生成树算法"
   },
   {
    "type": "text",
@@ -104,20 +104,20 @@
   },
   {
    "type": "text",
-   "content": "Kruskal 算法相对简单一些，只需要先对图中的所有边按照权重排序，然后借助 \nUnion-Find 并查集算法\n 即可找到最小生成树。"
+   "content": "Kruskal 算法相对简单一些，只需要先对图中的所有边按照权重排序，然后借助  Union-Find 并查集算法  即可找到最小生成树。"
   },
   {
    "type": "text",
-   "content": "Prim 算法可以由 \nDijkstra 算法\n 拓展而来，借助 \n优先级队列\n 动态排序的特性，逐步构造最小生成树。"
+   "content": "Prim 算法可以由  Dijkstra 算法  拓展而来，借助  优先级队列  动态排序的特性，逐步构造最小生成树。"
   },
   {
    "type": "text",
-   "content": "具体的代码实现在 \nKruskal 算法\n 和 \nPrim 算法\n 中讲解。"
+   "content": "具体的代码实现在  Kruskal 算法  和  Prim 算法  中讲解。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n随机地图构造问题"
+   "content": "¶ 随机地图构造问题"
   },
   {
    "type": "text",

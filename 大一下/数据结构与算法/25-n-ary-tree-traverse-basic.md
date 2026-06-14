@@ -38,46 +38,31 @@ LeetCode
 
 一句话总结
 
-多叉树结构就是
-二叉树结构
- 的延伸，二叉树是特殊的多叉树。
+多叉树结构就是  二叉树结构  的延伸，二叉树是特殊的多叉树。
 
-多叉树的遍历就是
-二叉树遍历
- 的延伸。
+多叉树的遍历就是  二叉树遍历  的延伸。
 
 森林是指多个多叉树的集合，单独一棵多叉树是一个特殊的森林。
 
 二叉树的节点长这样，每个节点有两个子节点：
 
 ```cpp
-class TreeNode {
-public:
-    int val;
-    TreeNode* left;
-    TreeNode* right;
+class TreeNode { public:  int val;  TreeNode* left;  TreeNode* right;
 
-    TreeNode(int v) : val(v), left(nullptr), right(nullptr) {}
-};
+  TreeNode(int v) : val(v), left(nullptr), right(nullptr) {} };
 ```
 
 多叉树的节点长这样，每个节点有任意个子节点：
 
 ```cpp
-class Node {
-public:
-    int val;
-    vector<Node*> children;
-};
+class Node { public:  int val;  vector<Node*> children; };
 ```
 
 就这点区别，其他没了。
 
 ## 森林
 
-这里介绍一下「森林」这个名词，后面讲到
-Union Find 并查集算法
- 时，会用到这个概念。
+这里介绍一下「森林」这个名词，后面讲到  Union Find 并查集算法  时，会用到这个概念。
 
 顾名思义，森林就是多个多叉树的集合（单独一棵多叉树也是一个特殊的森林），用代码表示就是多个多叉树的根节点列表，类似这样：
 

@@ -17,8 +17,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/cycle-array/
 
 一句话总结
 
-环形数组技巧利用求模（余数）运算，将普通数组变成逻辑上的环形数组，可以让我们用
-O(1) 的时间在数组头部增删元素。
+环形数组技巧利用求模（余数）运算，将普通数组变成逻辑上的环形数组，可以让我们用  O(1) 的时间在数组头部增删元素。
 
 ## 环形数组原理
 
@@ -27,141 +26,43 @@ O(1) 的时间在数组头部增删元素。
 但是，我们可以在「逻辑上」把数组变成环形的，比如下面这段代码：
 
 ```cpp
-#include <iostream>
-#include <vector>
-using namespace std;
+#include <iostream> #include <vector> using namespace std;
 
-// 长度为 5 的数组
-vector<int> arr = {1, 2, 3, 4, 5};
-int i = 0;
-// 模拟环形数组，这个循环永远不会结束
-while (i < arr.size()) {
-    cout << arr[i] << endl;
-    i = (i + 1) % arr.size();
-}
+// 长度为 5 的数组 vector<int> arr = {1, 2, 3, 4, 5}; int i = 0; // 模拟环形数组，这个循环永远不会结束 while (i < arr.size()) {  cout << arr[i] << endl;  i = (i + 1) % arr.size(); }
 ```
 
 这段代码的关键在于求模运算 %，也就是求余数。当 i 到达数组末尾元素时，i + 1 和 arr.length 取余数又会变成 0，即会回到数组头部，这样就在逻辑上形成了一个环形数组，永远遍历不完。
 
-这就是环形数组技巧。这个技巧如何帮助我们在
-O(1) 的时间在数组头部增删元素呢？
+这就是环形数组技巧。这个技巧如何帮助我们在  O(1) 的时间在数组头部增删元素呢？
 
 是这样，假设我们现在有一个长度为 6 的数组，现在其中只装了 3 个元素，如下（未装元素的位置用 _ 标识）：
 
 ```cpp
-#include <iostream>
-#include <stdexcept>
-#include <vector>
-#include <ostream>
+#include <iostream> #include <stdexcept> #include <vector> #include <ostream>
 
-template<typename T>
-class CycleArray {
-    vector<T> arr;
-    int start;
-    int end;
-    int count;
+template<typename T> class CycleArray {  vector<T> arr;  int start;  int end;  int count;
 
-    // 自动扩缩容辅助函数
-    void resize(int newSize) {
-        // 创建新的数组并复制元素
-        vector<T> newArr(newSize);
-        for (int i = 0; i < count; ++i) {
-            newArr[i] = arr[(start + i) % arr.size()];
-        }
-        arr = move(newArr);
-        // 重置 start 和 end 指针
-        start = 0;
-        end = count;
-    }
+  // 自动扩缩容辅助函数  void resize(int newSize) {  // 创建新的数组并复制元素  vector<T> newArr(newSize);  for (int i = 0; i < count; ++i) {  newArr[i] = arr[(start + i) % arr.size()];  }  arr = move(newArr);  // 重置 start 和 end 指针  start = 0;  end = count;  }
 
-public:
-    CycleArray() : CycleArray(1) {}
+public:  CycleArray() : CycleArray(1) {}
 
-    explicit CycleArray(int size)
-        : arr(size), start(0), end(0), count(0) {}
+  explicit CycleArray(int size)  : arr(size), start(0), end(0), count(0) {}
 
-    // 在数组头部添加元素，时间复杂度 O(1)
-    void addFirst(const T &val) {
-        // 当数组满时，扩容为原来的两倍
-        if (isFull()) {
-            resize(arr.size() * 2);
-        }
-        // 因为 start 是闭区间，所以先左移，再赋值
-        start = (start - 1 + arr.size()) % arr.size();
-        arr[start] = val;
-        count++;
-    }
+  // 在数组头部添加元素，时间复杂度 O(1)  void addFirst(const T &val) {  // 当数组满时，扩容为原来的两倍  if (isFull()) {  resize(arr.size() * 2);  }  // 因为 start 是闭区间，所以先左移，再赋值  start = (start - 1 + arr.size()) % arr.size();  arr[start] = val;  count++;  }
 
-    // 删除数组头部元素，时间复杂度 O(1)
-    void removeFirst() {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        // 因为 start 是闭区间，所以先赋值，再右移
-        arr[start] = T();
-        start = (start + 1) % arr.size();
-        count--;
-        // 如果数组元素数量减少到原大小的四分之一，则减小数组大小为一半
-        if (count > 0 && count == arr.size() / 4) {
-            resize(arr.size() / 2);
-        }
-    }
+  // 删除数组头部元素，时间复杂度 O(1)  void removeFirst() {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  // 因为 start 是闭区间，所以先赋值，再右移  arr[start] = T();  start = (start + 1) % arr.size();  count--;  // 如果数组元素数量减少到原大小的四分之一，则减小数组大小为一半  if (count > 0 && count == arr.size() / 4) {  resize(arr.size() / 2);  }  }
 
-    // 在数组尾部添加元素，时间复杂度 O(1)
-    void addLast(const T &val) {
-        if (isFull()) {
-            resize(arr.size() * 2);
-        }
-        // 因为 end 是开区间，所以是先赋值，再右移
-        arr[end] = val;
-        end = (end + 1) % arr.size();
-        count++;
-    }
+  // 在数组尾部添加元素，时间复杂度 O(1)  void addLast(const T &val) {  if (isFull()) {  resize(arr.size() * 2);  }  // 因为 end 是开区间，所以是先赋值，再右移  arr[end] = val;  end = (end + 1) % arr.size();  count++;  }
 
-    // 删除数组尾部元素，时间复杂度 O(1)
-    void removeLast() {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        // 因为 end 是开区间，所以先左移，再赋值
-        end = (end - 1 + arr.size()) % arr.size();
-        arr[end] = T();
-        count--;
-        // 缩容
-        if (count > 0 && count == arr.size() / 4) {
-            resize(arr.size() / 2);
-        }
-    }
+  // 删除数组尾部元素，时间复杂度 O(1)  void removeLast() {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  // 因为 end 是开区间，所以先左移，再赋值  end = (end - 1 + arr.size()) % arr.size();  arr[end] = T();  count--;  // 缩容  if (count > 0 && count == arr.size() / 4) {  resize(arr.size() / 2);  }  }
 
-    // 获取数组头部元素，时间复杂度 O(1)
-    T getFirst() const {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        return arr[start];
-    }
+  // 获取数组头部元素，时间复杂度 O(1)  T getFirst() const {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  return arr[start];  }
 
-    // 获取数组尾部元素，时间复杂度 O(1)
-    T getLast() const {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        // end 是开区间，指向的是下一个元素的位置，所以要减 1
-        return arr[(end - 1 + arr.size()) % arr.size()];
-    }
+  // 获取数组尾部元素，时间复杂度 O(1)  T getLast() const {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  // end 是开区间，指向的是下一个元素的位置，所以要减 1  return arr[(end - 1 + arr.size()) % arr.size()];  }
 
-    bool isFull() const {
-        return count == arr.size();
-    }
+  bool isFull() const {  return count == arr.size();  }  int size() const {  return count;  }
 
-    int size() const {
-        return count;
-    }
-
-    bool isEmpty() const {
-        return count == 0;
-    }
-};
+  bool isEmpty() const {  return count == 0;  } };
 ```
 
 现在我们要在数组头部删除元素 1，那么我们可以把数组变成这样：
@@ -213,146 +114,50 @@ public:
 最后，请看代码实现：
 
 ```cpp
-#include <iostream>
-#include <stdexcept>
-#include <vector>
-#include <ostream>
+#include <iostream> #include <stdexcept> #include <vector> #include <ostream>
 
-template<typename T>
-class CycleArray {
-    vector<T> arr;
-    int start;
-    int end;
-    int count;
+template<typename T> class CycleArray {  vector<T> arr;  int start;  int end;  int count;
 
-    // 自动扩缩容辅助函数
-    void resize(int newSize) {
-        // 创建新的数组并复制元素
-        vector<T> newArr(newSize);
-        for (int i = 0; i < count; ++i) {
-            newArr[i] = arr[(start + i) % arr.size()];
-        }
-        arr = move(newArr);
-        // 重置 start 和 end 指针
-        start = 0;
-        end = count;
-    }
+  // 自动扩缩容辅助函数  void resize(int newSize) {  // 创建新的数组并复制元素  vector<T> newArr(newSize);  for (int i = 0; i < count; ++i) {  newArr[i] = arr[(start + i) % arr.size()];  }  arr = move(newArr);  // 重置 start 和 end 指针  start = 0;  end = count;  }
 
-public:
-    CycleArray() : CycleArray(1) {}
+public:  CycleArray() : CycleArray(1) {}
 
-    explicit CycleArray(int size)
-        : arr(size), start(0), end(0), count(0) {}
+  explicit CycleArray(int size)  : arr(size), start(0), end(0), count(0) {}
 
-    // 在数组头部添加元素，时间复杂度 O(1)
-    void addFirst(const T &val) {
-        // 当数组满时，扩容为原来的两倍
-        if (isFull()) {
-            resize(arr.size() * 2);
-        }
-        // 因为 start 是闭区间，所以先左移，再赋值
-        start = (start - 1 + arr.size()) % arr.size();
-        arr[start] = val;
-        count++;
-    }
+  // 在数组头部添加元素，时间复杂度 O(1)  void addFirst(const T &val) {  // 当数组满时，扩容为原来的两倍  if (isFull()) {  resize(arr.size() * 2);  }  // 因为 start 是闭区间，所以先左移，再赋值  start = (start - 1 + arr.size()) % arr.size();  arr[start] = val;  count++;  }
 
-    // 删除数组头部元素，时间复杂度 O(1)
-    void removeFirst() {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        // 因为 start 是闭区间，所以先赋值，再右移
-        arr[start] = T();
-        start = (start + 1) % arr.size();
-        count--;
-        // 如果数组元素数量减少到原大小的四分之一，则减小数组大小为一半
-        if (count > 0 && count == arr.size() / 4) {
-            resize(arr.size() / 2);
-        }
-    }
+  // 删除数组头部元素，时间复杂度 O(1)  void removeFirst() {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  // 因为 start 是闭区间，所以先赋值，再右移  arr[start] = T();  start = (start + 1) % arr.size();  count--;  // 如果数组元素数量减少到原大小的四分之一，则减小数组大小为一半  if (count > 0 && count == arr.size() / 4) {  resize(arr.size() / 2);  }  }
 
-    // 在数组尾部添加元素，时间复杂度 O(1)
-    void addLast(const T &val) {
-        if (isFull()) {
-            resize(arr.size() * 2);
-        }
-        // 因为 end 是开区间，所以是先赋值，再右移
-        arr[end] = val;
-        end = (end + 1) % arr.size();
-        count++;
-    }
+  // 在数组尾部添加元素，时间复杂度 O(1)  void addLast(const T &val) {  if (isFull()) {  resize(arr.size() * 2);  }  // 因为 end 是开区间，所以是先赋值，再右移  arr[end] = val;  end = (end + 1) % arr.size();  count++;  }
 
-    // 删除数组尾部元素，时间复杂度 O(1)
-    void removeLast() {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        // 因为 end 是开区间，所以先左移，再赋值
-        end = (end - 1 + arr.size()) % arr.size();
-        arr[end] = T();
-        count--;
-        // 缩容
-        if (count > 0 && count == arr.size() / 4) {
-            resize(arr.size() / 2);
-        }
-    }
+  // 删除数组尾部元素，时间复杂度 O(1)  void removeLast() {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  // 因为 end 是开区间，所以先左移，再赋值  end = (end - 1 + arr.size()) % arr.size();  arr[end] = T();  count--;  // 缩容  if (count > 0 && count == arr.size() / 4) {  resize(arr.size() / 2);  }  }
 
-    // 获取数组头部元素，时间复杂度 O(1)
-    T getFirst() const {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        return arr[start];
-    }
+  // 获取数组头部元素，时间复杂度 O(1)  T getFirst() const {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  return arr[start];  }
 
-    // 获取数组尾部元素，时间复杂度 O(1)
-    T getLast() const {
-        if (isEmpty()) {
-            throw runtime_error("Array is empty");
-        }
-        // end 是开区间，指向的是下一个元素的位置，所以要减 1
-        return arr[(end - 1 + arr.size()) % arr.size()];
-    }
+  // 获取数组尾部元素，时间复杂度 O(1)  T getLast() const {  if (isEmpty()) {  throw runtime_error("Array is empty");  }  // end 是开区间，指向的是下一个元素的位置，所以要减 1  return arr[(end - 1 + arr.size()) % arr.size()];  }
 
-    bool isFull() const {
-        return count == arr.size();
-    }
+  bool isFull() const {  return count == arr.size();  }  int size() const {  return count;  }
 
-    int size() const {
-        return count;
-    }
-
-    bool isEmpty() const {
-        return count == 0;
-    }
-};
+  bool isEmpty() const {  return count == 0;  } };
 ```
 
 ## 思考题
 
-数组增删头部元素的效率真的只能是
-O(N) 么？
+数组增删头部元素的效率真的只能是  O(N) 么？
 
-我们都说，在数组增删头部元素的时间复杂度是
-O(N)，因为需要搬移元素。但是，如果我们使用环形数组，其实是可以实现在
-O(1) 的时间复杂度内增删头部元素的。
+我们都说，在数组增删头部元素的时间复杂度是  O(N)，因为需要搬移元素。但是，如果我们使用环形数组，其实是可以实现在  O(1) 的时间复杂度内增删头部元素的。
 
-当然，上面实现的这个环形数组只提供了 addFirst, removeFirst, addLast, removeLast 这几个方法，并没有提供
-我们之前实现的动态数组
- 的某些方法，比如删除指定索引的元素，获取指定索引的元素，在指定索引插入元素等等。
+当然，上面实现的这个环形数组只提供了 addFirst, removeFirst, addLast, removeLast 这几个方法，并没有提供  我们之前实现的动态数组  的某些方法，比如删除指定索引的元素，获取指定索引的元素，在指定索引插入元素等等。
 
 但是你可以思考一下，难道环形数组实现不了这些方法么？环形数组实现这些方法，时间复杂度相比普通数组，有退化吗？
 
 好像没有吧。
 
-环形数组也可以删除指定索引的元素，也要做数据搬移，和普通数组一样，复杂度是
-O(N)；
+环形数组也可以删除指定索引的元素，也要做数据搬移，和普通数组一样，复杂度是  O(N)；
 
-环形数组也可以获取指定索引的元素（随机访问），只不过不是直接访问对应索引，而是要通过 start 计算出真实索引，但计算和访问的时间复杂度依然是
-O(1)；
+环形数组也可以获取指定索引的元素（随机访问），只不过不是直接访问对应索引，而是要通过 start 计算出真实索引，但计算和访问的时间复杂度依然是  O(1)；
 
-环形数组也可以在指定索引插入元素，当然也要做数据搬移，和普通数组一样，复杂度是
-O(N)。
+环形数组也可以在指定索引插入元素，当然也要做数据搬移，和普通数组一样，复杂度是  O(N)。
 
 你可以思考一下是不是这样。如果是这样，为什么编程语言的标准库中提供的动态数组容器底层并没有用环形数组技巧。
 

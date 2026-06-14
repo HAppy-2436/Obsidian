@@ -21,7 +21,7 @@
   },
   {
    "type": "code",
-   "content": "// 假设 nums 是一个包含 1000 个整数的数组\nint[] nums = {...}\n\n// 我们在写算法时\n// 可能会用一个布尔数组来记录 nums 中那些元素已经被访问过\nboolean[] visited = new boolean[nums.length];\nvisited[10] = true;\nvisited[100] = true;"
+   "content": "// 假设 nums 是一个包含 1000 个整数的数组 int[] nums = {...}\n\n// 我们在写算法时 // 可能会用一个布尔数组来记录 nums 中那些元素已经被访问过 boolean[] visited = new boolean[nums.length]; visited[10] = true; visited[100] = true;"
   },
   {
    "type": "text",
@@ -53,7 +53,7 @@
   },
   {
    "type": "text",
-   "content": "比如后文介绍的 \n布隆过滤器\n，专门为了处理超大规模数据而设计，才需要使用位图这种结构进行优化。"
+   "content": "比如后文介绍的  布隆过滤器 ，专门为了处理超大规模数据而设计，才需要使用位图这种结构进行优化。"
   },
   {
    "type": "text",

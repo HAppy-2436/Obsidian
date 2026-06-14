@@ -16,24 +16,16 @@ url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array
 
 哈希表核心原理
 
-上一章
-用链表加强哈希表
- 我们利用
-双链表
- 对哈希表进行了加强，实现了 LinkedHashMap 这种数据结构，让哈希表的键保持插入顺序。
+上一章  用链表加强哈希表  我们利用  双链表  对哈希表进行了加强，实现了 LinkedHashMap 这种数据结构，让哈希表的键保持插入顺序。
 
 链表能加强哈希表，数组作为链表的好兄弟，其实也能加强哈希表。
 
 ## 添加 randomKey() API
 
-现在我给你出个题，让你基于标准哈希表的 API 之上，再添加一个新的 randomKey() API，可以在
-O(1) 的时间复杂度返回一个随机键：
+现在我给你出个题，让你基于标准哈希表的 API 之上，再添加一个新的 randomKey() API，可以在  O(1) 的时间复杂度返回一个随机键：
 
 ```cpp
-int randomeElement(vector<int>& arr) {
-    // 生成 [0, arr.size()) 的随机索引
-    return arr[rand() % arr.size()];
-}
+int randomeElement(vector<int>& arr) {  // 生成 [0, arr.size()) 的随机索引  return arr[rand() % arr.size()]; }
 ```
 
 均匀随机（uniform random）
@@ -47,10 +39,7 @@ int randomeElement(vector<int>& arr) {
 在标准数组，随机获取一个元素很简单，只要用随机数生成器生成一个 [0, size) 的随机索引，就相当于找了一个随机元素：
 
 ```
-int randomeElement(vector<int>& arr) {
-    // 生成 [0, arr.size()) 的随机索引
-    return arr[rand() % arr.size()];
-}
+int randomeElement(vector<int>& arr) {  // 生成 [0, arr.size()) 的随机索引  return arr[rand() % arr.size()]; }
 ```
 
 这个算法是正确的，它的复杂度是 O(1)，且每个元素被选中的概率都是 1/n，n 为 arr 数组的总元素个数。
@@ -62,48 +51,22 @@ int randomeElement(vector<int>& arr) {
 也许你想说，可以向左或者向右线性查找，找到一个非空的元素返回，类似这样：
 
 ```
-// 返回一个非空的随机元素（伪码）
-int randomeElement(int[] arr) {
-    Random r = new Random();
-    // 生成 [0, arr.length) 的随机索引
-    int i = r.nextInt(arr.length);
-    while (arr[i] == null) {
-        // 随机生成的索引 i 恰巧是空洞
-        // 借助环形数组技巧向右进行探查
-        // 直到找到一个非空元素
-        i = (i + 1) % arr.length;
-    }
-    return arr[i];
-}
+// 返回一个非空的随机元素（伪码） int randomeElement(int[] arr) {  Random r = new Random();  // 生成 [0, arr.length) 的随机索引  int i = r.nextInt(arr.length);  while (arr[i] == null) {  // 随机生成的索引 i 恰巧是空洞  // 借助环形数组技巧向右进行探查  // 直到找到一个非空元素  i = (i + 1) % arr.length;  }  return arr[i]; }
 ```
 
 你这样是不行的，这个算法有两个问题：
 
-1、有个循环，最坏时间复杂度上升到了
-O(N)，不符合
-O(1) 的要求。
+1、有个循环，最坏时间复杂度上升到了  O(N)，不符合  O(1) 的要求。
 
 2、这个算法不是均匀随机的，因为你的查找方向是固定的，空洞右侧的元素被选中的概率会更大。比如 arr = [1, 2, null, 4]，元素 1, 2, 4 被选中的概率分别是 1/4, 1/4, 2/4。
 
 那也许还有个办法，一次运气不好，就多来随机几次，直到找到一个非空元素：
 
 ```
-// 返回一个非空的随机元素（伪码）
-int randomeElement(int[] arr) {
-    Random r = new Random();
-    // 生成 [0, arr.length) 的随机索引
-    int i = r.nextInt(arr.length);
-    while (arr[i] == null) {
-        // 随机生成的索引 i 恰巧是空洞
-        // 重新生成一个随机索引
-        i = r.nextInt(arr.length);
-    }
-    return arr[i];
-}
+// 返回一个非空的随机元素（伪码） int randomeElement(int[] arr) {  Random r = new Random();  // 生成 [0, arr.length) 的随机索引  int i = r.nextInt(arr.length);  while (arr[i] == null) {  // 随机生成的索引 i 恰巧是空洞  // 重新生成一个随机索引  i = r.nextInt(arr.length);  }  return arr[i]; }
 ```
 
-现在这个算法是均匀随机的，但问题也非常明显，它的时间复杂度竟然依赖随机数！肯定不是
-O(1) 的，不符合要求。
+现在这个算法是均匀随机的，但问题也非常明显，它的时间复杂度竟然依赖随机数！肯定不是  O(1) 的，不符合要求。
 
 怎么样，从一个带有空洞的数组中随机返回一个元素是不是都把你难住了？
 
@@ -119,14 +82,9 @@ O(1) 的，不符合要求。
 
 关于概率算法
 
-概率算法也是非常有意思的一类问题，无论算法题还是实际业务中都会用到一些经典的随机算法，我会在后文
-谈谈游戏中的随机算法
- 和
-带权重的随机选择
- 中详细讲解，这里暂时不需要掌握。
+概率算法也是非常有意思的一类问题，无论算法题还是实际业务中都会用到一些经典的随机算法，我会在后文  谈谈游戏中的随机算法  和  带权重的随机选择  中详细讲解，这里暂时不需要掌握。
 
-唯一的办法就是通过 keys 方法遍历整个 table 数组，把所有的键都存储到一个数组中，然后再随机返回一个键。但这样复杂度就是
-O(N) 了，还是不符合要求。
+唯一的办法就是通过 keys 方法遍历整个 table 数组，把所有的键都存储到一个数组中，然后再随机返回一个键。但这样复杂度就是  O(N) 了，还是不符合要求。
 
 是不是感觉已经走投无路了？所以说，还是要积累一些经典数据结构设计经验，如果面试笔试的时候遇到类似的问题，你现场想恐怕是很难的。下面我就来介绍一下如何用数组加强哈希表，轻松实现 randomKey() API。
 

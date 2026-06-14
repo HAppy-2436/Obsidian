@@ -26,7 +26,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n基本原理"
+   "content": "¶ 基本原理"
   },
   {
    "type": "text",
@@ -58,12 +58,12 @@
   },
   {
    "type": "code",
-   "content": "template<typename E>\nclass MyDeque {\npublic:\n    // 从队头插入元素，时间复杂度 O(1)\n    void addFirst(E e);\n\n    // 从队尾插入元素，时间复杂度 O(1)\n    void addLast(E e);\n\n    // 从队头删除元素，时间复杂度 O(1)\n    E removeFirst();\n\n    // 从队尾删除元素，时间复杂度 O(1)\n    E removeLast();\n\n    // 查看队头元素，时间复杂度 O(1)\n    E peekFirst();\n\n    // 查看队尾元素，时间复杂度 O(1)\n    E peekLast();\n};",
+   "content": "template<typename E> class MyDeque { public:  // 从队头插入元素，时间复杂度 O(1)  void addFirst(E e);\n\n  // 从队尾插入元素，时间复杂度 O(1)  void addLast(E e);\n\n  // 从队头删除元素，时间复杂度 O(1)  E removeFirst();\n\n  // 从队尾删除元素，时间复杂度 O(1)  E removeLast();\n\n  // 查看队头元素，时间复杂度 O(1)  E peekFirst();\n\n  // 查看队尾元素，时间复杂度 O(1)  E peekLast(); };",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "标准队列\n 只能在队尾插入元素，队头删除元素，而双端队列的队头和队尾都可以插入或删除元素。"
+   "content": "标准队列  只能在队尾插入元素，队头删除元素，而双端队列的队头和队尾都可以插入或删除元素。"
   },
   {
    "type": "text",
@@ -76,11 +76,11 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n用链表实现双端队列"
+   "content": "¶ 用链表实现双端队列"
   },
   {
    "type": "text",
-   "content": "很简单吧，直接复用我们之前实现的 \nMyLinkedList\n 类，或者使用编程语言标准库提供的双链表结构就行了。因为双链表本就支持 \n𝑂\n(\n1\n)\nO(1) 时间复杂度在链表的头尾增删元素："
+   "content": "很简单吧，直接复用我们之前实现的  MyLinkedList  类，或者使用编程语言标准库提供的双链表结构就行了。因为双链表本就支持  O(1) 时间复杂度在链表的头尾增删元素："
   },
   {
    "type": "text",
@@ -108,17 +108,17 @@
   },
   {
    "type": "code",
-   "content": "#include <iostream>\n#include <list>\n\ntemplate<typename E>\nclass MyListDeque {\n    list<E> list;\n\npublic:\n    // 从队头插入元素，时间复杂度 O(1)\n    void addFirst(const E &e) {\n        list.push_front(e);\n    }\n\n    // 从队尾插入元素，时间复杂度 O(1)\n    void addLast(const E &e) {\n        list.push_back(e);\n    }\n\n    // 从队头删除元素，时间复杂度 O(1)\n    E removeFirst() {\n        E firstElement = list.front();\n        list.pop_front();\n        return firstElement;\n    }\n\n    // 从队尾删除元素，时间复杂度 O(1)\n    E removeLast() {\n        E lastElement = list.back();\n        list.pop_back();\n        return lastElement;\n    }\n\n    // 查看队头元素，时间复杂度 O(1)\n    E peekFirst() {\n        return list.front();\n    }\n\n    // 查看队尾元素，时间复杂度 O(1)\n    E peekLast() {\n        return list.back();\n    }\n};\n\nint main() {\n    MyListDeque<int> deque;\n    deque.addFirst(1);\n    deque.addFirst(2);\n    deque.addLast(3);\n    deque.addLast(4);\n\n    cout << deque.removeFirst() << endl; // 2\n    cout << deque.removeLast() << endl; // 4\n    cout << deque.peekFirst() << endl; // 1\n    cout << deque.peekLast() << endl; // 3\n    return 0;\n}",
+   "content": "#include <iostream> #include <list>\n\ntemplate<typename E> class MyListDeque {  list<E> list;\n\npublic:  // 从队头插入元素，时间复杂度 O(1)  void addFirst(const E &e) {  list.push_front(e);  }\n\n  // 从队尾插入元素，时间复杂度 O(1)  void addLast(const E &e) {  list.push_back(e);  }\n\n  // 从队头删除元素，时间复杂度 O(1)  E removeFirst() {  E firstElement = list.front();  list.pop_front();  return firstElement;  }\n\n  // 从队尾删除元素，时间复杂度 O(1)  E removeLast() {  E lastElement = list.back();  list.pop_back();  return lastElement;  }\n\n  // 查看队头元素，时间复杂度 O(1)  E peekFirst() {  return list.front();  }\n\n  // 查看队尾元素，时间复杂度 O(1)  E peekLast() {  return list.back();  } };\n\nint main() {  MyListDeque<int> deque;  deque.addFirst(1);  deque.addFirst(2);  deque.addLast(3);  deque.addLast(4);\n\n  cout << deque.removeFirst() << endl; // 2  cout << deque.removeLast() << endl; // 4  cout << deque.peekFirst() << endl; // 1  cout << deque.peekLast() << endl; // 3  return 0; }",
    "cpp_source": true
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n用数组实现双端队列"
+   "content": "¶ 用数组实现双端队列"
   },
   {
    "type": "text",
-   "content": "也很简单吧，直接复用我们在 \n环形数组技巧\n 中实现的 CycleArray 提供的方法就行了。环形数组头尾增删元素的复杂度都是 \n𝑂\n(\n1\n)\nO(1)："
+   "content": "也很简单吧，直接复用我们在  环形数组技巧  中实现的 CycleArray 提供的方法就行了。环形数组头尾增删元素的复杂度都是  O(1)："
   },
   {
    "type": "text",
@@ -146,7 +146,7 @@
   },
   {
    "type": "code",
-   "content": "template <typename E>\nclass CycleArray {\npublic:\n    void addFirst(E e);\n    void addLast(E e);\n    E removeFirst();\n    E removeLast();\n    E getFirst();\n    E getLast();\n};\n\ntemplate <typename E>\nclass MyArrayDeque {\nprivate:\n    CycleArray<E> arr;\n\npublic:\n    // 从队头插入元素，时间复杂度 O(1)\n    void addFirst(E e) {\n        arr.addFirst(e);\n    }\n\n    // 从队尾插入元素，时间复杂度 O(1)\n    void addLast(E e) {\n        arr.addLast(e);\n    }\n\n    // 从队头删除元素，时间复杂度 O(1)\n    E removeFirst() {\n        return arr.removeFirst();\n    }\n\n    // 从队尾删除元素，时间复杂度 O(1)\n    E removeLast() {\n        return arr.removeLast();\n    }\n\n    // 查看队头元素，时间复杂度 O(1)\n    E peekFirst() {\n        return arr.getFirst();\n    }\n\n    // 查看队尾元素，时间复杂度 O(1)\n    E peekLast() {\n        return arr.getLast();\n    }\n};",
+   "content": "template <typename E> class CycleArray { public:  void addFirst(E e);  void addLast(E e);  E removeFirst();  E removeLast();  E getFirst();  E getLast(); };\n\ntemplate <typename E> class MyArrayDeque { private:  CycleArray<E> arr;\n\npublic:  // 从队头插入元素，时间复杂度 O(1)  void addFirst(E e) {  arr.addFirst(e);  }\n\n  // 从队尾插入元素，时间复杂度 O(1)  void addLast(E e) {  arr.addLast(e);  }\n\n  // 从队头删除元素，时间复杂度 O(1)  E removeFirst() {  return arr.removeFirst();  }\n\n  // 从队尾删除元素，时间复杂度 O(1)  E removeLast() {  return arr.removeLast();  }\n\n  // 查看队头元素，时间复杂度 O(1)  E peekFirst() {  return arr.getFirst();  }\n\n  // 查看队尾元素，时间复杂度 O(1)  E peekLast() {  return arr.getLast();  } };",
    "cpp_source": true
   },
   {

@@ -37,7 +37,7 @@
   },
   {
    "type": "code",
-   "content": "class ListNode {\n    public:\n        int val;\n        ListNode *next; \n        ListNode(int x) : val(x), next(NULL) {}\n};",
+   "content": "class ListNode {  public:  int val;  ListNode *next;  ListNode(int x) : val(x), next(NULL) {} };",
    "cpp_source": true
   },
   {
@@ -70,7 +70,7 @@
   },
   {
    "type": "code",
-   "content": "private:\n    template <typename E>\n    class Node {\n    public:\n        E val;\n        Node* next;\n        Node* prev;\n\n        Node(Node* prev, E element, Node* next) {\n            this->val = element;\n            this->next = next;\n            this->prev = prev;\n        }\n    };",
+   "content": "private:  template <typename E>  class Node {  public:  E val;  Node* next;  Node* prev;\n\n  Node(Node* prev, E element, Node* next) {  this->val = element;  this->next = next;  this->prev = prev;  }  };",
    "cpp_source": true
   },
   {
@@ -92,11 +92,11 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n为什么需要链表"
+   "content": "¶ 为什么需要链表"
   },
   {
    "type": "text",
-   "content": "前面介绍了 \n数组（顺序存储）的底层原理\n，说白了就是一块连续的内存空间，有了这块内存空间的首地址，就能直接通过索引计算出任意位置的元素地址。"
+   "content": "前面介绍了  数组（顺序存储）的底层原理 ，说白了就是一块连续的内存空间，有了这块内存空间的首地址，就能直接通过索引计算出任意位置的元素地址。"
   },
   {
    "type": "text",
@@ -125,7 +125,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n单链表的基本操作"
+   "content": "¶ 单链表的基本操作"
   },
   {
    "type": "text",
@@ -157,13 +157,13 @@
   },
   {
    "type": "code",
-   "content": "class ListNode {\npublic:\n    int val;\n    ListNode *next;\n    ListNode(int x) : val(x), next(NULL) {}\n};\n\n// 输入一个数组，转换为一条单链表\nListNode* createLinkedList(vector<int> arr) {\n    if (arr.empty()) {\n        return nullptr;\n    }\n    ListNode* head = new ListNode(arr[0]);\n    ListNode* cur = head;\n    for (int i = 1; i < arr.size(); i++) {\n        cur->next = new ListNode(arr[i]);\n        cur = cur->next;\n    }\n    return head;\n}",
+   "content": "class ListNode { public:  int val;  ListNode *next;  ListNode(int x) : val(x), next(NULL) {} };\n\n// 输入一个数组，转换为一条单链表 ListNode* createLinkedList(vector<int> arr) {  if (arr.empty()) {  return nullptr;  }  ListNode* head = new ListNode(arr[0]);  ListNode* cur = head;  for (int i = 1; i < arr.size(); i++) {  cur->next = new ListNode(arr[i]);  cur = cur->next;  }  return head; }",
    "cpp_source": true
   },
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n查/改"
+   "content": "¶ 查/改"
   },
   {
    "type": "text",
@@ -199,7 +199,7 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 遍历单链表\nfor (ListNode* p = head; p != nullptr; p = p->next) {\n    cout << p->val << endl;\n}",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 遍历单链表 for (ListNode* p = head; p != nullptr; p = p->next) {  cout << p->val << endl; }",
    "cpp_source": true
   },
   {
@@ -208,12 +208,12 @@
   },
   {
    "type": "text",
-   "content": "这个操作的最坏时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，其中 \n𝑛\nn 是链表的长度。"
+   "content": "这个操作的最坏时间复杂度是  O(n)，其中 \n\nn 是链表的长度。"
   },
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n增"
+   "content": "¶ 增"
   },
   {
    "type": "text",
@@ -249,12 +249,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 在单链表头部插入一个新节点 0\nListNode* newNode = new ListNode(0);\nnewNode->next = head;\nhead = newNode;\n\n// 现在链表变成了 0 -> 1 -> 2 -> 3 -> 4 -> 5",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 在单链表头部插入一个新节点 0 ListNode* newNode = new ListNode(0); newNode->next = head; head = newNode;\n\n// 现在链表变成了 0 -> 1 -> 2 -> 3 -> 4 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(1)。"
   },
   {
    "type": "text",
@@ -290,12 +290,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 在单链表尾部插入一个新节点 6\nListNode* p = head;\n// 先走到链表的最后一个节点\nwhile (p->next != nullptr) {\n    p = p->next;\n}\n// 现在 p 就是链表的最后一个节点\n// 在 p 后面插入新节点\np->next = new ListNode(6);\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4 -> 5 -> 6",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 在单链表尾部插入一个新节点 6 ListNode* p = head; // 先走到链表的最后一个节点 while (p->next != nullptr) {  p = p->next; } // 现在 p 就是链表的最后一个节点 // 在 p 后面插入新节点 p->next = new ListNode(6);\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4 -> 5 -> 6",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先遍历到链表尾部。当然，如果我们持有对链表尾节点的引用，那么在尾部插入新节点的操作就会变得非常简单，不用每次从头去遍历了。这个优化会在后面具体实现双链表时介绍。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先遍历到链表尾部。当然，如果我们持有对链表尾节点的引用，那么在尾部插入新节点的操作就会变得非常简单，不用每次从头去遍历了。这个优化会在后面具体实现双链表时介绍。"
   },
   {
    "type": "text",
@@ -335,12 +335,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 在第 3 个节点后面插入一个新节点 66\n// 先要找到前驱节点，即第 3 个节点\nListNode* p = head;\nfor (int i = 0; i < 2; i++) {\n    p = p->next;\n}\n// 此时 p 指向第 3 个节点\n// 组装新节点的后驱指针\nListNode* newNode = new ListNode(66);\nnewNode->next = p->next;\n\n// 插入新节点\np->next = newNode;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 66 -> 4 -> 5",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 在第 3 个节点后面插入一个新节点 66 // 先要找到前驱节点，即第 3 个节点 ListNode* p = head; for (int i = 0; i < 2; i++) {  p = p->next; } // 此时 p 指向第 3 个节点 // 组装新节点的后驱指针 ListNode* newNode = new ListNode(66); newNode->next = p->next;\n\n// 插入新节点 p->next = newNode;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 66 -> 4 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先找到插入位置的前驱节点。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先找到插入位置的前驱节点。"
   },
   {
    "type": "text",
@@ -349,7 +349,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n删"
+   "content": "¶ 删"
   },
   {
    "type": "text",
@@ -385,12 +385,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 删除第 4 个节点，要操作前驱节点\nListNode* p = head;\nfor (int i = 0; i < 2; i++) {\n    p = p->next;\n}\n\n// 此时 p 指向第 3 个节点，即要删除节点的前驱节点\n// 把第 4 个节点从链表中摘除\np->next = p->next->next;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 5",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 删除第 4 个节点，要操作前驱节点 ListNode* p = head; for (int i = 0; i < 2; i++) {  p = p->next; }\n\n// 此时 p 指向第 3 个节点，即要删除节点的前驱节点 // 把第 4 个节点从链表中摘除 p->next = p->next->next;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先找到被删除节点的前驱节点。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先找到被删除节点的前驱节点。"
   },
   {
    "type": "text",
@@ -430,12 +430,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 删除尾节点\nListNode* p = head;\n// 找到倒数第二个节点\nwhile (p->next->next != nullptr) {\n    p = p->next;\n}\n\n// 此时 p 指向倒数第二个节点\n// 把尾节点从链表中摘除\np->next = nullptr;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList({1, 2, 3, 4, 5});\n\n// 删除尾节点 ListNode* p = head; // 找到倒数第二个节点 while (p->next->next != nullptr) {  p = p->next; }\n\n// 此时 p 指向倒数第二个节点 // 把尾节点从链表中摘除 p->next = nullptr;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先遍历到倒数第二个节点。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先遍历到倒数第二个节点。"
   },
   {
    "type": "text",
@@ -475,12 +475,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条单链表\nListNode* head = createLinkedList(vector<int>{1, 2, 3, 4, 5});\n\n// 删除头结点\nhead = head->next;\n\n// 现在链表变成了 2 -> 3 -> 4 -> 5",
+   "content": "// 创建一条单链表 ListNode* head = createLinkedList(vector<int>{1, 2, 3, 4, 5});\n\n// 删除头结点 head = head->next;\n\n// 现在链表变成了 2 -> 3 -> 4 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(1)。"
   },
   {
    "type": "text",
@@ -536,12 +536,12 @@
   },
   {
    "type": "text",
-   "content": "虚拟节点技巧在 \n单链表经典算法技巧\n 中也会经常运用，这里仅仅简单提一下，具体实现会在后面讲到。"
+   "content": "虚拟节点技巧在  单链表经典算法技巧  中也会经常运用，这里仅仅简单提一下，具体实现会在后面讲到。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n双链表的基本操作"
+   "content": "¶ 双链表的基本操作"
   },
   {
    "type": "text",
@@ -573,13 +573,13 @@
   },
   {
    "type": "code",
-   "content": "class DoublyListNode {\npublic:\n    int val;\n    DoublyListNode *next, *prev;\n    DoublyListNode(int x) : val(x), next(NULL), prev(NULL) {}\n};\n\nDoublyListNode* createDoublyLinkedList(const vector<int>& arr) {\n    if (arr.empty()) {\n        return NULL;\n    }\n    DoublyListNode* head = new DoublyListNode(arr[0]);\n    DoublyListNode* cur = head;\n    // for 循环迭代创建双链表\n    for (int i = 1; i < arr.size(); i++) {\n        DoublyListNode* newNode = new DoublyListNode(arr[i]);\n        cur->next = newNode;\n        newNode->prev = cur;\n        cur = cur->next;\n    }\n    return head;\n}",
+   "content": "class DoublyListNode { public:  int val;  DoublyListNode *next, *prev;  DoublyListNode(int x) : val(x), next(NULL), prev(NULL) {} };\n\nDoublyListNode* createDoublyLinkedList(const vector<int>& arr) {  if (arr.empty()) {  return NULL;  }  DoublyListNode* head = new DoublyListNode(arr[0]);  DoublyListNode* cur = head;  // for 循环迭代创建双链表  for (int i = 1; i < arr.size(); i++) {  DoublyListNode* newNode = new DoublyListNode(arr[i]);  cur->next = newNode;  newNode->prev = cur;  cur = cur->next;  }  return head; }",
    "cpp_source": true
   },
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n查/改"
+   "content": "¶ 查/改"
   },
   {
    "type": "text",
@@ -615,17 +615,17 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\nDoublyListNode* tail = nullptr;\n\n// 从头节点向后遍历双链表\nfor (DoublyListNode* p = head; p != nullptr; p = p->next) {\n    cout << p->val << endl;\n    tail = p;\n}\n\n// 从尾节点向前遍历双链表\nfor (DoublyListNode* p = tail; p != nullptr; p = p->prev) {\n    cout << p->val << endl;\n}",
+   "content": "// 创建一条双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5}); DoublyListNode* tail = nullptr;\n\n// 从头节点向后遍历双链表 for (DoublyListNode* p = head; p != nullptr; p = p->next) {  cout << p->val << endl;  tail = p; }\n\n// 从尾节点向前遍历双链表 for (DoublyListNode* p = tail; p != nullptr; p = p->prev) {  cout << p->val << endl; }",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的最坏时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)。访问或修改节点时，可以根据索引是靠近头部还是尾部，选择合适的方向遍历，这样可以一定程度上提高效率。"
+   "content": "这个操作的最坏时间复杂度是  O(n)。访问或修改节点时，可以根据索引是靠近头部还是尾部，选择合适的方向遍历，这样可以一定程度上提高效率。"
   },
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n增"
+   "content": "¶ 增"
   },
   {
    "type": "text",
@@ -661,12 +661,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 在双链表头部插入新节点 0\nDoublyListNode* newHead = new DoublyListNode(0);\nnewHead->next = head;\nhead->prev = newHead;\nhead = newHead;\n\n// 现在链表变成了 0 -> 1 -> 2 -> 3 -> 4 -> 5",
+   "content": "// 创建一条双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 在双链表头部插入新节点 0 DoublyListNode* newHead = new DoublyListNode(0); newHead->next = head; head->prev = newHead; head = newHead;\n\n// 现在链表变成了 0 -> 1 -> 2 -> 3 -> 4 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(1)。"
   },
   {
    "type": "text",
@@ -706,12 +706,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\nDoublyListNode* tail = head;\n// 先走到链表的最后一个节点\nwhile (tail->next != nullptr) {\n    tail = tail->next;\n}\n\n// 在双链表尾部插入新节点 6\nDoublyListNode* newNode = new DoublyListNode(6);\ntail->next = newNode;\nnewNode->prev = tail;\n// 更新尾节点引用\ntail = newNode;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4 -> 5 -> 6",
+   "content": "// 创建一条双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\nDoublyListNode* tail = head; // 先走到链表的最后一个节点 while (tail->next != nullptr) {  tail = tail->next; }\n\n// 在双链表尾部插入新节点 6 DoublyListNode* newNode = new DoublyListNode(6); tail->next = newNode; newNode->prev = tail; // 更新尾节点引用 tail = newNode;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4 -> 5 -> 6",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先遍历到尾节点。如果持有尾节点引用，则是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先遍历到尾节点。如果持有尾节点引用，则是  O(1)。"
   },
   {
    "type": "text",
@@ -755,12 +755,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 想要插入到索引 3（第 4 个节点）\n// 需要操作索引 2（第 3 个节点）的指针\nDoublyListNode* p = head;\nfor (int i = 0; i < 2; i++) {\n    p = p->next;\n}\n\n// 组装新节点\nDoublyListNode* newNode = new DoublyListNode(66);\nnewNode->next = p->next;\nnewNode->prev = p;\n\n// 插入新节点\np->next->prev = newNode;\np->next = newNode;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 66 -> 4 -> 5",
+   "content": "// 创建一条双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 想要插入到索引 3（第 4 个节点） // 需要操作索引 2（第 3 个节点）的指针 DoublyListNode* p = head; for (int i = 0; i < 2; i++) {  p = p->next; }\n\n// 组装新节点 DoublyListNode* newNode = new DoublyListNode(66); newNode->next = p->next; newNode->prev = p;\n\n// 插入新节点 p->next->prev = newNode; p->next = newNode;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 66 -> 4 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先找到插入位置。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先找到插入位置。"
   },
   {
    "type": "text",
@@ -769,7 +769,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n删"
+   "content": "¶ 删"
   },
   {
    "type": "text",
@@ -805,12 +805,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一个双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 删除第 4 个节点\n// 先找到第 3 个节点\nDoublyListNode* p = head;\nfor (int i = 0; i < 2; ++i) {\n    p = p->next;\n}\n\n// 现在 p 指向第 3 个节点，我们将它后面那个节点摘除出去\nDoublyListNode* toDelete = p->next;\n\n// 把 toDelete 从链表中摘除\np->next = toDelete->next;\ntoDelete->next->prev = p;\n\n// 把 toDelete 的前后指针都置为 null 是个好习惯（可选）\ntoDelete->next = nullptr;\ntoDelete->prev = nullptr;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 5",
+   "content": "// 创建一个双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 删除第 4 个节点 // 先找到第 3 个节点 DoublyListNode* p = head; for (int i = 0; i < 2; ++i) {  p = p->next; }\n\n// 现在 p 指向第 3 个节点，我们将它后面那个节点摘除出去 DoublyListNode* toDelete = p->next;\n\n// 把 toDelete 从链表中摘除 p->next = toDelete->next; toDelete->next->prev = p;\n\n// 把 toDelete 的前后指针都置为 null 是个好习惯（可选） toDelete->next = nullptr; toDelete->prev = nullptr;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先找到被删除节点的位置。如果已知被删除节点的引用，则删除操作本身是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先找到被删除节点的位置。如果已知被删除节点的引用，则删除操作本身是  O(1)。"
   },
   {
    "type": "text",
@@ -850,12 +850,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 删除头结点\nDoublyListNode* toDelete = head;\nhead = head->next;\nhead->prev = nullptr;\n\n// 清理已删除节点的指针\ntoDelete->next = nullptr;\n\n// 现在链表变成了 2 -> 3 -> 4 -> 5",
+   "content": "// 创建一条双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 删除头结点 DoublyListNode* toDelete = head; head = head->next; head->prev = nullptr;\n\n// 清理已删除节点的指针 toDelete->next = nullptr;\n\n// 现在链表变成了 2 -> 3 -> 4 -> 5",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(1)。"
   },
   {
    "type": "text",
@@ -899,12 +899,12 @@
   },
   {
    "type": "code",
-   "content": "// 创建一条双链表\nDoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 删除尾节点\nDoublyListNode* p = head;\n// 找到尾结点\nwhile (p->next != nullptr) {\n    p = p->next;\n}\n\n// 现在 p 指向尾节点\n// 把尾节点从链表中摘除\np->prev->next = nullptr;\n\n// 把被删结点的指针都断开是个好习惯（可选）\np->prev = nullptr;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4",
+   "content": "// 创建一条双链表 DoublyListNode* head = createDoublyLinkedList({1, 2, 3, 4, 5});\n\n// 删除尾节点 DoublyListNode* p = head; // 找到尾结点 while (p->next != nullptr) {  p = p->next; }\n\n// 现在 p 指向尾节点 // 把尾节点从链表中摘除 p->prev->next = nullptr;\n\n// 把被删结点的指针都断开是个好习惯（可选） p->prev = nullptr;\n\n// 现在链表变成了 1 -> 2 -> 3 -> 4",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这个操作的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，因为需要先遍历到尾节点。如果持有尾节点引用，则是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "这个操作的时间复杂度是  O(n)，因为需要先遍历到尾节点。如果持有尾节点引用，则是  O(1)。"
   },
   {
    "type": "text",
@@ -913,7 +913,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n接下来"
+   "content": "¶ 接下来"
   },
   {
    "type": "text",

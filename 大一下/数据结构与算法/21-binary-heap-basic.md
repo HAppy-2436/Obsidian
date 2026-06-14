@@ -20,9 +20,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/binary-heap-basic/
 
 一句话总结
 
-二叉堆是一种能够动态排序的数据结构，是
-二叉树结构
- 的延伸。
+二叉堆是一种能够动态排序的数据结构，是  二叉树结构  的延伸。
 
 二叉堆的主要操作就两个，sink（下沉）和 swim（上浮），用以维护二叉堆的性质。
 

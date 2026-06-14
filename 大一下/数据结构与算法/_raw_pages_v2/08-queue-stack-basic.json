@@ -81,7 +81,7 @@
   },
   {
    "type": "code",
-   "content": "// 队列的基本 API\ntemplate <typename E>\nclass MyQueue {\npublic:\n    // 向队尾插入元素，时间复杂度 O(1)\n    void push(const E& e);\n\n    // 从队头删除元素，时间复杂度 O(1)\n    E pop();\n\n    // 查看队头元素，时间复杂度 O(1)\n    E peek() const;\n\n    // 返回队列中的元素个数，时间复杂度 O(1)\n    int size() const;\n};\n\n// 栈的基本 API\ntemplate <typename E>\nclass MyStack {\npublic:\n    // 向栈顶插入元素，时间复杂度 O(1)\n    void push(const E& e);\n\n    // 从栈顶删除元素，时间复杂度 O(1)\n    E pop();\n\n    // 查看栈顶元素，时间复杂度 O(1)\n    E peek() const;\n\n    // 返回栈中的元素个数，时间复杂度 O(1)\n    int size() const;\n};",
+   "content": "// 队列的基本 API template <typename E> class MyQueue { public:  // 向队尾插入元素，时间复杂度 O(1)  void push(const E& e);\n\n  // 从队头删除元素，时间复杂度 O(1)  E pop();\n\n  // 查看队头元素，时间复杂度 O(1)  E peek() const;\n\n  // 返回队列中的元素个数，时间复杂度 O(1)  int size() const; };\n\n// 栈的基本 API template <typename E> class MyStack { public:  // 向栈顶插入元素，时间复杂度 O(1)  void push(const E& e);\n\n  // 从栈顶删除元素，时间复杂度 O(1)  E pop();\n\n  // 查看栈顶元素，时间复杂度 O(1)  E peek() const;\n\n  // 返回栈中的元素个数，时间复杂度 O(1)  int size() const; };",
    "cpp_source": true
   },
   {

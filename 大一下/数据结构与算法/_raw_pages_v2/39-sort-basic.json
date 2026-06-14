@@ -25,7 +25,7 @@
   },
   {
    "type": "text",
-   "content": "一般刷题和面试/笔试的时候不会直接让你手撕排序算法，不过考虑到知识的完整性，我这里还是开一个章节，结合 \n可视化面板\n 讲解几种常见排序算法的原理、特点、时间复杂度和代码实现。"
+   "content": "一般刷题和面试/笔试的时候不会直接让你手撕排序算法，不过考虑到知识的完整性，我这里还是开一个章节，结合  可视化面板  讲解几种常见排序算法的原理、特点、时间复杂度和代码实现。"
   },
   {
    "type": "text",
@@ -34,7 +34,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n时空复杂度"
+   "content": "¶ 时空复杂度"
   },
   {
    "type": "text",
@@ -42,12 +42,12 @@
   },
   {
    "type": "text",
-   "content": "正如 \n时空复杂度入门\n 中所说，对于任意一个算法，其时间复杂度和空间复杂度都是越小越好的。"
+   "content": "正如  时空复杂度入门  中所说，对于任意一个算法，其时间复杂度和空间复杂度都是越小越好的。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n排序稳定性"
+   "content": "¶ 排序稳定性"
   },
   {
    "type": "text",
@@ -71,7 +71,7 @@
   },
   {
    "type": "code",
-   "content": "// 非原地排序\nvoid sort(vector<int>& nums) {\n    // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间\n    vector<int> tmp(nums.size());\n\n    // 对 nums 进行排序\n    for ...\n}\n\n// 原地排序\nvoid sort(vector<int>& nums) {\n    // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间\n    for ...\n}",
+   "content": "// 非原地排序 void sort(vector<int>& nums) {  // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间  vector<int> tmp(nums.size());\n\n  // 对 nums 进行排序  for ... }\n\n// 原地排序 void sort(vector<int>& nums) {  // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间  for ... }",
    "cpp_source": true
   },
   {
@@ -89,7 +89,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n是否原地排序"
+   "content": "¶ 是否原地排序"
   },
   {
    "type": "text",
@@ -125,7 +125,7 @@
   },
   {
    "type": "code",
-   "content": "// 非原地排序\nvoid sort(vector<int>& nums) {\n    // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间\n    vector<int> tmp(nums.size());\n\n    // 对 nums 进行排序\n    for ...\n}\n\n// 原地排序\nvoid sort(vector<int>& nums) {\n    // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间\n    for ...\n}"
+   "content": "// 非原地排序 void sort(vector<int>& nums) {  // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间  vector<int> tmp(nums.size());\n\n  // 对 nums 进行排序  for ... }\n\n// 原地排序 void sort(vector<int>& nums) {  // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间  for ... }"
   },
   {
    "type": "text",

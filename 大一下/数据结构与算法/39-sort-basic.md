@@ -17,9 +17,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/sort-basic/
 
 时空复杂度入门
 
-一般刷题和面试/笔试的时候不会直接让你手撕排序算法，不过考虑到知识的完整性，我这里还是开一个章节，结合
-可视化面板
- 讲解几种常见排序算法的原理、特点、时间复杂度和代码实现。
+一般刷题和面试/笔试的时候不会直接让你手撕排序算法，不过考虑到知识的完整性，我这里还是开一个章节，结合  可视化面板  讲解几种常见排序算法的原理、特点、时间复杂度和代码实现。
 
 本文先介绍一下排序算法的几个关键指标，后面讲解到具体的排序算法时，都会根据这些指标来分析。
 
@@ -27,9 +25,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/sort-basic/
 
 首先一个指标肯定是时间复杂度和空间复杂度。
 
-正如
-时空复杂度入门
- 中所说，对于任意一个算法，其时间复杂度和空间复杂度都是越小越好的。
+正如  时空复杂度入门  中所说，对于任意一个算法，其时间复杂度和空间复杂度都是越小越好的。
 
 ## 排序稳定性
 
@@ -44,20 +40,11 @@ url: https://labuladong.online/zh/algo/data-structure-basic/sort-basic/
 如果你用稳定排序算法，那么排序完成后，相同用户 ID 的订单依然会按照交易日期有序排列：
 
 ```cpp
-// 非原地排序
-void sort(vector<int>& nums) {
-    // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间
-    vector<int> tmp(nums.size());
+// 非原地排序 void sort(vector<int>& nums) {  // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间  vector<int> tmp(nums.size());
 
-    // 对 nums 进行排序
-    for ...
-}
+  // 对 nums 进行排序  for ... }
 
-// 原地排序
-void sort(vector<int>& nums) {
-    // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间
-    for ...
-}
+// 原地排序 void sort(vector<int>& nums) {  // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间  for ... }
 ```
 
 因为之前已经按照日期排好序了，对用户 ID 稳定排序之后，相同用户 ID 的订单的相对位置保持不变，所以在日期上依然是有序的。
@@ -73,20 +60,11 @@ void sort(vector<int>& nums) {
 注意，关键是是否需要额外的空间，而不是是否返回一个新的数组。具体来说就是类似这样的区别：
 
 ```
-// 非原地排序
-void sort(vector<int>& nums) {
-    // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间
-    vector<int> tmp(nums.size());
+// 非原地排序 void sort(vector<int>& nums) {  // 排序过程中需要额外的辅助数组，消耗 O(N) 的空间  vector<int> tmp(nums.size());
 
-    // 对 nums 进行排序
-    for ...
-}
+  // 对 nums 进行排序  for ... }
 
-// 原地排序
-void sort(vector<int>& nums) {
-    // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间
-    for ...
-}
+// 原地排序 void sort(vector<int>& nums) {  // 直接操作 nums，不需要额外的辅助数组，消耗 O(1) 的空间  for ... }
 ```
 
 :::

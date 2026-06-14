@@ -25,7 +25,7 @@
   },
   {
    "type": "text",
-   "content": "Trie 树就是 \n多叉树结构\n 的延伸，是一种针对字符串进行特殊优化的数据结构。"
+   "content": "Trie 树就是  多叉树结构  的延伸，是一种针对字符串进行特殊优化的数据结构。"
   },
   {
    "type": "text",
@@ -41,7 +41,7 @@
   },
   {
    "type": "text",
-   "content": "本文仅是 Trie 树（也叫做字典树、前缀树）的原理介绍，\n动手实现 TrieMap/TrieSet\n 我放到了\n二叉树系列习题章节\n 后面的数据结构设计章节。理由和上篇 \nTreeMap/TreeSet 原理\n 相同，在基础知识章节我不准备讲解这种复杂结构的具体实现，初学者也没必要在这个阶段理解 Trie 树的代码实现。"
+   "content": "本文仅是 Trie 树（也叫做字典树、前缀树）的原理介绍， 动手实现 TrieMap/TrieSet  我放到了 二叉树系列习题章节  后面的数据结构设计章节。理由和上篇  TreeMap/TreeSet 原理  相同，在基础知识章节我不准备讲解这种复杂结构的具体实现，初学者也没必要在这个阶段理解 Trie 树的代码实现。"
   },
   {
    "type": "text",
@@ -65,19 +65,19 @@
   },
   {
    "type": "text",
-   "content": "标准的 \n哈希表 HashMap\n，底层借助一个哈希函数把键值对存在 table 数组中，有两种解决哈希冲突的方法。它的特点是快，即基本的增删查改操作时间复杂度都是 \n𝑂\n(\n1\n)\nO(1)。\n哈希集合 HashSet\n 是 HashMap 的简单封装。"
+   "content": "标准的  哈希表 HashMap ，底层借助一个哈希函数把键值对存在 table 数组中，有两种解决哈希冲突的方法。它的特点是快，即基本的增删查改操作时间复杂度都是  O(1)。 哈希集合 HashSet  是 HashMap 的简单封装。"
   },
   {
    "type": "text",
-   "content": "哈希链表 LinkedHashMap\n，是 \n双链表结构\n 对标准哈希表的加强。它继承了哈希表的操作复杂度，并且可以让哈希表中的所有键保持「插入顺序」。LinkedHashSet 是 LinkedHashMap 的简单封装。"
+   "content": "哈希链表 LinkedHashMap ，是  双链表结构  对标准哈希表的加强。它继承了哈希表的操作复杂度，并且可以让哈希表中的所有键保持「插入顺序」。LinkedHashSet 是 LinkedHashMap 的简单封装。"
   },
   {
    "type": "text",
-   "content": "哈希数组 ArrayHashMap\n，是 \n数组结构\n 对标准哈希表的加强。它继承了哈希表的操作复杂度，并且提供了一个额外的 randomKey 函数，可以在 \n𝑂\n(\n1\n)\nO(1) 的时间返回一个随机键。ArrayHashSet 是 ArrayHashMap 的简单封装。"
+   "content": "哈希数组 ArrayHashMap ，是  数组结构  对标准哈希表的加强。它继承了哈希表的操作复杂度，并且提供了一个额外的 randomKey 函数，可以在  O(1) 的时间返回一个随机键。ArrayHashSet 是 ArrayHashMap 的简单封装。"
   },
   {
    "type": "text",
-   "content": "TreeMap 映射\n，底层是一棵二叉搜索树（编程语言标准库一般使用经过改良的自平衡 \n红黑树\n），基本增删查改操作复杂度是 \n𝑂\n(\n𝑙\n𝑜\n𝑔\n𝑁\n)\nO(logN)，它的特点是可以动态维护键值对的大小关系，有很多额外的 API 操作键值对。TreeSet 集合是 TreeMap 映射的简单封装。"
+   "content": "TreeMap 映射 ，底层是一棵二叉搜索树（编程语言标准库一般使用经过改良的自平衡  红黑树 ），基本增删查改操作复杂度是  O(logN)，它的特点是可以动态维护键值对的大小关系，有很多额外的 API 操作键值对。TreeSet 集合是 TreeMap 映射的简单封装。"
   },
   {
    "type": "text",
@@ -86,7 +86,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\nTrie 树的主要应用场景"
+   "content": "¶ Trie 树的主要应用场景"
   },
   {
    "type": "text",
@@ -95,7 +95,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n节约存储空间"
+   "content": "¶ 节约存储空间"
   },
   {
    "type": "text",
@@ -103,7 +103,7 @@
   },
   {
    "type": "code",
-   "content": "Map<String, Integer> map = new HashMap<>();\nmap.put(\"apple\", 1);\nmap.put(\"app\", 2);\nmap.put(\"appl\", 3);"
+   "content": "Map<String, Integer> map = new HashMap<>(); map.put(\"apple\", 1); map.put(\"app\", 2); map.put(\"appl\", 3);"
   },
   {
    "type": "text",
@@ -119,7 +119,7 @@
   },
   {
    "type": "code",
-   "content": "// Trie 树的键类型固定为 String 类型，值类型可以是泛型\nTrieMap<Integer> map = new TrieMap<>();\nmap.put(\"apple\", 1);\nmap.put(\"app\", 2);\nmap.put(\"appl\", 3);"
+   "content": "// Trie 树的键类型固定为 String 类型，值类型可以是泛型 TrieMap<Integer> map = new TrieMap<>(); map.put(\"apple\", 1); map.put(\"app\", 2); map.put(\"appl\", 3);"
   },
   {
    "type": "text",
@@ -132,7 +132,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n方便处理前缀操作"
+   "content": "¶ 方便处理前缀操作"
   },
   {
    "type": "text",
@@ -140,11 +140,11 @@
   },
   {
    "type": "code",
-   "content": "// Trie 树的键类型固定为 String 类型，值类型可以是泛型\nTrieMap<Integer> map = new TrieMap<>();\nmap.put(\"that\", 1);\nmap.put(\"the\", 2);\nmap.put(\"them\", 3);\nmap.put(\"apple\", 4);\n\n// \"the\" 是 \"themxyz\" 的最短前缀\nSystem.out.println(map.shortestPrefixOf(\"themxyz\")); // \"the\"\n\n// \"them\" 是 \"themxyz\" 的最长前缀\nSystem.out.println(map.longestPrefixOf(\"themxyz\")); // \"them\"\n\n// \"tha\" 是 \"that\" 的前缀\nSystem.out.println(map.hasKeyWithPrefix(\"tha\")); // true\n\n// 没有以 \"thz\" 为前缀的键\nSystem.out.println(map.hasKeyWithPrefix(\"thz\")); // false\n\n// \"that\", \"the\", \"them\" 都是 \"th\" 的前缀\nSystem.out.println(map.keysWithPrefix(\"th\")); // [\"that\", \"the\", \"them\"]"
+   "content": "// Trie 树的键类型固定为 String 类型，值类型可以是泛型 TrieMap<Integer> map = new TrieMap<>(); map.put(\"that\", 1); map.put(\"the\", 2); map.put(\"them\", 3); map.put(\"apple\", 4);\n\n// \"the\" 是 \"themxyz\" 的最短前缀 System.out.println(map.shortestPrefixOf(\"themxyz\")); // \"the\"\n\n// \"them\" 是 \"themxyz\" 的最长前缀 System.out.println(map.longestPrefixOf(\"themxyz\")); // \"them\"\n\n// \"tha\" 是 \"that\" 的前缀 System.out.println(map.hasKeyWithPrefix(\"tha\")); // true\n\n// 没有以 \"thz\" 为前缀的键 System.out.println(map.hasKeyWithPrefix(\"thz\")); // false\n\n// \"that\", \"the\", \"them\" 都是 \"th\" 的前缀 System.out.println(map.keysWithPrefix(\"th\")); // [\"that\", \"the\", \"them\"]"
   },
   {
    "type": "text",
-   "content": "除了 keysWithPrefix 方法的复杂度取决于返回结果的长度，其他前缀操作的复杂度都是 \n𝑂\n(\n𝐿\n)\nO(L)，其中 \n𝐿\nL 是前缀字符串长度。"
+   "content": "除了 keysWithPrefix 方法的复杂度取决于返回结果的长度，其他前缀操作的复杂度都是  O(L)，其中 \n\nL 是前缀字符串长度。"
   },
   {
    "type": "text",

@@ -29,15 +29,15 @@
   },
   {
    "type": "text",
-   "content": "Dijkstra 算法和 A* 算法是 \n图的 BFS 遍历\n 的拓展，可以处理不包含负权重的单源最短路径问题。"
+   "content": "Dijkstra 算法和 A* 算法是  图的 BFS 遍历  的拓展，可以处理不包含负权重的单源最短路径问题。"
   },
   {
    "type": "text",
-   "content": "SPFA 算法（基于队列的 Bellman-Ford 算法）是 \n图的 BFS 遍历\n 的拓展，可以处理包含负权重的单源最短路径问题。"
+   "content": "SPFA 算法（基于队列的 Bellman-Ford 算法）是  图的 BFS 遍历  的拓展，可以处理包含负权重的单源最短路径问题。"
   },
   {
    "type": "text",
-   "content": "Floyd 算法是 \n动态规划\n 的应用，可以处理多源最短路径问题。"
+   "content": "Floyd 算法是  动态规划  的应用，可以处理多源最短路径问题。"
   },
   {
    "type": "text",
@@ -130,7 +130,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n最短路径问题概览"
+   "content": "¶ 最短路径问题概览"
   },
   {
    "type": "text",
@@ -138,7 +138,7 @@
   },
   {
    "type": "text",
-   "content": "在算法中，我们一般把这类问题抽象成计算 \n加权图\n 中的最小路径权重。为了方便表述，在本文中「最短路径」和「最小路径权重和」是等价的。"
+   "content": "在算法中，我们一般把这类问题抽象成计算  加权图  中的最小路径权重。为了方便表述，在本文中「最短路径」和「最小路径权重和」是等价的。"
   },
   {
    "type": "text",
@@ -147,7 +147,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n单源最短路径"
+   "content": "¶ 单源最短路径"
   },
   {
    "type": "text",
@@ -176,7 +176,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n点对点最短路径"
+   "content": "¶ 点对点最短路径"
   },
   {
    "type": "text",
@@ -188,7 +188,7 @@
   },
   {
    "type": "text",
-   "content": "但是下面将介绍一种专门处理点对点问题的算法：\nA* 算法\n（A Star Algorithm）。"
+   "content": "但是下面将介绍一种专门处理点对点问题的算法： A* 算法 （A Star Algorithm）。"
   },
   {
    "type": "text",
@@ -213,7 +213,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n多源最短路径"
+   "content": "¶ 多源最短路径"
   },
   {
    "type": "text",
@@ -242,7 +242,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n负权重边的影响"
+   "content": "¶ 负权重边的影响"
   },
   {
    "type": "text",

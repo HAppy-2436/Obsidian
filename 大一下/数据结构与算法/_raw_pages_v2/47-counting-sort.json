@@ -65,7 +65,7 @@
   },
   {
    "type": "text",
-   "content": "计数排序的时间和空间复杂度都是 \nO(n+max−min)，其中 \n\nn 是待排序数组长度，\n\n−\n\nmax−min 是待排序数组的元素范围。"
+   "content": "计数排序的时间和空间复杂度都是  O(n+max−min)，其中 \n\nn 是待排序数组长度，\n\n−\n\nmax−min 是待排序数组的元素范围。"
   },
   {
    "type": "text",
@@ -121,7 +121,7 @@
   },
   {
    "type": "code",
-   "content": "class Solution {\npublic:\n    void sortColors(vector<int>& nums) {\n        // 统计 0, 1, 2 出现的次数\n        vector<int> count(3, 0);\n        for (int element : nums) {\n            count[element]++;\n        }\n\n        // 按照 count 数组的统计结果，依次填充原数组\n        int index = 0;\n        for (int element = 0; element < 3; element++) {\n            for (int i = 0; i < count[element]; i++) {\n                nums[index] = element;\n                index++;\n            }\n        }\n    }\n};",
+   "content": "class Solution { public:  void sortColors(vector<int>& nums) {  // 统计 0, 1, 2 出现的次数  vector<int> count(3, 0);  for (int element : nums) {  count[element]++;  }\n\n  // 按照 count 数组的统计结果，依次填充原数组  int index = 0;  for (int element = 0; element < 3; element++) {  for (int i = 0; i < count[element]; i++) {  nums[index] = element;  index++;  }  }  } };",
    "cpp_source": true
   },
   {
@@ -130,7 +130,7 @@
   },
   {
    "type": "code",
-   "content": "输入：nums = [2,0,1]\n输出：[0,1,2]\n"
+   "content": "输入：nums = [2,0,1] 输出：[0,1,2] "
   },
   {
    "type": "text",
@@ -170,7 +170,7 @@
   },
   {
    "type": "text",
-   "content": "这道题有多种思路，最优解法是用双指针技巧仅遍历一次数组完成排序，我会在 \n数组双指针技巧习题\n 中介绍。这里我们用计数排序的思路来解决这个问题，说白了就是让你对数组排序，且这个数组里只有 0、1、2 三种元素。"
+   "content": "这道题有多种思路，最优解法是用双指针技巧仅遍历一次数组完成排序，我会在  数组双指针技巧习题  中介绍。这里我们用计数排序的思路来解决这个问题，说白了就是让你对数组排序，且这个数组里只有 0、1、2 三种元素。"
   },
   {
    "type": "text",
@@ -202,7 +202,7 @@
   },
   {
    "type": "code",
-   "content": "class Solution {\npublic:\n    void sortColors(vector<int>& nums) {\n        // 统计 0, 1, 2 出现的次数\n        vector<int> count(3, 0);\n        for (int element : nums) {\n            count[element]++;\n        }\n\n        // 按照 count 数组的统计结果，依次填充原数组\n        int index = 0;\n        for (int element = 0; element < 3; element++) {\n            for (int i = 0; i < count[element]; i++) {\n                nums[index] = element;\n                index++;\n            }\n        }\n    }\n};"
+   "content": "class Solution { public:  void sortColors(vector<int>& nums) {  // 统计 0, 1, 2 出现的次数  vector<int> count(3, 0);  for (int element : nums) {  count[element]++;  }\n\n  // 按照 count 数组的统计结果，依次填充原数组  int index = 0;  for (int element = 0; element < 3; element++) {  for (int i = 0; i < count[element]; i++) {  nums[index] = element;  index++;  }  }  } };"
   },
   {
    "type": "text",
@@ -211,7 +211,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n通用的计数排序"
+   "content": "¶ 通用的计数排序"
   },
   {
    "type": "text",

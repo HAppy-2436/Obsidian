@@ -24,50 +24,19 @@ url: https://labuladong.online/zh/algo/data-structure-basic/linked-queue-stack/
 注意我这里是直接用标准库的链表容器，如果你用之前我们实现的 MyLinkedList，也是一样的。
 
 ```cpp
-// 用链表作为底层数据结构实现栈
-#include <list>
-#include <iostream>
+// 用链表作为底层数据结构实现栈 #include <list> #include <iostream>
 
-template<typename E>
-class MyLinkedStack {
-private:
-    list<E> list;
+template<typename E> class MyLinkedStack { private:  list<E> list;
 
-public:
-    // 向栈顶加入元素，时间复杂度 O(1)
-    void push(const E &e) {
-        list.push_back(e);
-    }
+public:  // 向栈顶加入元素，时间复杂度 O(1)  void push(const E &e) {  list.push_back(e);  }
 
-    // 从栈顶弹出元素，时间复杂度 O(1)
-    E pop() {
-        E value = list.back();
-        list.pop_back();
-        return value;
-    }
+  // 从栈顶弹出元素，时间复杂度 O(1)  E pop() {  E value = list.back();  list.pop_back();  return value;  }
 
-    // 查看栈顶元素，时间复杂度 O(1)
-    E peek() const {
-        return list.back();
-    }
+  // 查看栈顶元素，时间复杂度 O(1)  E peek() const {  return list.back();  }
 
-    // 返回栈中的元素个数，时间复杂度 O(1)
-    int size() const {
-        return list.size();
-    }
-};
+  // 返回栈中的元素个数，时间复杂度 O(1)  int size() const {  return list.size();  } };
 
-int main() {
-    MyLinkedStack<int> stack;
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
-    while (stack.size() > 0) {
-        cout << stack.pop() << endl;
-    }
-    return 0;
-}
+int main() {  MyLinkedStack<int> stack;  stack.push(1);  stack.push(2);  stack.push(3);  stack.push(4);  while (stack.size() > 0) {  cout << stack.pop() << endl;  }  return 0; }
 ```
 
 提示
@@ -81,52 +50,23 @@ int main() {
 同理，用链表实现队列也是一样的，也直接调用双链表的 API 就可以了：
 
 ```cpp
-// 用链表作为底层数据结构实现队列
-#include <iostream>
-#include <list>
+// 用链表作为底层数据结构实现队列 #include <iostream> #include <list>
 
-template<typename E>
-class MyLinkedQueue {
-private:
-    list<E> list;
+template<typename E> class MyLinkedQueue { private:  list<E> list;
 
-public:
-    // 向队尾插入元素，时间复杂度 O(1)
-    void push(const E &e) {
-        list.push_back(e);
-    }
+public:  // 向队尾插入元素，时间复杂度 O(1)  void push(const E &e) {  list.push_back(e);  }
 
-    // 从队头删除元素，时间复杂度 O(1)
-    E pop() {
-        E front = list.front();
-        list.pop_front();
-        return front;
-    }
+  // 从队头删除元素，时间复杂度 O(1)  E pop() {  E front = list.front();  list.pop_front();  return front;  }
 
-    // 查看队头元素，时间复杂度 O(1)
-    E peek() {
-        return list.front();
-    }
+  // 查看队头元素，时间复杂度 O(1)  E peek() {  return list.front();  }
 
-    // 返回队列中的元素个数，时间复杂度 O(1)
-    int size() {
-        return list.size();
-    }
-};
+  // 返回队列中的元素个数，时间复杂度 O(1)  int size() {  return list.size();  } };
 
-int main() {
-    MyLinkedQueue<int> queue;
-    queue.push(1);
-    queue.push(2);
-    queue.push(3);
+int main() {  MyLinkedQueue<int> queue;  queue.push(1);  queue.push(2);  queue.push(3);
 
-    cout << queue.peek() << endl; // 1
-    cout << queue.pop() << endl; // 1
-    cout << queue.pop() << endl; // 2
-    cout << queue.peek() << endl; // 3
+  cout << queue.peek() << endl; // 1  cout << queue.pop() << endl; // 1  cout << queue.pop() << endl; // 2  cout << queue.peek() << endl; // 3
 
-    return 0;
-}
+  return 0; }
 ```
 
 提示

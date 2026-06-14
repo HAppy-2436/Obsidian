@@ -21,7 +21,7 @@
   },
   {
    "type": "text",
-   "content": "上一章 \n用链表加强哈希表\n 我们利用 \n双链表\n 对哈希表进行了加强，实现了 LinkedHashMap 这种数据结构，让哈希表的键保持插入顺序。"
+   "content": "上一章  用链表加强哈希表  我们利用  双链表  对哈希表进行了加强，实现了 LinkedHashMap 这种数据结构，让哈希表的键保持插入顺序。"
   },
   {
    "type": "text",
@@ -30,15 +30,15 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n添加 randomKey() API"
+   "content": "¶ 添加 randomKey() API"
   },
   {
    "type": "text",
-   "content": "现在我给你出个题，让你基于标准哈希表的 API 之上，再添加一个新的 randomKey() API，可以在 \n𝑂\n(\n1\n)\nO(1) 的时间复杂度返回一个随机键："
+   "content": "现在我给你出个题，让你基于标准哈希表的 API 之上，再添加一个新的 randomKey() API，可以在  O(1) 的时间复杂度返回一个随机键："
   },
   {
    "type": "code",
-   "content": "int randomeElement(vector<int>& arr) {\n    // 生成 [0, arr.size()) 的随机索引\n    return arr[rand() % arr.size()];\n}",
+   "content": "int randomeElement(vector<int>& arr) {  // 生成 [0, arr.size()) 的随机索引  return arr[rand() % arr.size()]; }",
    "cpp_source": true
   },
   {
@@ -87,7 +87,7 @@
   },
   {
    "type": "code",
-   "content": "int randomeElement(vector<int>& arr) {\n    // 生成 [0, arr.size()) 的随机索引\n    return arr[rand() % arr.size()];\n}"
+   "content": "int randomeElement(vector<int>& arr) {  // 生成 [0, arr.size()) 的随机索引  return arr[rand() % arr.size()]; }"
   },
   {
    "type": "text",
@@ -107,7 +107,7 @@
   },
   {
    "type": "code",
-   "content": "// 返回一个非空的随机元素（伪码）\nint randomeElement(int[] arr) {\n    Random r = new Random();\n    // 生成 [0, arr.length) 的随机索引\n    int i = r.nextInt(arr.length);\n    while (arr[i] == null) {\n        // 随机生成的索引 i 恰巧是空洞\n        // 借助环形数组技巧向右进行探查\n        // 直到找到一个非空元素\n        i = (i + 1) % arr.length;\n    }\n    return arr[i];\n}"
+   "content": "// 返回一个非空的随机元素（伪码） int randomeElement(int[] arr) {  Random r = new Random();  // 生成 [0, arr.length) 的随机索引  int i = r.nextInt(arr.length);  while (arr[i] == null) {  // 随机生成的索引 i 恰巧是空洞  // 借助环形数组技巧向右进行探查  // 直到找到一个非空元素  i = (i + 1) % arr.length;  }  return arr[i]; }"
   },
   {
    "type": "text",
@@ -115,7 +115,7 @@
   },
   {
    "type": "text",
-   "content": "1、有个循环，最坏时间复杂度上升到了 \n𝑂\n(\n𝑁\n)\nO(N)，不符合 \n𝑂\n(\n1\n)\nO(1) 的要求。"
+   "content": "1、有个循环，最坏时间复杂度上升到了  O(N)，不符合  O(1) 的要求。"
   },
   {
    "type": "text",
@@ -127,11 +127,11 @@
   },
   {
    "type": "code",
-   "content": "// 返回一个非空的随机元素（伪码）\nint randomeElement(int[] arr) {\n    Random r = new Random();\n    // 生成 [0, arr.length) 的随机索引\n    int i = r.nextInt(arr.length);\n    while (arr[i] == null) {\n        // 随机生成的索引 i 恰巧是空洞\n        // 重新生成一个随机索引\n        i = r.nextInt(arr.length);\n    }\n    return arr[i];\n}"
+   "content": "// 返回一个非空的随机元素（伪码） int randomeElement(int[] arr) {  Random r = new Random();  // 生成 [0, arr.length) 的随机索引  int i = r.nextInt(arr.length);  while (arr[i] == null) {  // 随机生成的索引 i 恰巧是空洞  // 重新生成一个随机索引  i = r.nextInt(arr.length);  }  return arr[i]; }"
   },
   {
    "type": "text",
-   "content": "现在这个算法是均匀随机的，但问题也非常明显，它的时间复杂度竟然依赖随机数！肯定不是 \n𝑂\n(\n1\n)\nO(1) 的，不符合要求。"
+   "content": "现在这个算法是均匀随机的，但问题也非常明显，它的时间复杂度竟然依赖随机数！肯定不是  O(1) 的，不符合要求。"
   },
   {
    "type": "text",
@@ -163,11 +163,11 @@
   },
   {
    "type": "text",
-   "content": "概率算法也是非常有意思的一类问题，无论算法题还是实际业务中都会用到一些经典的随机算法，我会在后文 \n谈谈游戏中的随机算法\n 和 \n带权重的随机选择\n 中详细讲解，这里暂时不需要掌握。"
+   "content": "概率算法也是非常有意思的一类问题，无论算法题还是实际业务中都会用到一些经典的随机算法，我会在后文  谈谈游戏中的随机算法  和  带权重的随机选择  中详细讲解，这里暂时不需要掌握。"
   },
   {
    "type": "text",
-   "content": "唯一的办法就是通过 keys 方法遍历整个 table 数组，把所有的键都存储到一个数组中，然后再随机返回一个键。但这样复杂度就是 \n𝑂\n(\n𝑁\n)\nO(N) 了，还是不符合要求。"
+   "content": "唯一的办法就是通过 keys 方法遍历整个 table 数组，把所有的键都存储到一个数组中，然后再随机返回一个键。但这样复杂度就是  O(N) 了，还是不符合要求。"
   },
   {
    "type": "text",

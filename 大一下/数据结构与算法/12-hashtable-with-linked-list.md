@@ -16,9 +16,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linke
 
 哈希表核心原理
 
-前文
-哈希表原理
- 从原理上分析了，不能依赖哈希表遍历 key 的顺序，即哈希表中的 key 是无序的。
+前文  哈希表原理  从原理上分析了，不能依赖哈希表遍历 key 的顺序，即哈希表中的 key 是无序的。
 
 但结合实际的编程经验，你可能会有些疑问。
 
@@ -27,21 +25,11 @@ url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linke
 ```java
 import java.util.LinkedHashMap;
 
-public class Main {
-    public static void main(String[] args) {
-        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
-        map.put("a", 1);
-        map.put("b", 2);
-        map.put("c", 3);
-        System.out.println(map.keySet()); // [a, b, c]
+public class Main {  public static void main(String[] args) {  LinkedHashMap<String, Integer> map = new LinkedHashMap<>();  map.put("a", 1);  map.put("b", 2);  map.put("c", 3);  System.out.println(map.keySet()); // [a, b, c]
 
-        map.put("y", 4);
-        System.out.println(map.keySet()); // [a, b, c, y]
+  map.put("y", 4);  System.out.println(map.keySet()); // [a, b, c, y]
 
-        map.put("d", 5);
-        System.out.println(map.keySet()); // [a, b, c, y, d]
-    }
-}
+  map.put("d", 5);  System.out.println(map.keySet()); // [a, b, c, y, d]  } }
 ```
 
 无论你插入多少键，keySet 方法返回的所有键都是按照插入顺序排列，感觉就好像在向数组尾部追加元素一样。这怎么可能呢？
@@ -51,45 +39,18 @@ public class Main {
 ```
 package main
 
-import (
-	"fmt"
-)
+import ( 	"fmt" )
 
-func main() {
-	// 初始化 map
-	myMap := map[string]int{
-		"1":  1,
-		"2": 2,
-		"3":  3,
-		"4": 4,
-		"5":  5,
-	}
+func main() { 	// 初始化 map 	myMap := map[string]int{ 		"1":  1, 		"2": 2, 		"3":  3, 		"4": 4, 		"5":  5, 	}
 
-	// 定义遍历 map 的函数
-	printMapKeys := func(m map[string]int) {
-		for key := range m {
-			fmt.Print(key, " ")
-		}
-		fmt.Println()
-	}
+	// 定义遍历 map 的函数 	printMapKeys := func(m map[string]int) { 		for key := range m { 			fmt.Print(key, " ") 		} 		fmt.Println() 	}
 
-	// 多次遍历 map，观察键的顺序
-	printMapKeys(myMap)
-	printMapKeys(myMap)
-	printMapKeys(myMap)
-	printMapKeys(myMap)
-}
+	// 多次遍历 map，观察键的顺序 	printMapKeys(myMap) 	printMapKeys(myMap) 	printMapKeys(myMap) 	printMapKeys(myMap) }
 
-// 我运行的结果如下：
-// 1 2 3 4 5
-// 5 1 2 3 4
-// 2 3 4 5 1
-// 1 2 3 4 5
+// 我运行的结果如下： // 1 2 3 4 5 // 5 1 2 3 4 // 2 3 4 5 1 // 1 2 3 4 5
 ```
 
-也就是说，它每次遍历的顺序都是随机。但是按照前文
-哈希表原理
- 所说，虽然哈希表的键是无序的，但是没有对哈希表做任何操作，遍历得到的结果应该不会变才对，Golang 的 map 每次遍历的顺序咋都不一样？这也太离谱了吧？
+也就是说，它每次遍历的顺序都是随机。但是按照前文  哈希表原理  所说，虽然哈希表的键是无序的，但是没有对哈希表做任何操作，遍历得到的结果应该不会变才对，Golang 的 map 每次遍历的顺序咋都不一样？这也太离谱了吧？
 
 你可以先自己思考下原因，下面我给出答案。
 

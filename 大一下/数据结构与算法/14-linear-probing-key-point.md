@@ -16,9 +16,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-p
 
 哈希表核心原理
 
-前文
-哈希表核心原理
- 中我介绍了哈希表的核心原理和几个关键概念，其中提到了解决哈希冲突的方法主要有两种，分别是拉链法和线性探查法（也常叫做开放寻址法）：
+前文  哈希表核心原理  中我介绍了哈希表的核心原理和几个关键概念，其中提到了解决哈希冲突的方法主要有两种，分别是拉链法和线性探查法（也常叫做开放寻址法）：
 
 由于线性探查法稍微复杂一些，本文先讲解实现线性探查法的几个难点，下篇文章再给出具体的代码实现。
 
@@ -35,71 +33,19 @@ url: https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-p
 ```cpp
 // 线性探查法的基本逻辑，伪码实现
 
-class KVNode {
-public:
-    int key;
-    int value;
-    KVNode(int k, int v) : key(k), value(v) {}
-};
+class KVNode { public:  int key;  int value;  KVNode(int k, int v) : key(k), value(v) {} };
 
-class MyLinearProbingHashMap {
-private:
-    // 数组中每个元素都存储一个键值对
-    KVNode* table[10] = {nullptr};
+class MyLinearProbingHashMap { private:  // 数组中每个元素都存储一个键值对  KVNode* table[10] = {nullptr};
 
-    int hash(int key) {
-        return key % 10;
-    }
+  int hash(int key) {  return key % 10;  }
 
-public:
-    // 析构函数
-    ~MyLinearProbingHashMap() {
-        for (int i = 0; i < 10; i++) {
-            if (table[i] != nullptr) {
-                delete table[i];
-                table[i] = nullptr;
-            }
-        }
-    }
+public:  // 析构函数  ~MyLinearProbingHashMap() {  for (int i = 0; i < 10; i++) {  if (table[i] != nullptr) {  delete table[i];  table[i] = nullptr;  }  }  }
 
-    void put(int key, int value) {
-        int index = hash(key);
-        KVNode* node = table[index];
-        if (node == nullptr) {
-            table[index] = new KVNode(key, value);
-        } else {
-            // 线性探查法的逻辑
-            // 向后探查，直到找到 key 或者找到空位
-            while (index < 10 && table[index] != nullptr && table[index]->key != key) {
-                index++;
-            }
-            delete table[index];
-            table[index] = new KVNode(key, value);
-        }
-    }
+  void put(int key, int value) {  int index = hash(key);  KVNode* node = table[index];  if (node == nullptr) {  table[index] = new KVNode(key, value);  } else {  // 线性探查法的逻辑  // 向后探查，直到找到 key 或者找到空位  while (index < 10 && table[index] != nullptr && table[index]->key != key) {  index++;  }  delete table[index];  table[index] = new KVNode(key, value);  }  }
 
-    int get(int key) {
-        int index = hash(key);
-        // 向后探查，直到找到 key 或者找到空位
-        while (index < 10 && table[index] != nullptr && table[index]->key != key) {
-            index++;
-        }
-        if (index >= 10 || table[index] == nullptr) {
-            return -1;
-        }
-        return table[index]->value;
-    }
+  int get(int key) {  int index = hash(key);  // 向后探查，直到找到 key 或者找到空位  while (index < 10 && table[index] != nullptr && table[index]->key != key) {  index++;  }  if (index >= 10 || table[index] == nullptr) {  return -1;  }  return table[index]->value;  }
 
-    void remove(int key) {
-        int index = hash(key);
-        // 向后探查，直到找到 key 或者找到空位
-        while (index < 10 && table[index] != nullptr && table[index]->key != key) {
-            index++;
-        }
-        // 删除 table[index]
-        // ...
-    }
-};
+  void remove(int key) {  int index = hash(key);  // 向后探查，直到找到 key 或者找到空位  while (index < 10 && table[index] != nullptr && table[index]->key != key) {  index++;  }  // 删除 table[index]  // ...  } };
 ```
 
 基于这个假设场景，我们来看看线性探查法的两个难点。

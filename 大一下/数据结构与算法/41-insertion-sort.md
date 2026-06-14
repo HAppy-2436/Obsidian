@@ -33,48 +33,22 @@ LeetCode
 
 一句话总结
 
-插入排序是基于
-选择排序
- 的一种优化，将 nums[sortedIndex] 插入到左侧的有序数组中。对于有序度较高的数组，插入排序的效率比较高。
+插入排序是基于  选择排序  的一种优化，将 nums[sortedIndex] 插入到左侧的有序数组中。对于有序度较高的数组，插入排序的效率比较高。
 
 你可以点开可视化面板，点击播放按钮，然后点击加速/减速按钮调节速度，即可直观感受插入排序的过程：
 
 算法可视化
 
-前文
-选择排序所面临的问题
- 中分析了选择排序遇到的几个问题，然后逐步优化写出了
-冒泡排序
-，使得排序算法具有稳定性，且能够在输入数组的有序度较高时提前终止，提升效率。
+前文  选择排序所面临的问题  中分析了选择排序遇到的几个问题，然后逐步优化写出了  冒泡排序 ，使得排序算法具有稳定性，且能够在输入数组的有序度较高时提前终止，提升效率。
 
 回顾一下，冒泡排序的关键点在于对下面这段代码的优化：
 
 ```cpp
-// 对选择排序进行第一波优化，获得了稳定性
-void sort(vector<int>& nums) {
-    int n = nums.size();
-    int sortedIndex = 0;
-    while (sortedIndex < n) {
-        // 在未排序部分中找到最小值 nums[minIndex]
-        int minIndex = sortedIndex;
-        for (int i = sortedIndex + 1; i < n; i++) {
-            if (nums[i] < nums[minIndex]) {
-                minIndex = i;
-            }
-        }
+// 对选择排序进行第一波优化，获得了稳定性 void sort(vector<int>& nums) {  int n = nums.size();  int sortedIndex = 0;  while (sortedIndex < n) {  // 在未排序部分中找到最小值 nums[minIndex]  int minIndex = sortedIndex;  for (int i = sortedIndex + 1; i < n; i++) {  if (nums[i] < nums[minIndex]) {  minIndex = i;  }  }
 
-        // 优化：将 nums[minIndex] 插入到 nums[sortedIndex] 的位置
-        // 将 nums[sortedIndex..minIndex] 的元素整体向后移动一位
-        int minVal = nums[minIndex];
-        // 数组搬移数据的操作
-        for (int i = minIndex; i > sortedIndex; i--) {
-            nums[i] = nums[i - 1];
-        }
-        nums[sortedIndex] = minVal;
+  // 优化：将 nums[minIndex] 插入到 nums[sortedIndex] 的位置  // 将 nums[sortedIndex..minIndex] 的元素整体向后移动一位  int minVal = nums[minIndex];  // 数组搬移数据的操作  for (int i = minIndex; i > sortedIndex; i--) {  nums[i] = nums[i - 1];  }  nums[sortedIndex] = minVal;
 
-        sortedIndex++;
-    }
-}
+  sortedIndex++;  } }
 ```
 
 算法可视化
@@ -96,27 +70,7 @@ void sort(vector<int>& nums) {
 但是仔细想想，用二分搜索好像是多此一举的。因为就算我用二分搜索找到了 nums[sortedIndex] 应该插入的位置，我还是需要搬移元素进行插入，那还不如一边遍历一遍交换元素的方法简单高效呢：
 
 ```cpp
-// 对选择排序进一步优化，向左侧有序数组中插入元素
-// 这个算法有另一个名字，叫做插入排序
-void sort(vector<int>& nums) {
-    int n = nums.size();
-    // 维护 [0, sortedIndex) 是有序数组
-    int sortedIndex = 0;
-    while (sortedIndex < n) {
-        // 将 nums[sortedIndex] 插入到有序数组 [0, sortedIndex) 中
-        for (int i = sortedIndex; i > 0; i--) {
-            if (nums[i] < nums[i - 1]) {
-                // swap(nums[i], nums[i - 1])
-                int tmp = nums[i];
-                nums[i] = nums[i - 1];
-                nums[i - 1] = tmp;
-            } else {
-                break;
-            }
-        }
-        sortedIndex++;
-    }
-}
+// 对选择排序进一步优化，向左侧有序数组中插入元素 // 这个算法有另一个名字，叫做插入排序 void sort(vector<int>& nums) {  int n = nums.size();  // 维护 [0, sortedIndex) 是有序数组  int sortedIndex = 0;  while (sortedIndex < n) {  // 将 nums[sortedIndex] 插入到有序数组 [0, sortedIndex) 中  for (int i = sortedIndex; i > 0; i--) {  if (nums[i] < nums[i - 1]) {  // swap(nums[i], nums[i - 1])  int tmp = nums[i];  nums[i] = nums[i - 1];  nums[i - 1] = tmp;  } else {  break;  }  }  sortedIndex++;  } }
 ```
 
 算法可视化
@@ -125,16 +79,9 @@ void sort(vector<int>& nums) {
 
 这个算法的名字叫做插入排序，它的执行过程就像是打扑克牌时，将新抓到的牌插入到手中已经排好序的牌中。
 
-插入排序的空间复杂度是
-O(1)，是原地排序算法。时间复杂度是
-O(n^2)，具体的操作次数和选择排序类似，是一个等差数列求和，大约是
+插入排序的空间复杂度是  O(1)，是原地排序算法。时间复杂度是  O(n^2)，具体的操作次数和选择排序类似，是一个等差数列求和，大约是
 
-2
-/
-2
-n
-2
-/2 次。
+2 / 2 n 2 /2 次。
 
 插入排序是一种稳定排序，因为只有在 nums[i] < nums[i - 1] 的情况下才会交换元素，所以相同元素的相对位置不会发生改变。
 
@@ -142,11 +89,9 @@ n
 
 显然，插入排序的效率和输入数组的有序度有很大关系，可以举极端例子来理解：
 
-如果输入数组已经有序，或者仅有个别元素逆序，那么插入排序的内层 for 循环几乎不需要执行元素交换，所以时间复杂度接近
-O(n)。
+如果输入数组已经有序，或者仅有个别元素逆序，那么插入排序的内层 for 循环几乎不需要执行元素交换，所以时间复杂度接近  O(n)。
 
-如果输入的数组是完全逆序的，那么插入排序的效率就会很低，内层 for 循环每次都要对 nums[0..sortedIndex-1] 的所有元素进行交换，算法的总时间复杂度就接近
-O(n^2)。
+如果输入的数组是完全逆序的，那么插入排序的效率就会很低，内层 for 循环每次都要对 nums[0..sortedIndex-1] 的所有元素进行交换，算法的总时间复杂度就接近  O(n^2)。
 
 如果对比插入排序和冒泡排序，插入排序的综合性能应该要高于冒泡排序。
 
@@ -154,19 +99,9 @@ O(n^2)。
 
 所以冒泡排序的操作数大约是
 
-2
-/
-2
-n
-2
-/2，而插入排序的操作数会小于
+2 / 2 n 2 /2，而插入排序的操作数会小于
 
-2
-/
-2
-n
-2
-/2。
+2 / 2 n 2 /2。
 
 你可以把插入排序的代码拿去力扣第 912 题「排序数组」提交，它最终依然会超时，但可以说明算法代码的逻辑是正确的。之后的文章我们继续探讨如何对排序算法进行优化。
 

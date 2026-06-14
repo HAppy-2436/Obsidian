@@ -65,11 +65,11 @@
   },
   {
    "type": "text",
-   "content": "多叉树结构就是 \n二叉树结构\n 的延伸，二叉树是特殊的多叉树。"
+   "content": "多叉树结构就是  二叉树结构  的延伸，二叉树是特殊的多叉树。"
   },
   {
    "type": "text",
-   "content": "多叉树的遍历就是 \n二叉树遍历\n 的延伸。"
+   "content": "多叉树的遍历就是  二叉树遍历  的延伸。"
   },
   {
    "type": "text",
@@ -105,7 +105,7 @@
   },
   {
    "type": "code",
-   "content": "class TreeNode {\npublic:\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n\n    TreeNode(int v) : val(v), left(nullptr), right(nullptr) {}\n};",
+   "content": "class TreeNode { public:  int val;  TreeNode* left;  TreeNode* right;\n\n  TreeNode(int v) : val(v), left(nullptr), right(nullptr) {} };",
    "cpp_source": true
   },
   {
@@ -138,7 +138,7 @@
   },
   {
    "type": "code",
-   "content": "class Node {\npublic:\n    int val;\n    vector<Node*> children;\n};",
+   "content": "class Node { public:  int val;  vector<Node*> children; };",
    "cpp_source": true
   },
   {
@@ -148,11 +148,11 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n森林"
+   "content": "¶ 森林"
   },
   {
    "type": "text",
-   "content": "这里介绍一下「森林」这个名词，后面讲到 \nUnion Find 并查集算法\n 时，会用到这个概念。"
+   "content": "这里介绍一下「森林」这个名词，后面讲到  Union Find 并查集算法  时，会用到这个概念。"
   },
   {
    "type": "text",
@@ -177,7 +177,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n递归遍历（DFS）"
+   "content": "¶ 递归遍历（DFS）"
   },
   {
    "type": "text",

@@ -34,39 +34,21 @@ url: https://labuladong.online/zh/algo/data-structure-basic/queue-stack-basic/
 这两种数据结构的基本 API 如下：
 
 ```cpp
-// 队列的基本 API
-template <typename E>
-class MyQueue {
-public:
-    // 向队尾插入元素，时间复杂度 O(1)
-    void push(const E& e);
+// 队列的基本 API template <typename E> class MyQueue { public:  // 向队尾插入元素，时间复杂度 O(1)  void push(const E& e);
 
-    // 从队头删除元素，时间复杂度 O(1)
-    E pop();
+  // 从队头删除元素，时间复杂度 O(1)  E pop();
 
-    // 查看队头元素，时间复杂度 O(1)
-    E peek() const;
+  // 查看队头元素，时间复杂度 O(1)  E peek() const;
 
-    // 返回队列中的元素个数，时间复杂度 O(1)
-    int size() const;
-};
+  // 返回队列中的元素个数，时间复杂度 O(1)  int size() const; };
 
-// 栈的基本 API
-template <typename E>
-class MyStack {
-public:
-    // 向栈顶插入元素，时间复杂度 O(1)
-    void push(const E& e);
+// 栈的基本 API template <typename E> class MyStack { public:  // 向栈顶插入元素，时间复杂度 O(1)  void push(const E& e);
 
-    // 从栈顶删除元素，时间复杂度 O(1)
-    E pop();
+  // 从栈顶删除元素，时间复杂度 O(1)  E pop();
 
-    // 查看栈顶元素，时间复杂度 O(1)
-    E peek() const;
+  // 查看栈顶元素，时间复杂度 O(1)  E peek() const;
 
-    // 返回栈中的元素个数，时间复杂度 O(1)
-    int size() const;
-};
+  // 返回栈中的元素个数，时间复杂度 O(1)  int size() const; };
 ```
 
 不同编程语言中，队列和栈提供的方法名称可能不一样，但每个方法的效果肯定是一样的。

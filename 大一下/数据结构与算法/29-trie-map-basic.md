@@ -18,9 +18,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/trie-map-basic/
 
 一句话总结
 
-Trie 树就是
-多叉树结构
- 的延伸，是一种针对字符串进行特殊优化的数据结构。
+Trie 树就是  多叉树结构  的延伸，是一种针对字符串进行特殊优化的数据结构。
 
 Trie 树在处理字符串相关操作时有诸多优势，比如节省公共字符串前缀的内存空间、方便处理前缀操作、支持通配符匹配等。
 
@@ -28,13 +26,7 @@ Trie 树在处理字符串相关操作时有诸多优势，比如节省公共字
 
 算法可视化
 
-本文仅是 Trie 树（也叫做字典树、前缀树）的原理介绍，
-动手实现 TrieMap/TrieSet
- 我放到了
-二叉树系列习题章节
- 后面的数据结构设计章节。理由和上篇
-TreeMap/TreeSet 原理
- 相同，在基础知识章节我不准备讲解这种复杂结构的具体实现，初学者也没必要在这个阶段理解 Trie 树的代码实现。
+本文仅是 Trie 树（也叫做字典树、前缀树）的原理介绍， 动手实现 TrieMap/TrieSet  我放到了 二叉树系列习题章节  后面的数据结构设计章节。理由和上篇  TreeMap/TreeSet 原理  相同，在基础知识章节我不准备讲解这种复杂结构的具体实现，初学者也没必要在这个阶段理解 Trie 树的代码实现。
 
 但是我依然把 Trie 树的原理讲解放在这里，有两个目的：
 
@@ -46,29 +38,13 @@ TreeMap/TreeSet 原理
 
 本站将会带你实现一个 TrieMap 和 TrieSet，先来梳理一下我们已经实现过的 Map/Set 类型：
 
-标准的
-哈希表 HashMap
-，底层借助一个哈希函数把键值对存在 table 数组中，有两种解决哈希冲突的方法。它的特点是快，即基本的增删查改操作时间复杂度都是
-O(1)。
-哈希集合 HashSet
- 是 HashMap 的简单封装。
+标准的  哈希表 HashMap ，底层借助一个哈希函数把键值对存在 table 数组中，有两种解决哈希冲突的方法。它的特点是快，即基本的增删查改操作时间复杂度都是  O(1)。 哈希集合 HashSet  是 HashMap 的简单封装。
 
-哈希链表 LinkedHashMap
-，是
-双链表结构
- 对标准哈希表的加强。它继承了哈希表的操作复杂度，并且可以让哈希表中的所有键保持「插入顺序」。LinkedHashSet 是 LinkedHashMap 的简单封装。
+哈希链表 LinkedHashMap ，是  双链表结构  对标准哈希表的加强。它继承了哈希表的操作复杂度，并且可以让哈希表中的所有键保持「插入顺序」。LinkedHashSet 是 LinkedHashMap 的简单封装。
 
-哈希数组 ArrayHashMap
-，是
-数组结构
- 对标准哈希表的加强。它继承了哈希表的操作复杂度，并且提供了一个额外的 randomKey 函数，可以在
-O(1) 的时间返回一个随机键。ArrayHashSet 是 ArrayHashMap 的简单封装。
+哈希数组 ArrayHashMap ，是  数组结构  对标准哈希表的加强。它继承了哈希表的操作复杂度，并且提供了一个额外的 randomKey 函数，可以在  O(1) 的时间返回一个随机键。ArrayHashSet 是 ArrayHashMap 的简单封装。
 
-TreeMap 映射
-，底层是一棵二叉搜索树（编程语言标准库一般使用经过改良的自平衡
-红黑树
-），基本增删查改操作复杂度是
-O(logN)，它的特点是可以动态维护键值对的大小关系，有很多额外的 API 操作键值对。TreeSet 集合是 TreeMap 映射的简单封装。
+TreeMap 映射 ，底层是一棵二叉搜索树（编程语言标准库一般使用经过改良的自平衡  红黑树 ），基本增删查改操作复杂度是  O(logN)，它的特点是可以动态维护键值对的大小关系，有很多额外的 API 操作键值对。TreeSet 集合是 TreeMap 映射的简单封装。
 
 TrieSet 也是 TrieMap 的简单封装，所以下面我们聚焦 TrieMap 的实现原理即可。
 
@@ -81,10 +57,7 @@ Trie 树是一种针对字符串有特殊优化的数据结构，这也许它又
 用 HashMap 对比吧，比如说这样存储几个键值对：
 
 ```
-Map<String, Integer> map = new HashMap<>();
-map.put("apple", 1);
-map.put("app", 2);
-map.put("appl", 3);
+Map<String, Integer> map = new HashMap<>(); map.put("apple", 1); map.put("app", 2); map.put("appl", 3);
 ```
 
 回想哈希表的实现原理，键值对会被存到 table 数组中，也就是说它真的创建 "apple"、"app"、"appl" 这三个字符串，占用了 12 个字符的内存空间。
@@ -94,11 +67,7 @@ map.put("appl", 3);
 如果换成 TrieMap 来存储：
 
 ```
-// Trie 树的键类型固定为 String 类型，值类型可以是泛型
-TrieMap<Integer> map = new TrieMap<>();
-map.put("apple", 1);
-map.put("app", 2);
-map.put("appl", 3);
+// Trie 树的键类型固定为 String 类型，值类型可以是泛型 TrieMap<Integer> map = new TrieMap<>(); map.put("apple", 1); map.put("app", 2); map.put("appl", 3);
 ```
 
 Trie 树底层并不会重复存储公共前缀，所以只需要 "apple" 这 5 个字符的内存空间来存储键。
@@ -110,31 +79,20 @@ Trie 树底层并不会重复存储公共前缀，所以只需要 "apple" 这 5 
 举个例子就明白了：
 
 ```
-// Trie 树的键类型固定为 String 类型，值类型可以是泛型
-TrieMap<Integer> map = new TrieMap<>();
-map.put("that", 1);
-map.put("the", 2);
-map.put("them", 3);
-map.put("apple", 4);
+// Trie 树的键类型固定为 String 类型，值类型可以是泛型 TrieMap<Integer> map = new TrieMap<>(); map.put("that", 1); map.put("the", 2); map.put("them", 3); map.put("apple", 4);
 
-// "the" 是 "themxyz" 的最短前缀
-System.out.println(map.shortestPrefixOf("themxyz")); // "the"
+// "the" 是 "themxyz" 的最短前缀 System.out.println(map.shortestPrefixOf("themxyz")); // "the"
 
-// "them" 是 "themxyz" 的最长前缀
-System.out.println(map.longestPrefixOf("themxyz")); // "them"
+// "them" 是 "themxyz" 的最长前缀 System.out.println(map.longestPrefixOf("themxyz")); // "them"
 
-// "tha" 是 "that" 的前缀
-System.out.println(map.hasKeyWithPrefix("tha")); // true
+// "tha" 是 "that" 的前缀 System.out.println(map.hasKeyWithPrefix("tha")); // true
 
-// 没有以 "thz" 为前缀的键
-System.out.println(map.hasKeyWithPrefix("thz")); // false
+// 没有以 "thz" 为前缀的键 System.out.println(map.hasKeyWithPrefix("thz")); // false
 
-// "that", "the", "them" 都是 "th" 的前缀
-System.out.println(map.keysWithPrefix("th")); // ["that", "the", "them"]
+// "that", "the", "them" 都是 "th" 的前缀 System.out.println(map.keysWithPrefix("th")); // ["that", "the", "them"]
 ```
 
-除了 keysWithPrefix 方法的复杂度取决于返回结果的长度，其他前缀操作的复杂度都是
-O(L)，其中
+除了 keysWithPrefix 方法的复杂度取决于返回结果的长度，其他前缀操作的复杂度都是  O(L)，其中
 
 L 是前缀字符串长度。
 

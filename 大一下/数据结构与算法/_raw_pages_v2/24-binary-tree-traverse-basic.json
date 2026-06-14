@@ -150,7 +150,7 @@
   },
   {
    "type": "text",
-   "content": "了解了 \n二叉树基本概念和几种特殊的二叉树\n，本文来讲解如何遍历和访问二叉树的节点。"
+   "content": "了解了  二叉树基本概念和几种特殊的二叉树 ，本文来讲解如何遍历和访问二叉树的节点。"
   },
   {
    "type": "text",
@@ -163,7 +163,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n递归遍历（DFS）"
+   "content": "¶ 递归遍历（DFS）"
   },
   {
    "type": "text",
@@ -195,7 +195,7 @@
   },
   {
    "type": "code",
-   "content": "// 基本的二叉树节点\nclass TreeNode {\npublic:\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n\n    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n};\n\n// 二叉树的递归遍历框架\nvoid traverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    traverse(root->left);\n    traverse(root->right);\n}",
+   "content": "// 基本的二叉树节点 class TreeNode { public:  int val;  TreeNode* left;  TreeNode* right;\n\n  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} };\n\n// 二叉树的递归遍历框架 void traverse(TreeNode* root) {  if (root == nullptr) {  return;  }  traverse(root->left);  traverse(root->right); }",
    "cpp_source": true
   },
   {
@@ -256,7 +256,7 @@
   },
   {
    "type": "code",
-   "content": "// 修改标准的二叉树遍历框架\nvoid traverseFlip(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    // 反过来，先递归遍历右子树，再递归遍历左子树\n    traverseFlip(root->right);\n    traverseFlip(root->left);\n}",
+   "content": "// 修改标准的二叉树遍历框架 void traverseFlip(TreeNode* root) {  if (root == nullptr) {  return;  }  // 反过来，先递归遍历右子树，再递归遍历左子树  traverseFlip(root->right);  traverseFlip(root->left); }",
    "cpp_source": true
   },
   {
@@ -309,7 +309,7 @@
   },
   {
    "type": "code",
-   "content": "// 基本的二叉树节点\nclass TreeNode {\npublic:\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n\n    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n};\n\n// 二叉树的递归遍历框架\nvoid traverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    traverse(root->left);\n    traverse(root->right);\n}",
+   "content": "// 基本的二叉树节点 class TreeNode { public:  int val;  TreeNode* left;  TreeNode* right;\n\n  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} };\n\n// 二叉树的递归遍历框架 void traverse(TreeNode* root) {  if (root == nullptr) {  return;  }  traverse(root->left);  traverse(root->right); }",
    "cpp_source": true
   },
   {
@@ -331,7 +331,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n理解前/中/后序遍历"
+   "content": "¶ 理解前/中/后序遍历"
   },
   {
    "type": "text",
@@ -379,7 +379,7 @@
   },
   {
    "type": "code",
-   "content": "// 二叉树的遍历框架\nvoid traverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    // 前序位置\n    traverse(root->left);\n    // 中序位置\n    traverse(root->right);\n    // 后序位置\n}",
+   "content": "// 二叉树的遍历框架 void traverse(TreeNode* root) {  if (root == nullptr) {  return;  }  // 前序位置  traverse(root->left);  // 中序位置  traverse(root->right);  // 后序位置 }",
    "cpp_source": true
   },
   {
@@ -432,7 +432,7 @@
   },
   {
    "type": "text",
-   "content": "我会在 \n二叉树算法思想（纲领篇）\n 和习题中深入探讨二叉树遍历框架的前中后序位置，以及如何运用到回溯算法、动态规划算法中，这里就不展开了。"
+   "content": "我会在  二叉树算法思想（纲领篇）  和习题中深入探讨二叉树遍历框架的前中后序位置，以及如何运用到回溯算法、动态规划算法中，这里就不展开了。"
   },
   {
    "type": "text",
@@ -440,7 +440,7 @@
   },
   {
    "type": "text",
-   "content": "最后一个知识点，\n二叉搜索树（BST）\n 的中序遍历结果是有序的，这是 BST 的一个重要性质。"
+   "content": "最后一个知识点， 二叉搜索树（BST）  的中序遍历结果是有序的，这是 BST 的一个重要性质。"
   },
   {
    "type": "text",
@@ -452,12 +452,12 @@
   },
   {
    "type": "text",
-   "content": "在后面的 \nBST 相关习题集\n 中，会有一些题目利用到这个特性。"
+   "content": "在后面的  BST 相关习题集  中，会有一些题目利用到这个特性。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n层序遍历（BFS）"
+   "content": "¶ 层序遍历（BFS）"
   },
   {
    "type": "text",
@@ -474,7 +474,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n写法一"
+   "content": "¶ 写法一"
   },
   {
    "type": "text",
@@ -506,7 +506,7 @@
   },
   {
    "type": "code",
-   "content": "void levelOrderTraverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    queue<TreeNode*> q;\n    q.push(root);\n    while (!q.empty()) {\n        TreeNode* cur = q.front();\n        q.pop();\n        // 访问 cur 节点\n        cout << cur->val << endl;\n        \n        // 把 cur 的左右子节点加入队列\n        if (cur->left != nullptr) {\n            q.push(cur->left);\n        }\n        if (cur->right != nullptr) {\n            q.push(cur->right);\n        }\n    }\n}",
+   "content": "void levelOrderTraverse(TreeNode* root) {  if (root == nullptr) {  return;  }  queue<TreeNode*> q;  q.push(root);  while (!q.empty()) {  TreeNode* cur = q.front();  q.pop();  // 访问 cur 节点  cout << cur->val << endl;  // 把 cur 的左右子节点加入队列  if (cur->left != nullptr) {  q.push(cur->left);  }  if (cur->right != nullptr) {  q.push(cur->right);  }  } }",
    "cpp_source": true
   },
   {
@@ -536,7 +536,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n写法二"
+   "content": "¶ 写法二"
   },
   {
    "type": "text",
@@ -568,7 +568,7 @@
   },
   {
    "type": "code",
-   "content": "void levelOrderTraverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    queue<TreeNode*> q;\n    q.push(root);\n    // 记录当前遍历到的层数（根节点视为第 1 层）\n    int depth = 1;\n\n    while (!q.empty()) {\n        int sz = q.size();\n        for (int i = 0; i < sz; i++) {\n            TreeNode* cur = q.front();\n            q.pop();\n            // 访问 cur 节点，同时知道它所在的层数\n            cout << \"depth = \" << depth << \", val = \" << cur->val << endl;\n\n            // 把 cur 的左右子节点加入队列\n            if (cur->left != nullptr) {\n                q.push(cur->left);\n            }\n            if (cur->right != nullptr) {\n                q.push(cur->right);\n            }\n        }\n        depth++;\n    }\n}",
+   "content": "void levelOrderTraverse(TreeNode* root) {  if (root == nullptr) {  return;  }  queue<TreeNode*> q;  q.push(root);  // 记录当前遍历到的层数（根节点视为第 1 层）  int depth = 1;\n\n  while (!q.empty()) {  int sz = q.size();  for (int i = 0; i < sz; i++) {  TreeNode* cur = q.front();  q.pop();  // 访问 cur 节点，同时知道它所在的层数  cout << \"depth = \" << depth << \", val = \" << cur->val << endl;\n\n  // 把 cur 的左右子节点加入队列  if (cur->left != nullptr) {  q.push(cur->left);  }  if (cur->right != nullptr) {  q.push(cur->right);  }  }  depth++;  } }",
    "cpp_source": true
   },
   {
@@ -577,7 +577,7 @@
   },
   {
    "type": "code",
-   "content": "class State {\npublic:\n    TreeNode* node;\n    int depth;\n\n    State(TreeNode* node, int depth) : node(node), depth(depth) {}\n};\n\nvoid levelOrderTraverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    queue<State> q;\n    // 根节点的路径权重和是 1\n    q.push(State(root, 1));\n\n    while (!q.empty()) {\n        State cur = q.front();\n        q.pop();\n        // 访问 cur 节点，同时知道它的路径权重和\n        cout << \"depth = \" << cur.depth << \", val = \" << cur.node->val << endl;\n\n        // 把 cur 的左右子节点加入队列\n        if (cur.node->left != nullptr) {\n            q.push(State(cur.node->left, cur.depth + 1));\n        }\n        if (cur.node->right != nullptr) {\n            q.push(State(cur.node->right, cur.depth + 1));\n        }\n    }\n}",
+   "content": "class State { public:  TreeNode* node;  int depth;\n\n  State(TreeNode* node, int depth) : node(node), depth(depth) {} };\n\nvoid levelOrderTraverse(TreeNode* root) {  if (root == nullptr) {  return;  }  queue<State> q;  // 根节点的路径权重和是 1  q.push(State(root, 1));\n\n  while (!q.empty()) {  State cur = q.front();  q.pop();  // 访问 cur 节点，同时知道它的路径权重和  cout << \"depth = \" << cur.depth << \", val = \" << cur.node->val << endl;\n\n  // 把 cur 的左右子节点加入队列  if (cur.node->left != nullptr) {  q.push(State(cur.node->left, cur.depth + 1));  }  if (cur.node->right != nullptr) {  q.push(State(cur.node->right, cur.depth + 1));  }  } }",
    "cpp_source": true
   },
   {
@@ -586,7 +586,7 @@
   },
   {
    "type": "code",
-   "content": "int sz = q.size();\nwhile (sz-- > 0) {\n    ...\n}"
+   "content": "int sz = q.size(); while (sz-- > 0) {  ... }"
   },
   {
    "type": "text",
@@ -611,7 +611,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n写法三"
+   "content": "¶ 写法三"
   },
   {
    "type": "text",
@@ -619,7 +619,7 @@
   },
   {
    "type": "text",
-   "content": "现在我们只是在探讨二叉树的层序遍历，但是二叉树的层序遍历可以衍生出 \n多叉树的层序遍历\n，\n图的 BFS 遍历\n，以及经典的 \nBFS 暴力穷举算法框架\n，所以这里要拓展延伸一下。"
+   "content": "现在我们只是在探讨二叉树的层序遍历，但是二叉树的层序遍历可以衍生出  多叉树的层序遍历 ， 图的 BFS 遍历 ，以及经典的  BFS 暴力穷举算法框架 ，所以这里要拓展延伸一下。"
   },
   {
    "type": "text",
@@ -663,7 +663,7 @@
   },
   {
    "type": "code",
-   "content": "class State {\npublic:\n    TreeNode* node;\n    int depth;\n\n    State(TreeNode* node, int depth) : node(node), depth(depth) {}\n};\n\nvoid levelOrderTraverse(TreeNode* root) {\n    if (root == nullptr) {\n        return;\n    }\n    queue<State> q;\n    // 根节点的路径权重和是 1\n    q.push(State(root, 1));\n\n    while (!q.empty()) {\n        State cur = q.front();\n        q.pop();\n        // 访问 cur 节点，同时知道它的路径权重和\n        cout << \"depth = \" << cur.depth << \", val = \" << cur.node->val << endl;\n\n        // 把 cur 的左右子节点加入队列\n        if (cur.node->left != nullptr) {\n            q.push(State(cur.node->left, cur.depth + 1));\n        }\n        if (cur.node->right != nullptr) {\n            q.push(State(cur.node->right, cur.depth + 1));\n        }\n    }\n}"
+   "content": "class State { public:  TreeNode* node;  int depth;\n\n  State(TreeNode* node, int depth) : node(node), depth(depth) {} };\n\nvoid levelOrderTraverse(TreeNode* root) {  if (root == nullptr) {  return;  }  queue<State> q;  // 根节点的路径权重和是 1  q.push(State(root, 1));\n\n  while (!q.empty()) {  State cur = q.front();  q.pop();  // 访问 cur 节点，同时知道它的路径权重和  cout << \"depth = \" << cur.depth << \", val = \" << cur.node->val << endl;\n\n  // 把 cur 的左右子节点加入队列  if (cur.node->left != nullptr) {  q.push(State(cur.node->left, cur.depth + 1));  }  if (cur.node->right != nullptr) {  q.push(State(cur.node->right, cur.depth + 1));  }  } }"
   },
   {
    "type": "text",
@@ -679,12 +679,12 @@
   },
   {
    "type": "text",
-   "content": "其实你很快就会学到，这种边带有权重的场景属于图结构算法，在之后的 \nBFS 算法习题集\n 和 \ndijkstra 算法\n 中，才会用到这种写法。"
+   "content": "其实你很快就会学到，这种边带有权重的场景属于图结构算法，在之后的  BFS 算法习题集  和  dijkstra 算法  中，才会用到这种写法。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n其他遍历？"
+   "content": "¶ 其他遍历？"
   },
   {
    "type": "text",

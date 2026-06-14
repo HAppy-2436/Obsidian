@@ -33,7 +33,7 @@
   },
   {
    "type": "text",
-   "content": "Hierholzer 算法是用于计算欧拉路径/欧拉回路的经典算法，它是 \n图结构 DFS 算法\n 的拓展。"
+   "content": "Hierholzer 算法是用于计算欧拉路径/欧拉回路的经典算法，它是  图结构 DFS 算法  的拓展。"
   },
   {
    "type": "text",
@@ -50,7 +50,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n一笔画游戏"
+   "content": "¶ 一笔画游戏"
   },
   {
    "type": "text",
@@ -90,7 +90,7 @@
   },
   {
    "type": "text",
-   "content": "游戏面板中会显示每个节点的 \n度数\n，你可以先试试看这个套路好不好用：）"
+   "content": "游戏面板中会显示每个节点的  度数 ，你可以先试试看这个套路好不好用：）"
   },
   {
    "type": "text",
@@ -99,7 +99,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n七桥问题"
+   "content": "¶ 七桥问题"
   },
   {
    "type": "text",
@@ -136,7 +136,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n术语定义"
+   "content": "¶ 术语定义"
   },
   {
    "type": "text",

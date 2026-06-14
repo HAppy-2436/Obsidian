@@ -10,7 +10,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n本章适合谁"
+   "content": "¶ 本章适合谁"
   },
   {
    "type": "text",
@@ -18,12 +18,12 @@
   },
   {
    "type": "text",
-   "content": "对于希望速成刷题能力应对笔试的读者，不需要完整学习本章，请参考 \n速成目录\n。"
+   "content": "对于希望速成刷题能力应对笔试的读者，不需要完整学习本章，请参考  速成目录 。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n本章导读"
+   "content": "¶ 本章导读"
   },
   {
    "type": "text",
@@ -43,7 +43,7 @@
   },
   {
    "type": "text",
-   "content": "在本章节中，会经常用到 \n算法可视化面板\n 对稍微复杂的数据结构操作进行可视化。可视化代码是用 JavaScript 写的，但是都比较简单，无论你是否了解 JavaScript 都应该很容易看懂。"
+   "content": "在本章节中，会经常用到  算法可视化面板  对稍微复杂的数据结构操作进行可视化。可视化代码是用 JavaScript 写的，但是都比较简单，无论你是否了解 JavaScript 都应该很容易看懂。"
   },
   {
    "type": "text",

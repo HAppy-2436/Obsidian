@@ -29,11 +29,11 @@
   },
   {
    "type": "text",
-   "content": "1、二叉树本身是比较简单的基础数据结构，但是很多复杂的数据结构都是基于二叉树的，比如 \n红黑树\n（二叉搜索树）、\n多叉树\n、\n二叉堆\n、\n图\n、\n字典树\n、\n并查集\n、\n线段树\n 等等。你把二叉树玩明白了，这些数据结构都不是问题；如果你不把二叉树搞明白，这些高级数据结构你也很难驾驭。"
+   "content": "1、二叉树本身是比较简单的基础数据结构，但是很多复杂的数据结构都是基于二叉树的，比如  红黑树 （二叉搜索树）、 多叉树 、 二叉堆 、 图 、 字典树 、 并查集 、 线段树  等等。你把二叉树玩明白了，这些数据结构都不是问题；如果你不把二叉树搞明白，这些高级数据结构你也很难驾驭。"
   },
   {
    "type": "text",
-   "content": "2、二叉树不单纯是一种数据结构，更是一种常用的算法思维。一切暴力穷举算法，比如 \n回溯算法\n、\nBFS 算法\n、\n动态规划\n 本质上也是把具体问题抽象成树结构，你只要抽象出来了，这些问题最终都回归二叉树的问题。同样看一段算法代码，在别人眼里是一串文本，每个字都认识，但连起来就不认识了；而在你眼里的代码就是一棵树，想咋改就咋改，咋改都能改对，实在是太简单了。"
+   "content": "2、二叉树不单纯是一种数据结构，更是一种常用的算法思维。一切暴力穷举算法，比如  回溯算法 、 BFS 算法 、 动态规划  本质上也是把具体问题抽象成树结构，你只要抽象出来了，这些问题最终都回归二叉树的问题。同样看一段算法代码，在别人眼里是一串文本，每个字都认识，但连起来就不认识了；而在你眼里的代码就是一棵树，想咋改就咋改，咋改都能改对，实在是太简单了。"
   },
   {
    "type": "text",
@@ -42,7 +42,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n几种常见的二叉树"
+   "content": "¶ 几种常见的二叉树"
   },
   {
    "type": "text",
@@ -111,7 +111,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n满二叉树"
+   "content": "¶ 满二叉树"
   },
   {
    "type": "text",
@@ -184,7 +184,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n完全二叉树"
+   "content": "¶ 完全二叉树"
   },
   {
    "type": "text",
@@ -248,7 +248,7 @@
   },
   {
    "type": "text",
-   "content": "这个特点在讲到 \n二叉堆核心原理\n 和 \n线段树核心原理\n 时会用到：完全二叉树可以用数组来存储，不需要真的构建链式节点。"
+   "content": "这个特点在讲到  二叉堆核心原理  和  线段树核心原理  时会用到：完全二叉树可以用数组来存储，不需要真的构建链式节点。"
   },
   {
    "type": "text",
@@ -260,7 +260,7 @@
   },
   {
    "type": "text",
-   "content": "这个性质在做算法题的时候会用到，比如 \n巧算完全二叉树的节点数\n，这里就先提一下。"
+   "content": "这个性质在做算法题的时候会用到，比如  巧算完全二叉树的节点数 ，这里就先提一下。"
   },
   {
    "type": "text",
@@ -289,7 +289,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n二叉搜索树"
+   "content": "¶ 二叉搜索树"
   },
   {
    "type": "text",
@@ -386,7 +386,7 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n高度平衡二叉树"
+   "content": "¶ 高度平衡二叉树"
   },
   {
    "type": "text",
@@ -466,7 +466,7 @@
   },
   {
    "type": "text",
-   "content": "假设高度平衡二叉树中共有 \n𝑁\nN 个节点，那么高度平衡二叉树的高度是 \n𝑂\n(\nlog\n⁡\n𝑁\n)\nO(logN)。这是非常重要的性质，本站后面的章节会讲解几种基于二叉树的数据结构，如果能保证树的高度为 \n𝑂\n(\nlog\n⁡\n𝑁\n)\nO(logN)，那么这些数据结构的增删查改效率就会很高。"
+   "content": "假设高度平衡二叉树中共有 \n\nN 个节点，那么高度平衡二叉树的高度是  O(logN)。这是非常重要的性质，本站后面的章节会讲解几种基于二叉树的数据结构，如果能保证树的高度为  O(logN)，那么这些数据结构的增删查改效率就会很高。"
   },
   {
    "type": "text",
@@ -499,11 +499,11 @@
   {
    "type": "heading",
    "level": 3,
-   "content": "¶\n自平衡二叉树"
+   "content": "¶ 自平衡二叉树"
   },
   {
    "type": "text",
-   "content": "上面介绍了高度平衡二叉树，说到它的高度为 \n𝑂\n(\nlog\n⁡\n𝑁\n)\nO(logN)，增删查改的效率高。"
+   "content": "上面介绍了高度平衡二叉树，说到它的高度为  O(logN)，增删查改的效率高。"
   },
   {
    "type": "text",
@@ -511,7 +511,7 @@
   },
   {
    "type": "text",
-   "content": "自平衡的二叉树有很多种实现方式，最经典的就是 \n红黑树\n，一种自平衡的二叉搜索树。"
+   "content": "自平衡的二叉树有很多种实现方式，最经典的就是  红黑树 ，一种自平衡的二叉搜索树。"
   },
   {
    "type": "text",
@@ -524,7 +524,7 @@
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n二叉树的实现方式"
+   "content": "¶ 二叉树的实现方式"
   },
   {
    "type": "text",
@@ -560,7 +560,7 @@
   },
   {
    "type": "code",
-   "content": "class TreeNode {\npublic:\n    int val;\n    TreeNode* left;\n    TreeNode* right;\n    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n};\n\n// 你可以这样构建一棵二叉树：\nTreeNode* root = new TreeNode(1);\nroot->left = new TreeNode(2);\nroot->right = new TreeNode(3);\nroot->left->left = new TreeNode(4);\nroot->right->left = new TreeNode(5);\nroot->right->right = new TreeNode(6);\n\n// 构建出来的二叉树是这样的：\n//     1\n//    / \\\n//   2   3\n//  /   / \\\n// 4   5   6",
+   "content": "class TreeNode { public:  int val;  TreeNode* left;  TreeNode* right;  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {} };\n\n// 你可以这样构建一棵二叉树： TreeNode* root = new TreeNode(1); root->left = new TreeNode(2); root->right = new TreeNode(3); root->left->left = new TreeNode(4); root->right->left = new TreeNode(5); root->right->right = new TreeNode(6);\n\n// 构建出来的二叉树是这样的： //  1 //  / \\ //  2  3 //  /  / \\ // 4  5  6",
    "cpp_source": true
   },
   {
@@ -569,15 +569,15 @@
   },
   {
    "type": "text",
-   "content": "是的，在 \n二叉堆原理及实现\n 和 \n并查集算法详解\n 中，我们会根据具体的需求场景选择用数组来存储二叉树。"
+   "content": "是的，在  二叉堆原理及实现  和  并查集算法详解  中，我们会根据具体的需求场景选择用数组来存储二叉树。"
   },
   {
    "type": "text",
-   "content": "在 \n可视化面板\n 可视化递归函数时，其实是根据函数堆栈生成的递归树，这也可以算是一种二叉树的实现方式。"
+   "content": "在  可视化面板  可视化递归函数时，其实是根据函数堆栈生成的递归树，这也可以算是一种二叉树的实现方式。"
   },
   {
    "type": "text",
-   "content": "另外，在一般的算法题中，我们可能会把实际问题抽象成二叉树结构，但我们并不需要真的用 TreeNode 创建一棵二叉树出来，而是直接用类似 \n哈希表\n 的结构来表示二叉树/多叉树。"
+   "content": "另外，在一般的算法题中，我们可能会把实际问题抽象成二叉树结构，但我们并不需要真的用 TreeNode 创建一棵二叉树出来，而是直接用类似  哈希表  的结构来表示二叉树/多叉树。"
   },
   {
    "type": "text",
@@ -637,12 +637,12 @@
   },
   {
    "type": "code",
-   "content": "// 1 -> {2, 3}\n// 2 -> {4}\n// 3 -> {5, 6}\n\nunordered_map<int, vector<int>> tree;\ntree[1] = {2, 3};\ntree[2] = {4};\ntree[3] = {5, 6};",
+   "content": "// 1 -> {2, 3} // 2 -> {4} // 3 -> {5, 6}\n\nunordered_map<int, vector<int>> tree; tree[1] = {2, 3}; tree[2] = {4}; tree[3] = {5, 6};",
    "cpp_source": true
   },
   {
    "type": "text",
-   "content": "这样就可以模拟和操作二叉树/多叉树结构，后文讲到图论的时候你就会知道，它有一个新的名字叫做 \n邻接表\n。"
+   "content": "这样就可以模拟和操作二叉树/多叉树结构，后文讲到图论的时候你就会知道，它有一个新的名字叫做  邻接表 。"
   },
   {
    "type": "text",

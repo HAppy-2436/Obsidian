@@ -81,7 +81,7 @@
   },
   {
    "type": "code",
-   "content": "void sort(vector<int>& nums) {\n    int n = nums.size();\n    // sortedIndex 是一个分割线\n    // 索引 < sortedIndex 的元素都是已排序的\n    // 索引 >= sortedIndex 的元素都是未排序的\n    // 初始化为 0，表示整个数组都是未排序的\n    int sortedIndex = 0;\n    while (sortedIndex < n) {\n        // 找到未排序部分 [sortedIndex, n) 中的最小值\n        int minIndex = sortedIndex;\n        for (int i = sortedIndex + 1; i < n; i++) {\n            if (nums[i] < nums[minIndex]) {\n                minIndex = i;\n            }\n        }\n        // 交换最小值和 sortedIndex 处的元素\n        int tmp = nums[sortedIndex];\n        nums[sortedIndex] = nums[minIndex];\n        nums[minIndex] = tmp;\n\n        // sortedIndex 后移一位\n        sortedIndex++;\n    }\n}",
+   "content": "void sort(vector<int>& nums) {  int n = nums.size();  // sortedIndex 是一个分割线  // 索引 < sortedIndex 的元素都是已排序的  // 索引 >= sortedIndex 的元素都是未排序的  // 初始化为 0，表示整个数组都是未排序的  int sortedIndex = 0;  while (sortedIndex < n) {  // 找到未排序部分 [sortedIndex, n) 中的最小值  int minIndex = sortedIndex;  for (int i = sortedIndex + 1; i < n; i++) {  if (nums[i] < nums[minIndex]) {  minIndex = i;  }  }  // 交换最小值和 sortedIndex 处的元素  int tmp = nums[sortedIndex];  nums[sortedIndex] = nums[minIndex];  nums[minIndex] = tmp;\n\n  // sortedIndex 后移一位  sortedIndex++;  } }",
    "cpp_source": true
   },
   {
@@ -122,7 +122,7 @@
   },
   {
    "type": "code",
-   "content": "void sort(vector<int>& nums) {\n    int n = nums.size();\n    // sortedIndex 是一个分割线\n    // 索引 < sortedIndex 的元素都是已排序的\n    // 索引 >= sortedIndex 的元素都是未排序的\n    // 初始化为 0，表示整个数组都是未排序的\n    int sortedIndex = 0;\n    while (sortedIndex < n) {\n        // 找到未排序部分 [sortedIndex, n) 中的最小值\n        int minIndex = sortedIndex;\n        for (int i = sortedIndex + 1; i < n; i++) {\n            if (nums[i] < nums[minIndex]) {\n                minIndex = i;\n            }\n        }\n        // 交换最小值和 sortedIndex 处的元素\n        int tmp = nums[sortedIndex];\n        nums[sortedIndex] = nums[minIndex];\n        nums[minIndex] = tmp;\n\n        // sortedIndex 后移一位\n        sortedIndex++;\n    }\n}"
+   "content": "void sort(vector<int>& nums) {  int n = nums.size();  // sortedIndex 是一个分割线  // 索引 < sortedIndex 的元素都是已排序的  // 索引 >= sortedIndex 的元素都是未排序的  // 初始化为 0，表示整个数组都是未排序的  int sortedIndex = 0;  while (sortedIndex < n) {  // 找到未排序部分 [sortedIndex, n) 中的最小值  int minIndex = sortedIndex;  for (int i = sortedIndex + 1; i < n; i++) {  if (nums[i] < nums[minIndex]) {  minIndex = i;  }  }  // 交换最小值和 sortedIndex 处的元素  int tmp = nums[sortedIndex];  nums[sortedIndex] = nums[minIndex];  nums[minIndex] = tmp;\n\n  // sortedIndex 后移一位  sortedIndex++;  } }"
   },
   {
    "type": "text",
@@ -142,21 +142,21 @@
   },
   {
    "type": "text",
-   "content": "暂且不管如何通过 912 题，我们先来按照 \n排序算法的几个关键指标\n 来分析一下这个排序算法。"
+   "content": "暂且不管如何通过 912 题，我们先来按照  排序算法的几个关键指标  来分析一下这个排序算法。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n是否是原地排序"
+   "content": "¶ 是否是原地排序"
   },
   {
    "type": "text",
-   "content": "是的。因为算法并没有使用额外的数组空间进行辅助，只是用了几个变量，空间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+   "content": "是的。因为算法并没有使用额外的数组空间进行辅助，只是用了几个变量，空间复杂度是  O(1)。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n时空复杂度分析"
+   "content": "¶ 时空复杂度分析"
   },
   {
    "type": "text",
@@ -164,11 +164,11 @@
   },
   {
    "type": "code",
-   "content": "for (int sortedIndex = 0; sortedIndex < n; sortedIndex++) {\n    for (int i = sortedIndex + 1; i < n; i++) {\n        // ...\n    }\n}"
+   "content": "for (int sortedIndex = 0; sortedIndex < n; sortedIndex++) {  for (int i = sortedIndex + 1; i < n; i++) {  // ...  } }"
   },
   {
    "type": "text",
-   "content": "你看到了，这就是嵌套 for 循环，总的循环次数是 (n - 1) + (n - 2) + (n - 3) +... + 1，这是等差数列求和，结果近似是 n^2 / 2，所以这个排序算法的时间复杂度用 Big O 表示法就是 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n)，其中 n 是待排序数组的元素个数。"
+   "content": "你看到了，这就是嵌套 for 循环，总的循环次数是 (n - 1) + (n - 2) + (n - 3) +... + 1，这是等差数列求和，结果近似是 n^2 / 2，所以这个排序算法的时间复杂度用 Big O 表示法就是  O(n^2)，其中 n 是待排序数组的元素个数。"
   },
   {
    "type": "text",
@@ -188,12 +188,12 @@
   },
   {
    "type": "text",
-   "content": "因为有多种排序算法从 Big O 的视角来看都是 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n) 复杂度，那么我们要根据他们的实际执行次数以及特殊情况下的表现，来分析它们的优劣。"
+   "content": "因为有多种排序算法从 Big O 的视角来看都是  O(n^2) 复杂度，那么我们要根据他们的实际执行次数以及特殊情况下的表现，来分析它们的优劣。"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n时间都去哪了？优化思路？"
+   "content": "¶ 时间都去哪了？优化思路？"
   },
   {
    "type": "text",
@@ -261,15 +261,15 @@
   },
   {
    "type": "code",
-   "content": "int[] nums = new int[]{3, 1, 4, 2};\n// suffixMin[i] 表示 nums[i..] 中的最小值\nint[] suffixMin = new int[nums.length];\n\n// 从后往前计算 suffixMin\nsuffixMin[nums.length - 1] = nums[nums.length - 1];\nfor (int i = nums.length - 2; i >= 0; i--) {\n    suffixMin[i] = Math.min(nums[i], suffixMin[i + 1]);\n}\n\n// [1, 1, 2, 2]\nSystem.out.println(suffixMin);"
+   "content": "int[] nums = new int[]{3, 1, 4, 2}; // suffixMin[i] 表示 nums[i..] 中的最小值 int[] suffixMin = new int[nums.length];\n\n// 从后往前计算 suffixMin suffixMin[nums.length - 1] = nums[nums.length - 1]; for (int i = nums.length - 2; i >= 0; i--) {  suffixMin[i] = Math.min(nums[i], suffixMin[i + 1]); }\n\n// [1, 1, 2, 2] System.out.println(suffixMin);"
   },
   {
    "type": "text",
-   "content": "好了，这个计算 suffixMin 数组的问题解决了，现在回到选择排序的优化，我现在只需要花 \n𝑂\n(\n𝑛\n)\nO(n) 的时间遍历一遍 nums 数组算出 suffixMin 数组，就可以在 \n𝑂\n(\n1\n)\nO(1) 的时间内得到 nums[1..], nums[2..], ... 任意子数组的最小值。"
+   "content": "好了，这个计算 suffixMin 数组的问题解决了，现在回到选择排序的优化，我现在只需要花  O(n) 的时间遍历一遍 nums 数组算出 suffixMin 数组，就可以在  O(1) 的时间内得到 nums[1..], nums[2..], ... 任意子数组的最小值。"
   },
   {
    "type": "text",
-   "content": "按理说，现在我可以把选择排序的内层 for 循环消掉，时间复杂度优化成 \n𝑂\n(\n𝑛\n)\nO(n) 了，对吗？答案是不行。"
+   "content": "按理说，现在我可以把选择排序的内层 for 循环消掉，时间复杂度优化成  O(n) 了，对吗？答案是不行。"
   },
   {
    "type": "text",
@@ -293,20 +293,20 @@
   },
   {
    "type": "text",
-   "content": "比如上面预计算 suffixMin 的方法是一种经典的算法思维，后文 \n前缀和技巧\n 就会用到。nums 数组变化导致预计算数组 suffixMin 失效也是一类经典的算法问题，后文 \n线段树基础\n 会解决这个问题。"
+   "content": "比如上面预计算 suffixMin 的方法是一种经典的算法思维，后文  前缀和技巧  就会用到。nums 数组变化导致预计算数组 suffixMin 失效也是一类经典的算法问题，后文  线段树基础  会解决这个问题。"
   },
   {
    "type": "text",
-   "content": "在本站的教程中，我会经常展现这种思考过程。在后面讲到的排序算法中，你也可以思考一下，它们的本质上和选择排序有什么区别？凭什么它们就能把时间复杂度降到 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n) 以下？"
+   "content": "在本站的教程中，我会经常展现这种思考过程。在后面讲到的排序算法中，你也可以思考一下，它们的本质上和选择排序有什么区别？凭什么它们就能把时间复杂度降到  O(n^2) 以下？"
   },
   {
    "type": "heading",
    "level": 2,
-   "content": "¶\n排序的稳定性"
+   "content": "¶ 排序的稳定性"
   },
   {
    "type": "text",
-   "content": "请你按照 \n排序算法的几个关键指标\n 中对排序稳定性的定义，分析一下这个算法是不是稳定排序？"
+   "content": "请你按照  排序算法的几个关键指标  中对排序稳定性的定义，分析一下这个算法是不是稳定排序？"
   },
   {
    "type": "text",
