@@ -1,0 +1,394 @@
+version: 1
+plan:
+  name: 'labuladong 数据结构基础章节 Obsidian 知识网构建'
+  max_concurrency: 8
+  max_consecutive_failures: 2
+  max_cycles: 6
+  verifier_config:
+    default_verifiers: [verifier]
+    audit_sample_rate: 0.0
+tasks:
+  # === 8 个并行 worker，每个写一批 Obsidian 笔记 ===
+  - id: notes-batch-foundation
+    title: '生成基础篇 Obsidian 笔记（入门+数组+链表+数组链表技巧，共 8 章节）'
+    prompt: |
+      你的任务：为 labuladong 数据结构基础章节的"基础篇"8 个章节生成 Obsidian 笔记。
+
+      **必读输入**（先全部读完再开始写）：
+      1. 写作规范：`E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\_WRITING_GUIDE.md` — 详细说明笔记结构、wikilink 规则、C++ 代码规范、自检清单
+      2. 章节元数据：`E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\_chapters_meta.json` — 所有 51 章节的元数据，你负责这 8 个
+      3. 原文材料：以下 8 个原始 markdown 文件（按 tag 读取）
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\00-intro.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\01-complexity.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\02-array-basic.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\03-array-implement.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\04-cycle-array.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\05-linkedlist-basic.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\06-linkedlist-implement.md`
+         - `E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\07-deque-implement.md`
+
+      **你的输出**：在 `E:\Obsidian\Obsidian\大一下\数据结构与算法\` 根目录下生成 8 个 Obsidian 笔记文件（**不要写到子目录，不要覆盖 `_raw_pages/`**）：
+      - `00-intro.md`
+      - `01-complexity.md`
+      - `02-array-basic.md`
+      - `03-array-implement.md`
+      - `04-cycle-array.md`
+      - `05-linkedlist-basic.md`
+      - `06-linkedlist-implement.md`
+      - `07-deque-implement.md`
+
+      **每个文件必须遵循 `_WRITING_GUIDE.md` 里的模板**，特别注意：
+      - 完整 frontmatter（title/tags/order/prerequisites/group/paywall/source）
+      - 学习目标、一句话总结、前置知识（wikilink）、正文、复杂度表、应用场景、下一章（wikilink）、相关章节（wikilink）
+      - 所有示例代码用 C++ 17 风格（namespace dsa, #include <bits/stdc++.h>）
+      - wikilink 形如 `[[02-array-basic]]` 或 `[[02-array-basic|数组原理]]`，必须指向 51 章节之一
+      - 删掉原文的营销噪声（"成为会员"、"扫码"、"下载APP"等）
+      - 这 8 个章节都是非付费（paywall=false），但仍要保持讲解完整 + C++ 示例 + 复杂度分析
+
+      **完成后写一份 deliverable.md** 到 `E:\Obsidian\Obsidian\大一下\数据结构与算法\.mavis\plans\deliverable-notes-batch-foundation.md`，
+      包含：每个生成文件的路径、自检清单每项的勾选状态（7 项必须全 ✅）、字数统计。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计这 8 个 Obsidian 笔记。**不要相信 producer 的 deliverable，从原文件读**。
+
+      检查项（每项独立打分 PASS/FAIL）：
+      1. 8 个文件都存在：`00-intro.md`、`01-complexity.md`、`02-array-basic.md`、`03-array-implement.md`、`04-cycle-array.md`、`05-linkedlist-basic.md`、`06-linkedlist-implement.md`、`07-deque-implement.md`
+      2. 每个文件都有 frontmatter（包含 title/tags/order/prerequisites/group/paywall/source 至少 6 个字段）
+      3. 每个文件 wikilink 都指向 51 章节中实际存在的 tag（用 grep 检查所有 `\[\[..?\]\]` 引用，对照 `_chapters_meta.json`）
+      4. 每个文件至少有 1 个 ```cpp 代码块，且代码使用 namespace dsa 和 #include <bits/stdc++.h>
+      5. 没有营销噪声（grep "成为会员|扫码|下载APP|订阅|VIP" 应该无命中）
+      6. 每章正文 ≥ 1500 字（中文字符数）
+      7. 每个文件末尾有"下一章"段落且使用 wikilink
+      8. 文件夹 `_raw_pages/` 下的原始 .md 文件未被覆盖
+
+      写出 `deliverable-verifier-notes-batch-foundation.md` 给出每项 PASS/FAIL 和具体证据（行号或 grep 结果）。
+    timeout_ms: 1800000
+
+  - id: notes-batch-queue-stack
+    title: '生成队列/栈篇 Obsidian 笔记（共 3 章节）'
+    prompt: |
+      你的任务：为"队列/栈"3 个章节生成 Obsidian 笔记。
+
+      **必读输入**：
+      1. 写作规范：`E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\_WRITING_GUIDE.md`
+      2. 章节元数据：`E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\_chapters_meta.json`
+      3. 原文：
+         - `_raw_pages\08-queue-stack-basic.md`
+         - `_raw_pages\09-array-queue-stack.md`
+         - `_raw_pages\10-linked-queue-stack.md`
+
+      **你的输出**（在 `E:\Obsidian\Obsidian\大一下\数据结构与算法\` 根目录）：
+      - `08-queue-stack-basic.md`
+      - `09-array-queue-stack.md`
+      - `10-linked-queue-stack.md`
+
+      严格按写作规范。3 章都是非付费，但要写完整 + C++ 实现 + 复杂度分析 + 应用场景。
+      完成后写 `deliverable-notes-batch-queue-stack.md` 到 `.mavis\plans\`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计这 3 个 Obsidian 笔记（08/09/10）。
+
+      检查项：
+      1. 3 个文件都存在
+      2. 每个文件有完整 frontmatter
+      3. wikilink 全部指向 51 章节中存在的 tag（对照 `_chapters_meta.json`）
+      4. 至少各 1 个 ```cpp 代码块（用 namespace dsa）
+      5. 无营销噪声
+      6. 每章 ≥ 1500 字
+      7. 末尾"下一章"wikilink
+      8. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-queue-stack.md`。
+    timeout_ms: 1800000
+
+  - id: notes-batch-hashtable
+    title: '生成哈希表篇 Obsidian 笔记（共 6 章节，含 3 个付费章节）'
+    prompt: |
+      你的任务：为"哈希表"6 个章节生成 Obsidian 笔记。
+
+      **必读输入**：
+      1. 写作规范：`E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\_WRITING_GUIDE.md`
+      2. 章节元数据：`E:\Obsidian\Obsidian\大一下\数据结构与算法\_raw_pages\_chapters_meta.json`
+      3. 原文：
+         - `_raw_pages\11-hashtable-with-array.md`（非付费）
+         - `_raw_pages\12-hashtable-with-linked-list.md`（非付费）
+         - `_raw_pages\13-hashmap-basic.md`（非付费）
+         - `_raw_pages\14-linear-probing-key-point.md`（非付费）
+         - `_raw_pages\15-linear-probing-code.md`（**付费墙**）
+         - `_raw_pages\16-hashtable-chaining.md`（**付费墙**）
+
+      **你的输出**（在 `E:\Obsidian\Obsidian\大一下\数据结构与算法\` 根目录）：
+      - `11-hashtable-with-array.md`
+      - `12-hashtable-with-linked-list.md`
+      - `13-hashmap-basic.md`
+      - `14-linear-probing-key-point.md`
+      - `15-linear-probing-code.md`
+      - `16-hashtable-chaining.md`
+
+      **重要：15 和 16 是付费章节，原文只有"前置介绍 + 成为会员"截断**。你必须基于以下知识补全：
+      - 15-linear-probing-code：补全"简化版线性探查哈希表的完整 C++ 实现 + 完整版（处理删除空洞 + 动态扩缩容）+ 测试用例"，至少 2500 字
+      - 16-hashtable-chaining：补全"拉链法哈希表的完整 C++ 实现（增删查改 + 负载因子 + 动态扩容）+ 与线性探查法的对比"，至少 2500 字
+      - 补全内容用 `> [!info] 📌 付费章节补全内容（基于算法知识体系补充）` 标注
+      - 补全部分必须包含完整可编译的 C++ 代码（namespace dsa）
+
+      严格按写作规范。完成后写 `deliverable-notes-batch-hashtable.md`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计 6 个哈希表笔记（11-16）。
+
+      检查项：
+      1. 6 个文件都存在
+      2. 每个文件有完整 frontmatter（特别注意 `paywall: true/false` 字段要正确）
+      3. wikilink 全部指向 51 章节中存在的 tag
+      4. 至少各 1 个 ```cpp 代码块（namespace dsa + #include <bits/stdc++.h>）
+      5. 无营销噪声
+      6. 每章 ≥ 1500 字（非付费）或 ≥ 2500 字（付费）
+      7. 末尾"下一章"wikilink
+      8. **`15-linear-probing-code.md` 和 `16-hashtable-chaining.md` 必须包含"📌 付费章节补全内容"标注且补全部分有完整 C++ 实现**
+      9. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-hashtable.md`。
+    timeout_ms: 1800000
+
+  - id: notes-batch-hash-set
+    title: '生成哈希集合篇 Obsidian 笔记（共 4 章节，含 3 个付费）'
+    prompt: |
+      你的任务：为"哈希集合"4 个章节生成 Obsidian 笔记。
+
+      **必读输入**：写作规范 + 章节元数据（同前） + 原文：
+      - `_raw_pages\17-hash-set.md`（**付费墙**）
+      - `_raw_pages\18-bitmap.md`（**付费墙**）
+      - `_raw_pages\19-bloom-filter.md`（**付费墙**）
+      - `_raw_pages\20-skip-list-basic.md`（非付费）
+
+      **你的输出**（根目录）：
+      - `17-hash-set.md`
+      - `18-bitmap.md`
+      - `19-bloom-filter.md`
+      - `20-skip-list-basic.md`
+
+      **付费章节补全要求**：
+      - 17-hash-set：补全"基于哈希表实现的 HashSet 完整 C++ 实现 + 与 HashMap 的关系 + Java HashSet 源码分析 + C++ std::unordered_set 原理"，≥2500 字
+      - 18-bitmap：补全"位图原理（用 bit 位存储整数存在性）+ 节省空间分析 + C++ 实现（用 std::vector<bool> 或位运算）+ 应用场景（10亿用户去重、排序加速）"，≥2500 字
+      - 19-bloom-filter：补全"布隆过滤器原理（多个哈希函数 + 位数组）+ 误判率分析 + C++ 实现 + 应用场景（垃圾邮件过滤、缓存穿透）"，≥2500 字
+      - 补全内容用 `> [!info] 📌 付费章节补全内容` 标注
+
+      严格按写作规范。完成后写 `deliverable-notes-batch-hash-set.md`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计 4 个哈希集合笔记（17-20）。
+
+      检查项：
+      1. 4 个文件都存在
+      2. 每个文件有完整 frontmatter，paywall 字段正确（17/18/19=true，20=false）
+      3. wikilink 全部指向 51 章节中存在的 tag
+      4. 至少各 1 个 ```cpp 代码块
+      5. 无营销噪声
+      6. 每章字数：非付费 ≥ 1500，付费 ≥ 2500
+      7. 末尾"下一章"wikilink
+      8. 17/18/19 必须包含"📌 付费章节补全内容"标注
+      9. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-hash-set.md`。
+    timeout_ms: 1800000
+
+  - id: notes-batch-heap-tree
+    title: '生成二叉堆+二叉树篇 Obsidian 笔记（共 5 章节，含 2 个付费）'
+    prompt: |
+      你的任务：为"二叉堆+二叉树"5 个章节生成 Obsidian 笔记。
+
+      **必读输入**：写作规范 + 章节元数据 + 原文：
+      - `_raw_pages\21-binary-heap-basic.md`（**付费墙**）
+      - `_raw_pages\22-binary-heap-implement.md`（**付费墙**）
+      - `_raw_pages\23-binary-tree-basic.md`（非付费）
+      - `_raw_pages\24-binary-tree-traverse-basic.md`（非付费）
+      - `_raw_pages\25-n-ary-tree-traverse-basic.md`（**付费墙**）
+
+      **你的输出**（根目录）：
+      - `21-binary-heap-basic.md`
+      - `22-binary-heap-implement.md`
+      - `23-binary-tree-basic.md`
+      - `24-binary-tree-traverse-basic.md`
+      - `25-n-ary-tree-traverse-basic.md`
+
+      **付费章节补全要求**：
+      - 21-binary-heap-basic：补全"二叉堆原理（完全二叉树 + 数组存储 + swim/sink 操作）+ 大顶堆小顶堆 + 堆的可视化文字描述 + C++ 实现"，≥2500 字
+      - 22-binary-heap-implement：补全"二叉堆完整 C++ 实现（含 swim/sink + push/pop/top）+ 优先级队列适配器 + std::priority_queue 源码分析 + Top K 问题应用"，≥2500 字
+      - 25-n-ary-tree-traverse-basic：补全"N 叉树节点结构 + 递归遍历（前/后序）+ 层序遍历 + C++ 实现 + 与二叉树遍历对比"，≥2500 字
+
+      严格按写作规范。完成后写 `deliverable-notes-batch-heap-tree.md`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计 5 个笔记（21-25）。
+
+      检查项：
+      1. 5 个文件都存在
+      2. 完整 frontmatter，paywall 字段正确（21/22/25=true，23/24=false）
+      3. wikilink 全部指向 51 章节中存在的 tag
+      4. 至少各 1 个 ```cpp 代码块
+      5. 无营销噪声
+      6. 字数：非付费 ≥ 1500，付费 ≥ 2500
+      7. 末尾"下一章"wikilink
+      8. 21/22/25 必须包含"📌 付费章节补全内容"标注
+      9. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-heap-tree.md`。
+    timeout_ms: 1800000
+
+  - id: notes-batch-advanced-tree
+    title: '生成高级树篇 Obsidian 笔记（共 6 章节，含 3 个付费）'
+    prompt: |
+      你的任务：为"高级树"6 个章节生成 Obsidian 笔记。
+
+      **必读输入**：写作规范 + 章节元数据 + 原文：
+      - `_raw_pages\26-segment-tree-basic.md`（**付费墙**）
+      - `_raw_pages\27-tree-map-basic.md`（非付费）
+      - `_raw_pages\28-tree-map-implement.md`（**付费墙**）
+      - `_raw_pages\29-trie-map-basic.md`（非付费）
+      - `_raw_pages\30-union-find-basic.md`（非付费）
+      - `_raw_pages\31-rbtree-basic.md`（**付费墙**）
+
+      **你的输出**（根目录）：
+      - `26-segment-tree-basic.md`
+      - `27-tree-map-basic.md`
+      - `28-tree-map-implement.md`
+      - `29-trie-map-basic.md`
+      - `30-union-find-basic.md`
+      - `31-rbtree-basic.md`
+
+      **付费章节补全要求**：
+      - 26-segment-tree-basic：补全"线段树原理（区间查询/更新 + tree 数组实现）+ lazy propagation + C++ 实现 + 应用（区间求和/最值）"，≥2500 字
+      - 28-tree-map-implement：补全"TreeMap/TreeSet 完整 C++ 实现（基于红黑树）+ 与 std::map 对比 + Java TreeMap 源码 + C++ std::map 内部结构"，≥2500 字
+      - 31-rbtree-basic：补全"红黑树 5 条性质 + 插入/删除的旋转和变色 + C++ 实现 + 与 AVL 树对比 + 为什么 map 用红黑树"，≥2500 字
+
+      严格按写作规范。完成后写 `deliverable-notes-batch-advanced-tree.md`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计 6 个笔记（26-31）。
+
+      检查项：
+      1. 6 个文件都存在
+      2. 完整 frontmatter，paywall 字段正确（26/28/31=true，27/29/30=false）
+      3. wikilink 全部指向 51 章节中存在的 tag
+      4. 至少各 1 个 ```cpp 代码块
+      5. 无营销噪声
+      6. 字数：非付费 ≥ 1500，付费 ≥ 2500
+      7. 末尾"下一章"wikilink
+      8. 26/28/31 必须包含"📌 付费章节补全内容"标注
+      9. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-advanced-tree.md`。
+    timeout_ms: 1800000
+
+  - id: notes-batch-graph
+    title: '生成图篇 Obsidian 笔记（共 7 章节，含 3 个付费）'
+    prompt: |
+      你的任务：为"图"7 个章节生成 Obsidian 笔记。
+
+      **必读输入**：写作规范 + 章节元数据 + 原文：
+      - `_raw_pages\32-graph-terminology.md`（非付费）
+      - `_raw_pages\33-graph-basic.md`（**付费墙**）
+      - `_raw_pages\34-graph-traverse-basic.md`（非付费）
+      - `_raw_pages\35-use-case-of-dfs-bfs.md`（**付费墙**）
+      - `_raw_pages\36-graph-minimum-spanning-tree.md`（非付费）
+      - `_raw_pages\37-graph-shortest-path.md`（非付费）
+      - `_raw_pages\38-eulerian-graph.md`（**付费墙**）
+
+      **你的输出**（根目录）：
+      - `32-graph-terminology.md`
+      - `33-graph-basic.md`
+      - `34-graph-traverse-basic.md`
+      - `35-use-case-of-dfs-bfs.md`
+      - `36-graph-minimum-spanning-tree.md`
+      - `37-graph-shortest-path.md`
+      - `38-eulerian-graph.md`
+
+      **付费章节补全要求**：
+      - 33-graph-basic：补全"图的通用 C++ 实现（邻接表 + 邻接矩阵 + 加权/无权/有向/无向支持）+ 图的加载与遍历 API"，≥2500 字
+      - 35-use-case-of-dfs-bfs：补全"DFS 应用（连通块、岛屿、排列、拓扑序）+ BFS 应用（最短路、扩散）+ LeetCode 经典例题 5 道 + C++ 实现"，≥2500 字
+      - 38-eulerian-graph：补全"欧拉图/欧拉回路/欧拉路径定义 + Hierholzer 算法 + C++ 实现 + 一笔画问题"，≥2500 字
+
+      严格按写作规范。完成后写 `deliverable-notes-batch-graph.md`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计 7 个图笔记（32-38）。
+
+      检查项：
+      1. 7 个文件都存在
+      2. 完整 frontmatter，paywall 字段正确（33/35/38=true，其他=false）
+      3. wikilink 全部指向 51 章节中存在的 tag
+      4. 至少各 1 个 ```cpp 代码块
+      5. 无营销噪声
+      6. 字数：非付费 ≥ 1500，付费 ≥ 2500
+      7. 末尾"下一章"wikilink
+      8. 33/35/38 必须包含"📌 付费章节补全内容"标注
+      9. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-graph.md`。
+    timeout_ms: 1800000
+
+  - id: notes-batch-sorting
+    title: '生成排序+应用篇 Obsidian 笔记（共 12 章节，含 4 个付费）'
+    prompt: |
+      你的任务：为"排序+应用"12 个章节生成 Obsidian 笔记。
+
+      **必读输入**：写作规范 + 章节元数据 + 原文：
+      - `_raw_pages\39-sort-basic.md`（非付费）
+      - `_raw_pages\40-bubble-sort.md`（非付费）
+      - `_raw_pages\41-insertion-sort.md`（非付费）
+      - `_raw_pages\42-select-sort.md`（非付费）
+      - `_raw_pages\43-merge-sort.md`（**付费墙**）
+      - `_raw_pages\44-quick-sort.md`（**付费墙**）
+      - `_raw_pages\45-heap-sort.md`（非付费）
+      - `_raw_pages\46-shell-sort.md`（**付费墙**）
+      - `_raw_pages\47-counting-sort.md`（非付费）
+      - `_raw_pages\48-bucket-sort.md`（非付费）
+      - `_raw_pages\49-radix-sort.md`（非付费）
+      - `_raw_pages\50-huffman-tree.md`（非付费）
+
+      **你的输出**（根目录）：
+      - `39-sort-basic.md`
+      - `40-bubble-sort.md`
+      - `41-insertion-sort.md`
+      - `42-select-sort.md`
+      - `43-merge-sort.md`
+      - `44-quick-sort.md`
+      - `45-heap-sort.md`
+      - `46-shell-sort.md`
+      - `47-counting-sort.md`
+      - `48-bucket-sort.md`
+      - `49-radix-sort.md`
+      - `50-huffman-tree.md`
+
+      **付费章节补全要求**（这 4 个必须基于算法知识体系补全详细 C++ 实现）：
+      - 43-merge-sort：补全"归并排序核心思想（分治 + 后序合并）+ 自顶向下 + 自底向上 + C++ 实现 + 复杂度 + 稳定性分析 + LeetCode 经典题（315 计算右侧小于当前元素的个数、912 排序数组）"，≥2500 字
+      - 44-quick-sort：补全"快速排序核心思想（分治 + 前序 partition）+ 单向/双向/三路快排 + C++ 实现 + 复杂度 + 稳定性分析 + 随机化优化"，≥2500 字
+      - 46-shell-sort：补全"希尔排序原理（h 有序数组 + 插入排序改进）+ 增量序列选择（Shell/Knuth）+ C++ 实现 + 与插入排序对比"，≥2500 字
+      - 50-huffman-tree：补全"赫夫曼编码原理（贪心 + 优先队列）+ 编码/解码流程 + C++ 完整实现（带文件压缩示例）"，≥2500 字（虽然 paywall=false，但内容较少，仍需丰富）
+
+      严格按写作规范。完成后写 `deliverable-notes-batch-sorting.md`。
+    assigned_to: coder
+    verified_by: verifier
+    verify_prompt: |
+      独立审计 12 个排序+应用笔记（39-50）。
+
+      检查项：
+      1. 12 个文件都存在
+      2. 完整 frontmatter，paywall 字段正确（43/44/46=true，50=false）
+      3. wikilink 全部指向 51 章节中存在的 tag
+      4. 至少各 1 个 ```cpp 代码块
+      5. 无营销噪声
+      6. 字数：非付费 ≥ 1500，付费 ≥ 2500
+      7. 末尾"下一章"wikilink
+      8. 43/44/46 必须包含"📌 付费章节补全内容"标注
+      9. `_raw_pages/` 未被覆盖
+
+      写 `deliverable-verifier-notes-batch-sorting.md`。
+    timeout_ms: 1800000

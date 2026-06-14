@@ -1,0 +1,69 @@
+{
+ "tag": "21-binary-heap-basic",
+ "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-basic/",
+ "blocks": [
+  {
+   "type": "heading",
+   "level": 1,
+   "content": "二叉堆核心原理及可视化"
+  },
+  {
+   "type": "text",
+   "content": "前置知识"
+  },
+  {
+   "type": "text",
+   "content": "阅读本文前，你需要先学习："
+  },
+  {
+   "type": "text",
+   "content": "二叉树基础及常见类型"
+  },
+  {
+   "type": "text",
+   "content": "二叉树的递归/层序遍历"
+  },
+  {
+   "type": "text",
+   "content": "一句话总结"
+  },
+  {
+   "type": "text",
+   "content": "二叉堆是一种能够动态排序的数据结构，是  二叉树结构  的延伸。"
+  },
+  {
+   "type": "text",
+   "content": "二叉堆的主要操作就两个，sink（下沉）和 swim（上浮），用以维护二叉堆的性质。"
+  },
+  {
+   "type": "text",
+   "content": "二叉堆的主要应用有两个，首先是一种很有用的数据结构优先级队列（Priority Queue），第二是一种排序方法堆排序（Heap Sort）。"
+  },
+  {
+   "type": "text",
+   "content": "这个可视化面板直观地展示了二叉堆的基本操作，你可以点击跳转执行其中的代码，或自己修改代码玩一玩："
+  },
+  {
+   "type": "text",
+   "content": "算法可视化"
+  },
+  {
+   "type": "text",
+   "content": "下面我就结合可视化面板来展示二叉堆的原理，最后以优先级队列为例，展示二叉堆的代码实现。"
+  },
+  {
+   "type": "text",
+   "content": "成为会员即可解锁全部内容"
+  },
+  {
+   "type": "text",
+   "content": "了解会员权益"
+  },
+  {
+   "type": "text",
+   "content": "更新时间：2026/06/12 00:27"
+  }
+ ],
+ "cpp_panels_count": 0,
+ "cpp_replaced": 0
+}

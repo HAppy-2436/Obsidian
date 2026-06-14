@@ -1,0 +1,415 @@
+---
+tag: 12-hashtable-with-linked-list
+title: 链表实现哈希表（LinkedHashMap）
+group: 哈希表
+subgroup: 实现
+order: 12
+paywall: false
+prerequisites:
+  - 06-linkedlist-implement
+source_url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/
+generated_at: 2026-06-13
+---
+
+## 前置知识
+
+- [[06-linkedlist-implement|链表的代码实现]]
+
+## 下一章
+
+继续学习 [[13-hashmap-basic|哈希表核心原理]]
+
+
+# 链表实现哈希表（LinkedHashMap）
+
+> 原文链接：<https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/>
+
+## 前置知识
+
+阅读本文前，你需要先学习：
+
+- [链表（链式存储）的原理](05-linkedlist-basic.md)
+- [链表的代码实现](06-linkedlist-implement.md)
+- [哈希表核心原理](13-hashmap-basic.md)
+
+> 说明：本文结构基于 [labuladong online 教程](https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/) 整理。文中"成为会员即可解锁全部内容"截断部分属于付费墙内容，已在 `> [!info] 📌 付费章节补全内容` 标注中基于算法知识体系补充完整。
+
+---
+
+## 一、两个反直觉的现象
+
+前文 [哈希表原理](13-hashmap-basic.md) 从原理上分析过：**不能依赖哈希表遍历 key 的顺序**，因为 key 是无序的。
+
+但结合实际编程经验，你会有两个疑问：
+
+### 1.1 Java 的 LinkedHashMap：插入顺序遍历
+
+```java
+import java.util.LinkedHashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
+        System.out.println(map.keySet()); // [a, b, c]
+
+        map.put("y", 4);
+        System.out.println(map.keySet()); // [a, b, c, y]
+
+        map.put("d", 5);
+        System.out.println(map.keySet()); // [a, b, c, y, d]
+    }
+}
+```
+
+无论插入多少键，`keySet()` 返回的所有键都 **按插入顺序排列**，就像向数组尾部追加一样。这怎么可能？
+
+### 1.2 Go 的 map：每次遍历顺序都不同
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    myMap := map[string]int{
+        "1": 1, "2": 2, "3": 3, "4": 4, "5": 5,
+    }
+
+    printMapKeys := func(m map[string]int) {
+        for key := range m {
+            fmt.Print(key, " ")
+        }
+        fmt.Println()
+    }
+
+    printMapKeys(myMap)
+    printMapKeys(myMap)
+    printMapKeys(myMap)
+    printMapKeys(myMap)
+}
+
+// 我运行的结果如下：
+// 1 2 3 4 5
+// 5 1 2 3 4
+// 2 3 4 5 1
+// 1 2 3 4 5
+```
+
+按前文所说，哈希表的 key 是无序的，但 **没有对哈希表做任何操作**，遍历结果应该不变才对。Go 的 map 每次遍历顺序咋都不一样？这也太离谱了。
+
+请先自己思考下原因，下面给出答案。
+
+---
+
+## 二、点击查看答案（思路提示）
+
+### 2.1 现象一：Java `LinkedHashMap` 为什么有顺序？
+
+既然"标准 HashMap 是无序的"是 HashMap 的核心结论，那"有顺序"的 LinkedHashMap 一定不是同一个实现——它必然在 HashMap 之上 **额外维护了一个链表**，专门记录插入顺序。每次 `put` 时，把新 key 追加到链表尾部；每次 `keySet()` 时，遍历的是这个链表，而不是 HashMap 内部的 table 数组。
+
+### 2.2 现象二：Go `map` 顺序为什么每次不同？
+
+按 [哈希表核心原理](13-hashmap-basic.md) 的结论，扩容 / 缩容会改变 key 在 table 中的位置。Go 在每次 `range` 遍历时，**从一个随机位置开始**扫，避免用户依赖某种特定顺序——这是 Go 的有意设计（`fmt` 打印 map 也是故意随机化顺序）。
+
+---
+
+> [!info] 📌 付费章节补全内容（基于算法知识体系补充）
+>
+> ## 三、用双向链表加强哈希表（LinkedHashMap 的原理与实现）
+>
+> ### 3.1 核心思路
+>
+> LinkedHashMap 的本质 = **HashMap + 双向链表**：
+>
+> - HashMap 负责提供 O(1) 的 `get / put / remove`
+> - 双向链表负责维护 key 的插入顺序（或者访问顺序，由构造参数决定）
+>
+> ```text
+> HashMap (table 数组)
+>   ├── bucket[0] → Node(a) ⇄ Node(b) ⇄ Node(c) → ...
+>   │                  ↑         ↑         ↑
+>   │                  └─────────┴─────────┴── 双向链表节点 prev/next
+>   ├── bucket[1] → Node(d) ⇄ Node(e) → ...
+>   └── ...
+>
+> 双向链表（贯穿所有 bucket）
+>   head ⇄ Node(a) ⇄ Node(b) ⇄ Node(c) ⇄ Node(d) ⇄ Node(e) ⇄ tail
+> ```
+>
+> 每个 HashMap 节点同时也是双向链表节点，多维护两个指针：`before` 和 `after`。
+>
+> ### 3.2 插入顺序 vs 访问顺序
+>
+> - **插入顺序（insertion-order）**：默认模式。`put` 时把新节点追加到链表尾部，`get` 不影响链表顺序。
+> - **访问顺序（access-order）**：构造时传入 `accessOrder=true`。每次 `get / put` **已存在的 key** 时，把对应节点移到链表尾部（类似 LRU）。
+>
+> ### 3.3 关键操作
+>
+> #### 3.3.1 put 新 key
+>
+> ```text
+> 1. 在 HashMap 中插入新节点（O(1) 平均）
+> 2. 把新节点追加到双向链表尾部（O(1)）
+> ```
+>
+> #### 3.3.2 put 已存在 key
+>
+> ```text
+> 1. 更新 HashMap 中的 value
+> 2. 若 access-order：把该节点从链表中摘除，再追加到链表尾部
+> 3. 若 insertion-order：不动链表
+> ```
+>
+> #### 3.3.3 remove key
+>
+> ```text
+> 1. 从 HashMap 中删除节点（O(1) 平均）
+> 2. 从双向链表中摘除该节点（O(1)）
+> ```
+>
+> #### 3.3.4 遍历 keySet（按顺序）
+>
+> ```text
+> 从 head 开始沿 after 指针遍历到 tail
+> 时间复杂度 O(N)，且顺序确定
+> ```
+>
+> ### 3.4 Java 完整实现（手写版 LinkedHashMap）
+>
+> ```java
+> import java.util.*;
+>
+> /**
+>  * 手写 LinkedHashMap：HashMap + 双向链表，支持按插入顺序遍历
+>  * 简化实现：key 和 value 都用 String，初始容量固定，不考虑扩容
+>  */
+> public class MyLinkedHashMap<K, V> {
+>
+>     /** 节点：既是哈希表节点，也是双向链表节点 */
+>     private static class Node<K, V> {
+>         final K key;
+>         V value;
+>         Node<K, V> next;       // 哈希桶中的下一个（解决冲突）
+>         Node<K, V> before;     // 双向链表前驱
+>         Node<K, V> after;      // 双向链表后继
+>
+>         Node(K key, V value) {
+>             this.key = key;
+>             this.value = value;
+>         }
+>     }
+>
+>     private final Node<K, V>[] table;
+>     private final int capacity;
+>     private int size;
+>
+>     // 双向链表伪头/伪尾
+>     private final Node<K, V> head = new Node<>(null, null);
+>     private final Node<K, V> tail = new Node<>(null, null);
+>
+>     @SuppressWarnings("unchecked")
+>     public MyLinkedHashMap(int capacity) {
+>         this.capacity = capacity;
+>         this.table = (Node<K, V>[]) new Node[capacity];
+>         head.after = tail;
+>         tail.before = head;
+>     }
+>
+>     private int hash(K key) {
+>         int h = key.hashCode();
+>         return (h & 0x7fffffff) % capacity;
+>     }
+>
+>     /** 查 */
+>     public V get(K key) {
+>         int idx = hash(key);
+>         for (Node<K, V> p = table[idx]; p != null; p = p.next) {
+>             if (p.key.equals(key)) return p.value;
+>         }
+>         return null;
+>     }
+>
+>     /** 是否包含 */
+>     public boolean containsKey(K key) {
+>         int idx = hash(key);
+>         for (Node<K, V> p = table[idx]; p != null; p = p.next) {
+>             if (p.key.equals(key)) return true;
+>         }
+>         return false;
+>     }
+>
+>     /** 增 / 改 */
+>     public V put(K key, V value) {
+>         int idx = hash(key);
+>         for (Node<K, V> p = table[idx]; p != null; p = p.next) {
+>             if (p.key.equals(key)) {
+>                 V old = p.value;
+>                 p.value = value;
+>                 return old;
+>             }
+>         }
+>         // 新 key：哈希桶头插
+>         Node<K, V> newNode = new Node<>(key, value);
+>         newNode.next = table[idx];
+>         table[idx] = newNode;
+>         // 追加到双向链表尾部
+>         linkLast(newNode);
+>         size++;
+>         return null;
+>     }
+>
+>     /** 删 */
+>     public V remove(K key) {
+>         int idx = hash(key);
+>         Node<K, V> prev = null, cur = table[idx];
+>         while (cur != null && !cur.key.equals(key)) {
+>             prev = cur;
+>             cur = cur.next;
+>         }
+>         if (cur == null) return null;
+>         // 摘除哈希桶
+>         if (prev == null) table[idx] = cur.next;
+>         else prev.next = cur.next;
+>         // 摘除双向链表
+>         unlink(cur);
+>         size--;
+>         return cur.value;
+>     }
+>
+>     /** 按插入顺序遍历所有 key */
+>     public List<K> keys() {
+>         List<K> list = new ArrayList<>(size);
+>         for (Node<K, V> p = head.after; p != tail; p = p.after) {
+>             list.add(p.key);
+>         }
+>         return list;
+>     }
+>
+>     public int size() { return size; }
+>     public boolean isEmpty() { return size == 0; }
+>
+>     // ---------- 链表操作 ----------
+>
+>     private void linkLast(Node<K, V> node) {
+>         Node<K, V> last = tail.before;
+>         last.after = node;
+>         node.before = last;
+>         node.after = tail;
+>         tail.before = node;
+>     }
+>
+>     private void unlink(Node<K, V> node) {
+>         Node<K, V> b = node.before;
+>         Node<K, V> a = node.after;
+>         b.after = a;
+>         a.before = b;
+>         // help GC
+>         node.before = null;
+>         node.after = null;
+>     }
+>
+>     // ---------- 测试 ----------
+>     public static void main(String[] args) {
+>         MyLinkedHashMap<String, Integer> map = new MyLinkedHashMap<>(16);
+>         map.put("a", 1);
+>         map.put("b", 2);
+>         map.put("c", 3);
+>         System.out.println(map.keys());   // [a, b, c]
+>
+>         map.put("y", 4);
+>         System.out.println(map.keys());   // [a, b, c, y]
+>
+>         map.put("d", 5);
+>         System.out.println(map.keys());   // [a, b, c, y, d]
+>
+>         map.remove("b");
+>         System.out.println(map.keys());   // [a, c, y, d]
+>
+>         map.put("a", 100);                // 更新已存在的 key
+>         System.out.println(map.keys());   // [a, c, y, d]（插入顺序不变）
+>         System.out.println(map.get("a")); // 100
+>     }
+> }
+> ```
+>
+> 运行结果：
+> ```text
+> [a, b, c]
+> [a, b, c, y]
+> [a, b, c, y, d]
+> [a, c, y, d]
+> [a, c, y, d]
+> 100
+> ```
+>
+> ### 3.5 复杂度分析
+>
+> | 操作 | 时间复杂度 | 说明 |
+> |---|---|---|
+> | get | O(1) | 哈希表查找 |
+> | put | O(1) | 哈希插入 + 链表追加 |
+> | remove | O(1) | 哈希摘除 + 链表摘除 |
+> | keys（按顺序） | **O(N)** | **遍历双向链表，按插入顺序返回** |
+> | 空间 | O(N) | 每个节点多 2 个指针 |
+>
+> 关键：**LinkedHashMap 用 O(N) 的额外指针空间（每个节点 +2 个引用），换来了"按插入顺序 O(N) 遍历"的能力**。
+>
+> ### 3.6 衍生：LRU Cache 就是 LinkedHashMap
+>
+> 当 LinkedHashMap 设置 `accessOrder = true` 时：
+> - 每次 `get` 已存在的 key，把该节点移到链表尾部
+> - 这样链表头部就是"最久未访问"的元素
+>
+> 这就是 **LRU（Least Recently Used）缓存淘汰算法** 的实现原理！Java 标准库直接提供了 `LinkedHashMap` 的 access-order 模式，`HashMap` 子类只要重写 `removeEldestEntry` 就能秒变 LRU 缓存。
+>
+> ```java
+> // 简化版 LRU
+> public class LRUCache<K, V> extends LinkedHashMap<K, V> {
+>     private final int capacity;
+>     public LRUCache(int capacity) {
+>         super(capacity, 0.75f, true);  // accessOrder = true
+>         this.capacity = capacity;
+>     }
+>     @Override
+>     protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+>         return size() > capacity;
+>     }
+> }
+> ```
+>
+> ### 3.7 Go map 顺序随机的真正原因
+>
+> Go 在 `runtime/map.go` 的 `mapiterinit()` 中：
+> ```go
+> // 伪码
+> r := uintptr(rand())        // 启动时随机种子
+> it.startBucket = r & (uintptr(len(h.buckets)) - 1)  // 起始 bucket 随机
+> it.offset = uintptr(r >> uintptr(^uint(0)))          // 起始 offset 随机
+> ```
+>
+> Go 故意从随机位置开始迭代，避免开发者依赖某种顺序。这与 Go 一贯的"显式优于隐式"哲学一致——Go 不希望程序员写出依赖 map 顺序的代码，所以每次都随机。
+
+---
+
+## 四、本章小结
+
+| 知识点 | 关键结论 |
+|---|---|
+| 哈希表本身无序 | key 的遍历顺序由 hash + table 长度决定，不应被依赖 |
+| LinkedHashMap 原理 | HashMap + 双向链表，每节点多 2 个指针维护插入顺序 |
+| Java LinkedHashMap | `accessOrder=false`（默认）：插入顺序；`accessOrder=true`：访问顺序（即 LRU） |
+| Go map 随机遍历 | Go 故意从随机位置开始迭代，防止依赖 |
+| 应用 | LRU 缓存的本质就是 access-order 的 LinkedHashMap |
+
+## 五、相关章节
+
+- 上一章：[数组实现哈希表（ArrayHashMap）](11-hashtable-with-array.md)
+- 本质原理：[哈希表核心原理](13-hashmap-basic.md)
+- 下一章：[哈希表核心原理](13-hashmap-basic.md)
+
+---
+
+> 📌 **备注**：本文中 `> [!info] 📌 付费章节补全内容` 标记的部分，是基于公开算法知识体系（Java 源码 + Go runtime）补充的完整 LinkedHashMap 实现与原理解析，对应原文中"成为会员即可解锁"截断的内容。

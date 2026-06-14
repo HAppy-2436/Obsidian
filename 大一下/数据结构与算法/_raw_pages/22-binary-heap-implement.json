@@ -1,0 +1,43 @@
+{
+ "tag": "22-binary-heap-implement",
+ "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-implement/",
+ "blocks": [
+  {
+   "type": "heading",
+   "level": 1,
+   "content": "二叉堆/优先级队列代码实现"
+  },
+  {
+   "type": "text",
+   "content": "前置知识"
+  },
+  {
+   "type": "text",
+   "content": "阅读本文前，你需要先学习："
+  },
+  {
+   "type": "text",
+   "content": "二叉堆的原理"
+  },
+  {
+   "type": "text",
+   "content": "前文 \n二叉堆的原理\n 介绍了二叉堆的基本性质、API 和常见应用。本文将结合 \n可视化面板\n 手把手带你实现一个优先级队列。"
+  },
+  {
+   "type": "text",
+   "content": "我们先实现一个简化版的优先级队列，用来帮你理解二叉堆的核心操作 sink 和 swim。最后我再用给出一个比较完整的代码实现。"
+  },
+  {
+   "type": "text",
+   "content": "成为会员即可解锁全部内容"
+  },
+  {
+   "type": "text",
+   "content": "了解会员权益"
+  },
+  {
+   "type": "text",
+   "content": "更新时间：2026/06/12 00:27"
+  }
+ ]
+}

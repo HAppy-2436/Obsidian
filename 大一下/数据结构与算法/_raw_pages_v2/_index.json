@@ -1,0 +1,410 @@
+[
+ {
+  "tag": "00-intro",
+  "url": "https://labuladong.online/zh/algo/intro/data-structure-basic/",
+  "ok": true,
+  "blocks": 17,
+  "replaced": 0,
+  "time": 3.7641868591308594
+ },
+ {
+  "tag": "01-complexity",
+  "url": "https://labuladong.online/zh/algo/intro/complexity-basic/",
+  "ok": true,
+  "blocks": 76,
+  "replaced": 5,
+  "time": 7.496851205825806
+ },
+ {
+  "tag": "02-array-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/array-basic/",
+  "ok": true,
+  "blocks": 133,
+  "replaced": 7,
+  "time": 9.318624019622803
+ },
+ {
+  "tag": "03-array-implement",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/array-implement/",
+  "ok": true,
+  "blocks": 43,
+  "replaced": 1,
+  "time": 3.885653495788574
+ },
+ {
+  "tag": "04-cycle-array",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/cycle-array/",
+  "ok": true,
+  "blocks": 62,
+  "replaced": 2,
+  "time": 5.062934637069702
+ },
+ {
+  "tag": "05-linkedlist-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/linkedlist-basic/",
+  "ok": true,
+  "blocks": 225,
+  "replaced": 18,
+  "time": 20.271683931350708
+ },
+ {
+  "tag": "06-linkedlist-implement",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/linkedlist-implement/",
+  "ok": true,
+  "blocks": 58,
+  "replaced": 2,
+  "time": 5.245358228683472
+ },
+ {
+  "tag": "07-deque-implement",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/deque-implement/",
+  "ok": true,
+  "blocks": 38,
+  "replaced": 3,
+  "time": 5.347470760345459
+ },
+ {
+  "tag": "08-queue-stack-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/queue-stack-basic/",
+  "ok": true,
+  "blocks": 25,
+  "replaced": 1,
+  "time": 3.834702253341675
+ },
+ {
+  "tag": "09-array-queue-stack",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/array-queue-stack/",
+  "ok": true,
+  "blocks": 31,
+  "replaced": 2,
+  "time": 4.20117449760437
+ },
+ {
+  "tag": "10-linked-queue-stack",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/linked-queue-stack/",
+  "ok": true,
+  "blocks": 33,
+  "replaced": 2,
+  "time": 4.348663091659546
+ },
+ {
+  "tag": "11-hashtable-with-array",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/",
+  "ok": true,
+  "blocks": 45,
+  "replaced": 1,
+  "time": 4.133849620819092
+ },
+ {
+  "tag": "12-hashtable-with-linked-list",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-linked-list/",
+  "ok": true,
+  "blocks": 18,
+  "replaced": 0,
+  "time": 2.3485469818115234
+ },
+ {
+  "tag": "13-hashmap-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/hashmap-basic/",
+  "ok": true,
+  "blocks": 138,
+  "replaced": 1,
+  "time": 3.385660171508789
+ },
+ {
+  "tag": "14-linear-probing-key-point",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/linear-probing-key-point/",
+  "ok": true,
+  "blocks": 22,
+  "replaced": 1,
+  "time": 3.6138079166412354
+ },
+ {
+  "tag": "15-linear-probing-code",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/linear-probing-code/",
+  "ok": true,
+  "blocks": 14,
+  "replaced": 0,
+  "time": 2.3055992126464844
+ },
+ {
+  "tag": "16-hashtable-chaining",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/hashtable-chaining/",
+  "ok": true,
+  "blocks": 18,
+  "replaced": 0,
+  "time": 3.193450450897217
+ },
+ {
+  "tag": "17-hash-set",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/hash-set/",
+  "ok": true,
+  "blocks": 10,
+  "replaced": 0,
+  "time": 2.2803761959075928
+ },
+ {
+  "tag": "18-bitmap",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/bitmap/",
+  "ok": true,
+  "blocks": 16,
+  "replaced": 0,
+  "time": 2.666792392730713
+ },
+ {
+  "tag": "19-bloom-filter",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/bloom-filter/",
+  "ok": true,
+  "blocks": 22,
+  "replaced": 0,
+  "time": 2.35994553565979
+ },
+ {
+  "tag": "20-skip-list-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/skip-list-basic/",
+  "ok": true,
+  "blocks": 35,
+  "replaced": 0,
+  "time": 2.8266401290893555
+ },
+ {
+  "tag": "21-binary-heap-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-basic/",
+  "ok": true,
+  "blocks": 15,
+  "replaced": 0,
+  "time": 2.390263319015503
+ },
+ {
+  "tag": "22-binary-heap-implement",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-heap-implement/",
+  "ok": true,
+  "blocks": 9,
+  "replaced": 0,
+  "time": 2.295077323913574
+ },
+ {
+  "tag": "23-binary-tree-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-tree-basic/",
+  "ok": true,
+  "blocks": 161,
+  "replaced": 2,
+  "time": 4.329681396484375
+ },
+ {
+  "tag": "24-binary-tree-traverse-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/binary-tree-traverse-basic/",
+  "ok": true,
+  "blocks": 174,
+  "replaced": 7,
+  "time": 10.466754913330078
+ },
+ {
+  "tag": "25-n-ary-tree-traverse-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/n-ary-tree-traverse-basic/",
+  "ok": true,
+  "blocks": 47,
+  "replaced": 2,
+  "time": 4.416971445083618
+ },
+ {
+  "tag": "26-segment-tree-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/segment-tree-basic/",
+  "ok": true,
+  "blocks": 25,
+  "replaced": 0,
+  "time": 2.6002180576324463
+ },
+ {
+  "tag": "27-tree-map-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/",
+  "ok": true,
+  "blocks": 55,
+  "replaced": 2,
+  "time": 4.614849090576172
+ },
+ {
+  "tag": "28-tree-map-implement",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/tree-map-implement/",
+  "ok": true,
+  "blocks": 7,
+  "replaced": 0,
+  "time": 2.5809991359710693
+ },
+ {
+  "tag": "29-trie-map-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/trie-map-basic/",
+  "ok": true,
+  "blocks": 40,
+  "replaced": 0,
+  "time": 2.677544355392456
+ },
+ {
+  "tag": "30-union-find-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/union-find-basic/",
+  "ok": true,
+  "blocks": 45,
+  "replaced": 0,
+  "time": 2.35296368598938
+ },
+ {
+  "tag": "31-rbtree-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/rbtree-basic/",
+  "ok": true,
+  "blocks": 16,
+  "replaced": 0,
+  "time": 2.3473622798919678
+ },
+ {
+  "tag": "32-graph-terminology",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-terminology/",
+  "ok": true,
+  "blocks": 56,
+  "replaced": 0,
+  "time": 2.905764579772949
+ },
+ {
+  "tag": "33-graph-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-basic/",
+  "ok": true,
+  "blocks": 14,
+  "replaced": 0,
+  "time": 2.3080663681030273
+ },
+ {
+  "tag": "34-graph-traverse-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/",
+  "ok": true,
+  "blocks": 79,
+  "replaced": 4,
+  "time": 6.162118911743164
+ },
+ {
+  "tag": "35-use-case-of-dfs-bfs",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/use-case-of-dfs-bfs/",
+  "ok": true,
+  "blocks": 15,
+  "replaced": 0,
+  "time": 2.545252561569214
+ },
+ {
+  "tag": "36-graph-minimum-spanning-tree",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-minimum-spanning-tree/",
+  "ok": true,
+  "blocks": 41,
+  "replaced": 0,
+  "time": 2.706315517425537
+ },
+ {
+  "tag": "37-graph-shortest-path",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/graph-shortest-path/",
+  "ok": true,
+  "blocks": 71,
+  "replaced": 0,
+  "time": 2.7900285720825195
+ },
+ {
+  "tag": "38-eulerian-graph",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/eulerian-graph/",
+  "ok": true,
+  "blocks": 37,
+  "replaced": 0,
+  "time": 2.495604991912842
+ },
+ {
+  "tag": "39-sort-basic",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/sort-basic/",
+  "ok": true,
+  "blocks": 36,
+  "replaced": 1,
+  "time": 3.3258543014526367
+ },
+ {
+  "tag": "40-bubble-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/bubble-sort/",
+  "ok": true,
+  "blocks": 77,
+  "replaced": 3,
+  "time": 5.268604755401611
+ },
+ {
+  "tag": "41-insertion-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/insertion-sort/",
+  "ok": true,
+  "blocks": 57,
+  "replaced": 2,
+  "time": 4.399021863937378
+ },
+ {
+  "tag": "42-select-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/select-sort/",
+  "ok": true,
+  "blocks": 83,
+  "replaced": 1,
+  "time": 3.852912425994873
+ },
+ {
+  "tag": "43-merge-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/merge-sort/",
+  "ok": true,
+  "blocks": 18,
+  "replaced": 0,
+  "time": 2.3363447189331055
+ },
+ {
+  "tag": "44-quick-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/quick-sort/",
+  "ok": true,
+  "blocks": 17,
+  "replaced": 0,
+  "time": 2.3278331756591797
+ },
+ {
+  "tag": "45-heap-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/heap-sort/",
+  "ok": true,
+  "blocks": 43,
+  "replaced": 1,
+  "time": 3.318143844604492
+ },
+ {
+  "tag": "46-shell-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/shell-sort/",
+  "ok": true,
+  "blocks": 23,
+  "replaced": 0,
+  "time": 2.3651108741760254
+ },
+ {
+  "tag": "47-counting-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/counting-sort/",
+  "ok": true,
+  "blocks": 61,
+  "replaced": 1,
+  "time": 3.333531618118286
+ },
+ {
+  "tag": "48-bucket-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/bucket-sort/",
+  "ok": true,
+  "blocks": 45,
+  "replaced": 0,
+  "time": 2.4726545810699463
+ },
+ {
+  "tag": "49-radix-sort",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/radix-sort/",
+  "ok": true,
+  "blocks": 45,
+  "replaced": 0,
+  "time": 2.346090078353882
+ },
+ {
+  "tag": "50-huffman-tree",
+  "url": "https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/",
+  "ok": true,
+  "blocks": 79,
+  "replaced": 0,
+  "time": 2.944263219833374
+ }
+]
