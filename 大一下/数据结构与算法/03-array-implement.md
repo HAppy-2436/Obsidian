@@ -1,373 +1,524 @@
 ---
 title: 动态数组的代码实现
-tags: [数据结构, 数组, 实现]
+tags: [labuladong, 数组, 数据结构与算法]
 order: 3
 prerequisites: [02-array-basic]
 group: 数组
 paywall: false
-source: labuladong
+source: labuladong.online
+url: https://labuladong.online/zh/algo/data-structure-basic/array-implement/
 ---
 
-# 动态数组的代码实现
+前置知识
 
-> [!info] 章节定位
-> 上一章讲了静态数组的内存模型和复杂度分析；本章动手实现一个动态数组 `MyArrayList`，把「末尾追加 / 中间插入 / 末尾删除 / 中间删除 / 自动扩缩容 / 索引越界」全部落到代码。理解这一章后，标准库里的 `std::vector` / `ArrayList` / `list` 就不再神秘。
+阅读本文前，你需要先学习：
 
-## 📚 学习目标
+数组（顺序存储）基础
 
-- 用 C++ 实现一个**模板类** `MyArrayList<T>`，支持 8 个核心 API
-- 理解「**自动扩缩容**」的触发条件与实现细节
-- 区分 `checkElementIndex`（不允许 `index == size`）和 `checkPositionIndex`（允许 `index == size`）的本质
-- 知道删除元素时「清空引用」的目的——避免内存泄漏
-- 能用本实现去解 LeetCode 707「设计链表」验证正确性
+## 几个关键点
 
-## 🎯 一句话总结
+下面我会直接给出一个简单的动态数组代码实现，包含了基本的增删查改功能。这里先给出几个关键点，等会你看代码的时候可以着重注意一下。
 
-> 动态数组 = **静态数组 + 增删查改 API + 自动扩缩容**；本章实现一个 `MyArrayList<T>`，重点是「扩容 / 缩容触发条件」「两类越界检查」「删除时清空引用」三个关键点。
+### 关键点一、自动扩缩容
 
-## 🔗 前置知识
+在上一章
+数组基础
+ 中只提到了数组添加元素时可能需要扩容，并没有提到缩容。
 
-- [[00-intro|本章导读]]
-- [[01-complexity|时间空间复杂度入门]]
-- [[02-array-basic|数组原理]] — 上一章必读
-- C++ 模板类基础语法
+在实际使用动态数组时，缩容也是重要的优化手段。比方说一个动态数组开辟了能够存储 1000 个元素的连续内存空间，但是实际只存了 10 个元素，那就有 990 个空间是空闲的。为了避免资源浪费，我们其实可以适当缩小存储空间，这就是缩容。
 
-## 📖 正文
+我们这里就实现一个简单的扩缩容的策略：
 
-### 1. 关键点一：自动扩缩容
+当数组元素个数达到底层静态数组的容量上限时，扩容为原来的 2 倍；
 
-#### 1.1 扩容（grow）
+当数组元素个数缩减到底层静态数组的容量的 1/4 时，缩容为原来的 1/2。
 
-「扩容」是数组最贵的操作（`O(n)`），所以我们要尽可能**少触发**。
+### 关键点二、索引越界的检查
 
-最常见的策略是**倍增**（geometric expansion）：
+下面的代码实现中，有两个检查越界的方法，分别是 checkElementIndex 和 checkPositionIndex，你可以看到它俩的区别仅仅在于 index < size 和 index <= size。
 
-- 当 `size == capacity` 时，扩容为 `2 * capacity`。
-- 每次扩容后，下一次填满的成本被「摊销」到之前的 N/2 次插入上，整体摊销复杂度是 `O(1)`。
+为什么 checkPositionIndex 可以允许 index == size 呢，因为这个 checkPositionIndex 是专门用来处理在数组中插入元素的情况。
 
-> [!tip] 为什么是「2 倍」而不是「1.5 倍」或「3 倍」？
-> - 1.5 倍：扩容次数多、均摊成本偏高，但内存利用率高。
-> - 2 倍：是工程折中（Java `ArrayList` 用 1.5，C++ `std::vector` 用 2，Python `list` 也接近 2）。
-> - 3 倍：扩容次数少，但浪费的尾部空间多。
-
-#### 1.2 缩容（shrink）
-
-只扩容不缩容，会让数组长期占用远超实际需要的内存（比如装 10 个元素但底层分配了 1000 个槽）。
-
-常见的「懒缩容」策略是：
-
-- 当 `size <= capacity / 4` 时，缩容为 `capacity / 2`。
-- 「除以 4」而不是「除以 2」是避免「删一个加一个」时反复扩缩容（**颠簸**）。
-
-```text
-size=100, cap=200  满
-删到 size=50, cap/4=50  → 触发缩容，cap=100
-再删一个 size=49, cap/4=25 → 不触发
-...
-继续删到 size=25, cap/4=25  → 触发缩容，cap=50
-```
-
-> 这种「缩到 1/2，缩容门槛设 1/4」的滞后策略，能让扩缩容次数摊销 O(1)。
-
-### 2. 关键点二：两类索引越界检查
-
-动态数组的索引语义有两种：
-
-| 语义 | 允许的范围 | 用途 |
-| --- | --- | --- |
-| **元素位置** | `0 <= i < size` | `get(i)`、`set(i, v)`、`remove(i)` |
-| **插入空隙** | `0 <= i <= size` | `add(i, v)`——可以在末尾「空隙」追加 |
-
-下面这段示意图能说明区别：
-
-```text
-nums = [5, 6, 7, 8]
-index   0  1  2  3
-        ^元素位置: 0..3
-
-如果要在数组中插入新元素，插入位置不是「元素位置」，
-而是元素之间的「空隙」：
-[ | 5 | 6 | 7 | 8 | ]
-   0   1   2   3   4
-   ^空隙位置: 0..4
-```
-
-因此：
+比方说有这样一个 nums 数组，对于每个元素来说，合法的索引一定是 index < size：
 
 ```cpp
-bool isElementIndex(int i) { return i >= 0 && i < size; }
-bool isPositionIndex(int i) { return i >= 0 && i <= size; }
-```
+#include <iostream>
+#include <stdexcept>
+#include <vector>
 
-只有「插入」相关方法用 `checkPositionIndex`；其他都使用 `checkElementIndex`。
-
-### 3. 关键点三：删除元素要清空引用
-
-看下面这段 `removeLast`：
-
-```cpp
-E removeLast() {
-    E deletedVal = data[size - 1];
-    data[size - 1] = null;   // <-- 这一行不能少
-    size--;
-    return deletedVal;
-}
-```
-
-如果省略 `data[size - 1] = null`，对于 Java/C# 等**带 GC 的语言**，会发生**内存泄漏**：data 数组这个槽还引用着对象，GC 判定它「可达」，于是这个对象永远不会被回收。
-
-对 C++，`std::vector` 用 RAII 自动析构，不会有这个泄漏问题，但**显式清空是个好习惯**（比如存的是 `std::shared_ptr` 时）。
-
-### 4. 关键点四：底层是「裸数组 + size + capacity」三件套
-
-```cpp
-template<typename T>
-class MyArrayList {
-    T*   data;       // 真正的存储（裸数组）
-    int  size_;      // 已有元素个数
-    int  capacity_;  // 底层数组总长度
-    static constexpr int INIT_CAP = 1;
-    ...
-};
-```
-
-`data` 是连续内存，`size_` 是逻辑长度（外部可见的「size()」），`capacity_` 是物理长度（`data` 的真实长度）。`size_ <= capacity_` 永远成立。
-
-### 5. 完整 C++ 实现
-
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-namespace dsa {
-
-template <typename T>
+template<typename E>
 class MyArrayList {
 private:
-    T*   data_;       // 底层存储
-    int  size_;       // 已有元素个数
-    int  capacity_;   // 底层数组容量
+    // 真正存储数据的底层数组
+    E* data;
+    // 记录当前元素个数
+    int size;
 
-    static constexpr int INIT_CAP = 1;
+    // 最大元素容量
+    int cap;
 
-    // 工具：把容量扩/缩到 newCap
-    void resize(int newCap) {
-        T* tmp = new T[newCap];
-        for (int i = 0; i < size_; ++i) {
-            tmp[i] = data_[i];   // 对内置类型是拷贝；对复杂类型会调拷贝构造
-        }
-        delete[] data_;
-        data_ = tmp;
-        capacity_ = newCap;
-    }
-
-    bool isElementIndex(int i) const { return i >= 0 && i < size_; }
-    bool isPositionIndex(int i) const { return i >= 0 && i <= size_; }
-
-    void checkElementIndex(int i) const {
-        if (!isElementIndex(i)) {
-            throw out_of_range("Index: " + to_string(i) +
-                               ", Size: " + to_string(size_));
-        }
-    }
-    void checkPositionIndex(int i) const {
-        if (!isPositionIndex(i)) {
-            throw out_of_range("Index: " + to_string(i) +
-                               ", Position max: " + to_string(size_));
-        }
-    }
+    // 默认初始容量
+    static const int INIT_CAP = 1;
 
 public:
-    // ===== 构造 / 析构 =====
-    MyArrayList() : MyArrayList(INIT_CAP) {}
-    explicit MyArrayList(int initCap) : size_(0), capacity_(initCap) {
-        if (initCap < 1) initCap = 1;
-        data_ = new T[initCap];
+    MyArrayList() {
+        this->data = new E[INIT_CAP];
+        this->size = 0;
+        this->cap = INIT_CAP;
     }
-    ~MyArrayList() { delete[] data_; }
 
-    // 禁用拷贝（C++ 教程简化处理；生产代码应写深拷贝或 =delete）
-    MyArrayList(const MyArrayList&) = delete;
-    MyArrayList& operator=(const MyArrayList&) = delete;
+    MyArrayList(int initCapacity) {
+        this->data = new E[initCapacity];
+        this->size = 0;
+        this->cap = initCapacity;
+    }
 
-    // ===== 增 =====
-    void addLast(const T& e) {
-        if (size_ == capacity_) {
-            resize(2 * capacity_);
+    // 增
+    void addLast(E e) {
+        // 看 data 数组容量够不够
+        if (size == cap) {
+            resize(2 * cap);
         }
-        data_[size_++] = e;
+        // 在尾部插入元素
+        data[size] = e;
+        size++;
     }
 
-    void addFirst(const T& e) {
+    void add(int index, E e) {
+        // 检查索引越界
+        checkPositionIndex(index);
+
+        // 看 data 数组容量够不够
+        if (size == cap) {
+            resize(2 * cap);
+        }
+
+        // 搬移数据 data[index..] -> data[index+1..]
+        // 给新元素腾出位置
+        for (int i = size - 1; i >= index; i--) {
+            data[i + 1] = data[i];
+        }
+
+        // 插入新元素
+        data[index] = e;
+
+        size++;
+    }
+
+    void addFirst(E e) {
         add(0, e);
     }
 
-    void add(int index, const T& e) {
-        checkPositionIndex(index);
-        if (size_ == capacity_) {
-            resize(2 * capacity_);
+    // 删
+    E removeLast() {
+        if (size == 0) {
+            throw out_of_range("NoSuchElementException");
         }
-        // 从后往前搬移
-        for (int i = size_ - 1; i >= index; --i) {
-            data_[i + 1] = data_[i];
+        // 可以缩容，节约空间
+        if (size == cap / 4) {
+            resize(cap / 2);
         }
-        data_[index] = e;
-        size_++;
+
+        E deletedVal = data[size - 1];
+        // 删除最后一个元素
+        // 必须给最后一个元素置为 null，否则会内存泄漏
+        data[size - 1] = E();
+        size--;
+
+        return deletedVal;
     }
 
-    // ===== 删 =====
-    T removeLast() {
-        if (size_ == 0) throw runtime_error("removeLast from empty list");
-        if (size_ == capacity_ / 4) {
-            resize(capacity_ / 2);
+    E remove(int index) {
+        // 检查索引越界
+        checkElementIndex(index);
+
+        // 可以缩容，节约空间
+        if (size == cap / 4) {
+            resize(cap / 2);
         }
-        T val = data_[size_ - 1];
-        data_[size_ - 1] = T();   // 清空
-        size_--;
-        return val;
+
+        E deletedVal = data[index];
+
+        // 搬移数据 data[index+1..] -> data[index..]
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+
+        data[size - 1] = E();
+        size--;
+
+        return deletedVal;
     }
 
-    T removeFirst() {
+    E removeFirst() {
         return remove(0);
     }
 
-    T remove(int index) {
+    // 查
+    E get(int index) {
+        // 检查索引越界
         checkElementIndex(index);
-        if (size_ == capacity_ / 4) {
-            resize(capacity_ / 2);
-        }
-        T val = data_[index];
-        // 从前往后搬移
-        for (int i = index + 1; i < size_; ++i) {
-            data_[i - 1] = data_[i];
-        }
-        data_[size_ - 1] = T();   // 清空
-        size_--;
-        return val;
+
+        return data[index];
     }
 
-    // ===== 查 / 改 =====
-    T get(int index) const {
+    // 改
+    E set(int index, E element) {
+        // 检查索引越界
         checkElementIndex(index);
-        return data_[index];
+        // 修改数据
+        E oldVal = data[index];
+        data[index] = element;
+        return oldVal;
     }
 
-    T set(int index, const T& e) {
-        checkElementIndex(index);
-        T old = data_[index];
-        data_[index] = e;
-        return old;
+    // 工具方法
+    int getSize() {
+        return size;
     }
 
-    // ===== 工具 =====
-    int  size()     const { return size_; }
-    bool isEmpty()  const { return size_ == 0; }
-    int  capacity() const { return capacity_; }
+    bool isEmpty() {
+        return size == 0;
+    }
 
-    void display() const {
-        cout << "size=" << size_ << " cap=" << capacity_ << " [";
-        for (int i = 0; i < size_; ++i) {
-            if (i) cout << ", ";
-            cout << data_[i];
+    // 将 data 的容量改为 newCap
+    void resize(int newCap) {
+        E* temp = new E[newCap];
+
+        for (int i = 0; i < size; i++) {
+            temp[i] = data[i];
         }
-        cout << "]\n";
+
+        // 释放原数组内存
+        delete[] data;
+
+        data = temp;
+        cap = newCap;
+    }
+
+    bool isElementIndex(int index) {
+        return index >= 0 && index < size;
+    }
+
+    bool isPositionIndex(int index) {
+        return index >= 0 && index <= size;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    void checkElementIndex(int index) {
+        if (!isElementIndex(index)) {
+            throw out_of_range("Index out of bounds");
+        }
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    void checkPositionIndex(int index) {
+        if (!isPositionIndex(index)) {
+            throw out_of_range("Index out of bounds");
+        }
+    }
+
+    void display() {
+        cout << "size = " << size << " cap = " << cap << endl;
+        for (int i = 0; i < size; i++) {
+            cout << data[i] << " ";
+        }
+        cout << endl;
+    }
+
+    ~MyArrayList() {
+        delete[] data;
     }
 };
 
-} // namespace dsa
-
-// ===== 简单测试 =====
 int main() {
-    dsa::MyArrayList<int> arr(3);
-    for (int i = 1; i <= 5; ++i) arr.addLast(i);
-    arr.display();                 // size=5 cap=6
+    // 初始容量设置为 3
+    MyArrayList<int> arr(3);
+
+    // 添加 5 个元素
+    for (int i = 1; i <= 5; i++) {
+        arr.addLast(i);
+    }
+
     arr.remove(3);
     arr.add(1, 9);
     arr.addFirst(100);
-    int v = arr.removeLast();
-    (void)v;
-    arr.display();
+    int val = arr.removeLast();
+
+    // 100 1 9 2 3
+    for (int i = 0; i < arr.getSize(); i++) {
+        cout << arr.get(i) << endl;
+    }
+
     return 0;
 }
 ```
 
-### 6. 关键操作的复杂度总结
+但如果是要在数组中插入新元素，那么新元素可能的插入位置并不是元素的索引，而是索引之间的空隙：
 
-| 操作 | 时间复杂度 | 备注 |
-| --- | --- | --- |
-| `addLast(e)` | 摊销 `O(1)` | 单次可能 `O(n)` 扩容 |
-| `addFirst(e)` | `O(n)` | 全部搬移 |
-| `add(i, e)` | `O(n)` | index 之后搬移 |
-| `removeLast()` | 摊销 `O(1)` | 单次可能 `O(n)` 缩容 |
-| `removeFirst()` | `O(n)` | 全部搬移 |
-| `remove(i)` | `O(n)` | index 之后搬移 |
-| `get(i)` | `O(1)` | 随机访问 |
-| `set(i, e)` | `O(1)` | 随机访问 |
+```
+nums = [ | 5 | 6 | 7 | 8 | ]
+index    0   1   2   3   4
+```
 
-### 7. 几个工程细节
+这些空隙都是合法的插入位置，所以说 index == size 也是合法的。这就是 checkPositionIndex 和 checkElementIndex 的区别。
 
-#### 7.1 为什么扩容时用 `new T[newCap]` 而不是 `realloc`？
+### 关键点三、删除元素谨防内存泄漏
 
-C++ 中 `T` 可能是带构造/析构函数的对象，`realloc` 不会调用构造函数（甚至会浅拷贝对象，破坏其内部指针）。我们用 `new T[]` + 循环赋值，让编译器正确处理非平凡类型。
+单从算法的角度，其实并不需要关心被删掉的元素应该如何处理，但是具体到代码实现，我们需要注意可能出现的内存泄漏。
 
-#### 7.2 为什么 `add` 时扩容和搬移分开？
+在我给出的代码实现中，删除元素时，我都会把被删除的元素置为 null，以 Java 为例：
 
-把 `resize` 单独抽成函数，是为了让「扩缩容」成为一个原子操作，外部看不到「半新半旧」的中间状态。
+```
+// 删
+public E removeLast() {
+    E deletedVal = data[size - 1];
+    // 删除最后一个元素
+    // 必须给最后一个元素置为 null，否则会内存泄漏
+    data[size - 1] = null;
+    size--;
 
-#### 7.3 异常安全
+    return deletedVal;
+}
+```
 
-- `add` 流程：先检查索引 → 扩容 → 搬移 → 写入。  
-  扩容失败（`bad_alloc`）时，原数组不变，安全。
-- `remove` 流程：先检查索引 → 缩容 → 搬移 → 清空。  
-  同样安全。
+Java 的垃圾回收机制是基于
+图算法
+ 的可达性分析，如果一个对象再也无法被访问到，那么这个对象占用的内存才会被释放；否则，垃圾回收器会认为这个对象还在使用中，就不会释放这个对象占用的内存。
 
-#### 7.4 怎样验证你的实现
+如果你不执行 data[size - 1] = null 这行代码，那么 data[size - 1] 这个引用就会一直存在，你可以通过 data[size - 1] 访问这个对象，所以这个对象被认为是可达的，它的内存就一直不会被释放，进而造成内存泄漏。
 
-> [!tip] 练手建议
-> 1. 跑一遍 `main()` 的测试，覆盖 add/remove/set/get。
-> 2. 改用「初始容量 1」，连续 `addLast 1000` 次，用 `cout << arr.capacity();` 观察容量从 1 → 2 → 4 → 8 → ... → 1024 的扩缩规律。
-> 3. 拿到 LeetCode 707「设计链表」——它的 API 名字不同，但内部用「数组」实现可以过；你就用 `MyArrayList` 套一层，验证正确性。
+其他带垃圾回收功能的语言应该也是类似的，你可以具体了解一下你使用的编程语言的垃圾回收机制，这是写出无 bug 代码的基本要求。
 
-### 8. 与 `std::vector` 的差异
+### 其他细节优化
 
-| 特性 | 本章 `MyArrayList` | `std::vector` |
-| --- | --- | --- |
-| 模板 | ✅ | ✅ |
-| 自动扩容 | ✅ 倍增 | ✅ 倍增（GCC 下大致 2 倍） |
-| 自动缩容 | ✅ 1/4 触发 | ❌ 只在 `shrink_to_fit` 时缩 |
-| 迭代器 | ❌ | ✅ 随机访问迭代器 |
-| 移动语义 | ❌ | ✅ |
-| 异常安全 | 基础 | 强保证（commit/rollback） |
-| 内存分配器 | 默认 `new/delete` | 可自定义 Allocator |
+下面的代码当然不会是一个很完善的实现，会有不少可以进一步优化的点。比方说，我是用 for 循环复制数组数据的，实际上这种方式复制的效率比较差，大部分编程语言会提供更高效的数组复制方法，比如 Java 的 System.arraycopy。
 
-`std::vector` 远比我们的玩具版复杂，但**核心思想一致**。
+不过它再怎么优化，本质上也是要搬移数据，时间复杂度都是
+𝑂
+(
+𝑛
+)
+O(n)。本文的重点在于让你理解数组增删查改 API 的基本实现思路以及时间复杂度，如果对这些细节感兴趣，可以找到编程语言标准库的源码深入研究。
 
-## 📊 复杂度一览
+如何验证你的实现？
 
-| 操作 | 时间 | 空间 | 备注 |
-| --- | --- | --- | --- |
-| 增（尾） | 摊销 O(1) | O(1) 摊销 | 单次最坏 O(n) |
-| 增（头/中） | O(n) | O(1) | 搬移 |
-| 删（尾） | 摊销 O(1) | O(1) 摊销 | 单次最坏 O(n) |
-| 删（头/中） | O(n) | O(1) | 搬移 |
-| 查 / 改（按索引） | O(1) | O(1) | 随机访问 |
-| 整体拷贝构造 | O(n) | O(n) | 拷贝所有元素 |
+你可以借助力扣第 707 题「设计链表」来验证自己的实现是否正确。虽然这道题是关于链表的，但是它其实也不知道你底层到底是不是用链表实现的。咱主要是借用它的测试用例，来验证你的增删查改功能是否正确。
 
-## 🛠️ 应用场景
+## 动态数组代码实现
 
-- **写题 / 面试**：手写 `MyArrayList` 是入门数据结构最常考的「白板题」之一。
-- **理解标准库**：知道 `std::vector` / `ArrayList` 内部就是这玩意儿，再去看源码就不会迷路。
-- **构造更复杂结构**：[[08-queue-stack-basic|栈]] 和 [[09-array-queue-stack|用数组实现队列]] 都用 `MyArrayList` 当底层。
-- **性能分析**：当遇到「vector 突然卡顿」时，怀疑扩容；用 `vector::capacity()` 打印验证。
+```java
+#include <iostream>
+#include <stdexcept>
+#include <vector>
 
-## ▶️ 下一章
+template<typename E>
+class MyArrayList {
+private:
+    // 真正存储数据的底层数组
+    E* data;
+    // 记录当前元素个数
+    int size;
 
-[[04-cycle-array|循环数组技巧及实现]] — 用「求模」让数组在「逻辑上」变成环形，从而让头尾增删也变 O(1)。
+    // 最大元素容量
+    int cap;
 
-## 🔗 相关章节
+    // 默认初始容量
+    static const int INIT_CAP = 1;
 
-- [[02-array-basic|数组原理]] — 上一章
-- [[04-cycle-array|环形数组]] — 下一章
-- [[07-deque-implement|双端队列]] — 头尾都要 O(1) 的标准容器
-- [[08-queue-stack-basic|队列/栈]] — 数组实现的两种最简单结构
-- [[11-hashtable-with-array|数组哈希表]] — 数组的另一重要应用
+public:
+    MyArrayList() {
+        this->data = new E[INIT_CAP];
+        this->size = 0;
+        this->cap = INIT_CAP;
+    }
+
+    MyArrayList(int initCapacity) {
+        this->data = new E[initCapacity];
+        this->size = 0;
+        this->cap = initCapacity;
+    }
+
+    // 增
+    void addLast(E e) {
+        // 看 data 数组容量够不够
+        if (size == cap) {
+            resize(2 * cap);
+        }
+        // 在尾部插入元素
+        data[size] = e;
+        size++;
+    }
+
+    void add(int index, E e) {
+        // 检查索引越界
+        checkPositionIndex(index);
+
+        // 看 data 数组容量够不够
+        if (size == cap) {
+            resize(2 * cap);
+        }
+
+        // 搬移数据 data[index..] -> data[index+1..]
+        // 给新元素腾出位置
+        for (int i = size - 1; i >= index; i--) {
+            data[i + 1] = data[i];
+        }
+
+        // 插入新元素
+        data[index] = e;
+
+        size++;
+    }
+
+    void addFirst(E e) {
+        add(0, e);
+    }
+
+    // 删
+    E removeLast() {
+        if (size == 0) {
+            throw out_of_range("NoSuchElementException");
+        }
+        // 可以缩容，节约空间
+        if (size == cap / 4) {
+            resize(cap / 2);
+        }
+
+        E deletedVal = data[size - 1];
+        // 删除最后一个元素
+        // 必须给最后一个元素置为 null，否则会内存泄漏
+        data[size - 1] = E();
+        size--;
+
+        return deletedVal;
+    }
+
+    E remove(int index) {
+        // 检查索引越界
+        checkElementIndex(index);
+
+        // 可以缩容，节约空间
+        if (size == cap / 4) {
+            resize(cap / 2);
+        }
+
+        E deletedVal = data[index];
+
+        // 搬移数据 data[index+1..] -> data[index..]
+        for (int i = index + 1; i < size; i++) {
+            data[i - 1] = data[i];
+        }
+
+        data[size - 1] = E();
+        size--;
+
+        return deletedVal;
+    }
+
+    E removeFirst() {
+        return remove(0);
+    }
+
+    // 查
+    E get(int index) {
+        // 检查索引越界
+        checkElementIndex(index);
+
+        return data[index];
+    }
+
+    // 改
+    E set(int index, E element) {
+        // 检查索引越界
+        checkElementIndex(index);
+        // 修改数据
+        E oldVal = data[index];
+        data[index] = element;
+        return oldVal;
+    }
+
+    // 工具方法
+    int getSize() {
+        return size;
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    // 将 data 的容量改为 newCap
+    void resize(int newCap) {
+        E* temp = new E[newCap];
+
+        for (int i = 0; i < size; i++) {
+            temp[i] = data[i];
+        }
+
+        // 释放原数组内存
+        delete[] data;
+
+        data = temp;
+        cap = newCap;
+    }
+
+    bool isElementIndex(int index) {
+        return index >= 0 && index < size;
+    }
+
+    bool isPositionIndex(int index) {
+        return index >= 0 && index <= size;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    void checkElementIndex(int index) {
+        if (!isElementIndex(index)) {
+            throw out_of_range("Index out of bounds");
+        }
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    void checkPositionIndex(int index) {
+        if (!isPositionIndex(index)) {
+            throw out_of_range("Index out of bounds");
+        }
+    }
+
+    void display() {
+        cout << "size = " << size << " cap = " << cap << endl;
+        for (int i = 0; i < size; i++) {
+            cout << data[i] << " ";
+        }
+        cout << endl;
+    }
+
+    ~MyArrayList() {
+        delete[] data;
+    }
+};
+
+int main() {
+    // 初始容量设置为 3
+    MyArrayList<int> arr(3);
+
+    // 添加 5 个元素
+    for (int i = 1; i <= 5; i++) {
+        arr.addLast(i);
+    }
+
+    arr.remove(3);
+    arr.add(1, 9);
+    arr.addFirst(100);
+    int val = arr.removeLast();
+
+    // 100 1 9 2 3
+    for (int i = 0; i < arr.getSize(); i++) {
+        cout << arr.get(i) << endl;
+    }
+
+    return 0;
+}
+```
+
+
+## 关联章节

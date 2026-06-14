@@ -1,103 +1,105 @@
 ---
 title: 拥有稳定性：冒泡排序
-tags:
-  - 排序
-  - 冒泡排序
-  - 稳定排序
-  - 原地排序
-  - 数据结构
+tags: [labuladong, 排序, 基础, 数据结构与算法]
 order: 40
-prerequisites:
-  - "[[42-select-sort]]"
-  - "[[04-cycle-array]]"
-group: 排序
-subgroup: 基础排序
+prerequisites: [39-sort-basic]
+group: 排序 / 基础
 paywall: false
-source: https://labuladong.online/zh/algo/data-structure-basic/bubble-sort/
+source: labuladong.online
+url: https://labuladong.online/zh/algo/data-structure-basic/bubble-sort/
 ---
 
-# 拥有稳定性：冒泡排序
+读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
-## 学习目标
+LeetCode
 
-- 理解 **冒泡排序（Bubble Sort）** 的核心思想：相邻逆序对的逐步交换
-- 通过对 [[42-select-sort|选择排序]] 的三波优化，掌握「**稳定排序 + 提前终止**」的改进思路
-- 能够手写一个支持提前终止的冒泡排序
-- 理解冒泡排序为何是稳定排序，且对 **部分有序数组** 很友好
+力扣
 
-## 一句话总结
+难度
 
-**冒泡排序** 是对选择排序的优化版本：通过反复交换 **相邻逆序对**，把当前未排序部分的最小值「冒泡」到分界线位置。它拥有 **稳定性**，并在 **数组有序或接近有序** 时能提前终止（最好 O(N)），但平均仍为 O(N²)。
+912. Sort an Array
 
-## 前置知识
+912. 排序数组
+
+前置知识
 
 阅读本文前，你需要先学习：
 
-- [[42-select-sort|选择排序所面临的问题]]
-- [[04-cycle-array|数组的增删查改操作]]
+选择排序所面临的问题
 
-## 1. 选择排序的三大缺陷
+数组的增删查改操作
 
-前文 [[42-select-sort|选择排序]] 中我们分析了它有三大问题：
+一句话总结
 
-1. **不稳定排序**：每次交换 `nums[sortedIndex]` 和 `nums[minIndex]`，跨度大，可能打乱相同元素的相对顺序
-2. **与初始有序度无关**：即便输入已经有序，依然执行 n²/2 次比较
-3. **效率低下**：O(N²) 时间复杂度，常规优化无法突破
+冒泡算法是对
+选择排序
+ 的一种优化，通过交换 nums[sortedIndex] 右侧的逆序对完成排序，是一种稳定排序算法。
 
-冒泡排序就是为了解决前两个问题而设计的。
+你可以点开可视化面板，点击播放按钮，然后点击加速/减速按钮调节速度，即可直观感受冒泡排序的过程：
 
-## 2. 第一波优化：重获稳定性
+算法可视化
 
-### 2.1 选择排序为何不稳定？
+前文讲解了
+选择排序
+ 这种最简单直接的排序算法，其中分析了选择排序的几个待优化的问题：
 
-关键在于「交换」步骤：
+1、选择排序算法是个不稳定排序算法，因为每次都要交换最小元素和当前元素的位置，这样可能会改变相同元素的相对位置。
 
-```text
-[2, 2', 2'', 1, 1']
- ^           ^
-sortedIndex  minIndex
+2、选择排序的时间复杂度和初始数据的有序度完全没有关系，即便输入的是一个已经有序的数组，选择排序的时间复杂度依然是
+𝑂
+(
+𝑛
+2
+)
+O(n
+2
+)。
 
-交换后：[1, 2', 2'', _, 1']
-                 ^
-               ↑ 这里原本是 2，现在空出来
-```
+3、选择排序的时间复杂度是
+𝑂
+(
+𝑛
+2
+)
+O(n
+2
+)，具体的操作次数大概是
+𝑛
+2
+/
+2
+n
+2
+/2 次，常规的优化思路无法降低时间复杂度。
 
-把 `nums[minIndex]` 放到 `nums[sortedIndex]` 这一步是稳定的，但 **把 `nums[sortedIndex]` 塞到 `nums[minIndex]`** 这步会破坏相对顺序。
+那么本文就围绕着选择排序的种种缺陷，看看能不能想办法帮它解决一下。
 
-### 2.2 优化思路：插入而非交换
+## 重获排序稳定性
 
-不要图省事用 swap，而是模仿 [[04-cycle-array|数组中部插入]] 的做法：
+前文分析过选择排序失去稳定性的原因，即每次都要交换最小元素（nums[minIndex]）和当前元素（nums[sortedIndex]），这样可能会改变相同元素的相对位置。
 
-```text
-[2, 2', 2'', 1, 1']
- ^           ^
-sortedIndex  minIndex
+你仔细思考这个交换过程，其实它的目标是把 nums[minIndex] 放到到 nums[sortedIndex]，至于 nums[sortedIndex] 这个位置的元素应该去哪里，它并不关心。之所以它用交换操作，只是因为交换操作最简单，不需要涉及数据搬移。
 
-Step 1: 把 nums[sortedIndex..minIndex] 整体后移一位
-        [1, 2', 2'', _, 1']
-              ↑ sortedIndex+1 处空出来
-Step 2: 把最小值放到 sortedIndex
-        [1, 2, 2', 2'', 1']
-```
-
-这样 2, 2', 2'' 的相对顺序就保住了。
-
-### 2.3 代码
+在交换过程中，把 nums[minIndex] 放到到 nums[sortedIndex] 的操作是不影响相同元素的相对顺序的：
 
 ```cpp
+// 对选择排序进行第一波优化，获得了稳定性
 void sort(vector<int>& nums) {
     int n = nums.size();
     int sortedIndex = 0;
     while (sortedIndex < n) {
+        // 在未排序部分中找到最小值 nums[minIndex]
         int minIndex = sortedIndex;
         for (int i = sortedIndex + 1; i < n; i++) {
             if (nums[i] < nums[minIndex]) {
                 minIndex = i;
             }
         }
-        // 把 nums[minIndex] 插入到 nums[sortedIndex] 位置
-        // nums[sortedIndex..minIndex] 整体后移一位
+
+        // 优化：将 nums[minIndex] 插入到 nums[sortedIndex] 的位置
+        // 将 nums[sortedIndex..minIndex] 的元素整体向后移动一位
         int minVal = nums[minIndex];
+        // 数组搬移数据的操作
         for (int i = minIndex; i > sortedIndex; i--) {
             nums[i] = nums[i - 1];
         }
@@ -108,155 +110,231 @@ void sort(vector<int>& nums) {
 }
 ```
 
-> [!warning] 稳定性有了，效率却下降了
-> 加上内层的数据搬移 for 循环，**实际执行次数比标准选择排序多**。Big O 仍是 O(N²)，但常数项显著增大。
-
-## 3. 第二波优化：消除额外循环
-
-### 3.1 合并两个 for 循环
-
-选择排序的核心是「找到最小值 + 把它放到 sortedIndex」。能否在 **找最小值的过程中**，就顺便把它放到正确位置？
-
-答案是：**倒序遍历未排序部分，只要发现逆序对就交换相邻元素**，最小值会像「冒泡」一样逐步浮到 sortedIndex 位置。
-
-```text
-初始 [3, 1, 2, 0, 4]，sortedIndex = 0
-倒序遍历 i = n-1 → 1，发现逆序就 swap
-
-i=3: [3, 1, 2, 0, 4]  (0<4? 否)
-i=2: [3, 1, 2, 0, 4]  (2<0? 否)
-i=1: [3, 1, 0, 2, 4]  (1<2? 是 → swap) → [3, 0, 1, 2, 4]
-                                  (2<4? 是)
-i=0: (1<3? 是 → swap) → [0, 3, 1, 2, 4]
-       (3<1? 否)
-       
-sortedIndex=1
-```
-
-### 3.2 标准冒泡排序代码
+真正破坏稳定性的，是让 nums[sortedIndex] 去 nums[minIndex] 的位置这一步：
 
 ```cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-namespace dsa {
-
-// 冒泡排序（Bubble Sort）
-// 时间复杂度：平均 O(N²)，最好 O(N)（加 flag 后）
-// 空间复杂度：O(1)
-// 稳定性：✅ 稳定（只交换相邻逆序对，不动相同元素）
-void bubbleSort(vector<int>& nums) {
+// 对选择排序进行第二波优化，获得稳定性的同时避免额外的 for 循环
+// 这个算法有另一个名字，叫做冒泡排序
+void sortVector(vector<int>& nums) {
     int n = nums.size();
     int sortedIndex = 0;
     while (sortedIndex < n) {
-        // 倒序遍历 [sortedIndex+1, n)，交换相邻逆序对
+        // 寻找 nums[sortedIndex..] 中的最小值
+        // 同时将这个最小值逐步移动到 nums[sortedIndex] 的位置
         for (int i = n - 1; i > sortedIndex; i--) {
             if (nums[i] < nums[i - 1]) {
-                swap(nums[i], nums[i - 1]);
+                // swap(nums[i], nums[i - 1])
+                int tmp = nums[i];
+                nums[i] = nums[i - 1];
+                nums[i - 1] = tmp;
             }
         }
         sortedIndex++;
     }
 }
-
-} // namespace dsa
 ```
 
-> [!success] 为什么叫「冒泡」？
-> 数组尾部的最小元素，像水泡一样从底部 **逐步冒到顶部**（分界线位置）。每次内层循环结束后，当前未排序部分的最小值就稳稳地落到了 sortedIndex 处。
+可以看到 2, 2', 2'' 这三个元素的相对顺序被打乱了。
 
-## 4. 第三波优化：提前终止
-
-### 4.1 改进思路
-
-加一个 `swapped` 标志位，**如果某一趟内层循环没有发生任何交换**，说明数组已经有序，可以直接跳出。
-
-### 4.2 完整代码
+所以优化的方向就在这里，你不要图省事儿直接把 nums[sortedIndex] 交换到 nums[minIndex]，而是模仿
+在数组中部插入元素的操作
+，将 nums[sortedIndex..minIndex] 的元素整体向后移动一位，把 nums[sortedIndex + 1] 的位置空出来让 nums[sortedIndex] 这个元素去那里待着。
 
 ```cpp
-namespace dsa {
-
-// 冒泡排序（带提前终止）
-// 最好时间复杂度：O(N)（已排序数组直接退出）
-// 平均/最坏：O(N²)
-void bubbleSortEarlyStop(vector<int>& nums) {
+// 进一步优化，数组有序时提前终止算法
+void sortVector(vector<int>& nums) {
     int n = nums.size();
     int sortedIndex = 0;
     while (sortedIndex < n) {
+        // 加一个布尔变量，记录是否进行过交换操作
         bool swapped = false;
         for (int i = n - 1; i > sortedIndex; i--) {
             if (nums[i] < nums[i - 1]) {
-                swap(nums[i], nums[i - 1]);
+                // swap(nums[i], nums[i - 1])
+                int tmp = nums[i];
+                nums[i] = nums[i - 1];
+                nums[i - 1] = tmp;
                 swapped = true;
             }
         }
-        // 这一趟没有任何交换 → 数组已经有序，提前终止
+        // 如果一次交换操作都没有进行，说明数组已经有序，可以提前终止算法
         if (!swapped) {
             break;
         }
         sortedIndex++;
     }
 }
-
-} // namespace dsa
 ```
 
-### 4.3 效果
+可以看到，这次 2, 2', 2'' 和 1, 1' 的相对顺序都没有发生改变，选择排序就变成了稳定排序了。
 
-| 输入类型 | 比较次数 |
-|---------|---------|
-| 完全有序 | n - 1 次（一趟就退出） |
-| 部分有序 | 取决于「逆序对」数量 |
-| 完全逆序 | n²/2 次（最坏情况） |
+具体代码如下，只需要把
+选择排序
+ 代码中交换元素的部分换一下即可：
 
-## 5. 与选择排序的对比
+```
+// 对选择排序进行第一波优化，获得了稳定性
+void sort(vector<int>& nums) {
+    int n = nums.size();
+    int sortedIndex = 0;
+    while (sortedIndex < n) {
+        // 在未排序部分中找到最小值 nums[minIndex]
+        int minIndex = sortedIndex;
+        for (int i = sortedIndex + 1; i < n; i++) {
+            if (nums[i] < nums[minIndex]) {
+                minIndex = i;
+            }
+        }
 
-| 维度 | [[42-select-sort\|选择排序]] | 冒泡排序 |
-|------|---------|---------|
-| 稳定性 | ❌ 不稳定 | ✅ 稳定 |
-| 提前终止 | ❌ 不支持 | ✅ 加 flag 即可 |
-| 实际比较次数 | ~n²/2 | ≤ n²/2 |
-| 交换次数 | 最多 N 次 | 取决于逆序对数 |
-| 原地 | ✅ | ✅ |
+        // 优化：将 nums[minIndex] 插入到 nums[sortedIndex] 的位置
+        // 将 nums[sortedIndex..minIndex] 的元素整体向后移动一位
+        int minVal = nums[minIndex];
+        // 数组搬移数据的操作
+        for (int i = minIndex; i > sortedIndex; i--) {
+            nums[i] = nums[i - 1];
+        }
+        nums[sortedIndex] = minVal;
 
-> [!tip] 选择 vs 冒泡的工程选择
-> 如果 **交换代价远大于比较代价**（比如写入 EEPROM、SSD 块擦写），**选择排序更优**（交换次数少）。
-> 如果 **稳定性是刚需**，必须用冒泡排序。
-> 否则在大数据量场景两者都不实用，应选 [[44-quick-sort|快速排序]]。
+        sortedIndex++;
+    }
+}
+```
 
-## 6. 复杂度表
+你可以拿着这个算法去力扣第 912 题「排序数组」提交一下，虽然最后会超时无法通过，但是可以证明这个算法的正确性是没有问题的。
 
-| 指标 | 值 |
-|------|---|
-| 最好时间 | O(N)（加 flag 提前终止） |
-| 平均时间 | O(N²) |
-| 最坏时间 | O(N²) |
-| 空间复杂度 | O(1) |
-| 稳定性 | ✅ 稳定 |
-| 原地性 | ✅ 原地 |
+这个算法对比标准的选择排序，虽然拥有了稳定性，但是执行效率会下降，虽然从 Big O 表示法的角度来看，两层嵌套循环的时间复杂度还是
+𝑂
+(
+𝑛
+2
+)
+O(n
+2
+)，但毕竟又加了一个 for 循环，实际执行次数肯定会大于标准选择排序的
+𝑛
+2
+/
+2
+n
+2
+/2 次。
 
-## 7. 冒泡排序的适用场景
+下面我们再来看看，能不能进一步优化，避免这个额外的 for 循环。
 
-虽然冒泡排序在大数据量场景几乎不会被使用，但它的价值在于：
+## 优化时间复杂度
 
-- **教学价值**：通过反复优化，认识「稳定性」「提前终止」这些指标
-- **小数据 + 已排序场景**：N ≤ 50 且接近有序时，常数极小，比快排还快
-- **稳定排序需求 + 小数据**：在 N 不大且需要稳定的场景
+仔细观察上面的算法代码，while 循环内部主要做了两件事：
 
-## 下一章
+1、第一个 for 循环寻找 nums[sortedIndex..] 中的最小值。
 
-→ [[41-insertion-sort|运用逆向思维：插入排序]]：用「**往左插**」替代「**找最小值往左放**」，得到另一种稳定排序。
+2、第二个 for 循环将这个最小值插入到 nums[sortedIndex] 的位置。
 
-## 相关章节
+那么我们能否将这两个步骤合在一起呢？具体来说，你在寻找 nums[sortedIndex..] 中的最小值的时候能不能做些力所能及的事情，能不能做到找到最小值后，它就已经被放在正确的位置上，不需要再进行数据搬移了？
 
-- [[42-select-sort|选择排序]] — 冒泡排序的优化起点
-- [[41-insertion-sort|插入排序]] — 另一种稳定排序
-- [[46-shell-sort|希尔排序]] — 插入排序的「跳步」优化，突破 O(N²)
-- [[39-sort-basic|排序算法的关键指标]] — 稳定性的价值
-- LeetCode [[#912|912. 排序数组]]
+答案是可以的，看我操作：
 
-## 练习题
+```
+// 对选择排序进行第二波优化，获得稳定性的同时避免额外的 for 循环
+// 这个算法有另一个名字，叫做冒泡排序
+void sortVector(vector<int>& nums) {
+    int n = nums.size();
+    int sortedIndex = 0;
+    while (sortedIndex < n) {
+        // 寻找 nums[sortedIndex..] 中的最小值
+        // 同时将这个最小值逐步移动到 nums[sortedIndex] 的位置
+        for (int i = n - 1; i > sortedIndex; i--) {
+            if (nums[i] < nums[i - 1]) {
+                // swap(nums[i], nums[i - 1])
+                int tmp = nums[i];
+                nums[i] = nums[i - 1];
+                nums[i - 1] = tmp;
+            }
+        }
+        sortedIndex++;
+    }
+}
+```
 
-| 难度 | 题号 | 题目 |
-|------|------|------|
-| 中 | 912 | 排序数组 |
+算法可视化
+
+这个优化就比较巧妙了，倒序遍历 nums[sortedIndex..]，如果发现逆序对儿，就交换顺序，这样最小值就会逐步移动到 nums[sortedIndex] 的位置。
+
+而且由于我们只交换相邻的逆序对儿，不会去碰值相同的元素，所以这个算法是稳定排序。
+
+这个算法的时间复杂度依然是
+𝑂
+(
+𝑛
+2
+)
+O(n
+2
+)，实际执行次数和选择排序类似，也是一个等差数列求和，大约是
+𝑛
+2
+/
+2
+n
+2
+/2 次。
+
+冒泡排序
+
+这个算法的名字叫做冒泡排序，因为它的执行过程就像从数组尾部向头部冒出水泡，每次都会将最小值顶到正确的位置。
+
+## 提前终止算法
+
+上面说到选择排序的一个问题是，其时间复杂度和初始数据的有序度完全没有关系，即便输入的数组已经有序，选择排序依然会执行
+𝑂
+(
+𝑛
+2
+)
+O(n
+2
+) 次操作。
+
+在上面的一些列优化之后，就可以解决这个问题了，具体看代码：
+
+```
+// 进一步优化，数组有序时提前终止算法
+void sortVector(vector<int>& nums) {
+    int n = nums.size();
+    int sortedIndex = 0;
+    while (sortedIndex < n) {
+        // 加一个布尔变量，记录是否进行过交换操作
+        bool swapped = false;
+        for (int i = n - 1; i > sortedIndex; i--) {
+            if (nums[i] < nums[i - 1]) {
+                // swap(nums[i], nums[i - 1])
+                int tmp = nums[i];
+                nums[i] = nums[i - 1];
+                nums[i - 1] = tmp;
+                swapped = true;
+            }
+        }
+        // 如果一次交换操作都没有进行，说明数组已经有序，可以提前终止算法
+        if (!swapped) {
+            break;
+        }
+        sortedIndex++;
+    }
+}
+```
+
+算法可视化
+
+好了，以上就是针对选择排序的一系列优化，最终使它拥有了排序稳定性，并支持在数组有序时提前终止算法。唯一的遗憾是，时间复杂度依然是
+𝑂
+(
+𝑛
+2
+)
+O(n
+2
+)，并没有降低。
+
+下面我们继续探讨，看看还有什么方法能够改进选择排序。
+
+
+## 关联章节

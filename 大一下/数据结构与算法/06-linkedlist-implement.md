@@ -1,483 +1,1079 @@
 ---
 title: 链表的代码实现
-tags: [数据结构, 链表, 实现]
+tags: [labuladong, 链表, 数据结构与算法]
 order: 6
 prerequisites: [05-linkedlist-basic]
 group: 链表
 paywall: false
-source: labuladong
+source: labuladong.online
+url: https://labuladong.online/zh/algo/data-structure-basic/linkedlist-implement/
 ---
 
-# 链表的代码实现
+读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
-> [!info] 章节定位
-> 上一章讲了链表原理，本章落到代码：用 C++ 实现一个**支持完整增删查改的 `MyLinkedList<E>`**（双链表版 + 单链表版）。重点掌握「**虚拟头尾节点**」「**持头尾指针**」「**删除时清空指针**」三个工程技巧。
+LeetCode
 
-## 📚 学习目标
+力扣
 
-- 用 C++ 模板实现 `MyLinkedList<E>`，支持 8 个核心 API
-- 理解「**虚拟头尾节点**」如何消除头尾操作的边界特例
-- 知道为什么链表容器要**同时持有头指针 + 尾指针**
-- 学会**单链表 + 虚拟头结点**的简化版实现
-- 能用本实现去解 LeetCode 707「设计链表」（注意：方法名要改）
+难度
 
-## 🎯 一句话总结
+707. Design Linked List
 
-> 链表实现的关键是「**双链表 + 虚拟头尾节点 + 同时持头尾指针**」三件套；这能消除「头节点是 null」「尾节点 next 是 null」「单链表删尾要遍历」等所有边界特例，让增删查改的代码**全部对称**。
+707. 设计链表
 
-## 🔗 前置知识
+前置知识
 
-- [[00-intro|本章导读]]
-- [[01-complexity|时间空间复杂度入门]]
-- [[02-array-basic|数组原理]]
-- [[05-linkedlist-basic|链表原理]] — **必读**
-- C++ 模板、智能指针（或手写 `new/delete`）
+阅读本文前，你需要先学习：
 
-## 📖 正文
+链表（链式存储）基础
 
-### 1. 关键点一：同时持有头尾节点的引用
+## 几个关键点
 
-工程中的链表容器（Java `LinkedList`、C++ `std::list`）几乎都是**双链表 + 持头尾指针**，原因：
+下面我会分别用双链表和单链给出一个简单的 MyLinkedList 代码实现，包含了基本的增删查改功能。这里给出几个关键点，等会你看代码的时候可以着重注意一下。
 
-| 操作 | 只有头指针 | 头尾都有 |
-| --- | --- | --- |
-| 头部插入 / 删除 | O(1) | O(1) |
-| 尾部插入 | O(n) 要遍历 | **O(1)** |
-| 尾部删除 | O(n) 单链表；O(1) 双链表 | O(1) |
-| 中间按索引 | O(n) | O(n)，可双向逼近省一半时间 |
+### 关键点一、同时持有头尾节点的引用
 
-> 现实里「**在容器尾部添加元素**」是超高频操作（`addLast` 是最常调用的方法），把这条路径优化到 O(1) 非常值得。
+在力扣做题时，一般题目给我们传入的就是单链表的头指针。但是在实际开发中，用的都是双链表，而双链表一般会同时持有头尾节点的引用。
 
-「持尾指针」听起来简单，但有个**陷阱**：
+因为在软件开发中，在容器尾部添加元素是个非常高频的操作，双链表持有尾部节点的引用，就可以在
+𝑂
+(
+1
+)
+O(1) 的时间复杂度内完成尾部添加元素的操作。
 
-```cpp
-tail = newNode;   // 假设 tail 当前指向链表最后一个节点
-```
+对于单链表来说，持有尾部节点的引用也有优化效果。比如你要在单链表尾部添加元素，如果没有尾部节点的引用，你就需要遍历整个链表找到尾部节点，时间复杂度是
+𝑂
+(
+𝑛
+)
+O(n)；如果有尾部节点的引用，就可以在
+𝑂
+(
+1
+)
+O(1) 的时间复杂度内完成尾部添加元素的操作。
 
-如果**删除了尾节点**，那个 `tail` 引用就指向了一个**无效节点**。常见解决：
+细心的读者可能会说，即便如此，如果删除一次单链表的尾结点，那么之前尾结点的引用就失效了，还是需要遍历一遍链表找到尾结点。
 
-- **双链表**：删尾后用 `tail = tail->prev` O(1) 找回。
-- **单链表**：删尾后必须**遍历**找新尾。可以顺便在 `addLast` 维护 tail 之后，**在 `removeLast` 时遍历**。
+是的，但你再仔细想想，删除单链表尾结点的时候，是不是也得遍历到倒数第二个节点（尾结点的前驱），才能通过指针操作把尾结点删掉？那么这个时候，你不就可以顺便把尾结点的引用给更新了吗？
 
-### 2. 关键点二：虚拟头尾节点
+### 关键点二、虚拟头尾节点
 
-#### 2.1 痛点：边界特例
+在上一篇文章
+链表基础
+ 中我提到过「虚拟头尾节点」技巧，它的原理很简单，就是在创建双链表时就创建一个虚拟头节点和一个虚拟尾节点，无论双链表是否为空，这两个节点都存在。这样就不会出现空指针的问题，可以避免很多边界情况的处理。
 
-如果不引入虚拟节点，链表的「头部插入」「头部删除」「空链表」要写一堆 `if (head == nullptr)` 的特例：
-
-```cpp
-void addFirst(E e) {
-    Node* n = new Node(e);
-    if (head == nullptr) {  // 特例：空链表
-        head = n;
-        tail = n;
-    } else {                // 一般情况
-        n->next = head;
-        head = n;
-    }
-}
-```
-
-类似特例在「删除头部」「删除尾部」上还要各写一次。
-
-#### 2.2 解决方案：永远存在 dummy head + dummy tail
-
-**无论链表是否为空**，`dummyHead` 和 `dummyTail` 两个节点都存在。空链表长这样：
-
-```text
-dummyHead <-> dummyTail
-```
-
-非空链表长这样（假设有 1, 2, 3）：
-
-```text
-dummyHead <-> 1 <-> 2 <-> 3 <-> dummyTail
-```
-
-加上 dummy 后，**所有插入 / 删除都可以统一为「在两个已知节点之间插入 / 删除」**——不再有特例。
-
-#### 2.3 dummy 不计入 size
-
-> [!warning] 关键约定
-> 虚拟节点是**内部实现细节**，对外**不可见**：
-> - `size()` 只计真实节点，不计 dummy。
-> - `get(i)` 的索引 `i` 从**第一个真实节点**算起（不是从 `dummyHead`）。
-> - 任何遍历循环的终止条件应该是 `p != dummyTail`（而不是 `p != nullptr`）。
-
-### 3. 关键点三：删除时清空指针
+举例来说，假设虚拟头尾节点分别是 dummyHead 和 dummyTail，那么一条空的双链表长这样：
 
 ```cpp
-Node* toDel = x;
-x->prev->next = x->next;
-x->next->prev = x->prev;
-x->prev = nullptr;   // 把被删节点的指针置空
-x->next = nullptr;
-delete toDel;
-```
+#include <iostream>
+#include <string>
+#include <stdexcept>
 
-- **C++ 必须**显式 `delete`（否则内存泄漏）。
-- **置空指针**是**好习惯**：避免被误用、帮助调试（gdb 看到 `nullptr` 就知道「这节点被删了」）。
-- 对 Java/Go 来说，「置空 prev/next」不是必须的（GC 不可达就回收），但**仍然推荐**——避免「野指针」风格的潜在 bug。
-
-### 4. 双链表完整实现（C++）
-
-```cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-namespace dsa {
-
-template <typename E>
+template<typename E>
 class MyLinkedList {
-private:
+    // 虚拟头尾节点
     struct Node {
-        E       val;
-        Node*   prev;
-        Node*   next;
-        Node(E v) : val(v), prev(nullptr), next(nullptr) {}
+        E val;
+        Node* next;
+        Node* prev;
+
+        Node(E value) : val(value), next(nullptr), prev(nullptr) {}
     };
 
-    Node* head_;   // dummy head
-    Node* tail_;   // dummy tail
-    int   size_;
+    Node* head;
+    Node* tail;
+    int size;
 
-    // 工具：插入到 pPrev 与 pNext 之间
-    void addBetween(Node* pPrev, Node* pNext, const E& e) {
-        Node* x = new Node(e);
-        x->prev  = pPrev;
-        x->next  = pNext;
-        pPrev->next = x;
-        pNext->prev = x;
-        size_++;
+public:
+    // 构造函数初始化虚拟头尾节点
+    MyLinkedList() {
+        head = new Node(E());
+        tail = new Node(E());
+        head->next = tail;
+        tail->prev = head;
+        size = 0;
     }
 
-    // 工具：把 node 从链表中摘下
-    E removeNode(Node* node) {
-        Node* p = node->prev;
-        Node* n = node->next;
-        p->next = n;
-        n->prev = p;
-        E val = node->val;
-        node->prev = nullptr;
-        node->next = nullptr;
-        delete node;
-        size_--;
+    ~MyLinkedList() {
+        while (size > 0) {
+            removeFirst();
+        }
+        delete head;
+        delete tail;
+    }
+
+    // ***** 增 *****
+
+    void addLast(E e) {
+        Node* x = new Node(e);
+        Node* temp = tail->prev;
+
+        temp->next = x;
+        x->prev = temp;
+        // temp <-> x
+
+        x->next = tail;
+        tail->prev = x;
+        // temp <-> x <-> tail
+        size++;
+    }
+
+    void addFirst(E e) {
+        Node* x = new Node(e);
+        Node* temp = head->next;
+        // head <-> temp
+        temp->prev = x;
+        x->next = temp;
+
+        head->next = x;
+        x->prev = head;
+        // head <-> x <-> temp
+        size++;
+    }
+
+    void add(int index, E element) {
+        checkPositionIndex(index);
+        if (index == size) {
+            addLast(element);
+            return;
+        }
+
+        // 找到 index 对应的 Node
+        Node* p = getNode(index);
+        Node* temp = p->prev;
+        // temp <-> p
+
+        // 新要插入的 Node
+        Node* x = new Node(element);
+
+        p->prev = x;
+        temp->next = x;
+
+        x->prev = temp;
+        x->next = p;
+
+        // temp <-> x <-> p
+
+        size++;
+    }
+
+    // ***** 删 *****
+
+    E removeFirst() {
+        if (size < 1) {
+            throw out_of_range("No elements to remove");
+        }
+        // 虚拟节点的存在是我们不用考虑空指针的问题
+        Node* x = head->next;
+        Node* temp = x->next;
+        // head <-> x <-> temp
+        head->next = temp;
+        temp->prev = head;
+
+        E val = x->val;
+        delete x;
+        // head <-> temp
+
+        size--;
         return val;
     }
 
-    Node* getNode(int i) const {
-        checkElementIndex(i);
-        // 双向逼近：索引小从头走，索引大从尾走
-        if (i < size_ / 2) {
-            Node* p = head_->next;
-            for (int k = 0; k < i; ++k) p = p->next;
-            return p;
-        } else {
-            Node* p = tail_->prev;
-            for (int k = size_ - 1; k > i; --k) p = p->prev;
-            return p;
-        }
-    }
-
-    bool isElementIndex(int i) const { return i >= 0 && i < size_; }
-    bool isPositionIndex(int i) const { return i >= 0 && i <= size_; }
-    void checkElementIndex(int i) const {
-        if (!isElementIndex(i)) throw out_of_range("Index: " + to_string(i));
-    }
-    void checkPositionIndex(int i) const {
-        if (!isPositionIndex(i)) throw out_of_range("Index: " + to_string(i));
-    }
-
-public:
-    MyLinkedList() : size_(0) {
-        head_ = new Node(E{});
-        tail_ = new Node(E{});
-        head_->next = tail_;
-        tail_->prev = head_;
-    }
-    ~MyLinkedList() {
-        Node* p = head_;
-        while (p) {
-            Node* n = p->next;
-            delete p;
-            p = n;
-        }
-    }
-
-    MyLinkedList(const MyLinkedList&) = delete;
-    MyLinkedList& operator=(const MyLinkedList&) = delete;
-
-    // ===== 增 =====
-    void addFirst(const E& e) { addBetween(head_, head_->next, e); }
-    void addLast (const E& e) { addBetween(tail_->prev, tail_, e); }
-    void add(int i, const E& e) {
-        checkPositionIndex(i);
-        if (i == size_) { addLast(e); return; }
-        Node* p = getNode(i);
-        addBetween(p->prev, p, e);
-    }
-
-    // ===== 删 =====
-    E removeFirst() {
-        if (size_ < 1) throw runtime_error("removeFirst from empty");
-        return removeNode(head_->next);
-    }
     E removeLast() {
-        if (size_ < 1) throw runtime_error("removeLast from empty");
-        return removeNode(tail_->prev);
-    }
-    E remove(int i) {
-        checkElementIndex(i);
-        return removeNode(getNode(i));
-    }
-
-    // ===== 查 / 改 =====
-    E getFirst() const {
-        if (size_ < 1) throw runtime_error("getFirst from empty");
-        return head_->next->val;
-    }
-    E getLast() const {
-        if (size_ < 1) throw runtime_error("getLast from empty");
-        return tail_->prev->val;
-    }
-    E get(int i) const { return getNode(i)->val; }
-    E set(int i, const E& e) {
-        Node* p = getNode(i);
-        E old = p->val;
-        p->val = e;
-        return old;
-    }
-
-    // ===== 工具 =====
-    int  size() const { return size_; }
-    bool isEmpty() const { return size_ == 0; }
-
-    void display() const {
-        cout << "size=" << size_ << " [";
-        for (Node* p = head_->next; p != tail_; p = p->next) {
-            if (p != head_->next) cout << " <-> ";
-            cout << p->val;
+        if (size < 1) {
+            throw out_of_range("No elements to remove");
         }
-        cout << "]\n";
+        Node* x = tail->prev;
+        Node* temp = tail->prev->prev;
+        // temp <-> x <-> tail
+
+        tail->prev = temp;
+        temp->next = tail;
+
+        E val = x->val;
+        x->prev = nullptr;
+        x->next = nullptr;
+        delete x;
+        // temp <-> tail
+
+        size--;
+        return val;
+    }
+
+    E remove(int index) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node* x = getNode(index);
+        Node* prev = x->prev;
+        Node* next = x->next;
+        // prev <-> x <-> next
+        prev->next = next;
+        next->prev = prev;
+
+        E val = x->val;
+        x->prev = nullptr;
+        x->next = nullptr;
+        delete x;
+        // prev <-> next
+
+        size--;
+        return val;
+    }
+
+    // ***** 查 *****
+
+    E get(int index) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node* p = getNode(index);
+
+        return p->val;
+    }
+
+    E getFirst() {
+        if (size < 1) {
+            throw out_of_range("No elements in the list");
+        }
+
+        return head->next->val;
+    }
+
+    E getLast() {
+        if (size < 1) {
+            throw out_of_range("No elements in the list");
+        }
+
+        return tail->prev->val;
+    }
+
+    // ***** 改 *****
+
+    E set(int index, E val) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node* p = getNode(index);
+
+        E oldVal = p->val;
+        p->val = val;
+
+        return oldVal;
+    }
+
+    // ***** 其他工具函数 *****
+
+    int getSize() const {
+        return size;
+    }
+
+    bool isEmpty() const {
+        return size == 0;
+    }
+
+    void display() {
+        cout << "size = " << size << endl;
+        for (Node* p = head->next; p != tail; p = p->next) {
+            cout << p->val << " <-> ";
+        }
+        cout << "nullptr" << endl;
+        cout << endl;
+    }
+
+private:
+    Node* getNode(int index) {
+        checkElementIndex(index);
+        Node* p = head->next;
+        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
+        for (int i = 0; i < index; i++) {
+            p = p->next;
+        }
+        return p;
+    }
+
+    bool isElementIndex(int index) const {
+        return index >= 0 && index < size;
+    }
+
+    bool isPositionIndex(int index) const {
+        return index >= 0 && index <= size;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    void checkElementIndex(int index) const {
+        if (!isElementIndex(index))
+            throw out_of_range("Index: " + to_string(index) + ", Size: " + to_string(size));
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    void checkPositionIndex(int index) const {
+        if (!isPositionIndex(index))
+            throw out_of_range("Index: " + to_string(index) + ", Size: " + to_string(size));
     }
 };
 
-} // namespace dsa
-
 int main() {
-    dsa::MyLinkedList<int> list;
+    MyLinkedList<int> list;
     list.addLast(1);
     list.addLast(2);
     list.addLast(3);
     list.addFirst(0);
     list.add(2, 100);
-    list.display();   // size=5 [0 <-> 1 <-> 100 <-> 2 <-> 3]
 
-    cout << "get(2)=" << list.get(2) << "\n";      // 100
-    list.set(2, 200);
-    cout << "get(2)=" << list.get(2) << "\n";      // 200
-    cout << "removeFirst=" << list.removeFirst() << "\n";
-    cout << "removeLast=" << list.removeLast() << "\n";
     list.display();
+    // size = 5
+    // 0 <-> 1 <-> 100 <-> 2 <-> 3 <-> null
+
     return 0;
 }
 ```
 
-### 5. 单链表版实现（更接近力扣风格）
+如果你添加 1,2,3 几个元素，那么链表长这样：
 
 ```cpp
-#include <bits/stdc++.h>
-using namespace std;
-
-namespace dsa {
+#include <iostream>
+#include <string>
+#include <stdexcept>
 
 template <typename E>
-class MySinglyLinkedList {
+class MyLinkedList2 {
 private:
+    // 节点结构
     struct Node {
-        E     val;
+        E val;
         Node* next;
-        Node(E v) : val(v), next(nullptr) {}
+
+        Node(E value) : val(value), next(nullptr) {}
     };
 
-    Node* head_;    // 虚拟头结点
-    Node* tail_;    // 真实尾节点引用
-    int   size_;
+    Node* head;
+    // 实际的尾部节点引用
+    Node* tail;
+    int size_;
 
 public:
-    MySinglyLinkedList() : head_(new Node(E{})), tail_(head_), size_(0) {}
-    ~MySinglyLinkedList() {
-        Node* p = head_;
-        while (p) { Node* n = p->next; delete p; p = n; }
+    MyLinkedList2() {
+        head = new Node(E());
+        tail = head;
+        size_ = 0;
     }
 
-    MySinglyLinkedList(const MySinglyLinkedList&) = delete;
-    MySinglyLinkedList& operator=(const MySinglyLinkedList&) = delete;
+    ~MyLinkedList2() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+    }
 
-    // ===== 增 =====
-    void addFirst(const E& e) {
-        Node* n = new Node(e);
-        n->next = head_->next;
-        head_->next = n;
-        if (size_ == 0) tail_ = n;
-        size_++;
-    }
-    void addLast(const E& e) {
-        Node* n = new Node(e);
-        tail_->next = n;
-        tail_ = n;
-        size_++;
-    }
-    void add(int i, const E& e) {
-        if (i < 0 || i > size_) throw out_of_range("i");
-        if (i == size_) { addLast(e); return; }
-        // 找前驱
-        Node* prev = head_;
-        for (int k = 0; k < i; ++k) prev = prev->next;
-        Node* n = new Node(e);
-        n->next = prev->next;
-        prev->next = n;
+    void addFirst(E e) {
+        Node* newNode = new Node(e);
+        newNode->next = head->next;
+        head->next = newNode;
+        if (size_ == 0) {
+            tail = newNode;
+        }
         size_++;
     }
 
-    // ===== 删 =====
+    void addLast(E e) {
+        Node* newNode = new Node(e);
+        tail->next = newNode;
+        tail = newNode;
+        size_++;
+    }
+
+    void add(int index, E element) {
+        checkPositionIndex(index);
+
+        if (index == size_) {
+            addLast(element);
+            return;
+        }
+
+        Node* prev = head;
+        for (int i = 0; i < index; i++) {
+            prev = prev->next;
+        }
+        Node* newNode = new Node(element);
+        newNode->next = prev->next;
+        prev->next = newNode;
+        size_++;
+    }
+
     E removeFirst() {
-        if (size_ < 1) throw runtime_error("empty");
-        Node* f = head_->next;
-        head_->next = f->next;
-        if (size_ == 1) tail_ = head_;
-        E v = f->val;
-        delete f;
+        if (isEmpty()) {
+            throw out_of_range("No elements to remove");
+        }
+        Node* first = head->next;
+        head->next = first->next;
+        if (size_ == 1) {
+            tail = head;
+        }
         size_--;
-        return v;
-    }
-    E removeLast() {
-        if (size_ < 1) throw runtime_error("empty");
-        // 单链表必须找前驱
-        Node* prev = head_;
-        while (prev->next != tail_) prev = prev->next;
-        E v = tail_->val;
-        delete tail_;
-        tail_ = prev;
-        tail_->next = nullptr;
-        size_--;
-        return v;
-    }
-    E remove(int i) {
-        if (i < 0 || i >= size_) throw out_of_range("i");
-        Node* prev = head_;
-        for (int k = 0; k < i; ++k) prev = prev->next;
-        Node* target = prev->next;
-        prev->next = target->next;
-        if (i == size_ - 1) tail_ = prev;  // 删的是尾，更新 tail
-        E v = target->val;
-        delete target;
-        size_--;
-        return v;
+        E val = first->val;
+        delete first;
+        return val;
     }
 
-    // ===== 查 / 改 =====
-    E get(int i) const {
-        if (i < 0 || i >= size_) throw out_of_range("i");
-        Node* p = head_->next;
-        for (int k = 0; k < i; ++k) p = p->next;
+    E removeLast() {
+        if (isEmpty()) {
+            throw out_of_range("No elements to remove");
+        }
+
+        Node* prev = head;
+        while (prev->next != tail) {
+            prev = prev->next;
+        }
+        E val = tail->val;
+        delete tail;
+        prev->next = nullptr;
+        tail = prev;
+        size_--;
+        return val;
+    }
+
+    E remove(int index) {
+        checkElementIndex(index);
+
+        Node* prev = head;
+        for (int i = 0; i < index; i++) {
+            prev = prev->next;
+        }
+
+        Node* nodeToRemove = prev->next;
+        prev->next = nodeToRemove->next;
+        // 删除的是最后一个元素
+        if (index == size_ - 1) {
+            tail = prev;
+        }
+        size_--;
+        E val = nodeToRemove->val;
+        delete nodeToRemove;
+        return val;
+    }
+
+    // ***** 查 *****
+
+    E getFirst() {
+        if (isEmpty()) {
+            throw out_of_range("No elements in the list");
+        }
+        return head->next->val;
+    }
+
+    E getLast() {
+        if (isEmpty()) {
+            throw out_of_range("No elements in the list");
+        }
+        return tail->val;
+    }
+
+    E get(int index) {
+        checkElementIndex(index);
+        Node* p = getNode(index);
         return p->val;
     }
-    E set(int i, const E& e) {
-        if (i < 0 || i >= size_) throw out_of_range("i");
-        Node* p = head_->next;
-        for (int k = 0; k < i; ++k) p = p->next;
-        E old = p->val;
-        p->val = e;
-        return old;
+
+    // ***** 改 *****
+
+    E set(int index, E element) {
+        checkElementIndex(index);
+        Node* p = getNode(index);
+
+        E oldVal = p->val;
+        p->val = element;
+
+        return oldVal;
     }
 
-    int  size()   const { return size_; }
-    bool isEmpty() const { return size_ == 0; }
+    // ***** 其他工具函数 *****
+    int size() {
+        return size_;
+    }
+
+    bool isEmpty() {
+        return size_ == 0;
+    }
+
+private:
+    bool isElementIndex(int index) {
+        return index >= 0 && index < size_;
+    }
+
+    bool isPositionIndex(int index) {
+        return index >= 0 && index <= size_;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    void checkElementIndex(int index) {
+        if (!isElementIndex(index)) {
+            throw out_of_range("Index: " + to_string(index) + ", size_: " + to_string(size_));
+        }
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    void checkPositionIndex(int index) {
+        if (!isPositionIndex(index)) {
+            throw out_of_range("Index: " + to_string(index) + ", size_: " + to_string(size_));
+        }
+    }
+
+    // 返回 index 对应的 Node
+    // 注意：请保证传入的 index 是合法的
+    Node* getNode(int index) {
+        Node* p = head->next;
+        for (int i = 0; i < index; i++) {
+            p = p->next;
+        }
+        return p;
+    }
 };
 
-} // namespace dsa
+int main() {
+    MyLinkedList2<int> list;
+    list.addFirst(1);
+    list.addFirst(2);
+    list.addLast(3);
+    list.addLast(4);
+    list.add(2, 5);
+
+    cout << list.removeFirst() << endl; // 2
+    cout << list.removeLast() << endl; // 4
+    cout << list.remove(1) << endl; // 5
+
+    cout << list.getFirst() << endl; // 1
+    cout << list.getLast() << endl; // 3
+    cout << list.get(1) << endl; // 3
+
+    return 0;
+}
 ```
 
-### 6. 关键操作的复杂度
+你以前要把在头部插入元素、在尾部插入元素和在中间插入元素几种情况分开讨论，现在有了头尾虚拟节点，无论链表是否为空，都只需要考虑在中间插入元素的情况就可以了，这样代码会简洁很多。
 
-| 操作 | 双链表（持头尾） | 单链表（持头尾） | 数组（对比） |
-| --- | --- | --- | --- |
-| `addFirst` | O(1) | O(1) | O(n) |
-| `addLast` | **O(1)** | **O(1)** | 摊销 O(1) |
-| `add(i, e)` | O(min(i, n-i)) | O(i) | O(n) |
-| `removeFirst` | O(1) | O(1) | O(n) |
-| `removeLast` | **O(1)** | O(n) 找前驱 | 摊销 O(1) |
-| `remove(i)` | O(min(i, n-i)) | O(i) | O(n) |
-| `get(i)` | O(min(i, n-i)) | O(i) | **O(1)** |
-| `set(i, e)` | O(min(i, n-i)) | O(i) | **O(1)** |
-| 空间开销 | 2 ptr/节点 | 1 ptr/节点 | 0 |
+当然，虚拟头结点会多占用一点内存空间，但是比起给你解决的麻烦，这点空间消耗是划算的。
 
-> [!tip] 单链表 `removeLast` 为何慢
-> 单链表**没有 prev**，要删尾必须遍历到 `prev->next == tail` 的位置。**这正是双链表存在的理由**——多 8 字节换 O(1) 尾删。
+对于单链表，虚拟头结点有一定的简化作用，但虚拟尾节点没有太大作用。
 
-### 7. 用本实现验证 LeetCode 707
+虚拟节点是内部实现，对外不可见
 
-> [!tip] 练手
-> LeetCode 707「设计链表」要求实现 `get(index)`、`addAtHead`、`addAtTail`、`addAtIndex`、`deleteAtIndex`、`getLength`。  
-> 把我们的 `MyLinkedList<int>` 套一层：
-> ```cpp
-> class MyLinkedList {
->     dsa::MyLinkedList<int> impl;
-> public:
->     int  get(int i) { return impl.get(i); }
->     void addAtHead(int v) { impl.addFirst(v); }
->     void addAtTail(int v) { impl.addLast(v); }
->     void addAtIndex(int i, int v) { impl.add(i, v); }
->     void deleteAtIndex(int i) { impl.remove(i); }
-> };
-> ```
-> 提交即可 AC（前提是 `get` 返回值类型对齐）。
+虚拟节点是你内部实现数据结构的技巧，对外是不可见的。比如按照索引获取元素的 get(index) 方法，都是从真实节点开始计算索引，而不是从虚拟节点开始计算。
 
-### 8. 一些工程细节
+### 关键点三、内存泄露？
 
-#### 8.1 内存安全
+在前文
+动态数组实现
+ 中，我提到了删除元素时，要注意内存泄露的问题。那么在链表中，删除元素会不会也有内存泄露的问题呢？
 
-- **C++ 异常安全**：`new` 失败会抛 `bad_alloc`，我们的代码在 `new` 之前已经检查了索引，因此不会出现「半构造」状态。
-- **C++ 析构**：一定要 `delete` 所有 `new` 出来的节点。
-- **C++ 拷贝构造**：默认浅拷贝会让两个 `MyLinkedList` 共享同一片节点，析构时 double free。我们**显式 `= delete`** 禁用拷贝；如果业务需要，自己写深拷贝或 `std::shared_ptr` / `std::unique_ptr` 包装。
+尤其是这样的写法，你觉得有没有问题：
 
-#### 8.2 `int*` vs `Node**` 的取舍
+```
+// 假设单链表头结点 head = 1 -> 2 -> 3 -> 4 -> 5
 
-`getNode` 返回 `Node*` 是**内部接口**，调用方不应直接操作它。一旦调用方 `delete` 那个 `Node*`，整个链表就坏了。**生产代码应该返回 `iterator` 或隐藏 `Node` 类型**。
+// 删除单链表头结点
+head = head.next;
 
-#### 8.3 迭代器
+// 此时 head = 2 -> 3 -> 4 -> 5
+```
 
-要支持 C++ `for (auto x : list)`，需要提供 `begin()` / `end()` / `iterator` 类。这一步留作练习（生产版 `std::list` 内部就是这种结构）。
+细心的读者可能认为这样写会有内存泄露的问题，因为原来的那个头结点 1 的 next 指针没有断开，依然指向着节点 2。
 
-## 📊 复杂度一览
+但实际上这样写是 OK 的，因为 Java 的垃圾回收的判断机制是看这个对象是否被别人引用，而并不会 care 这个对象是否还引用着别人。
 
-| 维度 | 双链表 | 单链表 | 数组（对比） |
-| --- | --- | --- | --- |
-| 头/尾增 | O(1) | O(1) 头 / O(1) 尾（有 tail） | O(n) / 摊销 O(1) |
-| 头/尾删 | O(1) | O(1) 头 / O(n) 尾 | O(n) / 摊销 O(1) |
-| 中间增删 | O(min(i, n-i)) | O(i) | O(n) |
-| 按索引读 | O(min(i, n-i)) | O(i) | **O(1)** |
-| 空间 | 2 ptr/节点 | 1 ptr/节点 | 0 |
-| 适用 | 通用容器 | 力扣 / 内存敏感 | 读多写少 |
+那个节点 1 的 next 指针确实还指向着节点 2，但是并没有别的指针引用节点 1 了，所以节点 1 最终会被垃圾回收器回收释放。所以说这个场景和数组中删除元素的场景是不一样的，你可以再仔细思考一下。
 
-## 🛠️ 应用场景
+不过呢，删除节点时，最好还是把被删除节点的指针都置为 null，这是个好习惯，不会有什么代价，还可能避免一些潜在的问题。所以在下面的实现中，无论是否有必要，我都会把被删除节点上的指针置为 null。
 
-- **通用链表容器**：本实现已经具备 `std::list` 的核心 API。
-- **LRU 缓存**：见「扩展阅读」中的 LRU 章节。
-- **图的邻接表**：稀疏图必备，每个节点的邻居用链表存。
-- **栈 / 队列的底层**：用链表实现栈是 O(1) push/pop，见 [[10-linked-queue-stack|链表实现队列/栈]]。
-- **哈希冲突链**：见 [[12-hashtable-with-linked-list|链表实现哈希表]]、[[16-hashtable-chaining|拉链法]]。
+如何验证你的实现？
 
-## ▶️ 下一章
+你可以借助力扣第 707 题「设计链表」来验证自己的实现是否正确。注意 707 题要求的增删查改 API 名字和本文给出的不一样，所以需要修改一下才能通过。
 
-[[07-deque-implement|双端队列（Deque）原理和实现]] — 把「链表 + 头尾 API」封装成标准容器；本章实现的 `MyLinkedList` 直接复用作 Deque 的底层。
+## 双链表代码实现
 
-## 🔗 相关章节
+```cpp
+#include <iostream>
+#include <string>
+#include <stdexcept>
 
-- [[05-linkedlist-basic|链表原理]] — 上一章
-- [[07-deque-implement|双端队列]] — 下一章，复用 `MyLinkedList`
-- [[10-linked-queue-stack|链表实现队列/栈]] — 链表最常见应用
-- [[12-hashtable-with-linked-list|链表实现哈希表]] — 链表的另一应用
-- [[20-skip-list-basic|跳表]] — 链表 + 多级索引
-- [[27-tree-map-basic|搜索树]] — 链表 + 二叉
+template<typename E>
+class MyLinkedList {
+    // 虚拟头尾节点
+    struct Node {
+        E val;
+        Node* next;
+        Node* prev;
+
+        Node(E value) : val(value), next(nullptr), prev(nullptr) {}
+    };
+
+    Node* head;
+    Node* tail;
+    int size;
+
+public:
+    // 构造函数初始化虚拟头尾节点
+    MyLinkedList() {
+        head = new Node(E());
+        tail = new Node(E());
+        head->next = tail;
+        tail->prev = head;
+        size = 0;
+    }
+
+    ~MyLinkedList() {
+        while (size > 0) {
+            removeFirst();
+        }
+        delete head;
+        delete tail;
+    }
+
+    // ***** 增 *****
+
+    void addLast(E e) {
+        Node* x = new Node(e);
+        Node* temp = tail->prev;
+
+        temp->next = x;
+        x->prev = temp;
+        // temp <-> x
+
+        x->next = tail;
+        tail->prev = x;
+        // temp <-> x <-> tail
+        size++;
+    }
+
+    void addFirst(E e) {
+        Node* x = new Node(e);
+        Node* temp = head->next;
+        // head <-> temp
+        temp->prev = x;
+        x->next = temp;
+
+        head->next = x;
+        x->prev = head;
+        // head <-> x <-> temp
+        size++;
+    }
+
+    void add(int index, E element) {
+        checkPositionIndex(index);
+        if (index == size) {
+            addLast(element);
+            return;
+        }
+
+        // 找到 index 对应的 Node
+        Node* p = getNode(index);
+        Node* temp = p->prev;
+        // temp <-> p
+
+        // 新要插入的 Node
+        Node* x = new Node(element);
+
+        p->prev = x;
+        temp->next = x;
+
+        x->prev = temp;
+        x->next = p;
+
+        // temp <-> x <-> p
+
+        size++;
+    }
+
+    // ***** 删 *****
+
+    E removeFirst() {
+        if (size < 1) {
+            throw out_of_range("No elements to remove");
+        }
+        // 虚拟节点的存在是我们不用考虑空指针的问题
+        Node* x = head->next;
+        Node* temp = x->next;
+        // head <-> x <-> temp
+        head->next = temp;
+        temp->prev = head;
+
+        E val = x->val;
+        delete x;
+        // head <-> temp
+
+        size--;
+        return val;
+    }
+
+    E removeLast() {
+        if (size < 1) {
+            throw out_of_range("No elements to remove");
+        }
+        Node* x = tail->prev;
+        Node* temp = tail->prev->prev;
+        // temp <-> x <-> tail
+
+        tail->prev = temp;
+        temp->next = tail;
+
+        E val = x->val;
+        x->prev = nullptr;
+        x->next = nullptr;
+        delete x;
+        // temp <-> tail
+
+        size--;
+        return val;
+    }
+
+    E remove(int index) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node* x = getNode(index);
+        Node* prev = x->prev;
+        Node* next = x->next;
+        // prev <-> x <-> next
+        prev->next = next;
+        next->prev = prev;
+
+        E val = x->val;
+        x->prev = nullptr;
+        x->next = nullptr;
+        delete x;
+        // prev <-> next
+
+        size--;
+        return val;
+    }
+
+    // ***** 查 *****
+
+    E get(int index) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node* p = getNode(index);
+
+        return p->val;
+    }
+
+    E getFirst() {
+        if (size < 1) {
+            throw out_of_range("No elements in the list");
+        }
+
+        return head->next->val;
+    }
+
+    E getLast() {
+        if (size < 1) {
+            throw out_of_range("No elements in the list");
+        }
+
+        return tail->prev->val;
+    }
+
+    // ***** 改 *****
+
+    E set(int index, E val) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node* p = getNode(index);
+
+        E oldVal = p->val;
+        p->val = val;
+
+        return oldVal;
+    }
+
+    // ***** 其他工具函数 *****
+
+    int getSize() const {
+        return size;
+    }
+
+    bool isEmpty() const {
+        return size == 0;
+    }
+
+    void display() {
+        cout << "size = " << size << endl;
+        for (Node* p = head->next; p != tail; p = p->next) {
+            cout << p->val << " <-> ";
+        }
+        cout << "nullptr" << endl;
+        cout << endl;
+    }
+
+private:
+    Node* getNode(int index) {
+        checkElementIndex(index);
+        Node* p = head->next;
+        // TODO: 可以优化，通过 index 判断从 head 还是 tail 开始遍历
+        for (int i = 0; i < index; i++) {
+            p = p->next;
+        }
+        return p;
+    }
+
+    bool isElementIndex(int index) const {
+        return index >= 0 && index < size;
+    }
+
+    bool isPositionIndex(int index) const {
+        return index >= 0 && index <= size;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    void checkElementIndex(int index) const {
+        if (!isElementIndex(index))
+            throw out_of_range("Index: " + to_string(index) + ", Size: " + to_string(size));
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    void checkPositionIndex(int index) const {
+        if (!isPositionIndex(index))
+            throw out_of_range("Index: " + to_string(index) + ", Size: " + to_string(size));
+    }
+};
+
+int main() {
+    MyLinkedList<int> list;
+    list.addLast(1);
+    list.addLast(2);
+    list.addLast(3);
+    list.addFirst(0);
+    list.add(2, 100);
+
+    list.display();
+    // size = 5
+    // 0 <-> 1 <-> 100 <-> 2 <-> 3 <-> null
+
+    return 0;
+}
+```
+
+## 单链表代码实现
+
+```cpp
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+template <typename E>
+class MyLinkedList2 {
+private:
+    // 节点结构
+    struct Node {
+        E val;
+        Node* next;
+
+        Node(E value) : val(value), next(nullptr) {}
+    };
+
+    Node* head;
+    // 实际的尾部节点引用
+    Node* tail;
+    int size_;
+
+public:
+    MyLinkedList2() {
+        head = new Node(E());
+        tail = head;
+        size_ = 0;
+    }
+
+    ~MyLinkedList2() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current->next;
+            delete current;
+            current = next;
+        }
+    }
+
+    void addFirst(E e) {
+        Node* newNode = new Node(e);
+        newNode->next = head->next;
+        head->next = newNode;
+        if (size_ == 0) {
+            tail = newNode;
+        }
+        size_++;
+    }
+
+    void addLast(E e) {
+        Node* newNode = new Node(e);
+        tail->next = newNode;
+        tail = newNode;
+        size_++;
+    }
+
+    void add(int index, E element) {
+        checkPositionIndex(index);
+
+        if (index == size_) {
+            addLast(element);
+            return;
+        }
+
+        Node* prev = head;
+        for (int i = 0; i < index; i++) {
+            prev = prev->next;
+        }
+        Node* newNode = new Node(element);
+        newNode->next = prev->next;
+        prev->next = newNode;
+        size_++;
+    }
+
+    E removeFirst() {
+        if (isEmpty()) {
+            throw out_of_range("No elements to remove");
+        }
+        Node* first = head->next;
+        head->next = first->next;
+        if (size_ == 1) {
+            tail = head;
+        }
+        size_--;
+        E val = first->val;
+        delete first;
+        return val;
+    }
+
+    E removeLast() {
+        if (isEmpty()) {
+            throw out_of_range("No elements to remove");
+        }
+
+        Node* prev = head;
+        while (prev->next != tail) {
+            prev = prev->next;
+        }
+        E val = tail->val;
+        delete tail;
+        prev->next = nullptr;
+        tail = prev;
+        size_--;
+        return val;
+    }
+
+    E remove(int index) {
+        checkElementIndex(index);
+
+        Node* prev = head;
+        for (int i = 0; i < index; i++) {
+            prev = prev->next;
+        }
+
+        Node* nodeToRemove = prev->next;
+        prev->next = nodeToRemove->next;
+        // 删除的是最后一个元素
+        if (index == size_ - 1) {
+            tail = prev;
+        }
+        size_--;
+        E val = nodeToRemove->val;
+        delete nodeToRemove;
+        return val;
+    }
+
+    // ***** 查 *****
+
+    E getFirst() {
+        if (isEmpty()) {
+            throw out_of_range("No elements in the list");
+        }
+        return head->next->val;
+    }
+
+    E getLast() {
+        if (isEmpty()) {
+            throw out_of_range("No elements in the list");
+        }
+        return tail->val;
+    }
+
+    E get(int index) {
+        checkElementIndex(index);
+        Node* p = getNode(index);
+        return p->val;
+    }
+
+    // ***** 改 *****
+
+    E set(int index, E element) {
+        checkElementIndex(index);
+        Node* p = getNode(index);
+
+        E oldVal = p->val;
+        p->val = element;
+
+        return oldVal;
+    }
+
+    // ***** 其他工具函数 *****
+    int size() {
+        return size_;
+    }
+
+    bool isEmpty() {
+        return size_ == 0;
+    }
+
+private:
+    bool isElementIndex(int index) {
+        return index >= 0 && index < size_;
+    }
+
+    bool isPositionIndex(int index) {
+        return index >= 0 && index <= size_;
+    }
+
+    // 检查 index 索引位置是否可以存在元素
+    void checkElementIndex(int index) {
+        if (!isElementIndex(index)) {
+            throw out_of_range("Index: " + to_string(index) + ", size_: " + to_string(size_));
+        }
+    }
+
+    // 检查 index 索引位置是否可以添加元素
+    void checkPositionIndex(int index) {
+        if (!isPositionIndex(index)) {
+            throw out_of_range("Index: " + to_string(index) + ", size_: " + to_string(size_));
+        }
+    }
+
+    // 返回 index 对应的 Node
+    // 注意：请保证传入的 index 是合法的
+    Node* getNode(int index) {
+        Node* p = head->next;
+        for (int i = 0; i < index; i++) {
+            p = p->next;
+        }
+        return p;
+    }
+};
+
+int main() {
+    MyLinkedList2<int> list;
+    list.addFirst(1);
+    list.addFirst(2);
+    list.addLast(3);
+    list.addLast(4);
+    list.add(2, 5);
+
+    cout << list.removeFirst() << endl; // 2
+    cout << list.removeLast() << endl; // 4
+    cout << list.remove(1) << endl; // 5
+
+    cout << list.getFirst() << endl; // 1
+    cout << list.getLast() << endl; // 3
+    cout << list.get(1) << endl; // 3
+
+    return 0;
+}
+```
+
+
+## 关联章节
