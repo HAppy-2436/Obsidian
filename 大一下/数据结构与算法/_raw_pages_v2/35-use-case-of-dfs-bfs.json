@@ -1,0 +1,69 @@
+{
+ "tag": "35-use-case-of-dfs-bfs",
+ "url": "https://labuladong.online/zh/algo/data-structure-basic/use-case-of-dfs-bfs/",
+ "blocks": [
+  {
+   "type": "heading",
+   "level": 1,
+   "content": "DFS 和 BFS 的适用场景"
+  },
+  {
+   "type": "text",
+   "content": "读完本文，你不仅学会了算法套路，还可以顺便解决如下题目："
+  },
+  {
+   "type": "text",
+   "content": "LeetCode"
+  },
+  {
+   "type": "text",
+   "content": "力扣"
+  },
+  {
+   "type": "text",
+   "content": "难度"
+  },
+  {
+   "type": "text",
+   "content": "111. Minimum Depth of Binary Tree"
+  },
+  {
+   "type": "text",
+   "content": "111. 二叉树的最小深度"
+  },
+  {
+   "type": "text",
+   "content": "前置知识"
+  },
+  {
+   "type": "text",
+   "content": "阅读本文前，你需要先学习："
+  },
+  {
+   "type": "text",
+   "content": "二叉树的递归/层序遍历"
+  },
+  {
+   "type": "text",
+   "content": "在实际的算法问题中，DFS 算法常用来穷举所有路径，BFS 算法常用来寻找最短路径，这是什么原因呢？"
+  },
+  {
+   "type": "text",
+   "content": "因为二叉树的递归遍历和层序遍历就是最简单的 DFS 算法和 BFS 算法，所以本文就用一道简单的二叉树例题，说明其中的道理。"
+  },
+  {
+   "type": "text",
+   "content": "成为会员即可解锁全部内容"
+  },
+  {
+   "type": "text",
+   "content": "了解会员权益"
+  },
+  {
+   "type": "text",
+   "content": "更新时间：2026/06/12 00:27"
+  }
+ ],
+ "cpp_panels_count": 0,
+ "cpp_replaced": 0
+}
