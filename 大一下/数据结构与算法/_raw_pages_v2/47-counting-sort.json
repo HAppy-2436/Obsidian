@@ -65,7 +65,7 @@
   },
   {
    "type": "text",
-   "content": "计数排序的时间和空间复杂度都是 \n\nO(n+max−min)，其中 \n𝑛\nn 是待排序数组长度，\n𝑚\n𝑎\n𝑥\n−\n𝑚\n𝑖\n𝑛\nmax−min 是待排序数组的元素范围。"
+   "content": "计数排序的时间和空间复杂度都是 \n𝑂\n(\n𝑛\n+\n𝑚\n𝑎\n𝑥\n−\n𝑚\n𝑖\n𝑛\n)\nO(n+max−min)，其中 \n𝑛\nn 是待排序数组长度，\n𝑚\n𝑎\n𝑥\n−\n𝑚\n𝑖\n𝑛\nmax−min 是待排序数组的元素范围。"
   },
   {
    "type": "text",
