@@ -31,7 +31,6 @@ url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-chaining/
 
 哈希表核心原理
  已经介绍过哈希函数和 key 的类型的关系，其中 hash 函数的作用是在
-
 O(1) 的时间把 key 转化成数组的索引，而 key 可以是任意不可变的类型。
 
 但是这里为了方便诸位理解，我先做如下简化：

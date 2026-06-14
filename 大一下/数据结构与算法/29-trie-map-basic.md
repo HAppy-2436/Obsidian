@@ -48,7 +48,6 @@ TreeMap/TreeSet 原理
 标准的
 哈希表 HashMap
 ，底层借助一个哈希函数把键值对存在 table 数组中，有两种解决哈希冲突的方法。它的特点是快，即基本的增删查改操作时间复杂度都是
-
 O(1)。
 哈希集合 HashSet
  是 HashMap 的简单封装。
@@ -62,14 +61,12 @@ O(1)。
 ，是
 数组结构
  对标准哈希表的加强。它继承了哈希表的操作复杂度，并且提供了一个额外的 randomKey 函数，可以在
-
 O(1) 的时间返回一个随机键。ArrayHashSet 是 ArrayHashMap 的简单封装。
 
 TreeMap 映射
 ，底层是一棵二叉搜索树（编程语言标准库一般使用经过改良的自平衡
 红黑树
 ），基本增删查改操作复杂度是
-
 O(logN)，它的特点是可以动态维护键值对的大小关系，有很多额外的 API 操作键值对。TreeSet 集合是 TreeMap 映射的简单封装。
 
 TrieSet 也是 TrieMap 的简单封装，所以下面我们聚焦 TrieMap 的实现原理即可。
@@ -136,7 +133,6 @@ System.out.println(map.keysWithPrefix("th")); // ["that", "the", "them"]
 ```
 
 除了 keysWithPrefix 方法的复杂度取决于返回结果的长度，其他前缀操作的复杂度都是
-
 O(L)，其中
 𝐿
 L 是前缀字符串长度。

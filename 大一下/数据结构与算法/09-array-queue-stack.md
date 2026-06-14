@@ -20,7 +20,6 @@ url: https://labuladong.online/zh/algo/data-structure-basic/array-queue-stack/
 ## 用数组实现栈
 
 先用数组实现栈，这个不难，你把动态数组的尾部作为栈顶，然后调用动态数组的 API 就行了。因为数组尾部增删元素的时间复杂度都是
-
 O(1)，符合栈的要求。
 
 我这里直接用标准库提供的动态数组，如果你想用之前我们实现的 MyArrayList，也是一样的：
@@ -62,13 +61,11 @@ public:
 能否让数组的头部作为栈顶？
 
 按照我们之前实现 MyArrayList 的逻辑，是不行的。因为数组头部增删元素的时间复杂度都是
-
 O(n)，不符合要求。
 
 但是我们可以改用前文
 环形数组技巧
  中实现的 CycleArray 类，这个数据结构在头部增删元素的时间复杂度是
-
 O(1)，符合栈的要求。
 
 你直接调用 CycleArray 的 addFirst 和 removeFirst 方法实现栈的 API 就行，我这里就不写了。

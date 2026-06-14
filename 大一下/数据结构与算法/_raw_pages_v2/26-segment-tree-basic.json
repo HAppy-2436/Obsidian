@@ -33,7 +33,7 @@
   },
   {
    "type": "text",
-   "content": "线段树可以在 \n𝑂\n(\nlog\n⁡\n𝑁\n)\nO(logN) 的时间复杂度查询任意长度的区间元素聚合值，在 \n𝑂\n(\nlog\n⁡\n𝑁\n)\nO(logN) 的时间复杂度对任意长度的区间元素进行动态修改，其中 \n𝑁\nN 为数组中的元素个数。"
+   "content": "线段树可以在 \nO(logN) 的时间复杂度查询任意长度的区间元素聚合值，在 \nO(logN) 的时间复杂度对任意长度的区间元素进行动态修改，其中 \n𝑁\nN 为数组中的元素个数。"
   },
   {
    "type": "text",
@@ -65,7 +65,7 @@
   },
   {
    "type": "text",
-   "content": "上面的实现都只支持「单点更新」，但更通用的需求是区间更新，比如把索引区间 [i, j] 的元素都更新为 val。\n懒更新线段树的实现\n 运用「懒更新」技巧，给线段树新增 rangeAdd/rangeUpdate 方法，可以在 \n𝑂\n(\nlog\n⁡\n𝑁\n)\nO(logN) 时间复杂度内完成任意长度的区间更新。"
+   "content": "上面的实现都只支持「单点更新」，但更通用的需求是区间更新，比如把索引区间 [i, j] 的元素都更新为 val。\n懒更新线段树的实现\n 运用「懒更新」技巧，给线段树新增 rangeAdd/rangeUpdate 方法，可以在 \nO(logN) 时间复杂度内完成任意长度的区间更新。"
   },
   {
    "type": "text",
@@ -90,7 +90,7 @@
   },
   {
    "type": "text",
-   "content": "我们将提出一种使用 suffixMin 数组的优化尝试，即提前预计算一个 suffixMin 数组，使得 suffixMin[i] = min(nums[i..])，这样就可以在 \n𝑂\n(\n1\n)\nO(1) 时间内查询 nums[i..] 的最小值："
+   "content": "我们将提出一种使用 suffixMin 数组的优化尝试，即提前预计算一个 suffixMin 数组，使得 suffixMin[i] = min(nums[i..])，这样就可以在 \nO(1) 时间内查询 nums[i..] 的最小值："
   },
   {
    "type": "text",
