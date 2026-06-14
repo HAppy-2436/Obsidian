@@ -1,0 +1,142 @@
+{
+ "tag": "10-linked-queue-stack",
+ "url": "https://labuladong.online/zh/algo/data-structure-basic/linked-queue-stack/",
+ "blocks": [
+  {
+   "type": "heading",
+   "level": 1,
+   "content": "用链表实现队列/栈"
+  },
+  {
+   "type": "text",
+   "content": "前置知识"
+  },
+  {
+   "type": "text",
+   "content": "阅读本文前，你需要先学习："
+  },
+  {
+   "type": "text",
+   "content": "队列/栈基本原理"
+  },
+  {
+   "type": "text",
+   "content": "数组基本原理"
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "content": "¶\n用链表实现栈"
+  },
+  {
+   "type": "text",
+   "content": "一些读者应该已经知道该怎么用链表作为底层数据结构实现队列和栈了。因为实在是太简单了，直接调用双链表的 API 就可以了。"
+  },
+  {
+   "type": "text",
+   "content": "注意我这里是直接用标准库的链表容器，如果你用之前我们实现的 MyLinkedList，也是一样的。"
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "import java.util.LinkedList;\n\n// 用链表作为底层数据结构实现栈\npublic class MyLinkedStack<E> {\n    private final LinkedList<E> list = new LinkedList<>();\n\n    // 向栈顶加入元素，时间复杂度 O(1)\n    public void push(E e) {\n        list.addLast(e);\n    }\n\n    // 从栈顶弹出元素，时间复杂度 O(1)\n    public E pop() {\n        return list.removeLast();\n    }\n\n    // 查看栈顶元素，时间复杂度 O(1)\n    public E peek() {\n        return list.getLast();\n    }\n\n    // 返回栈中的元素个数，时间复杂度 O(1)\n    public int size() {\n        return list.size();\n    }\n\n    public static void main(String[] args) {\n        MyLinkedStack<Integer> stack = new MyLinkedStack<>();\n        stack.push(1);\n        stack.push(2);\n        stack.push(3);\n\n        System.out.println(stack.peek()); // 3\n        System.out.println(stack.pop()); // 3\n        System.out.println(stack.peek()); // 2\n    }\n}"
+  },
+  {
+   "type": "text",
+   "content": "提示"
+  },
+  {
+   "type": "text",
+   "content": "上面这段代码相当于是把双链表的尾部作为栈顶，在双链表尾部增删元素的时间复杂度都是 O(1)，符合要求。"
+  },
+  {
+   "type": "text",
+   "content": "当然，你也可以把双链表的头部作为栈顶，因为双链表头部增删元素的时间复杂度也是 O(1)，所以这样实现也是一样的。只要做几个修改 addLast -> addFirst，removeLast -> removeFirst，getLast -> getFirst 就行了。"
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "content": "¶\n用链表实现队列"
+  },
+  {
+   "type": "text",
+   "content": "同理，用链表实现队列也是一样的，也直接调用双链表的 API 就可以了："
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "import java.util.LinkedList;\n\n// 用链表作为底层数据结构实现队列\npublic class MyLinkedQueue<E> {\n    private final LinkedList<E> list = new LinkedList<>();\n\n    // 向队尾插入元素，时间复杂度 O(1)\n    public void push(E e) {\n        list.addLast(e);\n    }\n\n    // 从队头删除元素，时间复杂度 O(1)\n    public E pop() {\n        return list.removeFirst();\n    }\n\n    // 查看队头元素，时间复杂度 O(1)\n    public E peek() {\n        return list.getFirst();\n    }\n\n    // 返回队列中的元素个数，时间复杂度 O(1)\n    public int size() {\n        return list.size();\n    }\n\n    public static void main(String[] args) {\n        MyLinkedQueue<Integer> queue = new MyLinkedQueue<>();\n        queue.push(1);\n        queue.push(2);\n        queue.push(3);\n\n        System.out.println(queue.peek()); // 1\n        System.out.println(queue.pop()); // 1\n        System.out.println(queue.pop()); // 2\n        System.out.println(queue.peek()); // 3\n    }\n}"
+  },
+  {
+   "type": "text",
+   "content": "提示"
+  },
+  {
+   "type": "text",
+   "content": "上面这段代码相当于是把双链表的尾部作为队尾，把双链表的头部作为队头，在双链表的头尾增删元素的复杂度都是 O(1)，符合队列 API 的要求。"
+  },
+  {
+   "type": "text",
+   "content": "当然，你也可以反过来，把双链表的头部作为队尾，双链表的尾部作为队头。类似栈的实现，只要改一改 list 的调用方法就行了。"
+  },
+  {
+   "type": "text",
+   "content": "更新时间：2026/06/12 00:27"
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "content": "评论"
+  },
+  {
+   "type": "text",
+   "content": "请登录后查看/发表评论"
+  }
+ ]
+}

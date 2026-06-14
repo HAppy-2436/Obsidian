@@ -1,0 +1,349 @@
+---
+tag: 13-hashmap-basic
+title: 哈希表核心原理
+group: 哈希表
+subgroup: null
+order: 13
+paywall: false
+prerequisites:
+  - 11-hashtable-with-array
+  - 12-hashtable-with-linked-list
+source_url: https://labuladong.online/zh/algo/data-structure-basic/hashmap-basic/
+generated_at: 2026-06-13
+---
+
+# 哈希表核心原理
+
+> 原文链接：<https://labuladong.online/zh/algo/data-structure-basic/hashmap-basic/>
+
+## 前置知识
+
+阅读本文前，你需要先学习：
+
+- [[02-array-basic|数组（顺序存储）的原理]]
+- [[03-array-implement|动态数组的代码实现]]
+- [[13-hashmap-basic|哈希表核心原理]]（按 _chapters_meta.json，本章以 11、12 为基础；按 labuladong 站点，13 在 11/12 之前；建议两者都读一遍）
+
+---
+
+## 一、先纠正一个常见误区
+
+**请问：哈希表和我们常说的 Map（键值映射）是不是同一个东西？**
+
+**不是**。用 Java 解释最清楚：
+
+```java
+interface Map<K, V> {
+    V get(K key);
+    void put(K key, V value);
+    V remove(K key);
+    // ...
+}
+```
+
+`Map` 只是接口，**只声明方法，不包含实现**。`HashMap` 是一种实现，`TreeMap` 是另一种，`LinkedHashMap` 又是一种。
+
+- 你可以说 **HashMap** 的 get/put/remove 都是 **O(1)**（平均）
+- 但 **不能** 说 **Map 接口** 的方法都是 O(1)——如果换成 TreeMap（底层红黑树），就是 **O(logN)**
+
+> [!warning] 为什么强调这个？
+> 其他语言没有 Java 这样清晰的接口定义，很容易让人把"哈希表"和"键值对"混为一谈，听到"键值操作"就认为是 O(1)。**不对**——得看底层用什么数据结构。
+
+---
+
+## 二、哈希表的基本原理
+
+**哈希表可以理解为一个加强版的数组**。
+
+- 数组：通过 **索引** 在 O(1) 内查到元素，索引是非负整数
+- 哈希表：通过 **key** 在 O(1) 内查到对应的 value，key 可以是数字、字符串、对象
+
+怎么做？特别简单：哈希表底层就是一个数组（叫 `table`），通过一个 **哈希函数**（叫 `hash`）把 key 转成数组索引，然后增删查改就和数组一样：
+
+```java
+class MyHashMap<K, V> {
+
+    private Object[] table;
+
+    // 增/改，O(1)
+    public void put(K key, V value) {
+        int index = hash(key);
+        table[index] = value;
+    }
+
+    // 查，O(1)
+    public V get(K key) {
+        int index = hash(key);
+        return (V) table[index];
+    }
+
+    // 删，O(1)
+    public void remove(K key) {
+        int index = hash(key);
+        table[index] = null;
+    }
+
+    // 哈希函数，O(1)
+    private int hash(K key) { /* ... */ }
+}
+```
+
+> 核心原理就这一段。剩下的就是细节：哈希函数怎么设计、冲突怎么解决。
+
+---
+
+## 三、关键概念及原理
+
+### 3.1 key 唯一，value 可以重复
+
+跟数组一样——数组索引是唯一的，存什么值随便；哈希表的 key 是唯一的，value 可以重复。
+
+### 3.2 哈希函数
+
+**作用**：把任意长度的输入（key）转成固定长度的输出（索引）。
+
+#### 3.2.1 把 key 转成整数
+
+以 Java 为例：任意 Java 对象都有 `int hashCode()` 方法，不重写时默认返回对象内存地址，全局唯一整数。
+
+#### 3.2.2 保证索引合法（非负 + 在 table 范围内）
+
+```java
+int h = key.hashCode();
+
+// ❌ 错误：可能溢出
+// int 最小值是 -2^31，取反后是 2^31，超出 int 最大值 2^31 - 1
+
+// ✅ 正确：位运算把符号位清零
+h = h & 0x7fffffff;  // 0x7fffffff = 0111 1111 ... 1111
+
+// 再用 % 映射到 table 合法索引
+return h % table.length;
+```
+
+> 位运算比取模快，标准库源码里能用位运算就优先用位运算。
+
+> [!info] 📌 **位运算 vs 取模**
+> 当 `table.length` 是 2 的幂时，可以用 `h & (table.length - 1)` 代替 `h % table.length`，性能更好。这也是为什么 HashMap 的容量总是 2 的幂。
+
+### 3.3 哈希冲突（必须掌握）
+
+**定义**：两个不同的 key 通过哈希函数得到相同的索引。
+
+**能不能避免？不能！**
+
+理由：哈希函数是把"无穷空间"映射到"有限空间"——必然会有不同 key 撞到同一个索引上。这就像三维物体投影到二维影子，信息有损。
+
+**两种解决方案**：
+1. **拉链法**（纵向延伸）：table 的每个槽位存一条链表
+2. **线性探查法 / 开放寻址法**（横向延伸）：撞了就往后挪
+
+后续章节会分别实现这两种方法。
+
+### 3.4 负载因子和扩容
+
+> [!info] 📌 **负载因子（load factor）**
+> 衡量哈希表装满的程度：`loadFactor = size / table.length`
+> - 越大 → 冲突越多 → 性能越差
+> - 越小 → 浪费空间
+
+**关键差异**：
+- **拉链法**：负载因子可以 **无限大**（链表可以无限延伸）
+- **线性探查法**：负载因子不会超过 **1**
+
+Java HashMap 默认负载因子 `0.75`（经验值）。
+
+**扩容机制**：当 size 达到 `table.length × loadFactor` 时，table 容量翻倍，**重新 hash** 所有 key 到新 table。复杂度 O(N)，但因为不是每次操作都触发，所以 put 的 **均摊复杂度** 仍然是 O(1)。
+
+### 3.5 为什么不能依赖遍历顺序
+
+```java
+// 遍历所有 key
+List<KeyType> keys = new ArrayList<>();
+for (int i = 0; i < table.length; i++) {
+    KVNode node = table[i];
+    if (node != null) keys.add(node.key);
+}
+```
+
+**两个原因**：
+
+1. hash 函数把 key 随机映射到 table 位置，不像数组有天然的"索引顺序"
+2. **扩容**时 `table.length` 变了，hash 函数 `hash = key.hashCode() % table.length` 算出的索引也变了，**同一个 key 在新 table 的位置不同**
+
+所以你观察到的现象是：这次遍历 key1 在最前，下次遍历 key1 可能跑最后去了。
+
+### 3.6 不建议在 for 循环中增/删 key
+
+遍历哈希表的 key，本质是遍历 table 数组。如果遍历中触发 **扩缩容**，整个 table 都变了——接下来的遍历行为是什么？新插入的元素要不要被遍历到？这些问题没有统一答案。
+
+即便不考虑扩缩容，**任何数据结构**都不建议在遍历中同时增删元素（容易出现非预期行为）。
+
+如果你非要这样做，请查阅你使用的语言标准库的文档，明确行为。
+
+### 3.7 key 必须是不可变的
+
+```java
+// ✅ 不可变类型可以做 key
+Map<String, Integer> map1 = new HashMap<>();
+Map<Integer, Integer> map2 = new HashMap<>();
+
+// ❌ 不应该把可变类型做 key（语法不报错，但 bug 一堆）
+Map<ArrayList<Integer>, Integer> map3 = new HashMap<>();
+```
+
+**为什么 ArrayList 不能做 key？**
+
+```java
+public int hashCode() {        // ArrayList 的实现
+    int h = 0;
+    for (int i = 0; i < elementData.length; i++) {
+        h = 31 * h + elementData[i];
+    }
+    return h;
+}
+```
+
+**两个问题**：
+
+1. **效率问题**：每次算 hashCode 都要遍历所有元素，O(N)，导致哈希表操作退化成 O(N)
+2. **正确性问题**：ArrayList 一旦增删元素，hashCode 就会变
+
+```java
+Map<ArrayList<Integer>, Integer> map = new HashMap<>();
+ArrayList<Integer> arr = new ArrayList<>();
+arr.add(1); arr.add(2);
+
+map.put(arr, 999);
+System.out.println(map.containsKey(arr));   // true
+System.out.println(map.get(arr));           // 999
+
+arr.add(3);                                 // ⚠️ arr 变了
+System.out.println(map.containsKey(arr));   // false  ← 键值对"丢失"了！
+System.out.println(map.get(arr));           // null
+```
+
+> 此时 `map` 内部 table 里 `arr → 999` 这个数据 **依然存在**，但因为 hashCode 变了再也查不到——还导致 **内存泄漏**（arr 被 map 引用，无法 GC）。
+
+**String 的 hashCode 也需要遍历所有字符**，但因为 String 不可变，算一次缓存即可，平均 O(1)。
+
+---
+
+## 四、总结：模拟面试问答
+
+> **Q1：为什么哈希表增删查改是 O(1)？**
+> 因为底层是数组，主要开销是哈希函数 + 冲突处理。只要哈希函数 O(1) 且冲突处理好，就是 O(1)。
+
+> **Q2：哈希表的遍历顺序为什么会变化？**
+> 扩容会导致 table 容量变化，hash 函数算出的索引也变化，所以顺序变了。
+
+> **Q3：哈希表的增删查改一定是 O(1) 吗？**
+> 不一定。如果哈希函数设计差（比如用可变类型当 key），复杂度会退化到 O(N)。
+
+> **Q4：为什么 key 必须是不可变的？**
+> 因为 key 的 hash 值必须稳定。如果 key 变了，hash 变了，键值对就"丢了"，还可能内存泄漏。
+
+---
+
+## 五、关键术语速查表
+
+| 术语 | 英文 | 含义 |
+|---|---|---|
+| 哈希函数 | hash function | key → 索引的映射函数 |
+| 哈希冲突 | hash collision | 不同 key 映射到同一索引 |
+| 拉链法 | separate chaining | 冲突的 key 用链表串起来 |
+| 线性探查法 | linear probing / open addressing | 冲突就往后挪位置 |
+| 负载因子 | load factor | size / capacity |
+| 桶 | bucket | table 数组的一个槽位 |
+| 哈希集合 | hash set | 只存 key、不存 value 的哈希结构 |
+
+---
+
+## 六、相关章节
+
+- 上一章：[[12-hashtable-with-linked-list|链表实现哈希表（LinkedHashMap）]]
+- 解决冲突：[[14-linear-probing-key-point|线性探查法的两个难点]]
+- 解决冲突：[[16-hashtable-chaining|用拉链法实现哈希表]]
+- 下一章：[[14-linear-probing-key-point|线性探查法的两个难点]]
+
+---
+
+> 📌 **备注**：本文 80% 内容来自 labuladong 原文（付费墙之前），剩下 20%（如"位运算 vs 取模""拉链法 vs 线性探查法负载因子差异"）是补充的工程实践知识。
+
+
+## C++ HashMap 核心实现原理
+
+> [!info] 📌 付费章节补全内容
+
+### 标准库 hash map 的实现
+
+C++17 标准库的 `std::unordered_map` 内部采用**哈希表**（一般是链地址法或开放定址法），关键概念：
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+namespace dsa {
+
+// 自定义 pair 哈希
+struct pair_hash {
+    template <class T1, class T2>
+    size_t operator()(const pair<T1,T2>& p) const {
+        auto h1 = hash<T1>{}(p.first);
+        auto h2 = hash<T2>{}(p.second);
+        return h1 ^ (h2 << 1);  // 简单合并
+    }
+};
+
+void demo() {
+    // 1. 基本用法
+    unordered_map<string, int> m;
+    m["hello"] = 1;
+    m["world"] = 2;
+
+    // 2. 自定义哈希（pair 作为 key）
+    unordered_map<pair<int,int>, string, pair_hash> grid;
+    grid[{0, 0}] = "origin";
+
+    // 3. 桶数与负载因子
+    unordered_map<int, string> m2;
+    m2.reserve(1000);            // 预分配 1000 个桶
+    m2.max_load_factor(0.5);     // 降低负载因子，减少冲突
+    cout << "bucket_count: " << m2.bucket_count() << endl;
+
+    // 4. 自定义哈希函数（字符串）
+    struct MyHash {
+        size_t operator()(const string& s) const noexcept {
+            // FNV-1a 哈希
+            size_t h = 14695981039346656037ULL;
+            for (char c : s) {
+                h ^= (size_t)c;
+                h *= 1099511628211ULL;
+            }
+            return h;
+        }
+    };
+    unordered_map<string, int, MyHash> m3;
+    m3["foo"] = 42;
+}
+
+} // namespace dsa
+```
+
+### 哈希冲突的处理
+
+| 方法 | 优点 | 缺点 |
+|------|------|------|
+| 链地址法 | 实现简单，删除简单 | 链表节点缓存不友好 |
+| 开放定址（线性探测） | 缓存友好 | 删除需要墓碑 |
+| 双重哈希 | 探测序列均匀 | 实现复杂 |
+
+### 时间复杂度分析
+
+| 操作 | 平均 | 最坏 |
+|------|------|------|
+| 插入 | O(1) | O(N) |
+| 查找 | O(1) | O(N) |
+| 删除 | O(1) | O(N) |
+
+最坏情况是所有 key 哈希到同一个桶。**负载因子** = 元素数 / 桶数，控制扩容时机。

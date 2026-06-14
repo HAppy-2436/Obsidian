@@ -1,0 +1,313 @@
+{
+ "tag": "01-complexity",
+ "url": "https://labuladong.online/zh/algo/intro/complexity-basic/",
+ "blocks": [
+  {
+   "type": "heading",
+   "level": 1,
+   "content": "时间空间复杂度入门"
+  },
+  {
+   "type": "text",
+   "content": "考虑到这是第一章，我不会对时空复杂度做面面俱到的讲解，详细的 \n算法时空复杂度分析实用指南\n 安排在你学完几种常见算法的核心框架之后，那时候你的知识储备可以轻松理解时空复杂度分析的各种场景。"
+  },
+  {
+   "type": "text",
+   "content": "因为本章后面的内容会带你实现常见的排序算法和数据结构，我会分析它们的时间复杂度，所以这里还是要提前介绍一下时间/空间复杂度的概念，以及分析时间/空间复杂度的简化方法，避免初学者疑惑。"
+  },
+  {
+   "type": "text",
+   "content": "对于初学者，你只需要记住以下几点："
+  },
+  {
+   "type": "text",
+   "content": "1、时空复杂度用 Big O 表示法表示（类似 \n𝑂\n(\n1\n)\n,\n𝑂\n(\n𝑛\n2\n)\n,\n𝑂\n(\n𝑙\n𝑜\n𝑔\n𝑛\n)\nO(1),O(n\n2\n),O(logn) 等）。它们都是估计值，不需要精确计算，常数项和低增长项都可以忽略，仅需保留最高增长项。"
+  },
+  {
+   "type": "text",
+   "content": "比方说 \n𝑂\n(\n2\n𝑛\n2\n+\n3\n𝑛\n+\n1\n)\nO(2n\n2\n+3n+1) 等同于 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n)，\n𝑂\n(\n1000\n𝑛\n+\n1000\n)\nO(1000n+1000) 等同于 \n𝑂\n(\n𝑛\n)\nO(n)。"
+  },
+  {
+   "type": "text",
+   "content": "2、我们分析算法复杂度时，分析的是最坏情况的复杂度。这一点会在下面的示例中体现。"
+  },
+  {
+   "type": "text",
+   "content": "3、时间复杂度用来衡量一个算法的执行效率，空间复杂度用来衡量算法的内存消耗，它们都是越小越好。"
+  },
+  {
+   "type": "text",
+   "content": "比方说时间复杂度 \n𝑂\n(\n𝑛\n)\nO(n) 的算法比 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n) 的算法执行效率高，空间复杂度 \n𝑂\n(\n1\n)\nO(1) 的算法比 \n𝑂\n(\n𝑛\n)\nO(n) 的算法内存消耗小。"
+  },
+  {
+   "type": "text",
+   "content": "当然，一般我们要说明这个 \n𝑛\nn 代表什么，比如 \n𝑛\nn 代表输入的数组的长度。"
+  },
+  {
+   "type": "text",
+   "content": "4、如何估算？现在你可以简单理解：时间复杂度大部分情况下就是看 for 循环的最大嵌套层数；空间复杂度就看算法申请了多少空间来存储数据。"
+  },
+  {
+   "type": "text",
+   "content": "注意"
+  },
+  {
+   "type": "text",
+   "content": "以上的分析方法中，有些细节并不严谨："
+  },
+  {
+   "type": "text",
+   "content": "1、按照 for 循环的嵌套层数来估算时间复杂度是简化的方法，其实不完全准确。"
+  },
+  {
+   "type": "text",
+   "content": "2、大部分时候我们是分析最坏情况下的复杂度，但是对于数据结构 API 的复杂度衡量，我们会分析平均复杂度。"
+  },
+  {
+   "type": "text",
+   "content": "完善的复杂度分析方法会在 \n算法时空复杂度分析实用指南\n 具体介绍，以上估算方法对于学习本章内容足够了。"
+  },
+  {
+   "type": "text",
+   "content": "举几个例子来说比较直观。"
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "content": "¶\n时间/空间复杂度案例分析"
+  },
+  {
+   "type": "text",
+   "content": "示例一，时间复杂度 \n𝑂\n(\n𝑛\n)\nO(n)，空间复杂度 \n𝑂\n(\n1\n)\nO(1)："
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "// 输入一个整数数组，返回所有元素的和\nint getSum(int[] nums) {\n    int sum = 0;\n    for (int i = 0; i < nums.length; i++) {\n        sum += nums[i];\n    }\n    return sum;\n}"
+  },
+  {
+   "type": "text",
+   "content": "算法包含一个 for 循环遍历 nums 数组，所以时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，其中 n 代表 nums 数组的长度。"
+  },
+  {
+   "type": "text",
+   "content": "我们的算法只使用了一个 sum 变量，这个 nums 是题目给的输入，不算在我们算法的空间复杂度里面，所以空间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+  },
+  {
+   "type": "text",
+   "content": "示例二，时间复杂度 \n𝑂\n(\n𝑛\n)\nO(n)，空间复杂度 \n𝑂\n(\n1\n)\nO(1)："
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "// 当 n 是 10 的倍数时，计算累加和，否则返回 -1\nint sum(int n) {\n    if (n % 10 != 0) {\n        return -1;\n    }\n    int sum = 0;\n    for (int i = 0; i <= n; i++) {\n        sum += i;\n    }\n    return sum;\n}"
+  },
+  {
+   "type": "text",
+   "content": "其实只有当 n 是 10 的倍数时，算法才会执行 for 循环，时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)。其他情况下算法会直接返回，时间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+  },
+  {
+   "type": "text",
+   "content": "但是算法复杂度只考察最坏情况，所以这个算法的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)，空间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+  },
+  {
+   "type": "text",
+   "content": "示例三，时间复杂度 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n)，空间复杂度 \n𝑂\n(\n1\n)\nO(1)："
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "// 数组是否存在两个数，它们的和为 target？\nboolean hasTargetSum(int[] nums, int target) {\n    for (int i = 0; i < nums.length; i++) {\n        for (int j = i + 1; j < nums.length; j++) {\n            if (nums[i] + nums[j] == target) {\n                return true;\n            }\n        }\n    }\n    return false;\n}"
+  },
+  {
+   "type": "text",
+   "content": "算法嵌套了两层 for 循环，所以时间复杂度是 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n)，其中 \n𝑛\nn 代表 nums 数组的长度。"
+  },
+  {
+   "type": "text",
+   "content": "我们的算法只使用了 i, j 两个变量，这是常数级别的空间消耗，所以空间复杂度是 \n𝑂\n(\n1\n)\nO(1)。"
+  },
+  {
+   "type": "text",
+   "content": "你也许会说，内层的 for 循环并没有遍历整个数组，且有可能提前 return，算法实际执行的次数应该是小于 \n𝑛\n2\nn\n2\n 的，时间复杂度还是 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n) 吗？"
+  },
+  {
+   "type": "text",
+   "content": "是的，还是 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n)。具体到不同的输入，算法的实际执行次数确实会小于 \n𝑛\n2\nn\n2\n，但我们不需要关心这些细节，估算一个最坏情况的时间复杂度就可以了。"
+  },
+  {
+   "type": "text",
+   "content": "每层 for 循环在最坏情况下都是 \n𝑂\n(\n𝑛\n)\nO(n) 的时间复杂度，套在一起，总的时间复杂度是 \n𝑂\n(\n𝑛\n2\n)\nO(n\n2\n)。"
+  },
+  {
+   "type": "text",
+   "content": "示例四，时间复杂度 \n𝑂\n(\n𝑛\n)\nO(n)，空间复杂度 \n𝑂\n(\n𝑛\n)\nO(n)："
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "void exampleFn(int n) {\n    int[] nums = new int[n];\n}"
+  },
+  {
+   "type": "text",
+   "content": "这个函数中创建了一个大小为 n 的数组，所以空间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)。"
+  },
+  {
+   "type": "text",
+   "content": "上述代码申请数组空间并将 n 个元素初始化为 0。内存申请操作的时间复杂度可以认为是 \n𝑂\n(\n1\n)\nO(1)，但为所有元素赋值的操作相当于一个隐藏的 for 循环（由编程语言为我们自动完成），时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)。所以总的时间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)。"
+  },
+  {
+   "type": "text",
+   "content": "时间复杂度并不仅仅体现在你看得到的 for 循环，每一行代码都可能有隐藏的时间复杂度。所以说要了解编程语言提供的常用数据结构实现原理，这是准确分析时间复杂度的基础。"
+  },
+  {
+   "type": "text",
+   "content": "示例五，时间复杂度 \n𝑂\n(\n𝑛\n)\nO(n)，空间复杂度 \n𝑂\n(\n𝑛\n)\nO(n)："
+  },
+  {
+   "type": "text",
+   "content": "C"
+  },
+  {
+   "type": "text",
+   "content": "C++"
+  },
+  {
+   "type": "text",
+   "content": "Go"
+  },
+  {
+   "type": "text",
+   "content": "Java"
+  },
+  {
+   "type": "text",
+   "content": "JavaScript"
+  },
+  {
+   "type": "text",
+   "content": "Python"
+  },
+  {
+   "type": "code",
+   "content": "// 输入一个整数数组，返回一个新的数组，新数组的每个元素是原数组对应元素的平方\nint[] squareArray(int[] nums) {\n    int[] res = new int[nums.length];\n    for (int i = 0; i < nums.length; i++) {\n        res[i] = nums[i] * nums[i];\n    }\n    return res;\n}"
+  },
+  {
+   "type": "text",
+   "content": "算法初始化 res 数组需要 \n𝑂\n(\n𝑛\n)\nO(n) 的时间复杂度，包含一个 for 循环，时间复杂度也是 \n𝑂\n(\n𝑛\n)\nO(n)，总的时间复杂度是还是 \n𝑂\n(\n𝑛\n)\nO(n) 其中 n 代表 nums 数组的长度。"
+  },
+  {
+   "type": "text",
+   "content": "我们声明了一个新的数组 res，这个数组的长度和 nums 数组一样，所以空间复杂度是 \n𝑂\n(\n𝑛\n)\nO(n)。"
+  },
+  {
+   "type": "text",
+   "content": "好了，初学者明白上面这些基本的时间、空间复杂度分析暂时就够用了，继续往下学习吧。"
+  },
+  {
+   "type": "text",
+   "content": "更新时间：2026/06/12 00:27"
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "content": "评论"
+  },
+  {
+   "type": "text",
+   "content": "请登录后查看/发表评论"
+  }
+ ]
+}
