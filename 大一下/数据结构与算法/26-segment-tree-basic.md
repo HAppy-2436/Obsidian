@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/segment-tree-basic/
 ---
 
-# 线段树核心原理及可视化
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -26,19 +24,9 @@ url: https://labuladong.online/zh/algo/data-structure-basic/segment-tree-basic/
  的衍生，用于高效解决数组的区间查询和区间动态修改问题。
 
 线段树可以在
-𝑂
-(
-log
-⁡
-𝑁
-)
+
 O(logN) 的时间复杂度查询任意长度的区间元素聚合值，在
-𝑂
-(
-log
-⁡
-𝑁
-)
+
 O(logN) 的时间复杂度对任意长度的区间元素进行动态修改，其中
 𝑁
 N 为数组中的元素个数。
@@ -68,12 +56,7 @@ N 为数组中的元素个数。
 上面的实现都只支持「单点更新」，但更通用的需求是区间更新，比如把索引区间 [i, j] 的元素都更新为 val。
 懒更新线段树的实现
  运用「懒更新」技巧，给线段树新增 rangeAdd/rangeUpdate 方法，可以在
-𝑂
-(
-log
-⁡
-𝑁
-)
+
 O(logN) 时间复杂度内完成任意长度的区间更新。
 
 你可以打开这个可视化面板，逐行点击代码，观察懒更新线段树的运行过程。rangeUpdate 方法更新区间时，并不需要立即更新区间内的所有叶子节点，而是将更新的值缓存在某个非叶子节点中，当调用 query 方法进行区间查询时，才逐渐将更新的值向叶子节点传播：
@@ -89,15 +72,11 @@ O(logN) 时间复杂度内完成任意长度的区间更新。
  中，我们会尝试解决一个需求，就是计算 nums 数组中从索引 i 开始到末尾的最小值。
 
 我们将提出一种使用 suffixMin 数组的优化尝试，即提前预计算一个 suffixMin 数组，使得 suffixMin[i] = min(nums[i..])，这样就可以在
-𝑂
-(
-1
-)
+
 O(1) 时间内查询 nums[i..] 的最小值：
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/segment-tree-basic/)。

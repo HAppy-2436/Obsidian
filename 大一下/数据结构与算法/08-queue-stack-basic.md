@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/queue-stack-basic/
 ---
 
-# 队列/栈的基本原理
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -75,13 +73,5 @@ public:
 
 有些语言的标准库可能没有直接提供队列和栈，你可以自己用数组或者链表模拟出队列和栈的效果。下一章我就会先带你用链表实现队列和栈。
 
-更新时间：2026/06/12 00:27
-
-## 评论
-
-请登录后查看/发表评论
 
 ## 关联章节
-
-- [[02-array-basic|数组（顺序存储）的原理]]
-- [[05-linkedlist-basic|链表（链式存储）的原理]]

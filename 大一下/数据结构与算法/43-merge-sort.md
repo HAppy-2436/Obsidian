@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/merge-sort/
 ---
 
-# 利用后序位置：归并排序
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -49,7 +47,6 @@ url: https://labuladong.online/zh/algo/data-structure-basic/merge-sort/
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/merge-sort/)。

@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/
 ---
 
-# 二叉搜索树原理及应用技巧
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -76,28 +74,13 @@ url: https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/
 算法可视化
 
 这里展示的是查找目标元素的场景，可以看到，利用 BST 左小右大的特性，可以迅速定位到目标节点，理想的时间复杂度是树的高度
-𝑂
-(
-𝑙
-𝑜
-𝑔
-𝑁
-)
+
 O(logN)，而普通的二叉树遍历函数则需要
-𝑂
-(
-𝑁
-)
+
 O(N) 的时间遍历所有节点。
 
 至于其他增、删、改的操作，你首先查到目标节点，才能进行增删改的操作对吧？增删改的操作无非就是改一改指针，所以增删改的时间复杂度也是
-𝑂
-(
-𝑙
-𝑜
-𝑔
-𝑁
-)
+
 O(logN)。
 
 ## TreeMap/TreeSet 实现原理
@@ -179,7 +162,7 @@ class MyTreeMap<K, V> {
     // 查找键 key 的排名，复杂度 O(logN)
     public int rank(K key) {}
 
-    // 区间查找，复杂度 O(logN + M)，M 为区间大小
+    // 区间查找，复杂度 O(logN+M)，M 为区间大小
     public List<K> rangeKeys(K low, K high) {}
 }
 ```
@@ -192,7 +175,6 @@ class MyTreeMap<K, V> {
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/tree-map-basic/)。

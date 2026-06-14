@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/linked-queue-stack/
 ---
 
-# 链表实现队列/栈
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -137,13 +135,5 @@ int main() {
 
 当然，你也可以反过来，把双链表的头部作为队尾，双链表的尾部作为队头。类似栈的实现，只要改一改 list 的调用方法就行了。
 
-更新时间：2026/06/12 00:27
-
-## 评论
-
-请登录后查看/发表评论
 
 ## 关联章节
-
-- [[08-queue-stack-basic|队列/栈的基本原理]]
-- [[06-linkedlist-implement|链表的代码实现]]

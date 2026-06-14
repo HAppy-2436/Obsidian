@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/quick-sort/
 ---
 
-# 利用前序位置：快速排序
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -44,28 +42,15 @@ url: https://labuladong.online/zh/algo/data-structure-basic/quick-sort/
 。
 
 但是越是效率高的算法，离计算机思维越近，未经训练的人就越难理解。学过前面几种基础排序算法，现在你应该可以感觉到这一点了，容易理解和推导的排序算法复杂度全都是
-𝑂
-(
-𝑁
-2
-)
-O(N
-2
-)，而突破
-𝑂
-(
-𝑁
-2
-)
-O(N
-2
-) 的排序算法，都感觉不是人类能想出来的。
+
+O(N2)，而突破
+
+O(N2) 的排序算法，都感觉不是人类能想出来的。
 
 哪个人要是张嘴就说：排序数组简单啊，只要把一个元素排好序，然后把剩下元素排好序，就能把整个数组排好序了。那只能说这个人可能是三体人潜伏在地球的特务：）
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/quick-sort/)。

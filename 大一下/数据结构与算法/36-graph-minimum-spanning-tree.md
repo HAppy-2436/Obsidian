@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/graph-minimum-spanning-tree/
 ---
 
-# 最小生成树算法概览
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -101,12 +99,5 @@ Prim 算法
 
 我会建议观察 BFS/DFS 算法求解地图的过程，仔细体会一下不同算法生成地图的特点。在后文讲解完最小生成树算法实现之后，我们再具体讲解随机迷宫地图的生成算法。
 
-更新时间：2026/06/12 00:27
-
-## 评论
-
-请登录后查看/发表评论
 
 ## 关联章节
-
-- [[34-graph-traverse-basic|图结构的 DFS/BFS 遍历]]

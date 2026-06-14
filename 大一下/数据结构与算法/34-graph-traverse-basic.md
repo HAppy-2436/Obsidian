@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/
 ---
 
-# 图结构的 DFS/BFS 遍历
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -196,41 +194,25 @@ void traverseEdges(Vertex* s, vector<vector<bool>>& visited) {
 算法可视化
 
 由于 visited 数组的剪枝作用，这个遍历函数会遍历一次图中的所有节点，并尝试遍历一次所有边，所以算法的时间复杂度是
-𝑂
-(
-𝐸
-+
-𝑉
-)
+
 O(E+V)，其中 E 是边的总数，V 是节点的总数。
 
-时间复杂度为什么是 $O(E + V)$？
+时间复杂度为什么是 $O(E+V)$？
 
 我们之前讲解
 二叉树的遍历
  时说，二叉树的遍历函数时间复杂度是
-𝑂
-(
-𝑁
-)
+
 O(N)，其中
 𝑁
 N 是节点的总数。
 
 这里图结构既然是树结构的延伸，为什么图的遍历函数时间复杂度是
-𝑂
-(
-𝐸
-+
-𝑉
-)
+
 O(E+V)，要把边的数量
 𝐸
 E 也算进去呢？为什么不是
-𝑂
-(
-𝑉
-)
+
 O(V) 呢？
 
 这是个非常好的问题。你可以花上两分钟想想，我把答案写在下面。
@@ -296,24 +278,10 @@ void traverseEdges(const Graph& graph, int s, vector<vector<bool>>& visited) {
 ```
 
 显然，使用二维 visited 数组并不是一个很高效的实现方式，因为需要创建二维 visited 数组，这个算法的时间复杂度是
-𝑂
-(
-𝐸
-+
-𝑉
-2
-)
-O(E+V
-2
-)，空间复杂度是
-𝑂
-(
-𝑉
-2
-)
-O(V
-2
-)，其中
+
+O(E+V2)，空间复杂度是
+
+O(V2)，其中
 𝐸
 E 是边的数量，
 𝑉
@@ -333,7 +301,6 @@ Hierholzer 算法计算欧拉路径
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/graph-traverse-basic/)。

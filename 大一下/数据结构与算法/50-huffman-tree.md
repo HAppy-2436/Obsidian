@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/
 ---
 
-# 数据压缩和赫夫曼编码
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -166,18 +164,11 @@ for (int i = 0; i < N; i++) {
 K，编码后的数据长度为
 𝑁
 N，那么解码的时间复杂度
-𝑂
-(
-𝑁
-𝐾
-)
+
 O(NK)。
 
 如果你能保证任意一个编码都不是另一个编码的前缀，那么就不需要尝试向后匹配了。这样一来，解码的复杂度就降到了
-𝑂
-(
-𝑁
-)
+
 O(N)。
 
 在实际的编解码场景中
@@ -185,15 +176,11 @@ O(N)。
 N 往往很大，即便
 𝐾
 K 较小，解码速度慢几倍也是非常糟糕的，所以我们需要保证编解码算法的时间复杂度为
-𝑂
-(
-𝑁
-)
+
 O(N)，且压缩率尽可能高。
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/huffman-tree/)。

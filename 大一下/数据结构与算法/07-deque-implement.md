@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/deque-implement/
 ---
 
-# 双端队列（Deque）原理和实现
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -59,10 +57,7 @@ public:
 很简单吧，直接复用我们之前实现的
 MyLinkedList
  类，或者使用编程语言标准库提供的双链表结构就行了。因为双链表本就支持
-𝑂
-(
-1
-)
+
 O(1) 时间复杂度在链表的头尾增删元素：
 
 ```cpp
@@ -129,10 +124,7 @@ int main() {
 也很简单吧，直接复用我们在
 环形数组技巧
  中实现的 CycleArray 提供的方法就行了。环形数组头尾增删元素的复杂度都是
-𝑂
-(
-1
-)
+
 O(1)：
 
 ```cpp
@@ -185,13 +177,5 @@ public:
 };
 ```
 
-更新时间：2026/06/12 00:27
-
-## 评论
-
-请登录后查看/发表评论
 
 ## 关联章节
-
-- [[06-linkedlist-implement|链表的代码实现]]
-- [[03-array-implement|动态数组的代码实现]]

@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/
 ---
 
-# 数组实现哈希表（ArrayHashMap）
-
 前置知识
 
 阅读本文前，你需要先学习：
@@ -28,10 +26,7 @@ url: https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array
 ## 添加 randomKey() API
 
 现在我给你出个题，让你基于标准哈希表的 API 之上，再添加一个新的 randomKey() API，可以在
-𝑂
-(
-1
-)
+
 O(1) 的时间复杂度返回一个随机键：
 
 ```cpp
@@ -85,15 +80,9 @@ int randomeElement(int[] arr) {
 你这样是不行的，这个算法有两个问题：
 
 1、有个循环，最坏时间复杂度上升到了
-𝑂
-(
-𝑁
-)
+
 O(N)，不符合
-𝑂
-(
-1
-)
+
 O(1) 的要求。
 
 2、这个算法不是均匀随机的，因为你的查找方向是固定的，空洞右侧的元素被选中的概率会更大。比如 arr = [1, 2, null, 4]，元素 1, 2, 4 被选中的概率分别是 1/4, 1/4, 2/4。
@@ -116,10 +105,7 @@ int randomeElement(int[] arr) {
 ```
 
 现在这个算法是均匀随机的，但问题也非常明显，它的时间复杂度竟然依赖随机数！肯定不是
-𝑂
-(
-1
-)
+
 O(1) 的，不符合要求。
 
 怎么样，从一个带有空洞的数组中随机返回一个元素是不是都把你难住了？
@@ -143,17 +129,13 @@ O(1) 的，不符合要求。
  中详细讲解，这里暂时不需要掌握。
 
 唯一的办法就是通过 keys 方法遍历整个 table 数组，把所有的键都存储到一个数组中，然后再随机返回一个键。但这样复杂度就是
-𝑂
-(
-𝑁
-)
+
 O(N) 了，还是不符合要求。
 
 是不是感觉已经走投无路了？所以说，还是要积累一些经典数据结构设计经验，如果面试笔试的时候遇到类似的问题，你现场想恐怕是很难的。下面我就来介绍一下如何用数组加强哈希表，轻松实现 randomKey() API。
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/hashtable-with-array/)。

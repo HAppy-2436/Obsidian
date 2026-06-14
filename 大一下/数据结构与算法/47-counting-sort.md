@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/counting-sort/
 ---
 
-# 全新的排序原理：计数排序
-
 读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
 LeetCode
@@ -40,18 +38,7 @@ LeetCode
 计数排序的原理比较简单：统计每种元素出现的次数，进而推算出每个元素在排序后数组中的索引位置，最终完成排序。
 
 计数排序的时间和空间复杂度都是
-𝑂
-(
-𝑛
-+
-𝑚
-𝑎
-𝑥
-−
-𝑚
-𝑖
-𝑛
-)
+
 O(n+max−min)，其中
 𝑛
 n 是待排序数组长度，
@@ -183,7 +170,6 @@ public:
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/counting-sort/)。

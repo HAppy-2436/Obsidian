@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/binary-tree-traverse-basic/
 ---
 
-# 二叉树的递归/层序遍历
-
 读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
 LeetCode
@@ -463,12 +461,5 @@ dijkstra 算法
 
 总之，不要被表象迷惑，二叉树的遍历方式就上面两种，结合后面的教程和习题，你把这两种遍历方式玩明白，一切暴力穷举算法都小菜一碟。
 
-更新时间：2026/06/12 00:27
-
-## 评论
-
-请登录后查看/发表评论
 
 ## 关联章节
-
-- [[23-binary-tree-basic|二叉树基本概念及特殊二叉树]]

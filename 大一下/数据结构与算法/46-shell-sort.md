@@ -9,8 +9,6 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/shell-sort/
 ---
 
-# 突破 O(N^2)：希尔排序
-
 读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
 LeetCode
@@ -36,14 +34,8 @@ LeetCode
 希尔排序是基于
 插入排序
  的简单改进，通过预处理增加数组的局部有序性，突破了插入排序的
-𝑂
-(
-𝑁
-2
-)
-O(N
-2
-) 时间复杂度。
+
+O(N2) 时间复杂度。
 
 你可以点开可视化面板，点击播放按钮，然后点击加速/减速按钮调节速度，即可直观感受希尔排序的过程：
 
@@ -61,7 +53,6 @@ O(N
 
 了解会员权益
 
-更新时间：2026/06/12 00:27
 
 > [!warning] 付费章节
 > 本章内容为 labuladong.online 付费会员内容。本笔记仅保留公开部分 + C++ 代码片段的整理（由 agent 自动从 C++ tab 提取）。完整讲解请见 [原网页](https://labuladong.online/zh/algo/data-structure-basic/shell-sort/)。
