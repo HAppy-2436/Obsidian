@@ -26,11 +26,11 @@ url: https://labuladong.online/zh/algo/data-structure-basic/graph-minimum-spanni
 ## 什么是生成树
 
 首先理解什么是生成树。给定一个无向连通图
-𝐺
+
 G，其生成树是
-𝐺
+
 G 的一个子图，它包含
-𝐺
+
 G 中的所有顶点，并且是一棵树（即无环连通图）。
 
 换句话说，生成树具有以下特性：

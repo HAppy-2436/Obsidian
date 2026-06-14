@@ -112,7 +112,7 @@ for (ListNode* p = head; p != nullptr; p = p->next) {
 
 这个操作的最坏时间复杂度是
 O(n)，其中
-𝑛
+
 n 是链表的长度。
 
 ### 增
