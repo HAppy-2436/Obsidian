@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/insertion-sort/
 ---
 
+# 插入排序的链表思维
+
 读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
 LeetCode
@@ -192,5 +194,13 @@ n
 
 你可以把插入排序的代码拿去力扣第 912 题「排序数组」提交，它最终依然会超时，但可以说明算法代码的逻辑是正确的。之后的文章我们继续探讨如何对排序算法进行优化。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[39-sort-basic|排序算法的关键指标]]
+- [[05-linkedlist-basic|链表（链式存储）的原理]]

@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/linkedlist-basic/
 ---
 
+# 链表（链式存储）的原理
+
 刷过力扣的读者肯定对单链表非常熟悉，力扣上的单链表节点定义如下：
 
 ```cpp
@@ -603,5 +605,12 @@ O(1)。
 
 在下一篇文章中，我们分别用单链表和双链表实现一个拥有增删查改等基本操作的 MyLinkedList，并且会使用「虚拟头结点」技巧简化代码逻辑，避免处理头尾指针为空情况的边界情况。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[02-array-basic|数组（顺序存储）的原理]]

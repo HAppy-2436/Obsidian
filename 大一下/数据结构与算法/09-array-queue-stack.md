@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/array-queue-stack/
 ---
 
+# 数组实现队列/栈
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -120,5 +122,13 @@ public:
 };
 ```
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[08-queue-stack-basic|队列/栈的基本原理]]
+- [[03-array-implement|动态数组的代码实现]]

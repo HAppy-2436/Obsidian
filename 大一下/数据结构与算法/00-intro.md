@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/intro/data-structure-basic/
 ---
 
+# 本章导读
+
 ## 本章适合谁
 
 对于希望系统掌握数据结构和算法的读者，都建议学习本章。
@@ -38,3 +40,9 @@ url: https://labuladong.online/zh/algo/intro/data-structure-basic/
 至于编程语言层面的极致优化和最佳实践，不在本站的教学范围。如果你追求更深入地理解，可以参考对应编程语言的标准库。
 
 当然，我给出的多语言代码难免也可能出现细节错误，欢迎大家批评指正，让我们共同进步！
+
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论

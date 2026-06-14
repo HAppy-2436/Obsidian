@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/sort-basic/
 ---
 
+# 排序算法的关键指标
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -95,5 +97,12 @@ void sort(vector<int>& nums) {
 
 排序算法的几个关键指标就是这些，后面我会介绍几种常见的排序算法，都会根据这些指标来分析它们的优劣。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[01-complexity|时间空间复杂度入门]]

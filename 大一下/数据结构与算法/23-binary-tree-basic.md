@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/binary-tree-basic/
 ---
 
+# 二叉树基本概念及特殊二叉树
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -392,5 +394,13 @@ tree[3] = {5, 6};
 邻接表
 。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[02-array-basic|数组（顺序存储）的原理]]
+- [[06-linkedlist-implement|链表的代码实现]]

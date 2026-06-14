@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/linkedlist-implement/
 ---
 
+# 链表的代码实现
+
 读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
 LeetCode
@@ -1075,5 +1077,12 @@ int main() {
 }
 ```
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[05-linkedlist-basic|链表（链式存储）的原理]]

@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/hashmap-basic/
 ---
 
+# 哈希表核心原理
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -521,5 +523,13 @@ O(N)。
 
 下面，就我将手把手带大家分别用拉链法和线性探查法来实现简单的哈希表，来加深对哈希表的理解。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[11-hashtable-with-array|数组实现哈希表（ArrayHashMap）]]
+- [[12-hashtable-with-linked-list|链表实现哈希表（LinkedHashMap）]]

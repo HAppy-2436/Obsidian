@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/cycle-array/
 ---
 
+# 循环数组技巧及实现
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -388,5 +390,12 @@ O(N)。
 
 你可以思考一下是不是这样。如果是这样，为什么编程语言的标准库中提供的动态数组容器底层并没有用环形数组技巧。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[03-array-implement|动态数组的代码实现]]

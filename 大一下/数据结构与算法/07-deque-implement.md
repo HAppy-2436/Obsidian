@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/deque-implement/
 ---
 
+# 双端队列（Deque）原理和实现
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -183,5 +185,13 @@ public:
 };
 ```
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[06-linkedlist-implement|链表的代码实现]]
+- [[03-array-implement|动态数组的代码实现]]

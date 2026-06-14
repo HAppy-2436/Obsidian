@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/array-basic/
 ---
 
+# 数组（顺序存储）的原理
+
 我们在说「数组」的时候有多种不同的语境，因为不同的编程语言提供的数组类型和 API 是不一样的，所以开头先统一一下说辞，方便后面的讲解。
 
 我认为暂且可以把「数组」分为两大类，一类是「静态数组」，一类是「动态数组」。
@@ -395,5 +397,12 @@ int index = find(arr.begin(), arr.end(), 666) - arr.begin();
 
 在后面的章节，我会手把手带大家实现一个动态数组，让大家更加深入地理解动态数组的原理。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[01-complexity|时间空间复杂度入门]]

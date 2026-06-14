@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/bubble-sort/
 ---
 
+# 拥有稳定性：冒泡排序
+
 读完本文，你不仅学会了算法套路，还可以顺便解决如下题目：
 
 LeetCode
@@ -336,5 +338,12 @@ O(n
 
 下面我们继续探讨，看看还有什么方法能够改进选择排序。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[39-sort-basic|排序算法的关键指标]]

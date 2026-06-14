@@ -9,6 +9,8 @@ source: labuladong.online
 url: https://labuladong.online/zh/algo/data-structure-basic/skip-list-basic/
 ---
 
+# 跳表原理
+
 前置知识
 
 阅读本文前，你需要先学习：
@@ -127,5 +129,12 @@ logN，否则时间复杂度就会退化。
 
 关于跳表的具体实现，我会更新到数据结构的设计章节，敬请期待。
 
+更新时间：2026/06/12 00:27
+
+## 评论
+
+请登录后查看/发表评论
 
 ## 关联章节
+
+- [[06-linkedlist-implement|链表的代码实现]]
