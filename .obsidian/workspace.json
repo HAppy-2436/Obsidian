@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "大一下/数据结构与算法/01-complexity.md",
+                "file": "大一下/数据结构与算法/02-array-basic.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01-complexity"
+              "title": "02-array-basic"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "688be167ced71ec3",
   "lastOpenFiles": [
+    "大一下/数据结构与算法/01-complexity.md",
     "大一下/CSAPP/260424.md",
     "大一下/数据结构与算法/00-overview.md",
     "大一下/数据结构与算法/_raw_pages_v2/_index.json",
@@ -202,7 +203,6 @@
     "大一下/数据结构与算法/05-linkedlist-basic.md",
     "大一下/数据结构与算法/07-deque-implement.md",
     "大一下/数据结构与算法/02-array-basic.md",
-    "大一下/数据结构与算法/01-complexity.md",
     "大一下/数据结构与算法/labuladong-data-structure-basic.md",
     "大一下/数据结构与算法/chaoxing-data-structure-course.md",
     "大一下/数据结构与算法/数据结构与算法复习指南.md",
