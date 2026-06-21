@@ -1,6 +1,7 @@
 ---
 title: 二叉树基本概念及特殊二叉树
 tags: [labuladong, 二叉树, 数据结构与算法]
+category: 二叉树结构及遍历
 order: 23
 prerequisites: [02-array-basic, 06-linkedlist-implement]
 group: 二叉树

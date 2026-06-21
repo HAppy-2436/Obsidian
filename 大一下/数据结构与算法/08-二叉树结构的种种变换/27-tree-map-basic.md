@@ -1,6 +1,7 @@
 ---
 title: 二叉搜索树原理及应用技巧
 tags: [labuladong, 高级树, 数据结构与算法, 付费章节]
+category: 二叉树结构的种种变换
 order: 27
 prerequisites: [23-binary-tree-basic]
 group: 高级树

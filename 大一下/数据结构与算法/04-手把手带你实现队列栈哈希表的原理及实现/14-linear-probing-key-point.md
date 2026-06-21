@@ -1,6 +1,7 @@
 ---
 title: 线性探查法的两个难点
 tags: [labuladong, 哈希表, 开放定址, 数据结构与算法, 付费章节]
+category: 手把手带你实现队列/栈哈希表的原理及实现
 order: 14
 prerequisites: [13-hashmap-basic]
 group: 哈希表 / 开放定址

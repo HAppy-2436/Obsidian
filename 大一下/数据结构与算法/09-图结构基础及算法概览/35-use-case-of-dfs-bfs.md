@@ -1,6 +1,7 @@
 ---
 title: DFS 和 BFS 的常用场景
 tags: [labuladong, 图, 遍历, 数据结构与算法, 付费章节]
+category: 图结构基础及算法概览
 order: 35
 prerequisites: [34-graph-traverse-basic]
 group: 图 / 遍历

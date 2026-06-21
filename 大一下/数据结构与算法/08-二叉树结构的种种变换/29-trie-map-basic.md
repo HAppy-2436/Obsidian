@@ -1,6 +1,7 @@
 ---
 title: Trie/字典树/前缀树原理及可视化
 tags: [labuladong, 高级树, 数据结构与算法, 付费章节]
+category: 二叉树结构的种种变换
 order: 29
 prerequisites: [27-tree-map-basic]
 group: 高级树

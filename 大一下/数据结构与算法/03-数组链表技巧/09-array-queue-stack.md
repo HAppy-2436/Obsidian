@@ -1,6 +1,7 @@
 ---
 title: 数组实现队列/栈
 tags: [labuladong, 队列/栈, 实现, 数据结构与算法]
+category: 数组链表技巧
 order: 9
 prerequisites: [08-queue-stack-basic, 03-array-implement]
 group: 队列/栈 / 实现

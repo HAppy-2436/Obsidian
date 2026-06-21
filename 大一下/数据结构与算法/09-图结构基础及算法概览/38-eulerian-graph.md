@@ -1,6 +1,7 @@
 ---
 title: 欧拉图一笔画游戏
 tags: [labuladong, 图, 应用, 数据结构与算法, 付费章节]
+category: 图结构基础及算法概览
 order: 38
 prerequisites: [34-graph-traverse-basic]
 group: 图 / 应用

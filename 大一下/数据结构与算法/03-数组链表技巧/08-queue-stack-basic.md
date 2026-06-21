@@ -1,6 +1,7 @@
 ---
 title: 队列/栈的基本原理
 tags: [labuladong, 队列/栈, 数据结构与算法]
+category: 数组链表技巧
 order: 8
 prerequisites: [02-array-basic, 05-linkedlist-basic]
 group: 队列/栈

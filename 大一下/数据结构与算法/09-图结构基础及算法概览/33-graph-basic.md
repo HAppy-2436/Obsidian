@@ -1,6 +1,7 @@
 ---
 title: 图结构的通用代码实现
 tags: [labuladong, 图, 实现, 数据结构与算法, 付费章节]
+category: 图结构基础及算法概览
 order: 33
 prerequisites: [32-graph-terminology]
 group: 图 / 实现

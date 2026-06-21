@@ -1,6 +1,7 @@
 ---
 title: 链表实现哈希表（LinkedHashMap）
 tags: [labuladong, 哈希表, 实现, 数据结构与算法, 付费章节]
+category: 手把手带你实现队列/栈哈希表的原理及实现
 order: 12
 prerequisites: [06-linkedlist-implement]
 group: 哈希表 / 实现

@@ -1,6 +1,7 @@
 ---
 title: 跳表原理
 tags: [labuladong, 哈希集合, 数据结构与算法]
+category: 哈希表结构的种种变换
 order: 20
 prerequisites: [06-linkedlist-implement]
 group: 哈希集合

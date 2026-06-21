@@ -1,6 +1,7 @@
 ---
 title: 数组（顺序存储）的原理
 tags: [labuladong, 数组, 数据结构与算法]
+category: 手把手带你实现动态数组
 order: 2
 prerequisites: [01-complexity]
 group: 数组

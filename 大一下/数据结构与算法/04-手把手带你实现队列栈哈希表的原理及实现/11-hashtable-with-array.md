@@ -1,6 +1,7 @@
 ---
 title: 数组实现哈希表（ArrayHashMap）
 tags: [labuladong, 哈希表, 实现, 数据结构与算法, 付费章节]
+category: 手把手带你实现队列/栈哈希表的原理及实现
 order: 11
 prerequisites: [03-array-implement]
 group: 哈希表 / 实现

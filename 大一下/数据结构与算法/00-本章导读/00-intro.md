@@ -1,6 +1,7 @@
 ---
 title: 本章导读
 tags: [labuladong, 入门, 数据结构与算法]
+category: 本章导读
 order: 0
 prerequisites: []
 group: 入门

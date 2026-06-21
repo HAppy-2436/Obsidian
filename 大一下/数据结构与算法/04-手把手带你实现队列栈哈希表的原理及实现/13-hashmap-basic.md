@@ -1,6 +1,7 @@
 ---
 title: 哈希表核心原理
 tags: [labuladong, 哈希表, 数据结构与算法]
+category: 手把手带你实现队列/栈哈希表的原理及实现
 order: 13
 prerequisites: [11-hashtable-with-array, 12-hashtable-with-linked-list]
 group: 哈希表

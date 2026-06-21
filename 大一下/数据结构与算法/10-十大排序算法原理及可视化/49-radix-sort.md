@@ -1,6 +1,7 @@
 ---
 title: 基数排序（Radix Sort）
 tags: [labuladong, 排序, 线性, 数据结构与算法, 付费章节]
+category: 十大排序算法原理及可视化
 order: 49
 prerequisites: [47-counting-sort, 48-bucket-sort]
 group: 排序 / 线性

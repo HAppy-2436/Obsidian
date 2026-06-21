@@ -1,6 +1,7 @@
 ---
 title: 插入排序的链表思维
 tags: [labuladong, 排序, 基础, 数据结构与算法]
+category: 十大排序算法原理及可视化
 order: 41
 prerequisites: [39-sort-basic, 05-linkedlist-basic]
 group: 排序 / 基础

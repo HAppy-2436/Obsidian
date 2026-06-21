@@ -1,6 +1,7 @@
 ---
 title: 线性探查法的两种代码实现
 tags: [labuladong, 哈希表, 开放定址, 数据结构与算法, 付费章节]
+category: 手把手带你实现队列/栈哈希表的原理及实现
 order: 15
 prerequisites: [14-linear-probing-key-point]
 group: 哈希表 / 开放定址

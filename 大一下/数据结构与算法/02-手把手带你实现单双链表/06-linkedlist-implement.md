@@ -1,6 +1,7 @@
 ---
 title: 链表的代码实现
 tags: [labuladong, 链表, 数据结构与算法]
+category: 手把手带你实现单/双链表
 order: 6
 prerequisites: [05-linkedlist-basic]
 group: 链表

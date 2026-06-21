@@ -1,6 +1,7 @@
 ---
 title: Union Find 并查集原理
 tags: [labuladong, 高级树, 数据结构与算法, 付费章节]
+category: 二叉树结构的种种变换
 order: 30
 prerequisites: [02-array-basic]
 group: 高级树

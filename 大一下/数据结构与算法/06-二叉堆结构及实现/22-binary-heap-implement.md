@@ -1,6 +1,7 @@
 ---
 title: 堆排序/优先级队列的代码实现
 tags: [labuladong, 二叉堆, 数据结构与算法, 付费章节]
+category: 二叉堆结构及实现
 order: 22
 prerequisites: [21-binary-heap-basic]
 group: 二叉堆

@@ -1,6 +1,7 @@
 ---
 title: 排序算法的关键指标
 tags: [labuladong, 排序, 数据结构与算法]
+category: 十大排序算法原理及可视化
 order: 39
 prerequisites: [01-complexity]
 group: 排序

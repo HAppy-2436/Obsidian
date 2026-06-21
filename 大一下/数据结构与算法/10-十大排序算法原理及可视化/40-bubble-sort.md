@@ -1,6 +1,7 @@
 ---
 title: 拥有稳定性：冒泡排序
 tags: [labuladong, 排序, 基础, 数据结构与算法]
+category: 十大排序算法原理及可视化
 order: 40
 prerequisites: [39-sort-basic]
 group: 排序 / 基础

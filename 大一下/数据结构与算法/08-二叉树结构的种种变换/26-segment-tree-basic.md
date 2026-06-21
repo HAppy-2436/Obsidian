@@ -1,6 +1,7 @@
 ---
 title: 线段树核心原理及可视化
 tags: [labuladong, 高级树, 数据结构与算法, 付费章节]
+category: 二叉树结构的种种变换
 order: 26
 prerequisites: [23-binary-tree-basic, 02-array-basic]
 group: 高级树

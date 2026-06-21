@@ -1,6 +1,7 @@
 ---
 title: 循环数组技巧及实现
 tags: [labuladong, 数组, 变体, 数据结构与算法]
+category: 手把手带你实现动态数组
 order: 4
 prerequisites: [03-array-implement]
 group: 数组 / 变体

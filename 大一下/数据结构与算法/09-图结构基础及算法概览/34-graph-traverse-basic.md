@@ -1,6 +1,7 @@
 ---
 title: 图结构的 DFS/BFS 遍历
 tags: [labuladong, 图, 遍历, 数据结构与算法, 付费章节]
+category: 图结构基础及算法概览
 order: 34
 prerequisites: [33-graph-basic, 24-binary-tree-traverse-basic]
 group: 图 / 遍历

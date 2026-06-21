@@ -1,6 +1,7 @@
 ---
 title: 堆结构妙用：堆排序
 tags: [labuladong, 排序, 选择, 数据结构与算法, 付费章节]
+category: 十大排序算法原理及可视化
 order: 45
 prerequisites: [21-binary-heap-basic]
 group: 排序 / 选择

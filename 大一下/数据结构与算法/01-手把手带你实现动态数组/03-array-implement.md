@@ -1,6 +1,7 @@
 ---
 title: 动态数组的代码实现
 tags: [labuladong, 数组, 数据结构与算法]
+category: 手把手带你实现动态数组
 order: 3
 prerequisites: [02-array-basic]
 group: 数组

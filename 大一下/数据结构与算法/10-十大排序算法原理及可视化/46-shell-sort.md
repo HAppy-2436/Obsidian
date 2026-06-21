@@ -1,6 +1,7 @@
 ---
 title: 突破 O(N^2)：希尔排序
 tags: [labuladong, 排序, 插入改进, 数据结构与算法, 付费章节]
+category: 十大排序算法原理及可视化
 order: 46
 prerequisites: [41-insertion-sort]
 group: 排序 / 插入改进

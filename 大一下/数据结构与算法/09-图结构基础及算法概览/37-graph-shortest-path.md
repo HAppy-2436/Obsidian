@@ -1,6 +1,7 @@
 ---
 title: 图结构最短路径算法概览
 tags: [labuladong, 图, 算法, 数据结构与算法, 付费章节]
+category: 图结构基础及算法概览
 order: 37
 prerequisites: [34-graph-traverse-basic]
 group: 图 / 算法

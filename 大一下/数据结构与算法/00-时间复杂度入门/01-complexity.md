@@ -1,6 +1,7 @@
 ---
 title: 时间空间复杂度入门
 tags: [labuladong, 入门, 数据结构与算法]
+category: 时间复杂度入门
 order: 1
 prerequisites: [00-intro]
 group: 入门

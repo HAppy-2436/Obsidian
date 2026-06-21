@@ -1,6 +1,7 @@
 ---
 title: 数据压缩和赫夫曼编码
 tags: [labuladong, 应用, 数据结构与算法, 付费章节]
+category: 十大排序算法原理及可视化
 order: 50
 prerequisites: [23-binary-tree-basic]
 group: 应用

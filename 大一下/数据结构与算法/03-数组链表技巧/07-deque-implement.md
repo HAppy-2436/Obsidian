@@ -1,6 +1,7 @@
 ---
 title: 双端队列（Deque）原理和实现
 tags: [labuladong, 数组链表技巧, 数据结构与算法]
+category: 数组链表技巧
 order: 7
 prerequisites: [06-linkedlist-implement, 03-array-implement]
 group: 数组链表技巧

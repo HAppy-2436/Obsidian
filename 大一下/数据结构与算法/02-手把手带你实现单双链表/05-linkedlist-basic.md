@@ -1,6 +1,7 @@
 ---
 title: 链表（链式存储）的原理
 tags: [labuladong, 链表, 数据结构与算法]
+category: 手把手带你实现单/双链表
 order: 5
 prerequisites: [02-array-basic]
 group: 链表

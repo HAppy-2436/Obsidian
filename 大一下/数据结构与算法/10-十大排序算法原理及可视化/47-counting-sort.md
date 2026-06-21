@@ -1,6 +1,7 @@
 ---
 title: 全新的排序原理：计数排序
 tags: [labuladong, 排序, 线性, 数据结构与算法, 付费章节]
+category: 十大排序算法原理及可视化
 order: 47
 prerequisites: [39-sort-basic]
 group: 排序 / 线性

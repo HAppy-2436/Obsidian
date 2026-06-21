@@ -1,6 +1,7 @@
 ---
 title: N 叉树的递归/层序遍历
 tags: [labuladong, 二叉树, 遍历, 数据结构与算法, 付费章节]
+category: 二叉树结构及遍历
 order: 25
 prerequisites: [24-binary-tree-traverse-basic]
 group: 二叉树 / 遍历

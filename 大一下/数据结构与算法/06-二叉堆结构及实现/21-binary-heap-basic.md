@@ -1,6 +1,7 @@
 ---
 title: 二叉堆核心原理及可视化
 tags: [labuladong, 二叉堆, 数据结构与算法, 付费章节]
+category: 二叉堆结构及实现
 order: 21
 prerequisites: [02-array-basic]
 group: 二叉堆

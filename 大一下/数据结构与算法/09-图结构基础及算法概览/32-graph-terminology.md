@@ -1,6 +1,7 @@
 ---
 title: 图的基本术语
 tags: [labuladong, 图, 数据结构与算法]
+category: 图结构基础及算法概览
 order: 32
 prerequisites: [02-array-basic]
 group: 图

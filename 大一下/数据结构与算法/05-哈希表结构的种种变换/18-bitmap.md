@@ -1,6 +1,7 @@
 ---
 title: 位图原理和实现
 tags: [labuladong, 哈希集合, 数据结构与算法, 付费章节]
+category: 哈希表结构的种种变换
 order: 18
 prerequisites: [17-hash-set]
 group: 哈希集合
