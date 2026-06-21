@@ -1,2 +1,44 @@
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+# =============================================
+# Obsidian vault 配置
+# =============================================
+# 工作区布局是机器/会话相关的，每次都变
+# 注意：只忽略布局文件，保留 .obsidian/app.json、appearance.json、
+#       community-plugins.json、core-plugins.json、graph.json、plugins/ 等
+#       这些是 vault 实际配置（已 tracked）
+/.obsidian/workspace.json
+/.obsidian/workspace-mobile.json
+/.obsidian/workspaces.json
+# 嵌套子 vault（如 大一上/.obsidian/）
+**/.obsidian/workspace.json
+**/.obsidian/workspace-mobile.json
+**/.obsidian/workspaces.json
+
+# =============================================
+# Obsidian 回收站
+# =============================================
+/.trash/
+**/.trash/
+
+# =============================================
+# mavis agent runtime（每次会话都会变）
+# =============================================
+/.mavis/
+**/.mavis/
+
+# =============================================
+# opencode CLI runtime（node_modules + 编译 tmp）
+# =============================================
+/.opencode/
+**/.opencode/
+
+# =============================================
+# 通用 OS / 编辑器垃圾
+# =============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
