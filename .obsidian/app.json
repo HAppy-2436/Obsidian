@@ -9,5 +9,6 @@
     "downscalePercent": 80
   },
   "readableLineLength": true,
-  "showInlineTitle": true
+  "showInlineTitle": true,
+  "alwaysUpdateLinks": true
 }
