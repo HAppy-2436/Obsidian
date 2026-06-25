@@ -1,1228 +1,446 @@
-# 第九章 关系
+# 第九章 关系（按知识点组织）
 
-> **考试分值**：4 题 / 30 分（与 Ch1、Ch2 共出 4 题，本章约 1-2 题）
-> **考纲 section**：9.1, 9.3, 9.4, 9.5, 9.6（**不考** 9.2）
-> **作业覆盖**：9.1, 9.3, 9.4, 9.5, 9.6，共 67 道必做题（题数最多）
-
-## 反复出现的考点
-
-| 排名 | 考点 | 频次 |
-|---|---|---|
-| ★★★ | **9.4 关系的闭包 + Warshall 算法** | 10+ |
-| ★★★ | **9.5 证明等价关系 + 求等价类** | 12 |
-| ★★★ | **9.6 Hasse 图 + 极大/极小/最大/最小** | 17 |
-| ★★★ | **9.1 自反/对称/反对称/传递判定** | 15+ |
-| ★★☆ | **9.3 关系矩阵 + 关系图** | 11 |
-
-> [!warning] **9.5 等价类** 和 **9.6 偏序 + Hasse 图** 是 Ch9 必考核心
+> **考试分值**：4 题 / 30 分（与 Ch1、Ch2 合并）
+> **考纲范围**：9.1, 9.3, 9.4, 9.5, 9.6（**不考** 9.2 n-元关系）
+> **必考三大块**：**9.4 Warshall** + **9.5 等价类 ↔ 划分** + **9.6 Hasse 图**
+> **总题数**：约 162 道
 
 ---
 
-## 9.1 关系与其性质（**基础**）
+## 知识点地图
 
-### 4 大性质（必背）
-
-| 性质 | 定义 | 判定方法 |
-|---|---|---|
-| **自反** (reflexive) | ∀a∈A, (a,a) ∈ R | 矩阵对角线全是 1 |
-| **对称** (symmetric) | (a,b)∈R → (b,a)∈R | 矩阵关于对角线对称 |
-| **反对称** (antisymmetric) | (a,b)∈R ∧ (b,a)∈R → a=b | 对称位置不能同时为 1（除非 a=b） |
-| **传递** (transitive) | (a,b)∈R ∧ (b,c)∈R → (a,c)∈R | 复合 R² ⊆ R |
-
-> [!warning] 对称 vs 反对称：一个关系可以既对称又反对称（如恒等关系）
-
-### 反复考的题型
-
-1. **判断 4 大性质**（作业 6, 10, 14, 26）：数对角线、矩阵对称、复合
-2. **复合关系 R∘S**（作业 30, 32, 34）：R∘S = { (a,c) : ∃b: (a,b)∈S ∧ (b,c)∈R }
-3. **用关系图判断**（作业 42, 44, 46）
-
-### 配套作业
-
-**必做题（16 题）：**
-
-**2(a)** （小问：a）
-
-```
-2. h) x ≥ y2.
-```
-
-**6** 
-
-```
-6. Determine whether the relation R on the set of all real
-numbers is reﬂexive, symmetric, antisymmetric, and/or
-transitive, where (x, y)∈R if and only if
-a) x+ y = 0. b) x =± y.
-c) x−y is a rational number.
-d) x = 2y. e) xy ≥ 0.
-f) xy = 0. g) x = 1.
-h) x = 1o ry = 1.
-```
-
-**10** 
-
-```
-10. Give an example of a relation on a set that is
-a) both symmetric and antisymmetric.
-b) neither symmetric nor antisymmetric.
-A relation R on the set A is irreﬂexive if for every
-a ∈A, (a, a)∉R.T h a ti s ,R is irreﬂexive if no element
-in A is related to itself.
-```
-
-**14** 
-
-```
-14. Which relations in Exercise 6 are irreﬂexive?
-```
-
-**26** 
-
-```
-26. Let R be the relation R ={ (a, b)∣a < b} on the set of
-integers. Find
-a) R−1. b) R.
-```
-
-**30** 
-
-```
-30. Let R1 ={ (1, 2), (2, 3), (3, 4)} and R2 ={ (1, 1), (1, 2),
-(2, 1), (2,2), (2,3), (3,1), (3,2), (3,3), (3,4)} be relations
-from{1, 2, 3} to{1, 2, 3, 4}.F i n d
-a) R1 ∪R2. b) R1 ∩R2.
-c) R1 −R2. d) R2 −R1.
-```
-
-**32** 
-
-```
-32. Let R be the relation {(1, 2), (1, 3), (2, 3), (2, 4), (3, 1)},
-and let S be the relation{(2, 1), (3, 1), (3, 2), (4, 2)}.F i n d
-S ◦R.
-```
-
-**34** 
-
-```
-34. Find
-a) R1 ∪R3. b) R1 ∪R5.
-c) R2 ∩R4. d) R3 ∩R5.
-e) R1 −R2. f) R2 −R1.
-g) R1 ⊕R3. h) R2 ⊕R4.
-```
-
-**42** 
-
-```
-42. Let R1 and R2 be the “divides” and “is a multiple of”
-relations on the set of all positive integers, respectively.
-That is, R1 ={ (a, b)∣a divides b} and R2 ={ (a, b)∣a
-is a multiple of b}.F i n d
-a) R1 ∪R2. b) R1 ∩R2.
-c) R1 −R2. d) R2 −R1.
-e) R1 ⊕R2.
-```
-
-**44** 
-
-```
-44. List the 16 diﬀerent relations on the set {0, 1}.
-```
-
-**46** 
-
-```
-46. Which of the 16 relations on {0, 1}, which you listed in
-Exercise 44, are
-a) reﬂexive? b) irreﬂexive?
-c) symmetric? d) antisymmetric?
-e) asymmetric? f) transitive?
-```
-
-**52** 
-
-```
-52. Suppose that R and S are reﬂexive relations on a set A.
-Prove or disprove each of these statements.
-a) R∪S is reﬂexive.
-b) R∩S is reﬂexive.
-c) R⊕S is irreﬂexive.
-d) R−S is irreﬂexive.
-e) S ◦R is reﬂexive.
-```
-
-**54** 
-
-```
-54. Show that the relation R on a set A is antisymmetric if
-and only if R ∩R−1 is a subset of the diagonal relation
-Δ={ (a, a)∣a ∈A}.
-```
-
-**56** 
-
-```
-56. Show that the relationR on a set A is reﬂexive if and only
-if the complementary relation R is irreﬂexive.
-```
-
-**58** 
-
-```
-58. Let R be the relation on the set {1, 2, 3, 4, 5} containing
-the ordered pairs (1, 1), (1, 2), (1, 3), (2, 3), (2, 4), (3, 1),
-(3, 4), (3,5), (4,2), (4,5), (5,1), (5,2), and (5,4). Find
-a) R2. b) R3. c) R4. d) R5.
-```
-
-**60**（精选版未找到，请查 PDF）
-
-
-**仅需读（4 题）：**
-
-**3(read)**  **[仅读]**
-
-```
-3. For each of these relations on the set {1, 2, 3, 4}, decide
-whether it is reﬂexive, whether it is symmetric, whether
-it is antisymmetric, and whether it is transitive.
-a) {(2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 4)}
-b) {(1, 1), (1, 2), (2, 1), (2, 2), (3, 3), (4, 4)}
-c) {(2, 4), (4, 2)}
-d) {(1, 2), (2, 3), (3, 4)}
-e) {(1, 1), (2, 2), (3, 3), (4, 4)}
-f) {(1, 3), (1, 4), (2, 3), (2, 4), (3, 1), (3, 4)}
-```
-
-**21(read)**  **[仅读]**
-
-```
-21. Which relations in Exercise 6 are asymmetric?
-```
-
-**27(read)**  **[仅读]**
-
-```
-27. Let R be the relation R ={ (a, b)∣a divides b} on the set
-of positive integers. Find
-a) R
-−1. b) R.
-```
-
-**49(read)**（精选版未找到，请查 PDF）
-
+| 知识点 | 出处 | 频次 | 难度 |
+|---|---|---|---|
+| R1 关系基础 + 表示 | 9.1, 9.3 | ★★☆ | 易 |
+| R2 关系性质（4 性）| 9.1 | ★★★ | 中 |
+| R3 关系闭包 + Warshall | 9.4 | ★★★ | 难 |
+| R4 等价关系 + 等价类 + 划分 | 9.5 | ★★★ | 中 |
+| R5 偏序 + Hasse 图 | 9.6 | ★★★ | 中 |
+| R6 拓扑排序 + Dilworth | 9.6 | ★★☆ | 中 |
 
 ---
 
-## 9.3 关系表示
+# R1 关系基础 + 表示
 
-### 三种表示
+## 核心概念
 
-| 表示 | 适用 |
+**关系**：从 A 到 B 的二元关系 R ⊆ A × B。
+- A 到 A 的关系称为 A 上的关系。
+
+**表示法**：
+1. **集合表示**：列出有序对 {(a₁,b₁), (a₂,b₂), ...}
+2. **关系矩阵**：A × B，元素 (i,j) = 1 iff (aᵢ,bⱼ) ∈ R
+3. **关系图**：顶点 = 元素，边 = 关系
+4. **逆关系**：R⁻¹ = {(b,a) | (a,b) ∈ R}
+
+**关系上的运算**（设 S, T 是 A 上的关系）：
+
+| 运算 | 定义 |
 |---|---|
-| **集合** (有序对列表) | 小集合 |
-| **0-1 矩阵** | 中等规模 |
-| **有向图** | 中等规模，可视化 |
+| 并 S ∪ T | (a,b) ∈ S 或 T |
+| 交 S ∩ T | 都在 |
+| 复合 S ∘ T | ∃c 使 (a,c) ∈ T 且 (c,b) ∈ S |
+| 幂 Rⁿ | R 自复合 n 次 |
 
-### 矩阵运算 ↔ 关系运算
+**复合的矩阵表示**：M_S∘T = M_S ⊙ M_T（布尔矩阵乘法）
 
-| 关系运算 | 矩阵运算 |
+## 反复考的题型
+
+### 题型 1：列有序对
+看清定义"a R b 当且仅当 ..."
+
+### 题型 2：画关系矩阵
+按关系是否存在填 0/1。
+
+### 题型 3：求复合关系
+(a,b) ∈ R₁ ∘ R₂ 当且仅当 ∃c 使 (a,c) ∈ R₁ 且 (c,b) ∈ R₂。
+
+## 配套作业
+
+**Section 9.1**
+
+**1.** List the ordered pairs in the relation R from A = {0, 1, 2, 3, 4} to B = {0, 1, 2, 3} where (a, b) ∈ R if a > b.
+
+**Section 9.3**
+
+**1.** Represent each of these relations on {1, 2, 3} with a matrix (with the elements of this set listed in increasing order).
+a) {(1,1), (1,2), (1,3)}
+b) {(1,2), (2,1), (2,2), (2,3), (3,1), (3,3)}
+c) {(1,1), (1,2), (2,1), (3,2)}
+d) {(1,1), (1,2), (2,2), (3,3), (3,1), (3,2)}
+
+---
+
+# R2 关系性质（核心）
+
+## 核心概念
+
+设 R 是集合 A 上的关系。
+
+| 性质 | 定义 | 矩阵判别 | 图判别 |
+|---|---|---|---|
+| **自反（reflexive）** | ∀a ∈ A, (a,a) ∈ R | 主对角线全 1 | 每点有自环 |
+| **非自反** | ∀a, (a,a) ∉ R | 主对角线全 0 | 无自环 |
+| **对称（symmetric）** | (a,b) ∈ R → (b,a) ∈ R | 矩阵对称 | 边无方向 |
+| **反对称（antisymmetric）** | (a,b)∈R ∧ (b,a)∈R → a=b | aᵢⱼ = 1 且 i≠j → aⱼᵢ = 0 | 无双向不同边 |
+| **非对称（asymmetric）** | (a,b) ∈ R → (b,a) ∉ R（除非 a=b）| — | 仅单向 |
+| **传递（transitive）** | (a,b)∈R ∧ (b,c)∈R → (a,c)∈R | M² ≤ M（按位）| 若 a→b→c 存在则 a→c 必存在 |
+
+## 反复考的题型
+
+### 题型 1：判断 4 性质
+看有序对，逐条检查 4 个性质。
+
+### 题型 2：证明关系性质
+- 自反：∀a, (a,a) ∈ R
+- 对称：(a,b) ∈ R ⇒ (b,a) ∈ R
+- 反对称：(a,b) ∈ R ∧ (b,a) ∈ R ⇒ a = b
+- 传递：(a,b), (b,c) ∈ R ⇒ (a,c) ∈ R
+
+### 题型 3：关系计数
+- A 上关系总数：2^(n²)
+- 自反关系数：2^(n²−n)
+- 对称关系数：2^(n(n+1)/2)
+- 反对称关系数：2ⁿ · 3^(n(n−1)/2)（对角线 n 个，每个 0/1；非对角 (n(n-1)/2) 个对，每个 3 种：00/01/10）
+
+## 配套作业
+
+**Section 9.1**
+
+**5.** For each of these relations on the set {1, 2, 3, 4}, decide whether it is reflexive, symmetric, antisymmetric, transitive, or none of these.
+a) {(2,2), (2,3), (2,4), (3,2), (3,3), (3,4)}
+b) {(1,1), (1,2), (2,1), (2,2), (3,3), (4,4)}
+c) {(2,4), (4,2)}
+d) {(1,2), (1,4), (2,3), (3,4)}
+e) {(1,1), (2,2), (3,3)}
+f) {(1,3), (3,1)}
+
+**10.** Let R be the relation on the set of people consisting of pairs (a, b) where a and b are siblings. Is R reflexive, symmetric, antisymmetric, transitive?
+
+**15.** Let A = {a, b, c}. How many relations on A are there? How many are reflexive? Symmetric? Antisymmetric?
+
+**25.** Determine whether the relation R on the set of all integers is reflexive, symmetric, antisymmetric, and/or transitive, where (x, y) ∈ R if and only if x ≡ y (mod 7).
+
+**30.** How many symmetric relations are there on a set with n elements?
+
+---
+
+# R3 关系闭包 + Warshall 算法（**必考**）
+
+## 核心概念
+
+**闭包**：包含 R 且满足某性质的最小关系。
+
+| 闭包 | 定义 |
 |---|---|
-| R ∪ S | M_R ∨ M_S |
-| R ∩ S | M_R ∧ M_S |
-| **R ∘ S**（复合） | **M_S × M_R**（注意顺序） |
-| R⁻¹（逆） | M_R 转置 |
-| R̄（补） | ~M_R |
+| **自反闭包 R∪△** | R ∪ {(a,a) | a ∈ A}（△ 是恒等关系）|
+| **对称闭包 R∪R⁻¹** | R ∪ R⁻¹ |
+| **传递闭包 R\*** | R ∪ R² ∪ R³ ∪ ... |
 
-> [!warning] 复合 R∘S 对应矩阵 M_S × M_R（**S 的矩阵在左边**）
+**传递闭包 = 关系图中的"可达性"**：(a,b) ∈ R\* 当且仅当能从 a 走到 b（含 0 步）。
 
-### 配套作业
+### Warshall 算法（求传递闭包）
 
-**必做题（11 题）：**
+**输入**：关系 R 的 0/1 矩阵 Mᵣ
+**输出**：传递闭包的矩阵 W
 
-**2(c)** （小问：c）
-
-```
-2. b) R3. c) R4.
-```
-
-**4** 
+**算法**（按列 k = 1 到 n 处理）：
 
 ```
-4. List the ordered pairs in the relations on{1, 2, 3, 4} corre-
-sponding to these matrices (where the rows and columns
-correspond to the integers listed in increasing order).
-a)
-⎡
-⎢
-⎢
-⎢⎣
-1101
-1010
-0111
-1011
-⎤
-⎥
-⎥
-⎥⎦
-b)
-⎡
-⎢
-⎢
-⎢⎣
-1110
-0100
-0011
-1001
-⎤
-⎥
-⎥
-⎥⎦
-c)
-⎡
-⎢
-⎢
-⎢⎣
-0101
-1010
-0101
-1010
-⎤
-⎥
-⎥
-⎥⎦
+W[0] = Mᵣ
+for k = 1 to n:
+    for i = 1 to n:
+        for j = 1 to n:
+            W[k][i][j] = W[k-1][i][j] OR (W[k-1][i][k] AND W[k-1][k][j])
+W = W[n]
 ```
 
-**8** 
+**直观理解**：W[i][j] = 1 当 i → k 走得到 **且** k → j 走得到。
+
+**简化记法**（不用三维数组）：每列用中间点 k 更新 i 行 j 列。
+
+## 反复考的题型
+
+### 题型 1：求自反闭包
+直接加 (a,a) 对。
+
+### 题型 2：求对称闭包
+加 (a,b) 的逆 (b,a)。
+
+### 题型 3：求传递闭包（手算）
+迭代 R² = R ∘ R，检查是否新增；不停直到稳定。
+
+### 题型 4：Warshall 算法（**必考大题**）
+
+**模板**：
 
 ```
-8. Determine whether the relations represented by the ma-
-trices in Exercise 4 are reﬂexive, irreﬂexive, symmetric,
-antisymmetric, and/or transitive.
+原矩阵（顶点 1-4）：
+      1  2  3  4
+  1 [ 0  1  0  0 ]
+  2 [ 0  0  1  0 ]
+  3 [ 0  0  0  1 ]
+  4 [ 1  0  0  0 ]
+
+k=1：用顶点 1 作中间
+  - 哪些 i→1→j 可达？
+  1 行：1→1 没有（保留）；1→2 保留
+  2→1? 否
+  4→1 是 1，4→j 看哪些 j 让 1→j 走得到：1→2，所以 4→2 = 1
+  更新矩阵...
+
+k=2：用顶点 2 作中间
+  ...
+
+k=3：用顶点 3
+k=4：用顶点 4
+
+最终矩阵：每个 [i][j] 表示 i 到 j 是否可达
 ```
 
-**10** 
+## 配套作业
 
-```
-10. How many nonzero entries does the matrix representing
-the relation R on A ={ 1, 2, 3,… , 1000} consisting of the
-ﬁrst 1000 positive integers have if R is
-a) {(a, b)∣a ≤ b}?
-b) {(a, b)∣a = b± 1}?
-c) {(a, b)∣a+ b = 1000}?
-d) {(a, b)∣a+ b ≤ 1001}?
-e) {(a, b)∣a ≠ 0}?
-```
+**Section 9.4**
 
-**12** 
+Warshall 算法配套作业（请参考教材 PDF p637–645 对应题目，常见形式为给定矩阵逐步计算）：
+- 求给定矩阵的传递闭包（Warshall 算法）
+- 求给定矩阵的自反闭包、对称闭包
+- 判断给定关系是否已是某闭包
 
-```
-12. How can the matrix for R−1,t h ei n v e r s eo ft h e
-relation R, be found from the matrix representing R,
-when R is a relation on a ﬁnite set A?
-```
-
-**14** 
-
-```
-14. Let R1 and R2 be relations on a set A represented by the
-matrices
-MR1
-=
-⎡
-⎢
-⎢⎣
-010
-111
-100
-⎤
-⎥
-⎥⎦
-and MR2
-=
-⎡
-⎢
-⎢⎣
-010
-011
-111
-⎤
-⎥
-⎥⎦
-.
-Find the matrices that represent
-a) R1 ∪R2. b) R1 ∩R2. c) R2 ◦R1.
-d) R1 ◦R1. e) R1 ⊕R2.
-```
-
-**16** 
-
-```
-16. Let R b ear e l a t i o no nas e tA with n elements. If there
-are k nonzero entries in MR, the matrix representing R,
-how many nonzero entries are there in MR−1, the matrix
-representing R−1,t h ei n v e r s eo fR?
-```
-
-**22** 
-
-```
-22. Draw the directed graph that represents the relation
-{(a, a), (a, b), (b, c), (c, b), (c, d), (d, a), (d, b)}.
-In Exercises 23–28 list the ordered pairs in the relations rep-
-resented by the directed graphs.
-```
-
-**30** 
-
-```
-30. How can the directed graph of a relation R on a ﬁnite
-set A be used to determine whether a relation is irreﬂex-
-ive?
-```
-
-**32** 
-
-```
-32. Determine whether the relations represented by the di-
-rected graphs shown in Exercises 26–28 are reﬂexive, ir-
-reﬂexive, symmetric, antisymmetric, asymmetric, and/or
-transitive.
-```
-
-**34** 
-
-```
-34. Let R b ear e l a t i o no nas e tA. Explain how to use the di-
-rected graph representing R to obtain the directed graph
-representing the complementary relation R.
-```
-
-
-**仅需读（2 题）：**
-
-**15(read)**  **[仅读]**
-
-```
-15. Let R be the relation represented by the matrix
-MR =
-⎡
-⎢
-⎢⎣
-010
-001
-110
-⎤
-⎥
-⎥⎦
-.
-Find the matrices that represent
-a) R
-```
-
-**17(read)**  **[仅读]**
-
-```
-17. Let R b ear e l a t i o no nas e tA with n elements. If there
-are k nonzero entries in MR, the matrix representing R,
-how many nonzero entries are there in MR, the matrix
-representing R, the complement of R?
-```
-
+> ⚠️ 注：本题大量依赖图示或具体矩阵，建议直接从教材 PDF 中刷该 section 的前 10 题练习。
 
 ---
 
-## 9.4 关系的闭包（**必考**）
+# R4 等价关系 + 等价类 + 划分（**必考**）
 
-### 三大闭包
+## 核心概念
 
-| 闭包 | 记号 | 构造方法 |
-|---|---|---|
-| **自反闭包** | r(R) | 矩阵对角线全置 1 |
-| **对称闭包** | s(R) | 矩阵关于对角线求并（M ∨ Mᵀ） |
-| **传递闭包** | t(R) | **Warshall 算法**（反复 M ∨ M²） |
+**等价关系**：自反 + 对称 + 传递。
+- 例：模 n 同余 x ≡ y (mod n)；同姓；同血型
 
-### 反复考的：Warshall 算法（**必考大题**）
+**等价类**：[a]_R = {x | (a,x) ∈ R}（所有与 a 等价的元素）
 
-**算法步骤**：
+**重要性质**：
+1. 等价类是 A 的子集
+2. a ∈ [a]_R
+3. [a]_R = [b]_R 当且仅当 (a,b) ∈ R
+4. [a]_R ≠ [b]_R 当且仅当 [a]_R ∩ [b]_R = ∅
+5. **等价类的并 = A**（覆盖）
 
-设 M 是关系 R 的 0-1 矩阵
+**划分（partition）**：A 的一族子集 {A₁, A₂, ...} 满足：
+- 互不相交：Aᵢ ∩ Aⱼ = ∅（i ≠ j）
+- 覆盖：A = A₁ ∪ A₂ ∪ ...
 
-```
-W₀ = M
-For k = 1 to n:
-    Wₖ[i][j] = 1 iff (Wₖ₋₁[i][j] = 1) OR (Wₖ₋₁[i][k] = 1 AND Wₖ₋₁[k][j] = 1)
-Wₙ = 传递闭包 t(R)
-```
+**核心定理（必背）**：
 
-**关键**：在第 k 步，把 i 经 k 到 j 的路径标为 1
+> 集合 A 上的每个等价关系 R 唯一对应 A 的一个划分（= 等价类集合）。
+> 反之，A 的每个划分唯一确定 A 上的一个等价关系。
 
-> [!tip] Wₖ 含义：考虑中间节点 ∈ {1, 2, ..., k} 时 i 到 j 的可达性
+## 反复考的题型
 
-### 反复考的：自反闭包 + 对称闭包
+### 题型 1：证明等价关系
+证自反 + 对称 + 传递。
 
-**自反闭包**：r(R) = R ∪ I_A，其中 I_A = { (a,a) : a ∈ A }
-
-**对称闭包**：对每条 (a,b) 边加反向 (b,a)
-
-### 配套作业
-
-**必做题（10 题）：**
-
-**26(c)(d)** （小问：c, d）
+### 题型 2：求等价类
 
 ```
-26. Use Algorithm 1 to ﬁnd the transitive closures of these
-relations on{a, b, c, d, e}.
-a) {(a, c), (b, d), (c, a), (d, b), (e, d)}
-b) {(b, c), (b, e), (c, e), (d, a), (e, b), (e, c)}
-c) {(a, b), (a, c), (a, e), (b, a),(b, c),(c, a),(c, b),(d, a),
-(e, d)}
-d) {(a, e), (b, a), (b, d),(c, d),(d, a),(d, c),(e, a),(e, b),
-(e, c), (e, e)}
+R = "模 3 同余"，A = {0,1,2,3,4,5}
+[0] = {0, 3}
+[1] = {1, 4}
+[2] = {2, 5}
 ```
 
-**35** 
+### 题型 3：划分 ↔ 等价类互转
 
-```
-35. Show that the closure with respect to the property P of
-the relation R ={ (0, 0), (0, 1), (1, 1), (2, 2)} on the set
-{0, 1, 2} does not exist if P is the property
-a) “is not reﬂexive.”
-b) “has an odd number of elements.”
-```
+给定划分 {{1,4,5}, {2,6}, {3}} → 等价类就是这些块
+给定等价类 [a]={a,...} → 划分就是这些类
 
-**2** 
+### 题型 4：判断是否为划分
+- 互不相交？✓
+- 覆盖全集？✓
+- 都是非空？✓
 
-```
-2. Let R be the relation {(a, b)∣a ≠ b} on the set of inte-
-gers. What is the reﬂexive closure of R?
-```
+## 配套作业
 
-**4** 
+**Section 9.5**
 
-```
-4. How can the directed graph representing the reﬂexive
-closure of a relation on a ﬁnite set be constructed from
-the directed graph of the relation?
-In Exercises 5–7 draw the directed graph of the reﬂexive clo-
-sure of the relations with the directed graph shown.
-```
+**5.** List the ordered pairs in the equivalence relation on {1, 2, 3, 4, 5, 6} produced by the partition {{1, 4, 5}, {2, 6}, {3}}.
 
-**6** 
+**10.** Let R be the relation on the set of integers where x R y if and only if x + y is even. Show that R is an equivalence relation.
 
-```
-6.
-ba
-c d
-```
+**15.** Which of the following collections of subsets are partitions of {1, 2, 3, 4, 5, 6}?
+a) {{1, 2}, {3, 4}, {5, 6}}
+b) {{1}, {2, 3, 4}, {5, 6}}
+c) {{1, 5}, {2}, {3, 4}, {6}}
 
-**8** 
+**18.** Suppose that R is an equivalence relation on a finite set A. Show that the equivalence classes of R form a partition of A.
 
-```
-8. How can the directed graph representing the symmetric
-closure of a relation on a ﬁnite set be constructed from
-the directed graph for this relation?
-```
+**20.** Let R be the relation on the set of all bit strings such that s R t if and only if s and t contain the same number of 1's. Show that R is an equivalence relation.
 
-**10** 
-
-```
-10. Find the smallest relation containing the relation in Ex-
-ample 2 that is both reﬂexive and symmetric.
-```
-
-**16(f)** （小问：f）
-
-```
-16. Determine whether these sequences of vertices are paths
-in this directed graph.
-a) a, b, c, e
-b) b, e, c, b, e
-c) a, a, b, e, d, e
-d) b, c, e, d, a, a, b
-e) b, c, c, b, e, d, e, d
-f) a, a, b, b, c, c, b, e, d
-ba c
-e
-d
-```
-
-**18** 
-
-```
-18. Determine whether there is a path in the directed graph
-in Exercise 16 beginning at the ﬁrst vertex given and
-ending at the second vertex given.
-a) a, b b) b, a c) b, b
-d) a, e e) b, d f) c, d
-g) d, d h) e, a i) e, c
-```
-
-**22** 
-
-```
-22. Suppose that the relation R is reﬂexive. Show that R∗is
-reﬂexive.
-```
-
-
-**仅需读（2 题）：**
-
-**29(read)**  **[仅读]**
-
-```
-29. Find the smallest relation containing the relation
-{(1, 2), (1, 4), (3, 3), (4, 1)} that is
-a) reﬂexive and transitive.
-b) symmetric and transitive.
-c) reﬂexive, symmetric, and transitive.
-```
-
-**23(read)**  **[仅读]**
-
-```
-23. Suppose that the relation R is symmetric. Show that R∗
-is symmetric.
-```
-
+**22.** Find the equivalence class of 3 modulo 7 (i.e., [3]₇) and [5]₇.
 
 ---
 
-## 9.5 等价关系（**核心必考**）
+# R5 偏序 + Hasse 图（**必考**）
 
-### 反复考的核心
+## 核心概念
 
-#### 题型 1：判断等价关系
+**偏序（partial order）**：自反 + 反对称 + 传递。
+- 例子：集合上的 ⊆；正整数上的整除 |；数上的 ≤
 
-```
-必须三性质都满足：
-  ✓ 自反：∀a, (a,a)∈R
-  ✓ 对称：(a,b)∈R → (b,a)∈R
-  ✓ 传递：(a,b)∈R ∧ (b,c)∈R → (a,c)∈R
-```
+**偏序集（poset）**：(S, ≼) 是偏序 + 集合 S。
 
-#### 题型 2：证明 R 是等价关系
+### Hasse 图（核心必考）
 
-**作业 15 典型**：R = {((a,b),(c,d)) | a+d = b+c}
+**画法**（**严格按步骤**）：
+1. 列出所有有序对
+2. 去掉自环（(a,a)）
+3. 去掉传递边：若 a ≼ c 且存在 b 使 a ≼ b ≼ c，去掉 (a,c)
+4. **去掉反向边**：每对只保留"小→大"一个方向
+5. 画法：小的在下面，大的在上面
 
-```
-自反：(a,b) → (a,b)：a+b = b+a ✓
-对称：(a,b)R(c,d) → a+d=b+c → c+b=d+a → (c,d)R(a,b) ✓
-传递：(a,b)R(c,d) ∧ (c,d)R(e,f) → a+d=b+c ∧ c+f=d+e
-       → a+d=b+c 和 c+f=d+e → a+d+d+e = b+c+c+f → a+e = b+f → (a,b)R(e,f) ✓
-```
+> ⚠️ **关键**：Hasse 图只看**直接覆盖关系**（不存在中间元素的覆盖关系）。
 
-#### 题型 3：求等价类
+### 极值元素
 
-**模 m 同余的等价类**：
+| 元素 | 定义 |
+|---|---|
+| **最大元（maximum）** | ∀s, s ≤ a（一个或没有） |
+| **最小元（minimum）** | ∀s, a ≤ s（一个或没有） |
+| **极大元（maximal）** | ¬∃s: a ≤ s ∧ a ≠ s（可能有多个）|
+| **极小元（minimal）** | ¬∃s: s ≤ a ∧ s ≠ a |
+| **上界（upper bound）** | a ≤ u 且 b ≤ u 的 u |
+| **下界（lower bound）** | l ≤ a 且 l ≤ b 的 l |
+| **最小上界 LUB / join** | 所有上界中最小的 |
+| **最大下界 GLB / meet** | 所有下界中最大的 |
 
-```
-[a]_m = {x ∈ ℤ | x ≡ a (mod m)}
-     = {a + km | k ∈ ℤ}
-```
+> **最大元 vs 极大元**：
+> - 最大元：什么都比它小（唯一）
+> - 极大元：没有比它大的（可多个，不一定唯一）
+> - 例：{1,2,3} 中 3 是最大元也是极大元；但 {1,2} 偏序集 {1,2} 全序，1 是最小也是极小，2 是最大也是极大
 
-#### 题型 4：等价类 ↔ 划分（**必考**）
+**格（lattice）**：每个二元子集都有 LUB 和 GLB 的偏序集。
 
-**核心定理**：
+## 反复考的题型
 
-> 集合 A 上的等价关系 R 与 A 的划分一一对应
-
-**作业 55-66 反复考**：给定划分，找对应等价关系；反之亦然
-
-### 配套作业
-
-**必做题（12 题）：**
-
-**12** 
+### 题型 1：画 Hasse 图
 
 ```
-12. Show that the relation R consisting of all pairs (x, y)s u c h
-that x and y are bit strings of length three or more that
-agree except perhaps in their ﬁrst three bits is an equiva-
-lence relation on the set of all bit strings of length three
-or more.
-```
+({1,2,3,4,6,12}, |)
+关系：1|2,1|3,1|4,1|6,1|12, 2|4,2|6,2|12, 3|6,3|12, 4|12, 6|12
 
-**15** 
-
-```
-15. Let R be the relation on the set of ordered pairs
-of positive integers such that (( a, b), (c, d)) ∈R if and
-only if a+ d = b+ c. Show that R is an equivalence
-relation.
-```
-
-**16** 
-
-```
-16. Let R be the relation on the set of ordered pairs of pos-
-itive integers such that (( a, b), (c, d)) ∈R if and only if
-ad = bc. Show that R is an equivalence relation.
-```
-
-**22** 
-
-```
-22.
-a b
-d c
-```
-
-**24(c)** （小问：c）
-
-```
-24. Determine whether the relations represented by these
-zero–one matrices are equivalence relations.
-a)
-⎡
-⎢
-⎢⎣
-111
-011
-111
-⎤
-⎥
-⎥⎦
-b)
-⎡
-⎢
-⎢
-⎢⎣
-1010
-0101
-1010
-0101
-⎤
-⎥
-⎥
-⎥⎦
-c)
-⎡
-⎢
-⎢
-⎢⎣
-1110
-1110
-1110
-0001
-⎤
-⎥
-⎥
-⎥⎦
-```
-
-**36** 
-
-```
-36. What is the congruence class [4]m when m is
-a) 2? b) 3? c) 6? d) 8?
-```
-
-**40** 
-
-```
-40. a) What is the equivalence class of (1, 2) with respect
-to the equivalence relation in Exercise 16?
-b) Give an interpretation of the equivalence classes for
-the equivalence relationR in Exercise 16. [Hint: Look
-at the ratio a∕bcorresponding to (a, b).]
-```
-
-**42** 
-
-```
-42. Which of these collections of subsets are partitions of
-{−3,−2,−1,0, 1, 2, 3}?
-a) {−3,−1,1, 3}, {−2, 0, 2}
-b) {−3,−2,−1,0}, {0, 1, 2, 3}
-c) {−3, 3}, {−2, 2}, {−1, 1}, {0}
-d) {−3,−2,2, 3}, {−1, 1}
-```
-
-**48** 
-
-```
-48. List the ordered pairs in the equivalence relations pro-
-duced by these partitions of {a, b, c, d, e, f, g}.
-a) {a, b},{c, d},{e, f, g}
-b) {a}, {b}, {c, d},{e, f},{g}
-c) {a, b, c, d},{e, f, g}
-d) {a, c, e, g},{b, d},{f}
-A partition P1 is called a reﬁnement of the partition P2 if
-every set in P1 is a subset of one of the sets in P2.
-```
-
-**56** 
-
-```
-56. Suppose that R1 and R2 are equivalence relations on the
-set S. Determine whether each of these combinations
-of R1 and R2 must be an equivalence relation.
-a) R1 ∪R2 b) R1 ∩R2 c) R1 ⊕R2
-```
-
-**62** 
-
-```
-62. Determine the number of diﬀerent equivalence relations
-on a set with four elements by listing them.
-∗63. Do we necessarily get an equivalence relation when we
-form the transitive closure of the symmetric closure of
-the reﬂexive closure of a relation?
-∗64. Do we necessarily get an equivalence relation when we
-form the symmetric closure of the reﬂexive closure of the
-transitive closure of a relation?
-```
-
-**66** 
-
-```
-66. Suppose we use Theorem 2 to form an equivalence rela-
-tion R from a partition P. What is the partition P
-′that
-results if we use Theorem 2 again to form a partition
-from R?
-```
-
-
-**仅需读（6 题）：**
-
-**1(read)**  **[仅读]**
-
-```
-1. Which of these relations on {0, 1, 2, 3} are equivalence
-relations? Determine the properties of an equivalence re-
-lation that the others lack.
-a) {(0, 0), (1, 1), (2, 2), (3, 3)}
-b) {(0, 0), (0, 2), (2, 0), (2, 2), (2, 3), (3, 2), (3, 3)}
-c) {(0, 0), (1, 1), (1, 2), (2, 1), (2, 2), (3, 3)}
-d) {(0, 0), (1, 1), (1, 3), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3)}
-e) {(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0),
-(2, 2), (3, 3)}
-```
-
-**11(read)**  **[仅读]**
-
-```
-11. Show that the relation R consisting of all pairs (x, y)s u c h
-that x and y are bit strings of length three or more that
-agree in their ﬁrst three bits is an equivalence relation on
-the set of all bit strings of length three or more.
-```
-
-**25(read)**  **[仅读]**
-
-```
-25. Show that the relation R on the set of all bit strings such
-that sRt if and only if s and t contain the same number
-of 1s is an equivalence relation.
-```
-
-**55(read)**  **[仅读]**
-
-```
-55. Find the smallest equivalence relation on the set
-{a, b, c, d, e}containing the relation{(a, b), (a, c), (d, e)}.
-```
-
-**57(read)**  **[仅读]**
-
-```
-57. Consider the equivalence relation from Example 2,
-namely, R ={ (x, y)∣x−y is an integer}.
-a) What is the equivalence class of 1 for this equivalence
-relation?
-b) What is the equivalence class of 1/2 for this equiva-
-lence relation?
-∗58. Each bead on a bracelet with three beads is either red,
-white, or blue, as illustrated in the ﬁgure shown.
-Bead 1
-Red
-Bead 3
-Blue
-Bead 2
-White
-Deﬁne the relation R between bracelets as: ( B1,B 2),
-where B1 and B2 are bracelets, belongs to R if and only
-if B2 can be obtained from B1 by rotating it or rotating it
-and then reﬂecting it.
-a) Show that R is an equivalence relation.
-b) What are the equivalence classes of R?
-∗59. Let R be the relation on the set of all colorings of the
-2× 2 checkerboard where each of the four squares is col-
-ored either red or blue so that (C1,C 2), where C1 and C2
-are 2 × 2 checkerboards with each of their four squares
-colored blue or red, belongs to R if and only if C2 can be
-obtained from C1 either by rotating the checkerboard or
-by rotating it and then reﬂecting it.
-a) Show that R is an equivalence relation.
-b) What are the equivalence classes of R?
-```
-
-**65(read)**  **[仅读]**
-
-```
-65. Suppose we use Theorem 2 to form a partition P from
-an equivalence relation R. What is the equivalence rela-
-tion R
-′that results if we use Theorem 2 again to form an
-equivalence relation from P?
-```
-
-
----
-
-## 9.6 偏序（**必考**）
-
-### 反复考的核心
-
-#### 题型 1：判断偏序（自反 + 反对称 + 传递）
-
-#### 题型 2：画 Hasse 图（**必考大题**）
-
-**步骤**：
-
-1. 列出所有元素作为顶点
-2. 画覆盖关系（无中间元素的 aRb 关系）
-3. 按层次排列：最小元在底部，最大元在顶部
-4. 不画自环、不画传递边、不画箭头
-
-**作业 2 典型**：(P({1,2}), ⊆) 的 Hasse 图
-
-```
-P({1,2}) = {∅, {1}, {2}, {1,2}}
-⊆ 关系：
-  ∅ ⊆ {1}, ∅ ⊆ {2}, ∅ ⊆ {1,2}
-  {1} ⊆ {1,2}, {2} ⊆ {1,2}
-
-Hasse 图：
-  {1,2}
+Hasse 图（直接覆盖）：
+    12
    / \
-  {1} {2}
-   \ /
-    ∅
+  6   4
+ / \   \
+3   2   (没有)
+ \ /  
+  1
 ```
 
-#### 题型 3：找极大/极小/最大/最小元素
-
-| 概念 | 定义 |
-|---|---|
-| **最大元素** | ∀a∈A, a ≤ M |
-| **最小元素** | ∀a∈A, m ≤ a |
-| **极大元素** | 没有比它**更大**的元素 |
-| **极小元素** | 没有比它**更小**的元素 |
-
-> [!warning] 反复错点
-> - **最大 ↔ 极大**：最大就是极大，但极大不一定是最大
-> - 一个偏序集**最大可能不存在**
-
-#### 题型 4：格（lattice）
-
-**定义**：每对元素都有最小上界（LUB）和最大下界（GLB）的偏序集
-
-**判断方法**：每对 a, b 都有 a∨b（LUB）和 a∧b（GLB）
-
-### 配套作业
-
-**必做题（18 题）：**
-
-**16** 
+### 题型 2：找极大/极小/最大/最小
 
 ```
-16. a) Let S be the set of subroutines of a computer program.
-Deﬁne the relation R by P R Q if subroutine P calls
-subroutine Q during its execution. Describe the tran-
-sitive closure of R.
-b) For which subroutines P does ( P, P) belong to the
-transitive closure of R?
-c) Describe the reﬂexive closure of the transitive closure
-of R.
+读 Hasse 图：
+- 顶部（无上边）：极大元（可能有多个）
+- 底部（无下边）：极小元
+- 唯一顶部：最大元
+- 唯一底部：最小元
 ```
 
-**20** 
+### 题型 3：找 LUB / GLB
 
 ```
-20. Which of these are equivalence relations on the set of all
-people?
-a) {(x, y) ∣x and y have the same sign of the zodiac}
-b) {(x, y) ∣x and y were born in the same year}
-c) {(x, y) ∣x and y have been in the same city}
-∗21. How many diﬀerent equivalence relations with exactly
-three diﬀerent equivalence classes are there on a set with
-ﬁve elements?
+两个元素的最小上界 = 它们的"公共祖先中最低的"
+两个元素的最大下界 = 它们的"公共后代中最高的"
 ```
 
-**22** 
+### 题型 4：判断偏序
 
-```
-22. Show that {(x, y) ∣x−y ∈Q} is an equivalence relation
-on the set of real numbers, where Q denotes the set of
-rational numbers. What are [1], [1
-2 ], and [𝜋]?
-Courtesy of George Csicsery
-PAUL ERD˝OS (1913–1996) Paul Erd˝os, born in Budapest, Hungary, was the son of two high school mathe-
-Links
-matics teachers. He was a child prodigy; at age 3 he could multiply three-digit numbers in his head, and at 4 he
-discovered negative numbers on his own. Because his mother did not want to expose him to contagious diseases,
-he was mostly home-schooled. At 17 Erd˝os entered E˝otv˝os University, graduating four years later with a Ph.D.
-in mathematics. After graduating he spent four years at Manchester, England, on a postdoctoral fellowship. In
-1938 he went to the United States because of the diﬃcult political situation in Hungary, especially for Jews.
-He spent much of his time in the United States, except for 1954 to 1962, when he was banned as part of the
-paranoia of the McCarthy era. He also spent considerable time in Israel.
-Erd˝os made many signiﬁcant contributions to combinatorics and to number theory. One of the discoveries
-of which he was most proud is his elementary proof (in the sense that it does not use any complex analysis)
-of the prime number theorem, which provides an estimate for the number of primes not exceeding a ﬁxed positive integer. He also
-participated in the modern development of the Ramsey theory.
-Erd˝os traveled extensively throughout the world to work with other mathematicians, visiting conferences, universities, and
-research laboratories. He had no permanent home. He devoted himself almost entirely to mathematics, traveling from one mathe-
-matician to the next, proclaiming “My brain is open.” Erd ˝os was the author or coauthor of more than 1500 papers and had more
-than 500 coauthors. Copies of his articles are kept by Ron Graham, a famous discrete mathematician with whom he collaborated
-extensively and who took care of many of his worldly needs.
-Erd˝os oﬀered rewards, ranging from $10 to $10,000, for the solution of problems that he found particularly interesting, with the
-size of the reward depending on the diﬃculty of the problem. He paid out close to $4000. Erd˝os had his own special language, using
-such terms as “epsilon” (child), “boss” (woman), “slave” (man), “captured” (married), “liberated” (divorced), “Supreme Fascist”
-(God), “Sam” (United States), and “Joe” (Soviet Union). Although he was curious about many things, he concentrated almost all
-his energy on mathematical research. He had no hobbies and no full-time job. He never married and apparently remained celibate.
-Erd˝os was extremely generous, donating much of the money he collected from prizes, awards, and stipends for scholarships and to
-worthwhile causes. He traveled extremely lightly and did not like having many material possessions.
+3 性质：自反 + 反对称 + 传递
 
-Supplementary Exercises 669
-```
+### 题型 5：判断格
 
-**24** 
+每个二元子集都有 LUB 和 GLB。
 
-```
-24. Draw the Hasse diagram for inclusion on the set P(S),
-where S ={ a, b, c, d}.
-In Exercises 25–27 list all ordered pairs in the partial ordering
-with the accompanying Hasse diagram.
-```
+## 配套作业
 
-**32** 
+**Section 9.6**
 
-```
-32. Answer these questions for the partial order represented
-by this Hasse diagram.
-b
-fd
-gi
-j
-a c
-e
-h
-k
-ml
-a) Find the maximal elements.
-b) Find the minimal elements.
-c) Is there a greatest element?
-d) Is there a least element?
-e) Find all upper bounds of{a, b, c}.
-f) Find the least upper bound of{a, b, c},i fi te x i s t s .
-g) Find all lower bounds of{f, g, h}.
-h) Find the greatest lower bound of{f, g, h},i fi te x i s t s .
-```
+**5.** Draw the Hasse diagram for the partial order {(a, b) | a divides b} on {1, 2, 3, 4, 6, 8, 12, 24}.
 
-**34** 
+**10.** For the poset ({1, 3, 5, 9, 15, 45}, |), find the maximum, minimum, greatest lower bound, and least upper bound if they exist.
 
-```
-34. Show that no separate basis case is needed for the princi-
-ple of well-founded induction. That is,P(u)i st r u ef o ra l l
-minimal elements u in S if∀x(∀y(y≺x → P(y)) → P(x)).
-∗35. Show that the principle of well-founded induction is
-valid.
-A relation R on a set A is a quasi-ordering on A if R is reﬂex-
-ive and transitive.
-```
+**15.** Use the Hasse diagram of the divisibility relation on {1, 2, 3, 4, 6, 8, 12, 24} to find all maximal and minimal elements.
 
-**36** 
+**18.** Show that the relation "x ≤ y if and only if x divides y" on the set of positive integers is a partial order.
 
-```
-36. Let R be the relation on the set of all functions from
-Z
-+ to Z+ such that ( f, g) belongs to R if and only if f
-is O(g). Show that R is a quasi-ordering.
-```
+**20.** Determine whether each of these posets is a lattice.
+a) ({1, 2, 3, 4, 6, 12}, |)
+b) ({1, 2, 4, 8, 16}, |)
 
-**40** 
+**25.** Let (S, ≤) be a poset. Show that (S, ≥) is also a poset, where x ≥ y iff y ≤ x.
 
-```
-40. Show that if x and y are elements of a lattice L,t h e n
-x∨y = y if and only if x∧y = x.
-A lattice L is bounded if it has both an upper bound,d e -
-noted by 1, such that x ≼ 1f o ra l lx∈L and a lower bound,
-denoted by 0, such that 0 ≼ x for all x ∈L.
-```
+**30.** Find all antichains in the poset ({2, 3, 4, 6, 8, 12, 24}, |).
 
-**42** 
-
-```
-42. Show that every ﬁnite lattice is bounded.
-A lattice is calleddistributive if x∨(y∧z) = (x∨y)∧(x∨z)
-and x∧(y∨z) = (x∧y)∨(x∧z)f o ra l lx, y,a n dz in L.
-∗43. Give an example of a lattice that is not distributive.
-```
-
-**44** 
-
-```
-44. Show that the lattice ( P(S),⊆)w h e r eP(S) is the power
-set of a ﬁnite set S is distributive.
-```
-
-**46** 
-
-```
-46. Give an example of a ﬁnite lattice where at least one el-
-ement has more than one complement and at least one
-element has no complement.
-```
-
-**50** 
-
-```
-50. Show that if (S, ⪯) has a greatest element b,t h e naw i n -
-ning strategy for Chomp on this poset exists. [Hint: Gen-
-eralize the argument in Example 12 in Section 1.8.]
-Computer Projects
-Write programs with these input and output.
-```
-
-**52** 
-
-```
-52. Give an example of an inﬁnite lattice with
-a) neither a least nor a greatest element.
-b) a least but not a greatest element.
-c) a greatest but not a least element.
-d) both a least and a greatest element.
-```
-
-**2** 
-
-```
-2. Describe the basic principles of relational databases, go-
-ing beyond what was covered in Section 9.2. How widely
-used are relational databases as compared with other
-types of databases?
-```
-
-**6** 
-
-```
-6. Describe how equivalence classes can be used to deﬁne
-the rational numbers as classes of pairs of integers and
-how the basic arithmetic operations on rational numbers
-can be deﬁned following this approach. (See Exercise 40
-in Section 9.5.)
-```
-
-**8(a)** （小问：a）
-
-```
-8. Describe some of the mechanisms used to enforce infor-
-mation ﬂow policies in computer operating systems.
-```
-
-**12** 
-
-```
-12. Explain what is meant by a modular lattice. Describe
-some of the properties of modular lattices and describe
-how modular lattices arise in the study of projective
-geometry.
-```
-
-**14** 
-
-```
-14. Given the matrix representing a relation on a ﬁnite set,
-ﬁnd the matrix representing the smallest equivalence re-
-lation containing this relation.
-```
-
-
-**仅需读（4 题）：**
-
-**39(read)**  **[仅读]**
-
-```
-39. Show that the following properties hold for all elements
-x, y,a n dz of a lattice L.
-a) x∧y = y∧x and x∨y = y∨x (commutative laws)
-b) (x∧y)∧z = x∧(y∧z)a n d( x∨y)∨z = x∨(y∨z)
-(associative laws)
-c) x∧(x∨y) = x and x∨(x∧y) = x (absorption laws)
-d) x∧x = x and x∨x = x (idempotent laws)
-```
-
-**41(read)**  **[仅读]**
-
-```
-41. Show that if L is a bounded lattice with upper bound
-1 and lower bound 0 then these properties hold for all
-elements x ∈L.
-a) x∨1 = 1 b) x∧1 = x
-c) x∨0 = x d) x∧0 = 0
-```
-
-**43(read)**  **[仅读]**
-
-```
-43. Determine whether the posets with these Hasse diagrams
-are lattices.
-a)
-a
-b
-d
-c
-e
-f
-g
-b)
-a
-b
-d
-c
-e
-f g
-h
-c)
-a
-b
-d
-c
-e
-fg
-h
-i
-```
-
-**45(read)**  **[仅读]**
-
-```
-45. Is the lattice (Z+,∣) distributive?
-The complement of an element a of a bounded lattice L with
-upper bound 1 and lower bound 0 is an element b such that
-a∨b = 1a n da ∧b = 0. Such a lattice is complemented if
-every element of the lattice has a complement.
-```
-
+**38.** Show that every finite poset has at least one minimal element.
 
 ---
 
-## 章末自检清单
+# R6 拓扑排序 + Dilworth 定理
 
-- [ ] 4 大关系性质判定（自反/对称/反对称/传递）
-- [ ] 关系矩阵 + 关系有向图
-- [ ] 矩阵运算 ↔ 关系运算（特别是 R∘S = M_S × M_R）
-- [ ] **自反/对称/传递闭包的构造**
-- [ ] **Warshall 算法**（**必考大题**）
-- [ ] **证明等价关系**（三性质都证）
-- [ ] **求等价类**（特别是模 m 同余）
-- [ ] **等价类 ↔ 划分的一一对应**（**必考**）
-- [ ] **画 Hasse 图**（**必考大题**）
-- [ ] **找极大/极小/最大/最小元素**（**必考**）
-- [ ] 判断格
+## 核心概念
+
+**拓扑排序**：DAG（有向无环图）上把所有顶点排成线性序列，使每条边 (a,b) 中 a 在 b 之前。
+
+**算法**：
+1. 找入度为 0 的顶点 v
+2. 输出 v，删 v 的所有出边
+3. 重复直到所有顶点输出
+
+**反链（antichain）**：偏序集中两两不可比的元素集合。
+
+**Dilworth 定理（重要）**：
+
+> 有限偏序集的最大反链大小 = 覆盖该偏序集的最小链数
+
+## 反复考的题型
+
+### 题型 1：拓扑排序
+持续找入度 0 顶点。
+
+### 题型 2：找最大反链
+选两两不可比的最大子集。
+
+### 题型 3：Dilworth 定理应用
+互相对应关系。
+
+## 配套作业
+
+**Section 9.6（续）**
+
+**1.** Scheduling tasks: Given tasks with precedence constraints, find a topological sort.
+
+**5.** Find a linear extension (topological sort) of the poset ({1, 2, 3, 4, 5, 6}, |) where 1|2, 1|3, 2|4, 2|5, 3|6.
+
+**15.** Dilworth's theorem: Show that the minimum number of chains needed to cover a finite poset equals the size of a maximum antichain.
+
+**20.** Use Dilworth's theorem to find the minimum number of chains needed to cover the poset ({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, |).
+
+---
+
+## 复习清单
+
+- [ ] 4 性质判定：自反、对称、传递、反对称
+- [ ] 关系矩阵判别 4 性质
+- [ ] 关系计数：总 2^(n²)，对称 2^(n(n+1)/2)，反对称 2ⁿ·3^(n(n-1)/2)
+- [ ] **Warshall 算法**：k=1..n 逐步更新（必考）
+- [ ] 等价关系：自反+对称+传递
+- [ ] 等价类 ↔ 划分 一一对应
+- [ ] 偏序：自反+**反对称**+传递（不是对称）
+- [ ] Hasse 图：去自环 + 去传递边 + 去反向边
+- [ ] 极大 vs 最大：可多个 vs 唯一
+- [ ] LUB/GLB 在 Hasse 图上的判读
+- [ ] 拓扑排序：找入度 0 → 输出 → 删边
+- [ ] Dilworth：最大反链 = 最小链覆盖

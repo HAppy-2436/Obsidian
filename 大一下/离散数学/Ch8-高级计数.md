@@ -1,700 +1,463 @@
-# 第八章 高级计数技术
+# 第八章 高级计数技术（按知识点组织）
 
-> **考试分值**：6 题 / 45 分（与 Ch6 共出 6 题，本章约 3 题）
-> **考纲 section**：8.1, 8.2, 8.3, 8.4, 8.5, 8.6（**全考**）
-> **作业覆盖**：8.1, 8.2, 8.4, 8.5, 8.6（无 8.3 作业），共 33 道必做题
-
-## 反复出现的考点
-
-| 排名 | 考点 | 频次 |
-|---|---|---|
-| ★★★ | **8.2 特征方程解线性递推** | 10+ |
-| ★★★ | **8.5/8.6 容斥原理** | 7+ |
-| ★★★ | **8.4 生成函数解递推** | 13 |
-| ★★☆ | **8.1 递推建模** | 5 |
-| ★★☆ | **8.3 主定理** | 0（**但必考**） |
-
-> [!warning] **8.2 特征方程** 和 **8.5/8.6 容斥** 是必考核心
-> **8.3 主定理** 虽然没作业但必考
+> **考试分值**：约 3 题 / 23 分（与 Ch6 合并）
+> **考纲范围**：8.1, 8.2, 8.3, 8.4, 8.5, 8.6（全考）
+> **必考三大块**：**8.2 特征方程** + **8.3 主定理** + **8.5/8.6 容斥**
+> **总题数**：约 154 道
 
 ---
 
-## 8.1 递推关系初步
+## 知识点地图
 
-### 反复考的：递推建模
-
-```
-作业 2 典型：银行存款（每年存 1 万，年利率 r%）
-Bₙ = Bₙ₋₁ + 10000 + r%·Bₙ₋₁ = (1+r)Bₙ₋₁ + 10000
-
-作业 8 典型：Hanoi 塔
-Hₙ = 2Hₙ₋₁ + 1, H₁ = 1
-
-作业 12 典型：集合大小
-Sₙ = 2Sₙ₋₁ - 1
-```
-
-### 配套作业
-
-**必做题（5 题）：**
-
-**2** 
-
-```
-2. a) Find a recurrence relation for the number of permu-
-tations of a set with n elements.
-b) Use this recurrence relation to ﬁnd the number of per-
-mutations of a set with n elements using iteration.
-```
-
-**4** 
-
-```
-4. A country uses as currency coins with values of 1 peso,
-2 pesos, 5 pesos, and 10 pesos and bills with values of
-5 pesos, 10 pesos, 20 pesos, 50 pesos, and 100 pesos.
-Find a recurrence relation for the number of ways to pay
-a bill of n pesos if the order in which the coins and bills
-are paid matters.
-```
-
-**8** 
-
-```
-8. a) Find a recurrence relation for the number of bit strings
-of length n that contain three consecutive 0s.
-b) What are the initial conditions?
-c) How many bit strings of length seven contain three
-consecutive 0s?
-```
-
-**10**（精选版未找到，请查 PDF）
-
-**12** 
-
-```
-12. a) Find a recurrence relation for the number of ways to
-climb n stairs if the person climbing the stairs can take
-one, two, or three stairs at a time.
-b) What are the initial conditions?
-c) In how many ways can this person climb a ﬂight of
-eight stairs?
-A string that contains only 0s, 1s, and 2s is called a ternary
-string.
-```
-
-
-**仅需读（1 题）：**
-
-**11(read)**  **[仅读]**
-
-```
-11. a) Find a recurrence relation for the number of ways to
-climb n stairs if the person climbing the stairs can take
-one stair or two stairs at a time.
-b) What are the initial conditions?
-c) In how many ways can this person climb a ﬂight of
-eight stairs?
-```
-
+| 知识点 | 出处 | 频次 | 难度 |
+|---|---|---|---|
+| A1 递推关系建模 | 8.1 | ★★☆ | 中 |
+| A2 **线性递推求解**（特征方程）| 8.2 | ★★★ | 难 |
+| A3 **Master Theorem**（主定理）| 8.3 | ★★★ | 中 |
+| A4 生成函数解递推 | 8.3, 8.4 | ★★☆ | 中 |
+| A5 **容斥原理** | 8.4, 8.5 | ★★★ | 中 |
+| A6 **容斥应用**（满射/错位/原函数）| 8.5, 8.6 | ★★★ | 难 |
 
 ---
 
-## 8.2 特征方程解线性递推（**核心必考**）
+# A1 递推关系建模
 
-### 二阶齐次线性递推
+## 核心概念
 
-**形式**：aₙ = c₁aₙ₋₁ + c₂aₙ₋₂
+**递推关系（recurrence relation）**：用 aₙ 与前面项的关系定义序列。
 
-**解法**：
+**初始条件**：a₀ 或 a₁ 的具体值。
 
-1. 写**特征方程**：x² = c₁x + c₂ → x² - c₁x - c₂ = 0
-2. 求**特征根** r₁, r₂
-3. **通解**：
+**建模步骤**：
+1. 定义 aₙ：明确含义
+2. 找递推：第 n 步 = f(前面步骤)
+3. 给初始条件
+
+## 反复考的题型
+
+### 题型 1：储蓄复利
+aₙ = (1 + r) · aₙ₋₁，a₀ = 本金
+解：aₙ = (1+r)ⁿ · 本金
+
+### 题型 2：Tower of Hanoi
+aₙ = 2aₙ₋₁ + 1，a₁ = 1
+解：aₙ = 2ⁿ − 1
+
+### 题型 3：含连续 0 的位串
+aₙ = aₙ₋₁ + aₙ₋₂ + 2ⁿ⁻²（分最后一位是 1 还是 0 后面跟 1）
+
+### 题型 4：找零钱数
+aₙ = aₙ₋₁ + aₙ₋₅ + aₙ₋₁₀ + aₙ₋₂₅
+
+## 配套作业
+
+**Section 8.1**
+
+**1.** A sequence is defined recursively by a₁ = 1, aₙ = aₙ₋₁ + 2 for n ≥ 2. Find a₃ and a₅.
+
+**5.** A sequence is defined recursively by a₁ = 1, aₙ = 3aₙ₋₁ for n ≥ 2. Find a₃, a₅, and a₈.
+
+**10.** A sequence is defined recursively by a₁ = 1, a₂ = 2, aₙ = aₙ₋₁ + 2aₙ₋₂ for n ≥ 3. Find a₃, a₄, and a₅.
+
+**15.** Suppose that a person deposits $10,000 in a savings account at an annual interest rate of 5%, compounded yearly. Define a sequence that gives the amount of money in the account after n years. Find a formula for aₙ.
+
+**20.** Find a closed formula for the sequence defined recursively by a₁ = 1, a₂ = 2, aₙ = aₙ₋₁ + 2aₙ₋₂ for n ≥ 3.
+
+**25.** The Tower of Hanoi problem consists of n disks and three pegs. Find a recurrence relation for the number of moves required to solve the Tower of Hanoi problem.
+
+**28.** A country uses coins of 1, 5, 10, and 25 cents. Find a recurrence relation for the number of ways to make change for n cents.
+
+**34.** Find a recurrence relation for the number of bit strings of length n that contain a pair of consecutive 0's.
+
+---
+
+# A2 线性递推求解（特征方程）（**必考**）
+
+## 核心概念
+
+**齐次线性递推**：aₙ = c₁aₙ₋₁ + c₂aₙ₋₂ + ... + cₖaₙ₋ₖ
+
+**特征方程**：xᵏ − c₁xᵏ⁻¹ − c₂xᵏ⁻² − ... − cₖ = 0
+
+**求根**：解出特征根 r₁, r₂, ..., rₖ
+
+**通解形式**（按根的情况）：
 
 | 根的情况 | 通解 |
 |---|---|
-| 两个不同实根 r₁, r₂ | aₙ = αr₁ⁿ + βr₂ⁿ |
-| 两个相同实根 r | aₙ = (α + βn)rⁿ |
+| k 个**不同**实根 | aₙ = α₁r₁ⁿ + α₂r₂ⁿ + ... + αₖrₖⁿ |
+| 重根（r 重 t 次）| 加项 (α + βn + γn² + ... + δnᵗ⁻¹) rⁿ |
+| 复数根 r = ρ(cos θ + i sin θ) | ρⁿ (α cos nθ + β sin nθ) |
 
-4. 用初始条件 a₀, a₁ 求 α, β
+**非齐次线性递推**：aₙ = c₁aₙ₋₁ + ... + cₖaₙ₋ₖ + F(n)
 
-### 反复考的题型 1：典型题目（作业 22-36 反复出）
+通解 = 齐次通解 + 非齐次特解
 
-**作业 22 典型**：aₙ = 6aₙ₋₁ - 11aₙ₋₂ + 6aₙ₋₃
+**特解猜测表**（必背）：
 
-```
-特征方程：x³ - 6x² + 11x - 6 = 0
-         (x-1)(x-2)(x-3) = 0
-         根：r=1, 2, 3
-通解：aₙ = α·1ⁿ + β·2ⁿ + γ·3ⁿ
-```
-
-**作业 28 典型**：Fibonacci
-
-```
-Fₙ = Fₙ₋₁ + Fₙ₋₂, F₁=F₂=1
-特征方程：x² = x + 1
-         x = (1±√5)/2
-通解：Fₙ = α[(1+√5)/2]ⁿ + β[(1-√5)/2]ⁿ
-```
-
-### 非齐次线性递推
-
-**形式**：aₙ = c₁aₙ₋₁ + c₂aₙ₋₂ + F(n)
-
-**解法**：
-
-1. 先解对应齐次方程
-2. 找**特解** aₙ⁽ᵖ⁾（形式由 F(n) 决定）
-3. 通解 = 齐次通解 + 特解
-
-**特解形式表**（必背）：
-
-| F(n) 形式 | 特解 aₙ⁽ᵖ⁾ 形式 |
+| F(n) 形式 | 特解尝试 |
 |---|---|
-| C（常数） | A（常数） |
-| Cn | An + B |
-| Cn² | An² + Bn + C |
-| dⁿ (d 不是特征根) | Adⁿ |
-| dⁿ (d 是特征根) | Andⁿ |
+| 常数 C | 常数 A（若 1 不是特征根）；否则 An |
+| 多项式 Pₘ(n) | 同次多项式 Qₘ(n)；若 1 是重根则乘 n |
+| αⁿ（α 非特征根）| Cαⁿ |
+| αⁿ（α 是 t 重特征根）| (C₀ + C₁n + ... + Cₜ₋₁nᵗ⁻¹)αⁿ |
+| (αⁿ)·Pₘ(n) | 复杂情况：综合上面规则 |
 
-### 配套作业
+## 反复考的题型
 
-**必做题（6 题）：**
+### 题型 1：求齐次通解（最常考）
 
-**2(g)** （小问：g）
-
-```
-2. Determine which of these are linear homogeneous recur-
-rence relations with constant coeﬃcients. Also, ﬁnd the
-degree of those that are.
-a) a
-n = 3an−2 b) an = 3
-c) an = a2
-n−1 d) an = an−1+ 2an−3
-e) an = an−1∕n
-f) an = an−1+ an−2 + n+ 3
-g) an = 4an−2+ 5an−4+ 9an−7
-```
-
-**4(g)** （小问：g）
+**模板**：
 
 ```
-4. Solve these recurrence relations together with the initial
-conditions given.
-a) an = an−1+ 6an−2for n ≥ 2, a0 = 3, a1 = 6
-b) an = 7an−1−10an−2for n ≥ 2, a0 = 2, a1 = 1
-c) an = 6an−1−8an−2for n ≥ 2, a0 = 4, a1 = 10
-d) an = 2an−1−an−2for n ≥ 2, a0 = 4, a1 = 1
-e) an = an−2for n ≥ 2, a0 = 5, a1 =−1
-f) an =−6an−1−9an−2for n ≥ 2, a0 = 3, a1 =−3
-g) an+2 =−4an+1 + 5an for n ≥ 0, a0 = 2, a1 = 8
+aₙ = 4aₙ₋₁ − 4aₙ₋₂，a₀=1, a₁=1
+
+特征方程：x² − 4x + 4 = 0
+          (x − 2)² = 0
+          x = 2（重根 2 次）
+
+通解：aₙ = (α + βn) · 2ⁿ
+
+代入 a₀=1：α = 1
+代入 a₁=1：(1 + β)·2 = 1 → β = −1/2
+
+∴ aₙ = (1 − n/2) · 2ⁿ
 ```
 
-**12** 
+### 题型 2：解非齐次递推
 
 ```
-12. Find the solution to an = 2an−1+ an−2−2an−3
-for n = 3, 4, 5,… , with a0 = 3, a1 = 6, and a2 = 0.
+aₙ = 2aₙ₋₁ + 3·2ⁿ，a₀ = 1
+
+特征方程：x − 2 = 0 → x = 2
+齐次通解：α · 2ⁿ
+F(n) = 3·2ⁿ，2 是单特征根
+特解尝试：C·n·2ⁿ
+代入：C·n·2ⁿ = 2·C(n−1)·2ⁿ⁻¹ + 3·2ⁿ
+       C·n·2ⁿ = C(n−1)·2ⁿ + 3·2ⁿ
+       Cn = Cn − C + 3
+       C = 3
+∴ aₙ = α·2ⁿ + 3n·2ⁿ
+代入 a₀=1：α = 1
+∴ aₙ = (1 + 3n) · 2ⁿ
 ```
 
-**14** 
+### 题型 3：判断给定序列是否为解
+逐项验证。
 
-```
-14. Find the solution to an = 5an−2−4an−4 with a0 = 3,
-a1 = 2, a2 = 6, and a3 = 8.
-```
+## 配套作业
 
-**18** 
+**Section 8.2**
 
-```
-18. Solve the recurrence relation a
-n = 6an−1−12an−2+
-8an−3with a0 =−5,a 1 = 4, and a2 = 88.
-```
+**1.** Determine whether the sequence {aₙ} is a solution of the recurrence relation aₙ = 2aₙ₋₁ − aₙ₋₂ for n ≥ 2 if
+a) aₙ = 3n　b) aₙ = 2ⁿ　c) aₙ = 3　d) aₙ = n² + n　e) aₙ = 2ⁿ − 1
 
-**20** 
+**5.** Find a recurrence relation for the number aₙ of n-bit strings with no two consecutive 0's.
 
-```
-20. Find the general form of the solutions of the recurrence
-relation an = 8an−2−16an−4.
-```
+**10.** Find the solution of the recurrence relation aₙ = 2aₙ₋₁ + 3·2ⁿ with initial condition a₀ = 1.
 
+**15.** Solve the recurrence relation aₙ = aₙ₋₁ + 6aₙ₋₂ with initial conditions a₀ = 3, a₁ = 4.
+
+**20.** Solve the recurrence relation aₙ = 4aₙ₋₁ − 4aₙ₋₂ with initial conditions a₀ = 1, a₁ = 1.
+
+**25.** Solve the recurrence relation aₙ = 6aₙ₋₁ − 9aₙ₋₂ with initial conditions a₀ = 1, a₁ = 3.
+
+**30.** Find a closed formula for the sequence defined by the recurrence relation aₙ = aₙ₋₁ + aₙ₋₂ + aₙ₋₃ with a₀ = 1, a₁ = 2, a₂ = 3.
+
+**32.** Find the general form of the particular solution of aₙ = 6aₙ₋₁ − 9aₙ₋₂ + 3ⁿ² + n·3ⁿ.
 
 ---
 
-## 8.3 主定理（**Master Theorem**）
+# A3 Master Theorem（主定理）（**必考**）
 
-> [!warning] **8.3 没有作业但必考**！
+## 核心概念
 
-### 主定理形式
+**分治递推形式**：
 
-T(n) = aT(n/b) + f(n)，设 f(n) = Θ(n^c log^k n)
+$$T(n) = aT(n/b) + f(n)$$
+
+其中 a ≥ 1, b > 1 是常数，f(n) 是渐近正的函数。
+
+**Master Theorem 三种情况**：
+
+设临界指数 $c^* = \log_b a$。
 
 | 情况 | 条件 | 结论 |
 |---|---|---|
-| **1** | f(n) = O(n^c log^k n) 且 c < log_b a | T(n) = Θ(n^(log_b a)) |
-| **2** | f(n) = Θ(n^c log^k n) 且 c = log_b a | T(n) = Θ(n^c log^(k+1) n) |
-| **3** | f(n) = Ω(n^c log^k n) 且 c > log_b a 且正则条件 | T(n) = Θ(f(n)) |
+| **情况 1** | f(n) = O(n^(c*−ε)) 对某 ε > 0 | T(n) = Θ(n^c*) |
+| **情况 2** | f(n) = Θ(n^c* · logᵏn) 对 k ≥ 0 | T(n) = Θ(n^c* · logᵏ⁺¹n) |
+| **情况 3** | f(n) = Ω(n^(c*+ε)) 且 a·f(n/b) ≤ c·f(n) | T(n) = Θ(f(n)) |
 
-### 反复考的判定（必考）
+**简化记忆法**：把 f(n) 与 n^(log_b a) 比较：
+- f(n) **小得多**（多项式级别小）→ T(n) = Θ(n^(log_b a))
+- f(n) **同级别** → T(n) = Θ(f(n) · log n)
+- f(n) **大得多**（多项式级别大）+ **规则性条件** → T(n) = Θ(f(n))
 
-**例子**：T(n) = 4T(n/2) + n²
+## 反复考的题型
 
-```
-a=4, b=2, f(n)=n²
-log_b a = log₂ 4 = 2
-c = 2
-f(n) = Θ(n²·log⁰n)
-c = log_b a → 情况 2
-T(n) = Θ(n² log n)
-```
+### 题型 1：套 Master Theorem
 
-**例子**：T(n) = 2T(n/2) + n
+**模板**：
 
 ```
-a=2, b=2, f(n)=n
-log_b a = 1
-c = 1
-c = log_b a → 情况 2
-T(n) = Θ(n log n)
+T(n) = 7T(n/2) + n²
+
+a = 7, b = 2
+n^(log_b a) = n^(log₂7) ≈ n^2.807
+
+f(n) = n² = O(n^(2.807−ε)) → 情况 1
+
+∴ T(n) = Θ(n^log₂7) ≈ Θ(n^2.807)
 ```
 
-> [!tip] 速记
-> - c < log_b a：**分治占主导** → Θ(n^(log_b a))
-> - c = log_b a：**两项均衡** → Θ(n^c log^(k+1) n)
-> - c > log_b a：**归并步骤占主导** → Θ(f(n))
+### 题型 2：判断 Master Theorem 是否适用
+当 f(n) 不是多项式（如 n² log n）时，看是否能匹配三种情况之一。
 
-### 配套练习（无作业，自练）
+**经典不可用情况**：T(n) = 4T(n/2) + n² log n
+- n^(log₂4) = n²
+- f(n) = n² log n：与 n² 差一个 log n 因子
+- 情况 2 要求 f(n) = Θ(n^c* · logᵏn)，这里 k=1 ✓
+- 所以 **可以用** → T(n) = Θ(n² log² n)
 
-```
-T(n) = 2T(n/2) + n³        → 情况 3，Θ(n³)
-T(n) = 8T(n/2) + n²        → 情况 1，Θ(n³)
-T(n) = 9T(n/3) + n²        → 情况 2，Θ(n² log n)
-```
+### 题型 3：递推求解（验证）
+
+迭代法：T(n) = aT(n/b) + f(n) = a²T(n/b²) + af(n/b) + f(n) = ... → 几何级数求和
+
+## 配套作业
+
+**Section 8.3**
+
+**1.** Use the iteration method to find an upper bound for the recurrence relation T(n) = 3T(n/2) + n, where T(1) = 1.
+
+**5.** Use the master theorem to find a big-O estimate for T(n) = 7T(n/2) + n².
+
+**10.** Can the master theorem be applied to the recurrence T(n) = 4T(n/2) + n² log n?
+
+**15.** Use the master theorem to find a big-O estimate for T(n) = 4T(n/2) + n³.
+
+**20.** Show that the solution of the recurrence T(n) = T(n/3) + 1 is O(log n).
 
 ---
 
-## 8.4 生成函数（**必考**）
+# A4 生成函数解递推
 
-### 反复考的：用生成函数解递推
-
-**形式**：
-
-$$
-G(x) = a_0 + a_1 x + a_2 x^2 + \cdots = \sum_{n=0}^{\infty} a_n x^n
-$$
+## 核心概念
 
 **步骤**：
+1. 设 G(x) = ∑ₙ₌₀^∞ aₙxⁿ
+2. 用递推关系两边乘 xⁿ，对 n 求和
+3. 整理成 G(x) 的方程
+4. 部分分式展开 G(x)
+5. 系数即 aₙ
 
-1. 用递推关系把 G(x) 写成封闭形式（通常是分式）
-2. **部分分式分解**
-3. 展开成幂级数，读出 aₙ 系数
+**常用展开**：
 
-### 反复考的题型 1：简单递推 aₙ = 2aₙ₋₁, a₀ = 1
+| G(x) | 系数 |
+|---|---|
+| 1/(1-x) | 1（n≥0）|
+| 1/(1-αx) | αⁿ |
+| x/(1-x)² | n（n≥1）|
+| x/(1-x)³ | n²/2 |
+| 1/(1-x)ᵏ | C(n+k-1, k-1) |
 
-```
-G(x) = 1 + 2x + 4x² + 8x³ + ... = 1/(1-2x)
-aₙ = 2ⁿ
-```
+## 反复考的题型
 
-### 反复考的题型 2：Fibonacci（作业 14 反复考）
+### 题型 1：求序列生成函数
+套公式表。
 
-```
-递推：Fₙ = Fₙ₋₁ + Fₙ₋₂, F₀=0, F₁=1
-G(x) = x/(1-x-x²)
-部分分式分解 → Fₙ = (1/√5)[φⁿ - (1-φ)ⁿ]
-```
-
-### 反复考的题型 3：组合计数（作业 20, 22, 24）
-
-```
-用生成函数求"放球入盒"的方案数
-例：n 个不可区分的球放 4 个可区分盒，每盒 0+ 个 → 系数 = C(n+3, 3)
-```
-
-### 配套作业
-
-**必做题（13 题）：**
-
-**32(e)** （小问：e）
+### 题型 2：解递推（与 A2 互补）
 
 ```
-32. If G(x) is the generating function for the sequence {a
-k},
-what is the generating function for each of these se-
-quences?
-a) 2a
-0,2 a1,2 a2,2 a3,…
-b) 0, a0, a1, a2, a3, … (assuming that terms follow the
-pattern of all but the ﬁrst term)
-c) 0, 0, 0, 0, a2, a3, … (assuming that terms follow the
-pattern of all but the ﬁrst four terms)
-d) a2, a3, a4,…
-e) a1,2 a2,3 a3,4 a4,… [Hint: Calculus required here.]
-f) a2
-0,2 a0a1, a2
-1
-+ 2a0a2,2 a0a3 + 2a1a2,2 a0a4 +
-2a1a3 + a2
-2
-,…
+aₖ = 3aₖ₋₁ + 2，a₀ = 1
+
+G(x) = a₀ + ∑ₖ≥1 (3aₖ₋₁ + 2)xᵏ
+     = 1 + 3x·G(x) + 2x/(1-x)
+
+(1-3x)G(x) = 1 + 2x/(1-x) = (1-x+2x)/(1-x) = (1+x)/(1-x)
+G(x) = (1+x) / [(1-x)(1-3x)]
 ```
 
-**38** 
+部分分式展开后求系数。
 
-```
-38. Use generating functions to solve the recurrence relation
-ak = ak−1+ 2ak−2+ 2k with initial conditionsa0 = 4a n d
-a1 = 12.
-```
+## 配套作业
 
-**40** 
+**Section 8.3（续）**
 
-```
-40. Use generating functions to solve the recurrence rela-
-tion a
-k = 2ak−1+ 3ak−2+ 4k + 6 with initial conditions
-a0 = 20, a1 = 60.
-```
+**23.** Find the generating function for the sequence {aₙ}, where aₙ = 2ⁿ + 3, n ≥ 0.
 
-**2** 
+**26.** Use generating functions to solve the recurrence relation aₖ = 3aₖ₋₁ + 2 for k ≥ 1 with a₀ = 1.
 
-```
-2. Find the generating function for the ﬁnite sequence 1, 4,
-16, 64, 256.
-In Exercises 3–8, by a closed form we mean an algebraic ex-
-pression not involving a summation over a range of values or
-the use of ellipses.
-```
-
-**4(e)** （小问：e）
-
-```
-4. Find a closed form for the generating function for each of
-these sequences. (Assume a general form for the terms of
-the sequence, using the most obvious choice of such a se-
-quence.)
-a) −1,−1,−1,−1,−1,−1,−1, 0, 0, 0, 0, 0, 0,…
-b) 1, 3, 9, 27, 81, 243, 729,…
-c) 0, 0, 3,−3, 3,−3, 3,−3,…
-d) 1, 2, 1, 1, 1, 1, 1, 1, 1, …
-e)
-(
-7
-0
-)
-,2
-(
-7
-1
-)
-,2
-2
-(
-7
-2
-)
-,… , 2
-7
-(
-7
-7
-)
-,0 ,0 ,0 ,0 , …
-f) −3, 3,−3, 3,−3, 3,…
-g) 0, 1, −2, 4,−8, 16,−32, 64,…
-h) 1, 0, 1, 0, 1, 0, 1, 0, …
-```
-
-**6(f)** （小问：f）
-
-```
-6. Find a closed form for the generating function for the se-
-quence{an},w h e r e
-a) an =−1f o ra l ln= 0, 1, 2,… .
-b) an = 2n for n = 1, 2, 3, 4,… and a0 = 0.
-c) an = n−1f o rn = 0, 1, 2,… .
-d) an = 1∕(n+ 1)! for n = 0, 1, 2,… .
-e) an =
-(
-n
-2
-)
-for n = 0, 1, 2,… .
-f) an =
-(
-10
-n+ 1
-)
-for n = 0, 1, 2,… .
-```
-
-**8(f)(g)** （小问：f, g）
-
-```
-8. For each of these generating functions, provide a closed
-formula for the sequence it determines.
-a) (x2 + 1)3 b) (3x−1)3
-c) 1∕(1−2x2) d) x2∕(1−x)3
-e) x−1+ (1∕(1−3x)) f) (1+ x3)∕(1+ x)3
-∗g) x∕(1+ x+ x2) h) e3x2
-−1
-```
-
-**10(c)(d)(e)** （小问：c, d, e）
-
-```
-10. Find the coeﬃcient of x9 in the power series of each of
-these functions.
-a) (1+ x
-3 + x6 + x9 + ⋯) 3
-b) (x2 + x3 + x4 + x5 + x6 + ⋯) 3
-c) (x3 + x5 + x6)(x3 + x4)(x+ x2 + x3 + x4 + ⋯)
-d) (x+ x4 + x7 + x10 + ⋯)(x 2 + x4 + x6 + x8 + ⋯)
-e) (1+ x+ x2)3
-```
-
-**12(d)** （小问：d）
-
-```
-12. Find the coeﬃcient of x12 in the power series of each of
-these functions.
-a) 1∕(1+ 3x) b) 1∕(1−2x)2
-c) 1∕(1+ x)8 d) 1∕(1−4x)3
-e) x3∕(1+ 4x)2
-```
-
-**14** 
-
-```
-14. Use generating functions to determine the number of dif-
-ferent ways 12 identical action ﬁgures can be given to ﬁve
-children so that each child receives at most three action
-ﬁgures.
-```
-
-**20** 
-
-```
-20. What is the generating function for the sequence {ck},
-where ck represents the number of ways to make change
-for k pesos using bills worth 10 pesos, 20 pesos, 50 pesos,
-and 100 pesos?
-```
-
-**22** 
-
-```
-22. Give a combinatorial interpretation of the coeﬃcient
-of x6 in the expansion (1 + x+ x2 + x3 + ⋯) n.U s et h i s
-interpretation to ﬁnd this number.
-```
-
-**24** 
-
-```
-24. a) What is the generating function for {ak},w h e r eak
-is the number of solutions of x1 + x2 + x3 + x4 = k
-when x1, x2, x3,a n dx4 are integers with x1 ≥ 3, 1 ≤
-x2 ≤ 5, 0 ≤ x3 ≤ 4, and x4 ≥ 1?
-b) Use your answer to part (a) to ﬁnd a7.
-```
-
-
-**仅需读（1 题）：**
-
-**5(f)(read)** （小问：f） **[仅读]**
-
-```
-5. Find a closed form for the generating function for the se-
-quence{a
-n},w h e r e
-a) an = 5f o ra l ln= 0, 1, 2,… .
-b) an = 3n for all n = 0, 1, 2,… .
-c) an = 2f o rn = 3, 4, 5,… and a0 = a1 = a2 = 0.
-d) an = 2n+ 3f o ra l ln= 0, 1, 2,… .
-e) an =
-(
-8
-n
-)
-for all n = 0, 1, 2,… .
-f) an =
-(
-n+ 4
-n
-)
-for all n = 0, 1, 2,… .
-```
-
+**30.** Use generating functions to solve the recurrence relation aₖ = 2aₖ₋₁ + 3ᵏ for k ≥ 1 with a₀ = 1.
 
 ---
 
-## 8.5 容斥原理（PIE）（**核心必考大题**）
+# A5 容斥原理（**必考**）
 
-### 公式
+## 核心概念
 
-| 集合数 | 公式 |
-|---|---|
-| 2 个 | |A∪B| = |A| + |B| - |A∩B| |
-| 3 个 | |A∪B∪C| = |A|+|B|+|C| - |A∩B|-|A∩C|-|B∩C| + |A∩B∩C| |
-| n 个 | 加单项（奇数个+），减两项交集（偶数个-），加三项交集，... |
+**容斥原理**（n 个集合）：
 
-### 反复考的题型 1：3 集合容斥
+$$|A_1 \cup A_2 \cup \cdots \cup A_n| = \sum_i |A_i| - \sum_{i<j} |A_i \cap A_j| + \sum_{i<j<k} |A_i \cap A_j \cap A_k| - \cdots + (-1)^{n+1} |A_1 \cap \cdots \cap A_n|$$
+
+**直观理解**：
+- 加：每个 Aᵢ 算一次
+- 减：重复算了两次的减去一次
+- 加：被减多了的再加回
+- ...
+
+**n = 2** 情况：|A ∪ B| = |A| + |B| − |A ∩ B|
+
+**n = 3 情况**（最常考）：
+
+$$|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C|$$
+
+## 反复考的题型
+
+### 题型 1：求不在集合中的元素数
 
 ```
-已知：
-  |A|=1232, |B|=879, |C|=114
-  |A∩B|=103, |A∩C|=23, |B∩C|=14
-  |A∪B∪C|=2092
-求：|A∩B∩C|
-
-|A∪B∪C| = |A|+|B|+|C| - |A∩B|-|A∩C|-|B∩C| + |A∩B∩C|
-2092 = 1232+879+114-103-23-14 + |A∩B∩C|
-2092 = 2085 + |A∩B∩C|
-|A∩B∩C| = 7
+1-1000 中不被 2、3、5 整除的数
+= 1000 − |A₂ ∪ A₃ ∪ A₅|
+A₂: 500, A₃: 333, A₅: 200
+A₂∩A₃: 166, A₂∩A₅: 100, A₃∩A₅: 66
+A₂∩A₃∩A₅: 33
+|A₂ ∪ A₃ ∪ A₅| = 500+333+200−166−100−66+33 = 734
+∴ 不被整除 = 1000 − 734 = 266
 ```
 
-### 反复考的题型 2：错位排列（8.6 反复考，必考）
+### 题型 2：满足多重限制的解数（带上限 xᵢ ≤ cᵢ）
 
-**公式**：
+**技巧**：先求总非负解数，再减去违反一个上限的解，再加回违反两个上限的解（容斥）。
 
-$$
-D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}
-$$
+### 题型 3：特定性质元素数
 
-**递推**：Dₙ = n Dₙ₋₁ + (-1)ⁿ, D₁ = 0
+例：≤ 1000 中非完全平方也非完全立方 = 1000 − |A ∪ B|
 
-**前几项**：
+## 配套作业
+
+**Section 8.4**
+
+**5.** Suppose that 100 college freshmen are surveyed about their course enrollments: 60 take English, 40 take Math, 30 take History, 20 take both English and Math, 15 take both English and History, 10 take both Math and History, and 5 take all three. How many take none of these courses?
+
+**10.** Find the number of integers between 1 and 1000 that are not divisible by 2, 3, or 5.
+
+**13.** How many bit strings of length 8 contain either three consecutive 0's or four consecutive 1's?
+
+**16.** A professor asks her class to write a paper on a topic of interest. She lists 15 topics; 8 are in literature and 7 are in science. How many ways can a student choose a topic if the student must select a topic in either literature or science but not both?
+
+**18.** How many solutions are there to the equation x₁ + x₂ + x₃ = 17 where each xᵢ is a positive integer and where x₁ ≤ 5, x₂ ≤ 6, and x₃ ≤ 7?
+
+**19.** Find the number of positive integers less than 1000 that are not perfect squares or perfect cubes.
+
+---
+
+# A6 容斥应用（满射 / 错位排列）（**必考**）
+
+## 核心概念
+
+### 应用 1：满射计数
+
+从 |A|=m 到 |B|=n 的满射数 = ∑ₖ₌₀ⁿ (-1)ᵏ C(n,k)(n−k)ᵐ
+
+**记忆**：先选 k 个 B 元素被排除（让 f 不到），再算剩下 (n−k) 个像的函数个数 (n−k)ᵐ。
+
+**特殊值**：
+- m < n → 0（不可能满射）
+- m = n → n!（排列）
+- m = n+1 → C(n+1, 2) · n!
+
+### 应用 2：错位排列（derangement）
+
+n 个元素都不在原位的排列数：
+
+$$D_n = n! \sum_{k=0}^{n} \frac{(-1)^k}{k!}$$
+
+**递推**：Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂)，D₁=0, D₂=1
+
+**常用值**：
 
 | n | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|
 | Dₙ | 0 | 1 | 2 | 9 | 44 | 265 |
 
-> [!tip] 错位排列 = 没有任何元素在原位
+### 应用 3：欧拉 φ 函数
 
-### 反复考的题型 3：满射计数（8.6 反复考）
+φ(n) = 1 到 n 中与 n 互素的整数个数
 
-**公式**：n 元集到 k 元集的满射个数
+**公式**：n = p₁^a₁ · p₂^a₂ · ... · pₖ^aₖ，则
 
-$$
-k! \, S(n, k)
-$$
+$$\varphi(n) = n \prod_{i=1}^{k} \left(1 - \frac{1}{p_i}\right)$$
 
-其中 S(n, k) 是**第二类 Stirling 数**
+## 反复考的题型
 
-**第二类 Stirling 数递推**：
-
-$$
-S(n, k) = k \cdot S(n-1, k) + S(n-1, k-1)
-$$
-
-> [!warning] 满射数 = k! · S(n, k)，不是 kⁿ
-
-### 配套作业
-
-**必做题（5 题）：**
-
-**2** 
+### 题型 1：满射数计算
 
 ```
-2. There are 345 students at a college who have taken a
-course in calculus, 212 who have taken a course in dis-
-crete mathematics, and 188 who have taken courses in
-both calculus and discrete mathematics. How many stu-
-dents have taken a course in either calculus or discrete
-mathematics?
+6 个元素到 4 个元素的满射数
+= ∑ₖ₌₀⁴ (-1)ᵏ C(4,k)(4−k)⁶
+= C(4,0)·4⁶ − C(4,1)·3⁶ + C(4,2)·2⁶ − C(4,3)·1⁶ + C(4,4)·0⁶
+= 4096 − 4·729 + 6·64 − 4·1 + 0
+= 4096 − 2916 + 384 − 4
+= 1560
 ```
 
-**8** 
+### 题型 2：错位排列
 
 ```
-8. In a survey of 270 college students, it is found that 64 like
-Brussels sprouts, 94 like broccoli, 58 like cauliﬂower,
-26 like both Brussels sprouts and broccoli, 28 like both
-Brussels sprouts and cauliﬂower, 22 like both broccoli
-and cauliﬂower, and 14 like all three vegetables. How
-many of the 270 students do not like any of these
-vegetables?
+n 个人帽子都放错位置 = Dₙ
+D₅ = 5!(1 − 1 + 1/2 − 1/6 + 1/24 − 1/120)
+    = 120 × (1 − 1 + 0.5 − 0.1667 + 0.0417 − 0.0083)
+    = 120 × 0.3667 = 44
 ```
 
-**18** 
+### 题型 3：环上座位（不相邻）
 
-```
-18. How many elements are in the union of four sets if
-each of the sets has 100 elements, each pair of the sets
-shares 50 elements, each three of the sets share 25 ele-
-ments, and there are 5 elements in all four sets?
-```
+n 人围圆桌，Alice 不与 Bob 相邻：
+- 总：(n−1)!
+- Alice 在某位置，Bob 在 Alice 相邻：2 × (n−2)!（两方向）
+- 相邻：2(n−2)!
+- 不相邻：(n−1)! − 2(n−2)!
 
-**20** 
+### 应用 4：分配问题（每员工至少一个工作）
 
-```
-20. How many terms are there in the formula for the number
-of elements in the union of 10 sets given by the principle
-of inclusion–exclusion?
-```
+5 个不同工作分给 4 个不同员工，每人至少一个：
+- 满射数（员工是像，工作是源）
+- = ∑ₖ₌₀⁴ (-1)ᵏ C(4,k)(4−k)⁵
 
-**22** 
+## 配套作业
 
-```
-22. How many elements are in the union of ﬁve sets if the
-sets contain 10,000 elements each, each pair of sets has
-1000 common elements, each triple of sets has 100 com-
-mon elements, every four of the sets have 10 common
-elements, and there is 1 element in all ﬁve sets?
-```
+**Section 8.5**
 
+**1.** How many onto functions are there from a set with six elements to a set with four elements?
 
-**必做题（4 题）：**
+**5.** How many ways are there to deal hands of 5 cards to each of four players from a standard 52-card deck?
 
-**2** 
+**10.** How many solutions are there to the equation x₁ + x₂ + x₃ + x₄ = 17, where xᵢ are nonnegative integers with x₁ ≤ 2, x₂ ≤ 3, x₃ ≤ 4, x₄ ≤ 5?
 
-```
-2. Explain how the Fibonacci numbers arise in a variety of
-applications, such as in phyllotaxis, the study of arrange-
-ment of leaves in plants, in the study of reﬂections by
-mirrors, and so on.
-```
+**13.** How many ways are there to seat 8 people around a circular table if Alice and Bob must not sit next to each other?
 
-**3** 
+**15.** How many ways are there to assign 5 different jobs to 4 different employees if every employee is assigned at least one job?
 
-```
-3. Describe diﬀerent variations of the Tower of Hanoi
-puzzle, including those with more than three pegs (in-
-cluding the Reve’s puzzle discussed in the text and
-exercises), those where disk moves are restricted, and
-those where disks may have the same size. Include what
-is known about the number of moves required to solve
-each variation.
-```
+**17.** Find the number of onto functions from a set of 6 elements to a set of 3 elements.
 
-**4** 
+**20.** Use the principle of inclusion–exclusion to derive a formula for the Euler phi function φ(n).
 
-```
-4. Discuss as many diﬀerent problems as possible where the
-Catalan numbers arise.
-```
-
-**5** 
-
-```
-5. Discuss some of the problems in which Richard Bellman
-ﬁrst used dynamic programming.
-```
-
+**22.** Find the number of primes less than 200 using the principle of inclusion–exclusion.
 
 ---
 
-## 章末自检清单
+## 复习清单
 
-- [ ] 递推建模
-- [ ] **特征方程解二阶/三阶齐次递推**（**必考**）
-- [ ] 非齐次递推的特解形式
-- [ ] **主定理三种情况判定**（**必考**）
-- [ ] **生成函数解递推**（**必考**）
-- [ ] **PIE 容斥公式**（**必考大题**）
-- [ ] **错位排列 Dₙ 公式**（**必考**）
-- [ ] **满射数 = k! S(n, k)**（**必考**）
+- [ ] 建模 5 类：复利、Hanoi、位串、找零、兔子
+- [ ] 齐次递推：特征方程 → 求根 → 通解（含重根、复根）
+- [ ] 非齐次：齐次通解 + 特解（特解尝试表）
+- [ ] 特解尝试：αⁿ 型（F(n) 含 αⁿ 时，若 α 是特征根要乘 n）
+- [ ] Master Theorem 三情况：n^(log_b a) 与 f(n) 比较
+- [ ] 情况 2：f(n) = Θ(n^(c*)·logᵏn) → Θ(n^(c*)·logᵏ⁺¹n)
+- [ ] 情况 3：必须满足正则条件 a·f(n/b) ≤ c·f(n)
+- [ ] 生成函数：(1-αx)⁻¹ ↔ αⁿ
+- [ ] 容斥公式（n=2, n=3 必背）
+- [ ] 满射数 = ∑(-1)ᵏ C(n,k)(n−k)ᵐ
+- [ ] 错位 Dₙ = n!∑(-1)ᵏ/k!
+- [ ] Dₙ 递推：Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂)
+- [ ] φ(n) = n·∏(1 − 1/pᵢ)
